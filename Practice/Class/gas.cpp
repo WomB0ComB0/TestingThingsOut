@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cmath>
+#include <iomanip>
 using namespace std;
 
 int main() {
@@ -15,6 +17,6 @@ int main() {
   } else if (gas >= 6.00) {
     cout << "You should really look for another gas station!" << gas << endl;
   }
-  cout << "You are going to spend $" << gas * gallons << " on gas." << endl;
+  cout << "You are going to spend $" << fixed  << setprecision(3) << gas * gallons << " on gas." << endl;
   return 0;
 }
