@@ -4,8 +4,7 @@
 using namespace std;
 
 int main() {
-  double gas;
-  double gallons;
+  double gas, gallons;
   cout << "Enter the price of gas (per gallon), two decimal places: ";
   cin >> gas;
   cout << "Enter the number of gallons of gas you are intending on getting: ";
