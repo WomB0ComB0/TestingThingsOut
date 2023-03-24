@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/Practice/Number Animation/index.css">
+</head>
+<body>
+  <article class="grid flow mb-10vh">
+    <div class="popout flow text-reverse">
+      <p>These numbers will count up from 0 when they enter the viewport, making a small statement from an otherwise static number. This has a slight easing applied and will properly format decimals and commas thanks to .toLocaleString().</p>
+    </div>
+    <div class="flex gap popout" data-module="countup">
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix">$</span>
+          <span class="stat-number" data-countup-number="2.2">2.2</span>
+          <span class="stat-suffix">B</span>
+        </p>
+        <p class="stat-caption">
+          of cogs disseminated
+        </p>
+      </div>
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="3,000">3,000</span>
+          <span class="stat-suffix"></span>
+        </p>
+        <p class="stat-caption">
+          wombats in your bathroom
+        </p>
+      </div>
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="2">2</span>
+          <span class="stat-suffix">%</span>
+        </p>
+        <p class="stat-caption">
+          of people think cereal is soup
+        </p>
+      </div>
+    </div>
+    <div class="flex gap popout" data-module="countup">
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="10.3">10.3</span>
+          <span class="stat-suffix">K</span>
+        </p>
+        <p class="stat-caption">
+          Average distance to the coffee pot
+        </p>
+      </div>
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="500,000">500,000</span>
+          <span class="stat-suffix"></span>
+        </p>
+        <p class="stat-caption">
+          bagels consumed in a week (by me)
+        </p>
+      </div>
+    </div>
+    <div class="flex gap popout" data-module="countup">
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="50">50</span>
+          <span class="stat-suffix">%</span>
+        </p>
+        <p class="stat-caption">
+          of people have bounced already (but not you, you beautiful human)
+        </p>
+      </div>
+    </div>
+    <div class="flex gap popout" data-module="countup">
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix">$</span>
+          <span class="stat-number" data-countup-number="5.55">5.55</span>
+          <span class="stat-suffix"></span>
+        </p>
+        <p class="stat-caption">
+          that Andrew still owes me
+        </p>
+      </div>
+      <div class="stat text-reverse">
+        <p class="stat-figure">
+          <span class="stat-prefix"></span>
+          <span class="stat-number" data-countup-number="100">100</span>
+          <span class="stat-suffix">%</span>
+        </p>
+        <p class="stat-caption">
+          of these stats are fake (you really don't owe me money, Andrew)
+        </p>
+      </div>
+    </div>
+  </article>
+</body>
+<script src="/Practice/Number Animation/index.js"></script>
+</html>
