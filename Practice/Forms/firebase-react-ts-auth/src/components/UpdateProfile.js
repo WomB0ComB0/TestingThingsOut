@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../Contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function UpdateProfile() {
@@ -13,7 +13,6 @@ export default function UpdateProfile() {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
-    //if passwords are not same I set this error
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
@@ -25,23 +24,19 @@ export default function UpdateProfile() {
 
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value));
-      //Check if our email is not equal to our current email
-      //if we've changed our email, I'll want to add that email by using (promises.push)
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
     }
 
-    Promise.all(promises) //Our array promises
+    Promise.all(promises)
       .then(() => {
-        //our .then will run everytime our promises execute
-        navigate("/"); //redirecting to our home page
+        navigate("/");
       })
       .catch(() => {
         setError("Failed to update account");
       })
       .finally(() => {
-        //our .finally will set our loading back to false and it runs if we either succeed or fail
         setLoading(false);
       });
   }
