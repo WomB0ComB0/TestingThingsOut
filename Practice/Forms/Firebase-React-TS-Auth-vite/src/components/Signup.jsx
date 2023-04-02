@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
-import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../Contexts/AuthContext"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Signup() {
   const emailRef = useRef()
@@ -10,7 +10,7 @@ export default function Signup() {
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const history = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()

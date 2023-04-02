@@ -1,8 +1,11 @@
-import firebase from 'firebase/app';
-import "firebase/auth";
+// import firebase from 'firebase/app';
+// import "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
 
 
-const app = firebase.initializeApp = {
+
+const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_REACT_TS_AUTH_API_KEY,
   authDomain: process.env.VITE_FIREBASE_REACT_TS_AUTH_AUTH_DOMAIN,
   projectId: process.env.VITE_FIREBASE_REACT_TS_AUTH_PROJECT_ID,
@@ -12,5 +15,9 @@ const app = firebase.initializeApp = {
   measurementId: process.env.VITE_FIREBASE_REACT_TS_AUTH_MEASUREMENT_ID,
 };
 
-export const auth = app.getAuth
-export default app
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+export { app as default, auth};
+
+// export const auth = app.getAuth
+// export default app
