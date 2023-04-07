@@ -1,11 +1,10 @@
 # Methods are functions that are defined within a class operate on the attributes of the class. Methods are defined in the body of a class. Methods are accessed using the dot operator.
 from dataclasses import dataclass
 from typing import List
-
 @dataclass
-class Student:
-    name: str
-    grades: List[int]
+class Student: # Class
+    name: str # Public attribute
+    grades: List[int] 
 class StudentDataSet:
     def __init__(self, students: List[Student]) -> None:
         self.students = students
@@ -21,11 +20,7 @@ class StudentDataSet:
         for student in self.students:
             total_sum += len(student.grades)
         return total_sum
-students = [
-    Student("John", [70, 80, 90]),
-    Student("Jane", [75, 85, 95]),
-    Student("Jack", [60, 80, 100]),
-]
+students = [Student("John", [70, 80, 90]),Student("Jane", [75, 85, 95]),Student("Jack", [60, 80, 100]),]
 student_data_set = StudentDataSet(students)
 print(student_data_set.get_average_grade())
 print(student_data_set.get_total_students())

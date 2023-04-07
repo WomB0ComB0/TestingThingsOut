@@ -1,5 +1,5 @@
 # Encapsulation in Python is the process of restricting access to methods and variables in a class in order to prevent direct data modification so that the user cannot change data which is accidental or intentional.
-class Customer:
+class Customer: 
     def __init__(self, name: str, email:str) -> None:
         self.name = name
         self.email = email

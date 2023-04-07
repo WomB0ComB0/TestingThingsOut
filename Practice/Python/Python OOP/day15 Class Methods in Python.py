@@ -1,6 +1,5 @@
 # Class Methods in Python are methods that are bound to a class rather than its object. They do not require the creation of a class instance. They are shared among all instances of a class. They are defined using the @classmethod decorator.
 import datetime
-
 class Person:
     def __init__(self, name, age):
         self.name = name

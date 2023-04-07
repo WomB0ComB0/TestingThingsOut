@@ -1,6 +1,6 @@
 # Multiple Inheritance in Python is the process of a class inheriting from more than one parent class. In multiple inheritance, the features of all the base classes are inherited into the derived class. The syntax for multiple inheritance is similar to single inheritance.
-class DataProcessor:
-    def process_data(self) -> None:
+class DataProcessor: # base class
+    def process_data(self) -> None: # what makes this a method and not a function is the self parameter
         print("Processing data")
 class DataAnalyzer:
     def analyze_data(self) -> None:

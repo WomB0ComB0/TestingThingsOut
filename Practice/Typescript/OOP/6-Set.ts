@@ -1,9 +1,10 @@
 // Set is a collection of unique values, no duplicates allowed. Update data while still providing the same interface
 // Opposite of get, set is used to set a value
 export class Song {
-  title: string;
-  lyric: string;
-  length: number;
+  title: string; //◀️ Property to store the title of the song
+  lyric: string; //◀️ Property to store the lyric of the song
+  length: number; //◀️ Property to store the length of the song
+  whenLiked: Date; //◀️ Property to store the date when the song was liked
   private _isLiked: boolean; // private property to store the value of isLiked property
   set isLiked(value: boolean){ //◀️ Setter
     if(value === true){
@@ -17,19 +18,17 @@ export class Song {
   get isLiked(): boolean{ //◀️ Getter
     return this._isLiked;
   }
-  whenLiked: Date;
   constructor(title, lyric, length, isLiked){
     this.title = title;
     this.lyric = lyric;
     this.length = length.toFixed(2);
     this.isLiked = false; // default value
   }
-  get titleStatus(): string{
+  get titleStatus(): string{ // getter
     const songLiked = (this.isLiked == true) ? 'liked' : 'not liked';
     return `The song ${this.title} is ${songLiked}`;
   }
-  // Method
-  previewlyric(): string{
+  previewLyric(): string{  // Method
     return `${this.lyric.slice(0, 10)}...`;
   }
 }
@@ -38,4 +37,4 @@ const lyric = new Song(
 );
 lyric.isLiked = true;
 lyric.titleStatus;
-lyric.previewlyric();
+lyric.previewLyric();

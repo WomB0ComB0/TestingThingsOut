@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="/Practice/JavaScript/Projects/MineSweeper/styles.css">
+  <script src="/Practice/JavaScript/Projects/MineSweeper/app.js"></script>
+  <link rel="stylesheet" href="/Practice/JavaScript/Projects/MineSweeper/background.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+  <script src="/Practice/JavaScript/Projects/MineSweeper/background.js"></script>
+  <!-- Source: https://github.com/kubowania/minesweeper/ -->
+</head>
+<body>
+  <!-- score counter -->
+  
+  <div class="container">
+      <h1>minesweeper</h1>
+    <div class="game-container">
+      <div class="grid"></div>
+      <div class="buttons">
+        <button onclick="reset()" id="reset">
+          <p>
+          reset
+          </p>
+        </button>
+      </div>
+      <div>Flags left:<span id="flags-left"></span></div>
+      <div id="result"></div>
+    </div>
+  </div>
+  <script>
+    function reset() {
+      location.reload()
+    }
+  </script>
+</body>
+</html>

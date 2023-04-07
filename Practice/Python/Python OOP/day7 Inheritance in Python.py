@@ -9,13 +9,11 @@ class Data:
         self.data.append(data)
     def describe(self) -> str:
         return f"{self.name} is {self.age} years old."
-    
 class SalesData(Data):
     def __init__(self, name: str, age: int) -> None:
         super().__init__(name, age)
     def get_average_sales_data(self) -> float:
         return sum(self.data) / len(self.data)
-
 sales_data = SalesData("Mike", 25)
 sales_data.add_data(100)
 sales_data.add_data(200)
@@ -23,6 +21,5 @@ sales_data.add_data(300)
 sales_data.add_data(400)
 sales_data.add_data(500)
 sales_data.add_data(600)
-
 sales_data.describe()
 print(sales_data.get_average_sales_data())

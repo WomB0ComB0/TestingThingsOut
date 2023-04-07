@@ -1,7 +1,7 @@
 # Class Variables in Python are variables that are shared among all instances of a class. Class variables are defined within the class construction. Class variables are accessed using the class name and not the object name. Class variables are shared among all instances of a class. Class variables are defined within the class construction. Class variables are accessed using the class name and not the object name.
-class Car:
+class Car: # class
     num_wheels = 4
-    def __init__(self, make, model, color):
+    def __init__(self, make, model, color): # constructor
         self.make = make
         self.model = model
         self.color = color

@@ -1,3 +1,4 @@
+// methods are functions that are members of an object or class.
 export class Song {
   title: string;
   lyric: string;
@@ -10,11 +11,11 @@ export class Song {
     this.isLiked = false;
   }
   // Method
-  previewlyric(): string{
+  previewLyric(): string{ // method declaration
     return `${this.lyric.slice(0, 10)}...`;
   }
 }
 const lyric = new Song(
   'Two fictitious stories','Another win on a page, I make it through these hardships like i\'m Phineas Gage. My biggest hater most likely a hideous face.', 7.21, true
 );
-lyric.previewlyric();
+lyric.previewLyric();
