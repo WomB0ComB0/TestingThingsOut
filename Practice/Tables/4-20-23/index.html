@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- https://www.youtube.com/watch?v=czZ1PvNW5hk -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/Practice/Tables/4-20-23/index.css">
+</head>
+<body>
+  <main>
+    <div class="wrapper">
+      <h1>
+        Responsive Tables
+      </h1>
+      <table>
+        <caption>
+          Lorem ipsum dolor sit amet.
+        </caption>
+        <tr>
+          <th>Names</th>
+          <th>Poles</th>
+          <th>Podiums</th>
+          <th>Wins</th>
+          <th>Career points</th>
+          <th>Championships</th>
+        </tr>
+        <tr>
+          <td data-cell="names">Max Verstappen</td>
+          <td data-cell="poles">22</td>
+          <td data-cell="podiums">80</td>
+          <td data-cell="wins">30</td>
+          <td data-cell="career points">2080.5</td>
+          <td data-cell="championships">2</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Lewis Hamilton</td>
+          <td data-cell="poles">103</td>
+          <td data-cell="podiums">192</td>
+          <td data-cell="wins">103</td>
+          <td data-cell="career points">4443.5</td>
+          <td data-cell="championships">7</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Rico Roseberg</td>
+          <td data-cell="poles">30</td>
+          <td data-cell="podiums">57</td>
+          <td data-cell="wins">23</td>
+          <td data-cell="career points">1594.5</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Sebastian Vettle</td>
+          <td data-cell="poles">57</td>
+          <td data-cell="podiums">122</td>
+          <td data-cell="wins">53</td>
+          <td data-cell="career points">3098</td>
+          <td data-cell="championships">4</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Jason Button</td>
+          <td data-cell="poles">8</td>
+          <td data-cell="podiums">50</td>
+          <td data-cell="wins">15</td>
+          <td data-cell="career points">1235</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Kimi Raikkonen</td>
+          <td data-cell="poles">18</td>
+          <td data-cell="podiums">103</td>
+          <td data-cell="wins">21</td>
+          <td data-cell="career points">1873</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Fernando Alonso</td>
+          <td data-cell="poles">22</td>
+          <td data-cell="podiums">101</td>
+          <td data-cell="wins">2106</td>
+          <td data-cell="career points">36</td>
+          <td data-cell="championships">2</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Michael Schumacher</td>
+          <td data-cell="poles">68</td>
+          <td data-cell="podiums">155</td>
+          <td data-cell="wins">91</td>
+          <td data-cell="career points">1566</td>
+          <td data-cell="championships">7</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Mika Hakkinen</td>
+          <td data-cell="poles">26</td>
+          <td data-cell="podiums">51</td>
+          <td data-cell="wins">20</td>
+          <td data-cell="career points">420</td>
+          <td data-cell="championships">2</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Jacques Villeneuve</td>
+          <td data-cell="poles">13</td>
+          <td data-cell="podiums">23</td>
+          <td data-cell="wins">11</td>
+          <td data-cell="career points">235</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Damon Hill</td>
+          <td data-cell="poles">20</td>
+          <td data-cell="podiums">42</td>
+          <td data-cell="wins">22</td>
+          <td data-cell="career points">360</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Alain Prost</td>
+          <td data-cell="poles">33</td>
+          <td data-cell="podiums">106</td>
+          <td data-cell="wins">51</td>
+          <td data-cell="career points">768.5</td>
+          <td data-cell="championships">4</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Nigel Mansell</td>
+          <td data-cell="poles">32</td>
+          <td data-cell="podiums">59</td>
+          <td data-cell="wins">31</td>
+          <td data-cell="career points">480</td>
+          <td data-cell="championships">1</td>
+        </tr>
+        <tr>
+          <td data-cell="names">Aryton Senna</td>
+          <td data-cell="poles">65</td>
+          <td data-cell="podiums">80</td>
+          <td data-cell="wins">41</td>
+          <td data-cell="career points">610</td>
+          <td data-cell="championships">3</td>
+        </tr>
+      </table>
+    </div>
+  </main>
+  <script>
+    function AddTableARIA() {
+    try {
+      var allTables = document.querySelectorAll('table');
+      for (var i = 0; i < allTables.length; i++) {
+        allTables[i].setAttribute('role','table');
+      }
+      var allCaptions = document.querySelectorAll('caption');
+      for (var i = 0; i < allCaptions.length; i++) {
+        allCaptions[i].setAttribute('role','caption');
+      }
+      var allRowGroups = document.querySelectorAll('thead, tbody, tfoot');
+      for (var i = 0; i < allRowGroups.length; i++) {
+        allRowGroups[i].setAttribute('role','rowgroup');
+      }
+      var allRows = document.querySelectorAll('tr');
+      for (var i = 0; i < allRows.length; i++) {
+        allRows[i].setAttribute('role','row');
+      }
+      var allCells = document.querySelectorAll('td');
+      for (var i = 0; i < allCells.length; i++) {
+        allCells[i].setAttribute('role','cell');
+      }
+      var allHeaders = document.querySelectorAll('th');
+      for (var i = 0; i < allHeaders.length; i++) {
+        allHeaders[i].setAttribute('role','columnheader');
+      }
+      // this accounts for scoped row headers
+      var allRowHeaders = document.querySelectorAll('th[scope=row]');
+      for (var i = 0; i < allRowHeaders.length; i++) {
+        allRowHeaders[i].setAttribute('role','rowheader');
+      }
+    } catch (e) {
+      console.log("AddTableARIA(): " + e);
+    }
+  }
+  AddTableARIA();
+  </script>
+</body>
+</html>
