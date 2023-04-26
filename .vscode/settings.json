@@ -34,5 +34,6 @@
     "**/.vscode/**"
   ],
   "C_Cpp_Runner.useAddressSanitizer": false,
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "C_Cpp.errorSquiggles": "disabled"
 }
