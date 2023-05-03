@@ -1,14 +1,11 @@
 // DFS algorithm in C++
-
 #include <iostream>
 #include <list>
 using namespace std;
-
 class Graph {
   int numVertices;
   list<int> *adjLists;
   bool *visited;
-
    public:
   Graph(int V);
   void addEdge(int src, int dest);
