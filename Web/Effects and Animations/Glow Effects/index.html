@@ -4,13 +4,60 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/Practice/Glow Effect/index.css">
+  <title></title>
+  <style>
+    body {
+      background-color: black;
+      height: 100vh;
+      margin: 0rem;
+      overflow: hidden; 
+    }
+    @keyframes rotate {
+      from {
+        rotate: 0deg;
+      }
+      50% {
+        scale: 1 1.5;
+      }
+      to {
+        rotate: 360deg;
+      }
+    }
+    #blob {
+      background-color: white;
+      height: 34vmax;
+      aspect-ratio: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      border-radius: 50%;
+      background: linear-gradient(to right, aquamarine, mediumpurple);
+      animation: rotate 20s infinite;
+      opacity: 0.5;
+    }
+    #blur {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: 2;
+      backdrop-filter: blur(12vmax);
+    }
+  </style>
 </head>
 <body>
   <div id="blob"></div>
   <div id="blur"></div>
   <!-- This can be added to the 404 page -->
 </body>
-<script src="/Practice/Glow Effect/index.js"></script>
+<script>
+  const blob = document.getElementById("blob");
+  window.onpointermove = event => {
+    const { clientX, clientY } = event;
+    blob.animate({
+      left: `${clientX}px`,
+      top: `${clientY}px`
+  }, { duration: 3000, fill: "forwards" });
+  }
+</script>
 </html>
