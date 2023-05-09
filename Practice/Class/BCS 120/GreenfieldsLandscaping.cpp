@@ -41,7 +41,11 @@ int main(){
   cout << "Green Fields Landscaping" << endl;
   cout << "Number of trees purchased: " << numTrees << endl;
   cout << "Tree height: " << height << endl;
-  cout << "Will Green Fields do the planting? " << planted << endl;
-  cout << "Green Fields Landscaping" << endl;
-  cout << "Evergreen Tree Purchase" << endl;
+  cout << "Will Green Fields do the planting?(y/n) " << planted << endl;
+  cout << "     Green Fields Landscaping     " << endl;
+  cout << "     Evergreen Tree Purchase      " << endl;
+  cout << numTrees << " trees @ $" << treeCost << " each: $" << totalTreeCost << endl;
+  cout << "Delivery charge: $" << deliveryCost << endl;
+  cout << "Planting charge: $" << plantingCost << endl;
+  cout << "Total Amount Due: $" << totalCharges << endl;
 }
