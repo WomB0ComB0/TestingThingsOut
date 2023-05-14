@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\airwo\\OneDrive\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj": {}
+    "C:\\Users\\Mike Odnis\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj": {}
   },
   "projects": {
-    "C:\\Users\\airwo\\OneDrive\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj": {
+    "C:\\Users\\Mike Odnis\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\airwo\\OneDrive\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj",
+        "projectUniqueName": "C:\\Users\\Mike Odnis\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj",
         "projectName": "RazorPagesPizza",
-        "projectPath": "C:\\Users\\airwo\\OneDrive\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj",
-        "packagesPath": "C:\\Users\\airwo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\airwo\\OneDrive\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\obj\\",
+        "projectPath": "C:\\Users\\Mike Odnis\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\RazorPagesPizza.csproj",
+        "packagesPath": "C:\\Users\\Mike Odnis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mike Odnis\\Documents\\GitHub\\TestingThingsOut\\MicrosoftLearn\\C#\\RazorPagesPizza\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\airwo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mike Odnis\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

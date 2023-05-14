@@ -26,7 +26,6 @@ int main() {
          }
       }
       if ((periodCounter == 1) && (searchName.at(0) != '.')) {
-
          theTld = searchName.substr(periodPosition);
          isCoreGtld = (theTld == coreGtld1) ? true : false;
          isCoreGtld = (theTld == coreGtld2) ? true : false;

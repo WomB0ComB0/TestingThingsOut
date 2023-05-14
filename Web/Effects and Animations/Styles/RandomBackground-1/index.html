@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rand Background</title>
+  <style>
+    html { color-scheme: dark; }
+    body {
+      min-height: 100dvh;      
+      font-family: system-ui;
+      font-size: 2rem; }
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; }
+    .container {  display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3em 3em;
+      grid-auto-flow: row;
+      justify-content: center;
+      align-content: center;
+      justify-items: center;
+      align-items: center;
+      grid-template-areas:
+      ". . . ."
+      ". . . .";
+    }
+    .container div {
+      width: 10em;
+      height: 10em;
+      border-radius: 100vw;
+      border: 0.1em solid hsl(185, 53%, 34%);
+      box-shadow: 0.1em 0.1em 0.5em hsl(185, 53%, 34%);
+      transition: all 0.5s ease-in-out;
+      cursor: pointer; }
+    button {
+      font: inherit;
+      padding: 0.25em 1em;
+      background: hsl(185, 53%, 15%);
+      border: 0.1em solid hsl(185, 53%, 34%);
+      border-radius: 100vw;
+      cursor: pointer;
+      position: relative; }
+    p {
+      font-size: 1rem;
+      margin-top: 1em;
+      font-style: bold;
+    }
+  </style> 
+</head>
+<body>
+  <div>
+    <button> <span> Click Me </span> </button>
+    <div class="conatiner">
+       <!--Get child nodes-->
+      <div id="color-monochromatic"></div>
+      <div id="color-analogous"></div>
+      <div id="color-complementary"></div>
+      <div id="color-split"></div>
+      <div id="color-split-complementary"></div>
+      <div id="color-triad"></div>
+      <div id="color-tetradic"></div>
+      <div id="color-negative"></div>
+    </div>
+  </div>
+  <script>
+    "use strict";
+    const button = document.querySelector("button");
+    const text = document.querySelector("p");
+    // add a p element for every div element in the class container
+    const container = document.querySelector(".conatiner");
+    const div = document.querySelectorAll(".conatiner div");
+    div.forEach((div) => {
+      let p = document.createElement("p");
+      div.appendChild(p);
+      div.style.borderRadius = "24px";
+    });
+    // get the p element in the div
+    const p = document.querySelectorAll(".conatiner div p");
+    // get the id of each div elements
+    const id = document.querySelectorAll(".conatiner div");
+    
+    const randomClr = () => {
+      let val = '0123456789ABCDEF';
+      let clr = '#';
+      for (let i = 0; i < 6; i++) { clr += val[Math.floor(Math.random() * 16)];} return clr;  }
+      let count = 0;
+      // Monochromatic, Analogous, complementary, split, split complementary, triad, tetradic and negative
+      // Switch case
+      button.addEventListener("click", () => { count++; document.body.style.backgroundColor = randomClr();
+        text.textContent = `Negative: ${document.body.style.backgroundColor}`;
+        text.style.color = randomClr().split('').map((c, i) => i > 0 ? c : c === '#' ? '#' : (15 - parseInt(c, 16)).toString(16)).join('');
+        console.log(`${count}: ${document.body.style.backgroundColor}`)
+      });
+  </script>
+</body>
+</html>
