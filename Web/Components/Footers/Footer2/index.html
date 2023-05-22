@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+  <footer>
+    <div class="container">
+      <div class="sec aboutus">
+        <h2>
+          About Us
+        </h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex modi suscipit esse dicta ad nam neque quisquam maxime temporibus ducimus, in labore officiis, magni atque vitae placeat tempore explicabo omnis?</p>
+        <ul class="sci">
+          <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-twitter fa-sm"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
+        </ul>
+      </div>
+      <div class="sec quickLinks">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#" id=""></a>About</li>
+          <li><a href="#" id=""></a>FAQ</li>
+          <li><a href="#" id=""></a>Privacy Policy</li>
+          <li><a href="#" id=""></a>Help</li>
+          <li><a href="#" id=""></a>Terms & Conditions</li>
+          <li><a href="#" id="">Contact</a></li>
+        </ul>
+      </div>
+      <div class="sec contact">
+        <h2>Contact Info</h2>
+        <ul class="info">
+          <li>
+            <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+            <span>Lorem, ipsum dolor. <br> Lorem, ipsum dolor. <br>Lorem.</span>
+          </li>
+          <li>
+            <span><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+            <p><a href="tel:+12345678910">+1 234-567-8910</a><br><a href="tel:+12345678910">+1 234-567-8910</a></p>
+          </li>
+          <li>
+            <span><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+            <p><a href="mailto:mikeodnis3242004@gmail.com">mikeondis3242004@gmail.com</a></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <div class="copyrightText">
+    <p>
+      &copy; <small class="year"></small> <a href="#">[]</a>
+    </p>
+  </div>
+  <script src="https://kit.fontawesome.com/a93e9f2175.js" crossorigin="anonymous"></script>
+  <script>
+    window.onload = function() {
+      const year = new Date().getFullYear();
+      document.querySelector('.year').innerHTML = year;
+    }
+  </script>
+</body>
+</html>
