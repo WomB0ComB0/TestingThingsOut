@@ -2,6 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "TTTDriver",
+      "request": "launch",
+      "mainClass": "TTTDriver",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
+      "name": "ReviewDriver",
+      "request": "launch",
+      "mainClass": "ReviewDriver",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
