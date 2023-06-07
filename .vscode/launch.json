@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "RaggedArray",
+      "request": "launch",
+      "mainClass": "RaggedArray",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
       "name": "TTTDriver",
       "request": "launch",
       "mainClass": "TTTDriver",
