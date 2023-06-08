@@ -3,6 +3,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "RectangleTest",
+      "request": "launch",
+      "mainClass": "RectangleTest",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
+      "name": "InvoiceTest",
+      "request": "launch",
+      "mainClass": "InvoiceTest",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
+      "name": "AccountTest",
+      "request": "launch",
+      "mainClass": "AccountTest",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
       "name": "RaggedArray",
       "request": "launch",
       "mainClass": "RaggedArray",
