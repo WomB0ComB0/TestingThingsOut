@@ -1,5 +1,6 @@
 import React from 'react';
 import ReadMoreReadLess from './ReadMoreReadLess';
+import PostImage from './PostImage';
 export default function App() {
   return (
     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>

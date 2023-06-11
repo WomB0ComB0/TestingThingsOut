@@ -16,6 +16,7 @@ const ReadMoreReadLess = ({ children, maxCharacterCount = 150 }) => {
         <span style={{display: 'flex', flexDirection: 'row'}}>
           <h4 style={{ marginTop: '4px' ,marginRight: 'auto', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>Mike Odnis <span style={{ color: 'gray', fontSize: '12px' }}>@mikeodnis</span></h4>(he/him)
         </span>
+        <hr width="100px" height="1px" style={{margin:0}}/>
           <p style={{ overflow: 'hidden', textOverflow: 'ellipsis', margin: 'auto', padding: '10px 0px', maxHeight: isTruncated ? '60px' : 'none', transition: 'max-height 0.5 ease', display: 'inline' }}>{resultString}   
           {children.length > maxCharacterCount && (
             <span
@@ -28,7 +29,7 @@ const ReadMoreReadLess = ({ children, maxCharacterCount = 150 }) => {
           </p>
           <>
             <span style={{ color: 'grey', fontSize: '12px', marginRight: 'auto', marginBottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', userSelect: 'none' }}>{`${date}`}</span>
-        </>
+          </>
       </div>
     </Card>
   );
