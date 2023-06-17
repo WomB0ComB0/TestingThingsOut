@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/Web/Effects and Animations/Popover/dist/output.css">
+  <style>
+    #popover::backdrop{
+      background:rgba(0,0,0, 0.6);
+    }
+    #popover{
+      &:popover-open{
+        opacity: 1;
+        animation: slide 500ms ease-out;
+      }
+      opacity: 0;
+      transition: transform 0.5s, display 0.5s, opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateY(2rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0rem);
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <button 
+  popovertarget="popover"
+  class="absolute px-6 py-2 text-white -translate-x-1/2 -translate-y-1/2 bg-blue-600 rounded-md shadow-lg top-1/2 left-1/2 shadow-blue-400">
+    Toggle the popover
+  </button>
+  <div id="popover" popover class="w-2/3 text-center rounded-md">
+    <img src="./Image7.jpg">
+    <div class="p-12">
+      <h1 class="text-2xl font-black">
+        Let's learn more about the web.
+      </h1>
+      <p class="pt-4">
+        Join the waitlist to find otu when the podcast launches.
+      </p>
+      <div class="flex mt-6">
+        <input type="email" placeholder="email" class="w-full p-2 text-sm border-2 border-gray-200 rounded-sm border-1"/>
+        <button class="p-2 px-6 text-sm text-white bg-blue-600 rounded-sm shadow-lg w-36 shadow-blue-400">
+          Join now
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+</html>

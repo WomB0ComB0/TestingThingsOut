@@ -13,7 +13,7 @@ public class IntegerSet {
       }
     }
   }
-  public IntegerSet union(IntegerSet other){
+  /*public IntegerSet union(IntegerSet other){
     IntegerSet result = new IntegerSet();
     for (int i = 0; i < set.length; i++){
       if (set[i] || other.set[i]){
@@ -49,7 +49,7 @@ public class IntegerSet {
       }
     }
     return result;
-  }
+  }*/
   public boolean isEqualTo(IntegerSet other){
     for (int i = 0; i < set.length; i++){
       if (set[i] != other.set[i]){
