@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "FrogDriver",
+      "request": "launch",
+      "mainClass": "FrogDriver",
+      "projectName": "TestingThingsOut_4415a7e2"
+    },
+    {
+      "type": "java",
       "name": "RectangleTest",
       "request": "launch",
       "mainClass": "RectangleTest",
