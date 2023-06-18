@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .copy-link {
+      --height: 36px;   
+      display: flex;
+      max-width: 250px;
+    }
+    .copy-link-input {
+      flex-grow: 1;
+      padding: 0 8px;
+      font-size: 14px;
+      border: 1px solid #cccccc;
+      border-right: none;
+      outline: none;
+    }
+    .copy-link-input:hover {
+      background: #eeeeee;
+    }
+    .copy-link-button {
+      flex-shrink: 0;
+      width: var(--height);
+      height: var(--height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #dddddd;
+      color: #333333;
+      outline: none;
+      border: 1px solid #cccccc;
+      cursor: pointer;
+    }
+    .copy-link-button:hover {
+      background: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="copy-link">
+    <input type="text" class="copy-link-input" value="https://www.youtube.com/" readonly>
+    <button type="button" class="copy-link-button">
+      <span class="material-icons">content_copy</span>
+    </button>
+  </div>
+  <script>
+    const copyLinkButton = document.querySelector('.copy-link-button');
+    const copyLinkInput = document.querySelector('.copy-link-input');
+    copyLinkButton.addEventListener('click', () => {
+      copyLinkInput.select();
+      document.execCommand('copy');
+    });
+  </script>
+</body>
+</html>
