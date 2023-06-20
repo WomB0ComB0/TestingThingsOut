@@ -9,7 +9,7 @@ public class RectangleTest {
     rectangle1.setLength(5.0);
     rectangle1.setWidth(50.0);
     
-    rectangle2.setLength(4.5); nm
+    rectangle2.setLength(4.5);
     rectangle2.setWidth(45.9);
     
     System.out.printf("rectangle1: %.2f %.2f %.2f %.2f%n", rectangle1.getLength(), rectangle1.getWidth(), rectangle1.getArea(), rectangle1.getPerimeter());
