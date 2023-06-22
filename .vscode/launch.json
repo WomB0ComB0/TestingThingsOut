@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "TicTacToe",
+      "request": "launch",
+      "mainClass": "TicTacToe",
+      "projectName": "TestingThingsOut_4b00d657"
+    },
+    {
+      "type": "java",
       "name": "FrogDriver",
       "request": "launch",
       "mainClass": "FrogDriver",
