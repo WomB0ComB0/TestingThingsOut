@@ -3,10 +3,17 @@
   "configurations": [
     {
       "type": "java",
+<<<<<<< HEAD
       "name": "RoomTest",
       "request": "launch",
       "mainClass": "RoomTest",
       "projectName": "TestingThingsOut_4415a7e2"
+=======
+      "name": "TicTacToe",
+      "request": "launch",
+      "mainClass": "TicTacToe",
+      "projectName": "TestingThingsOut_4b00d657"
+>>>>>>> 2b92692f2abca349abb3243e8ee1d077eab40f13
     },
     {
       "type": "java",
