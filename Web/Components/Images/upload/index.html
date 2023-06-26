@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+        background-color: #141414;
+      }
+      #container {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #cccccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        box-shadow: 0 0 5px #cccccc;
+      }
+      img {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+      }
+      input {
+        border: none;
+        outline: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #eeeeee;
+        margin-bottom: 10px;
+        box-shadow: 0 0 5px #cccccc;
+      }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img src="./avatar.png" alt="" id="image" width="100px"/>
+  </div>
+  <input type="file" id="inImg" accept="image/png, image/jpeg"/>
+  <script>
+    var file = document.getElementById('inImg');
+    var image = document.getElementById('image');
+    file.addEventListener('change', function() {
+      var reader = new FileReader();
+      reader.onload = function() {
+        image.src = reader.result;
+      }
+      reader.readAsDataURL(file.files[0]);
+    });
+  </script>
+</body>
+</html>
