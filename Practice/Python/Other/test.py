@@ -44,3 +44,39 @@
 # list = [1, 3, 4, 2, 5]
 # x = calc(list)        
 # print(x)
+# from itertools import product
+# a = {1,2}
+# print(len(list(product(range(3),a))))
+
+# def power(x, y):
+    # if y == 0:
+        # return 1
+    # else:
+        # return x * power(x, y-1)
+# print(power(2, 3))
+
+# num = int(input())
+# def fib(n):
+    # if n == 0:
+        # return 0
+    # elif n == 1:
+        # return 1
+    # else:
+        # return fib(n-1) + fib(n-2)
+# print(fib(num))
+
+num = int(input())
+def fibonacci(n):
+	if n == 0:
+		return []
+	elif n == 1:
+		return [0]
+	elif n == 2:
+		return [0,1]
+	else:
+		sequence = fibonacci(n-1)
+		sequence.append(sequence[-1]+sequence[-2])
+		return sequence
+fib_sequence = fibonacci(num)
+for number in fib_sequence:
+	print(number)

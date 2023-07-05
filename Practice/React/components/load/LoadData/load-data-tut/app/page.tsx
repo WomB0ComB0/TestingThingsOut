@@ -57,6 +57,6 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Home />
     </QueryClientProvider>
-  )
+  ) 
 }
 export default App
