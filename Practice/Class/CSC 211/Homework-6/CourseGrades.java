@@ -11,7 +11,7 @@ public class CourseGrades {
     grades[2] = essay;
   }
   public void setFinalExam(FinalExam exam) {
-    grades[3] = exam;
+    grades[3] = exam; 
   }
   public String toString() {
     String str = "";
