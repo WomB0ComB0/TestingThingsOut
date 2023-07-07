@@ -1,0 +1,51 @@
+public class BankDriver {
+  public static void main(String[] args) {
+    BankAccount account = new BankAccount(1000, 0.05, 10);
+    SavingsAccount savings = new SavingsAccount(1000, 0.05, 10);
+    System.out.println("Bank Account");
+    System.out.println("Balance: " + account.getBalance());
+    System.out.println("Number of Deposits: " + account.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + account.getNumWithdrawals());
+    System.out.println("Interest Rate: " + account.getInterestRate());
+    System.out.println("Monthly Service Charges: " + account.getMonthlyServiceCharges());
+    System.out.println();
+    System.out.println("Savings Account");
+    System.out.println("Balance: " + savings.getBalance());
+    System.out.println("Number of Deposits: " + savings.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + savings.getNumWithdrawals());
+    System.out.println("Interest Rate: " + savings.getInterestRate());
+    System.out.println("Monthly Service Charges: " + savings.getMonthlyServiceCharges());
+    System.out.println();
+    account.deposit(100);
+    savings.deposit(100);
+    System.out.println("Bank Account");
+    System.out.println("Balance: " + account.getBalance());
+    System.out.println("Number of Deposits: " + account.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + account.getNumWithdrawals());
+    System.out.println("Interest Rate: " + account.getInterestRate());
+    System.out.println("Monthly Service Charges: " + account.getMonthlyServiceCharges());
+    System.out.println();
+    System.out.println("Savings Account");
+    System.out.println("Balance: " + savings.getBalance());
+    System.out.println("Number of Deposits: " + savings.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + savings.getNumWithdrawals());
+    System.out.println("Interest Rate: " + savings.getInterestRate());
+    System.out.println("Monthly Service Charges: " + savings.getMonthlyServiceCharges());
+    System.out.println();
+    account.withdraw(100);
+    savings.withdraw(100);
+    System.out.println("Bank Account");
+    System.out.println("Balance: " + account.getBalance());
+    System.out.println("Number of Deposits: " + account.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + account.getNumWithdrawals()); 
+    System.out.println("Interest Rate: " + account.getInterestRate());
+    System.out.println("Monthly Service Charges: " + account.getMonthlyServiceCharges());
+    System.out.println();
+    System.out.println("Savings Account");
+    System.out.println("Balance: " + savings.getBalance());
+    System.out.println("Number of Deposits: " + savings.getNumDeposits());
+    System.out.println("Number of Withdrawals: " + savings.getNumWithdrawals());
+    System.out.println("Interest Rate: " + savings.getInterestRate());
+    System.out.println("Monthly Service Charges: " + savings.getMonthlyServiceCharges());
+  }
+}
