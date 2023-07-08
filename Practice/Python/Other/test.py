@@ -80,3 +80,11 @@ def fibonacci(n):
 fib_sequence = fibonacci(num)
 for number in fib_sequence:
 	print(number)
+
+def spiralTraverse(array):
+    traversedArray = []
+    while array: # while array is not empty
+        traversedArray += array.pop(0) # pop the first row and add it to traversedArray
+        # .pop(0) removes the first element of the array and returns ite
+        array = list(zip(*array))[::-1] #  rotate the remaining array clockwise
+    return traversedArray
