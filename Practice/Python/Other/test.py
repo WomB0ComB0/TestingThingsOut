@@ -65,26 +65,43 @@
         # return fib(n-1) + fib(n-2)
 # print(fib(num))
 
-num = int(input())
-def fibonacci(n):
-	if n == 0:
-		return []
-	elif n == 1:
-		return [0]
-	elif n == 2:
-		return [0,1]
-	else:
-		sequence = fibonacci(n-1)
-		sequence.append(sequence[-1]+sequence[-2])
-		return sequence
-fib_sequence = fibonacci(num)
-for number in fib_sequence:
-	print(number)
+# num = int(input())
+# def fibonacci(n):
+	# if n == 0:
+		# return []
+	# elif n == 1:
+		# return [0]
+	# elif n == 2:
+		# return [0,1]
+	# else:
+		# sequence = fibonacci(n-1)
+		# sequence.append(sequence[-1]+sequence[-2])
+		# return sequence
+# fib_sequence = fibonacci(num)
+# for number in fib_sequence:
+	# print(number)
 
-def spiralTraverse(array):
-    traversedArray = []
-    while array: # while array is not empty
-        traversedArray += array.pop(0) # pop the first row and add it to traversedArray
+# def spiralTraverse(array):
+    # traversedArray = []
+    # while array: # while array is not empty
+        # traversedArray += array.pop(0) # pop the first row and add it to traversedArray
         # .pop(0) removes the first element of the array and returns ite
-        array = list(zip(*array))[::-1] #  rotate the remaining array clockwise
-    return traversedArray
+        # array = list(zip(*array))[::-1] #  rotate the remaining array clockwise
+    # return traversedArray
+scores = [12, 20, 10, 24]
+def breakingRecords(scores):
+    minMax = [0,0]
+    minScore = 0
+    maxScore = 0
+    for i in range(len(scores)):
+        if i == 0:
+            minScore = scores[i]
+            maxScore = scores[i]
+        elif scores[i] < minScore:
+            minScore = scores[i]
+            minMax[1] += 1
+        elif scores[i] > maxScore:
+            maxScore = scores[i]
+            minMax[0] += 1
+    return minMax
+print(breakingRecords(scores))
