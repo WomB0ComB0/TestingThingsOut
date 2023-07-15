@@ -7,16 +7,16 @@
 
 # import math
 # def military_to_standard(hours, mins):
-#     if hours > 12:
-#         hours -= 12
-#         return str(hours) + ":" + str(mins).zfill(2) + " PM"
-#     elif hours == 12:
-#         return str(hours) + ":" + str(mins).zfill(2) + " PM"
-#     elif hours == 0:
-#         hours += 12
-#         return str(hours) + ":" + str(mins).zfill(2) + " AM"
-#     else:
-#         return str(hours) + ":" + str(mins).zfill(2) + " AM"
+    # if hours > 12:
+        # hours -= 12
+        # return str(hours) + ":" + str(mins).zfill(2) + " PM"
+    # elif hours == 12:
+        # return str(hours) + ":" + str(mins).zfill(2) + " PM"
+    # elif hours == 0:
+        # hours += 12
+        # return str(hours) + ":" + str(mins).zfill(2) + " AM"
+    # else:
+        # return str(hours) + ":" + str(mins).zfill(2) + " AM"
 # print(military_to_standard(0, 0))
 
 #def test(func, arg): # func = multiply, arg = 2
@@ -201,4 +201,42 @@
         # for j in x.adj[i]:
             # if j==1:
                 # a+=1
-# print(a)
+# matrix = [[1,2,3,4],[5,6,7,8]]
+# print(len(matrix[0]))
+
+# def standard_to_military(hours, time_of_day):
+    # if time_of_day == "AM":
+        # if hours == 12:
+            # return 0
+        # else:
+            # return hours
+    # else:
+        # if hours == 12:
+            # return 12
+        # else:
+            # return hours + 12
+
+# def rotate_right(num_list):
+#     return num_list[-1:] + num_list[:-1]
+# print(rotate_right([1,2,3,4,5]))
+
+# def rotate_element(num_list, k):
+    # if len(num_list) == 0:
+        # return num_list
+    # if k > 0:
+        # for i in range(k):
+            # last_value = num_list[-1]
+            # num_list.insert(0, last_value)
+            # num_list.pop()
+    # return num_list
+# print(rotate_element([1,2,3,4,5], 3))
+
+def majorityElement(array):
+    current_max = 0
+    if range(len(array)):
+        return array[0]
+    for i in range(len(array)):
+        temp = array.count(array[i])
+        if temp > current_max:
+            current_max = temp
+    return current_max
