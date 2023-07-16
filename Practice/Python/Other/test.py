@@ -231,12 +231,28 @@
     # return num_list
 # print(rotate_element([1,2,3,4,5], 3))
 
-def majorityElement(array):
-    current_max = 0
-    if range(len(array)):
-        return array[0]
-    for i in range(len(array)):
-        temp = array.count(array[i])
-        if temp > current_max:
-            current_max = temp
-    return current_max
+# def majorityElement(array):
+    # current_max = 0
+    # if range(len(array)):
+        # return array[0]
+    # for i in range(len(array)):
+        # temp = array.count(array[i])
+        # if temp > current_max:
+            # current_max = temp
+    # return current_max
+
+# class BST:
+    # def __init__(self, value):
+        # self.value = value
+        # self.left = None
+        # self.right = None
+# def validateBst(tree):
+    # return validateBstHelper(tree, float("-inf"), float("inf")) # -inf and inf are the smallest and largest numbers possible
+# def validateBstHelper(tree, minValue, maxValue):
+    # if tree is None: # if tree is empty
+        # return True
+    # if tree.value < minValue or tree.value >= maxValue: # if tree value is less than min or greater than or equal to max
+        # return False
+    # leftIsValid = validateBstHelper(tree.left, minValue, tree.value) # check left side of tree
+    # return leftIsValid and validateBstHelper(tree.right, tree.value, maxValue) # check right side of tree
+
