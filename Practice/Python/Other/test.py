@@ -256,3 +256,68 @@
     # leftIsValid = validateBstHelper(tree.left, minValue, tree.value) # check left side of tree
     # return leftIsValid and validateBstHelper(tree.right, tree.value, maxValue) # check right side of tree
 
+# def mystery(s):
+    # prt1 = 0 
+    # prt2 = 3
+    # lst = []
+    # while prt2 <= len(s):
+        # sub = s[prt1:prt2]
+        # if sub not in lst:
+            # lst.append(sub)
+        # prt1 += 1
+        # prt2 += 1
+    # return lst
+# print(mystery("ababababa"))
+
+# def mystery(nums):
+    # if len(nums) == 0:
+        # return 0
+    # i = 0
+    # for j in range(1, len(nums)):
+        # if nums[j] != nums[i]:
+            # i += 1
+            # nums[i] = nums[j]
+    # return i + 1
+# print(mystery([1,1,2]))
+# def first_palindrome(words):
+    # for string in range(len(words)):
+        # if words[string] == words[string][::-1]:
+            # return  words[string]
+    # return ""
+# print(first_palindrome(["def", "ghi"]))
+
+# def subarray_sum(nums, target):
+    # n = len(nums)
+    # if n < 3:
+        # return []
+    # window_sum = sum(nums[:3])
+    # if window_sum == target:
+        # return nums[:3]
+    # for i in range(3, n):
+        # window_sum += nums[i] - nums[i - 3]
+        # if window_sum == target:
+            # return nums[i - 2:i + 1]
+    # return []
+# print(subarray_sum([0, 5, -7, 1, -2, 7, 6, 1, 4, 1, 10], 15))
+# import random
+# s = "aba"
+# s.replace(random(0,len(s)),'')
+# print(s)
+
+# import random
+# def palindrome_del(s):
+    # s = ''.join([s[i] for i in range(len(s)) if i != random.randint(0, len(s) - 1)])
+    # return s == s[::-1]
+# print(palindrome_del("aba"))
+
+# import math
+
+# def approximate(x, dx):
+#   """Approximates the quantity of x ^ 1/3."""
+#   dy = (1/3) * x ** (-2/3) * dx
+#   return x ** (1/3) + dy
+# 
+# print(approximate(107.5, 0.1))
+
+import math
+print(math.floor(107.5))

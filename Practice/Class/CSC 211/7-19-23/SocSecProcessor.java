@@ -1,13 +1,9 @@
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 public interface SocSecProcessor {
     public static void main(String[] args) {
-        System.out.println("Main method started");
         boolean continueInput = true;
-        while(continueInput)
-        {
+        while(continueInput) {
             try {
-                Scanner keyb = new Scanner(System.in);
                 String name = JOptionPane.showInputDialog("Enter a name:");
                 String ssn = JOptionPane.showInputDialog("Enter a social security number (xxx-xx-xxxx):");
                 if (isValid(ssn)) {
@@ -19,7 +15,6 @@ public interface SocSecProcessor {
             String continueChoice = JOptionPane.showInputDialog("Continue? (y/n):");
             continueInput = continueChoice.equalsIgnoreCase("y");
         }
-        System.out.println("Main method ended");
     }
 
 
