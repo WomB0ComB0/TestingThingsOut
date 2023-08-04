@@ -11,16 +11,12 @@ public class SavingsDemo
       // Create a SavingsAccount object with a $100 balance, 
       // 3% interest rate, and a monthly service charge
       // of $2.50.
-      SavingsAccount savings = 
-                   new SavingsAccount(100.0, 0.03, 2.50);
+      SavingsAccount savings = new SavingsAccount(100.0, 0.03, 2.50);
       
       // Display what we've got.
-      System.out.printf("Balance: $%,.2f\n", 
-                        savings.getBalance());
-      System.out.println("Number of deposits: " + 
-                         savings.getNumDeposits());
-      System.out.println("Number of withdrawals: " + 
-                         savings.getNumWithdrawals());
+      System.out.printf("Balance: $%,.2f\n", savings.getBalance());
+      System.out.println("Number of deposits: " + savings.getNumDeposits());
+      System.out.println("Number of withdrawals: " + savings.getNumWithdrawals());
       System.out.println();
       
       // Make some deposits.
@@ -29,12 +25,9 @@ public class SavingsDemo
       savings.deposit(35.00);
       
       // Display what we've done so far.
-      System.out.printf("Balance: $%,.2f\n", 
-                        savings.getBalance());
-      System.out.println("Number of deposits: " + 
-                         savings.getNumDeposits());
-      System.out.println("Number of withdrawals: " + 
-                         savings.getNumWithdrawals());
+      System.out.printf("Balance: $%,.2f\n", savings.getBalance());
+      System.out.println("Number of deposits: " + savings.getNumDeposits());
+      System.out.println("Number of withdrawals: " + savings.getNumWithdrawals());
       System.out.println();
       
       // Make some withdrawals.
@@ -45,23 +38,17 @@ public class SavingsDemo
       savings.withdraw(1.00);
       
       // Display what we've done so far.
-      System.out.printf("Balance: $%,.2f\n", 
-                        savings.getBalance());
-      System.out.println("Number of deposits: " + 
-                         savings.getNumDeposits());
-      System.out.println("Number of withdrawals: " + 
-                         savings.getNumWithdrawals());
+      System.out.printf("Balance: $%,.2f\n", savings.getBalance());
+      System.out.println("Number of deposits: " + savings.getNumDeposits());
+      System.out.println("Number of withdrawals: " + savings.getNumWithdrawals());
       System.out.println();
 
       // Do the monthly processing.
       savings.monthlyProcess();
    
       // Display what we've done so far.
-      System.out.printf("Balance: $%,.2f\n",
-                        savings.getBalance());
-      System.out.println("Number of deposits: " + 
-                         savings.getNumDeposits());
-      System.out.println("Number of withdrawals: " + 
-                         savings.getNumWithdrawals());
+      System.out.printf("Balance: $%,.2f\n", savings.getBalance());
+      System.out.println("Number of deposits: " + savings.getNumDeposits());
+      System.out.println("Number of withdrawals: " + savings.getNumWithdrawals());
    }
 }

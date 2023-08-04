@@ -1,7 +1,7 @@
 public class BankDriver {
   public static void main(String[] args) {
-    BankAccount account = new BankAccount(1000, 0.05, 10);
-    SavingsAccount savings = new SavingsAccount(1000, 0.05, 10);
+    BankAccount account = new BankAccount(1000.00, 0.05, 10);
+    SavingsAccount savings = new SavingsAccount(1000.00, 0.05, 10);
     System.out.println("Bank Account");
     System.out.println("Balance: " + account.getBalance());
     System.out.println("Number of Deposits: " + account.getNumDeposits());
@@ -16,8 +16,8 @@ public class BankDriver {
     System.out.println("Interest Rate: " + savings.getInterestRate());
     System.out.println("Monthly Service Charges: " + savings.getMonthlyServiceCharges());
     System.out.println();
-    account.deposit(100);
-    savings.deposit(100);
+    account.deposit(100.00);
+    savings.deposit(100.00);
     System.out.println("Bank Account");
     System.out.println("Balance: " + account.getBalance());
     System.out.println("Number of Deposits: " + account.getNumDeposits());
@@ -32,8 +32,8 @@ public class BankDriver {
     System.out.println("Interest Rate: " + savings.getInterestRate());
     System.out.println("Monthly Service Charges: " + savings.getMonthlyServiceCharges());
     System.out.println();
-    account.withdraw(100);
-    savings.withdraw(100);
+    account.withdraw(100.00);
+    savings.withdraw(100.00);
     System.out.println("Bank Account");
     System.out.println("Balance: " + account.getBalance());
     System.out.println("Number of Deposits: " + account.getNumDeposits());
