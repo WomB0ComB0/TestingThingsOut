@@ -80,7 +80,6 @@
 # fib_sequence = fibonacci(num)
 # for number in fib_sequence:
 	# print(number)
-
 # def spiralTraverse(array):
     # traversedArray = []
     # while array: # while array is not empty
@@ -408,16 +407,88 @@
     # return max_points
 # print(maximumPoints(k, costs))
 
-def find_anagrams(word_list):
-    my_dict = {}
-    for word in word_list:
-        srt_letters = ''.join(sorted(word))
-        if srt_letters in my_dict:
-            my_dict[srt_letters].append(word)
-        else:
-            my_dict[srt_letters] = [word]
-    for key, words in my_dict.items():
-        if len(words) >= 2:
-            return [words[0], words[1]]
-    return []
-print(find_anagrams(["cat", "dog", "tac", "god", "act"]))
+# def find_anagrams(word_list):
+    # my_dict = {}
+    # for word in word_list:
+        # srt_letters = ''.join(sorted(word))
+        # if srt_letters in my_dict:
+            # my_dict[srt_letters].append(word)
+        # else:
+            # my_dict[srt_letters] = [word]
+    # for key, words in my_dict.items():
+        # if len(words) >= 2:
+            # return [words[0], words[1]]
+    # return []
+# print(find_anagrams(["cat", "dog", "tac", "god", "act"]))
+# def consecutive(list):
+#   l, r = 0, 1
+#   count = 0
+#   while l < r:
+    # if list[l] == list[r]:
+    #   l += 1
+    #   r += 1
+    #   count += 1
+    # elif list[l] != list[r]:
+        # l += 1
+        # r += 1
+    # return count
+# print(consecutive([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]))
+
+# def total_inventory(dict1,dict2):
+    # total = 0
+    # for key in dict1: # for each key in dict1
+        # total += dict1[key] # add the value of the key to total
+    # for key in dict2: # for each key in dict2
+        # total += dict2[key] # add the value of the key to total
+    # return total
+# print(total_inventory({'pencil': 10, 'pen': 8, 'paper': 7}, {'pencil': 11, 'pen': 12, 'paper': 13}))
+
+# def translate(list,dic):
+    # translatedList = []
+    # for i in list: # for each element in list
+        # translatedList.append(dic[i]) # append the value of the element to translatedList
+    # return translatedList
+# print(translate(['cat', 'dog', 'walrus'], {0: 'dog', 1: 'walrus', 2: 'cat'}))
+# def roman_nums(input):
+    # roman = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    # total = 0
+    # for i in range(len(input)):
+        # value = roman[input[i]] # value = roman['I'] = 1
+        # if i+1 < len(input) and roman[input[i+1]] > value: # if next value is > current value
+            # total -= value
+        # else: # if the next value is not greater than the current value
+            # total += value
+    # return total
+# print(roman_nums('III'))
+# print(roman_nums('LVIII'))
+# print(roman_nums('MMXXIII'))
+
+# capitals = {
+    # "France": "Paris",
+    # "Netherlands": "Amsterdam",
+    # "Germany": "Berlin",
+    # "Switzerland": "Bern",
+# }
+# Printing just the keys
+# for country in capitals.keys():
+    # print(country)
+#  Printing just the values
+# for capital in capitals.values():
+    # print(capital)
+# Printing both keys and values
+# for country, capital in capitals.items():
+    # print(country, capital)
+# Printing the keys and values in a formatted string
+# for country, capital in capitals.items():
+    # print("The capital of " + country + " is " + capital + ".")
+
+# words = ["apple", "apple", "banana", "apple", "orange", "banana", "pear", "banana"]
+# def word_freq(words):
+    # output = {}
+    # for word in words:
+        # if not(word in output):
+            # output[word] = 1
+        # else:
+            # output[word] += 1
+    # return output
+# print(word_freq(words))
