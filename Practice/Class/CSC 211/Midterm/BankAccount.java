@@ -6,7 +6,7 @@ public class BankAccount {
   private double balance;
   private int numDeposits;
   private int numWithdrawals;
-  private final double interestRate;
+  private double interestRate;
   private double monthlyServiceCharges;
   /**
    * Constructs a BankAccount object with the given initial balance, interest rate,
@@ -43,7 +43,7 @@ public class BankAccount {
    * Calculates and adds monthly interest to the account balance.
    */
   private void calcInterest() {
-    double monthlyInterestRate = this.interestRate / 12;
+    double monthlyInterestRate = this.interestRate / 12.00; // Change this 
     double monthlyInterest = this.balance * monthlyInterestRate;
     this.balance += monthlyInterest;
   }
@@ -53,27 +53,18 @@ public class BankAccount {
    */
   public void monthlyProcess() {
     this.balance -= this.monthlyServiceCharges;
-    this.calcInterest();
+    calcInterest();
+    setMonthlyServiceCharges(0);
     this.numDeposits = 0;
     this.numWithdrawals = 0;
-    this.monthlyServiceCharges = 0;
+    // this.monthlyServiceCharges = 0;
   }
-  public void setMonthlyServiceCharges(double amount) {
-    this.monthlyServiceCharges = amount;
+  public void setMonthlyServiceCharges(double monthlyServiceCharges) {
+    this.monthlyServiceCharges = monthlyServiceCharges;
   }
-  public double getBalance() {
-    return this.balance;
-  }
-  public int getNumDeposits() {
-    return this.numDeposits;
-  }
-  public int getNumWithdrawals() {
-    return this.numWithdrawals;
-  }
-  public double getInterestRate() {
-    return this.interestRate;
-  }
-  public double getMonthlyServiceCharges() {
-    return this.monthlyServiceCharges;
-  }
+  public double getBalance() {return this.balance;}
+  public int getNumDeposits() {return this.numDeposits;}
+  public int getNumWithdrawals() {return this.numWithdrawals;}
+  public double getInterestRate() {return this.interestRate;}
+  public double getMonthlyServiceCharges() {return this.monthlyServiceCharges;}
 }
