@@ -53,18 +53,43 @@ public class BankAccount {
    */
   public void monthlyProcess() {
     this.balance -= this.monthlyServiceCharges;
-    calcInterest();
-    setMonthlyServiceCharges(0);
+    this.calcInterest();
     this.numDeposits = 0;
     this.numWithdrawals = 0;
-    // this.monthlyServiceCharges = 0;
+    this.monthlyServiceCharges = 0;
   }
-  public void setMonthlyServiceCharges(double monthlyServiceCharges) {
-    this.monthlyServiceCharges = monthlyServiceCharges;
+  /**
+   * Sets the balance of the account to the given amount.
+   *
+   * @param amount The amount to set the balance to.
+   */
+  public void setMonthlyServiceCharges(double amount) {
+    this.monthlyServiceCharges = amount;
   }
+  /**
+   * Returns the balance of the account.
+   *
+   * @return The balance of the account.
+   */
   public double getBalance() {return this.balance;}
+  /**
+   * Returns the number of deposits made in the month.
+   * @return The number of deposits made in the month.
+   */
   public int getNumDeposits() {return this.numDeposits;}
+  /**
+   * Returns the number of withdrawals made in the month.
+   * @return The number of withdrawals made in the month.
+   */
   public int getNumWithdrawals() {return this.numWithdrawals;}
+  /**
+   * Returns the annual interest rate of the account.
+   * @return The annual interest rate of the account.
+   */
   public double getInterestRate() {return this.interestRate;}
+  /**
+   * Returns the monthly service charge of the account.
+   * @return The monthly service charge of the account.
+   */
   public double getMonthlyServiceCharges() {return this.monthlyServiceCharges;}
 }
