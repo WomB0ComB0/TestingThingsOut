@@ -44,7 +44,7 @@ public class SavingsDemo
       System.out.println();
 
       // Do the monthly processing.
-      savings.monthlyProcess();
+      // savings.monthlyProcess();
    
       // Display what we've done so far.
       System.out.printf("Balance: $%,.2f\n", savings.getBalance());

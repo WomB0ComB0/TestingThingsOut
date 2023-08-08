@@ -35,9 +35,9 @@ public class SavingsAccount extends BankAccount {
    */
   @Override
   public void deposit(double amount) {
-    if (!(this.status)) {
+    if ((this.status)) { // This was the issue, the status was not being updated
       super.deposit(amount); // Look into this, only the withdrawal method works
-      if (super.getBalance() > 25) {
+      if (super.getBalance() >= 25) {
         this.status = true;
       }
     }
@@ -50,8 +50,9 @@ public class SavingsAccount extends BankAccount {
   @Override
   public void monthlyProcess() {
     if (super.getNumWithdrawals() > 4) {
-      super.setMonthlyServiceCharges(super.getMonthlyServiceCharges() + (super.getNumWithdrawals() - 4)); // Change this
+      super.setMonthlyServiceCharges(super.getMonthlyServiceCharges() + (super.getNumWithdrawals() - 4));
     }
+    // The only problem here is that the number of deposits is not being reset
     super.monthlyProcess();
     if (super.getBalance() < 25) {
       this.status = false;

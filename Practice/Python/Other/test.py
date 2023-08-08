@@ -321,6 +321,105 @@
 # import math
 # print(math.floor(107.5))
 
+# d = { "a": 'b', "b": 'c', "c": 'a' }
+# for x, y  in d.items():
+#     print(x, y, d[x], d[y])
+# print(d.items())
+# inventory = {"banana": 6, "apple": 0, "orange": 32, "pear": 15}
+# inventory = {'bananas': 5, 'apples': 3, 'cherries': 100}
+# def maximum_count(inventory):
+    # max = 0
+    # for x in inventory:
+        # if inventory[x] > max:
+            # max = inventory[x]
+        # elif inventory[x] == max:
+            # max = inventory[x]
+    # return inventory.keys(max)
+# print(maximum_count(inventory))
+
+# inventory = {"banana": 5, "apple": 3, "orange": 10, "bacon": 1, "sausages": 13}
+# def low_inventory(inventory, threshold):
+    # value_list = []
+    # for key, value in inventory.items():
+        # if value <= threshold:
+            # value_list.append(key)
+    # return value_list
+# print(low_inventory(inventory, 3))
+
+# def category_total(inventory, categories, category):
+    # total = 0
+    # for key, value in inventory.items():
+        # if key in categories[category]:
+            # total += value
+    # return total
+
+# def most_common_first_letter(word_list):
+    # first_letters = [word[0] for word in word_list]
+    # return max(set(first_letters), key=first_letters.count)
+# print(most_common_first_letter(["cat","bat", "rat", "bar", "car", "can"]))
+
+# opened = ["[","{","("]
+# closed = ["]", "}",")"]
+# def balanced_symbols(s):
+#   stack = []
+#   for i in s:
+    # if i in opened:
+    #   stack.append(i)
+    # elif i in closed:
+    #   pos = closed.index(i)
+    #   if ((len(stack) > 0) and (opened[pos] == stack[len(stack) -1])):
+        # stack.pop()
+    #   else:
+        # return False
+#   if len(stack) == 0:
+    # return True
+#   else:
+    # return False
+# s = "{[]{()}}"
+# print(balanced_symbols(s))
+# O(n) Time
+
+# def unique(my_list):
+    # my_dict = {}
+    # for item in my_list:
+        # if item in my_dict:
+            # my_dict[item] += 1
+        # else:
+            # my_dict[item] = 1
+    # return my_dict.keys()
+# print(unique([1,2,3,3,2,1,0]))
+
+# k = 14
+# costs = [2, 4, 1, 8, 6]
+# def maximumPoints(k, costs):
+    # n = len(costs)
+    # max_points = 0
+    # total_cost = 0
+    # skipped = False
+    # skip_index = -1
+    # for i in range(n):
+        # total_cost += costs[i]
+        # while total_cost > k and not skipped:
+            # total_cost -= costs[skip_index + 1]
+            # skip_index += 1
+            # skipped = True
+        # max_points = max(max_points, i - skip_index)
+    # return max_points
+# print(maximumPoints(k, costs))
+
+# def find_anagrams(word_list):
+    # my_dict = {}
+    # for word in word_list:
+        # srt_letters = ''.join(sorted(word))
+        # if srt_letters in my_dict:
+            # my_dict[srt_letters].append(word)
+        # else:
+            # my_dict[srt_letters] = [word]
+    # for key, words in my_dict.items():
+        # if len(words) >= 2:
+            # return [words[0], words[1]]
+    # return []
+# print(find_anagrams(["cat", "dog", "tac", "god", "act"]))
 # def consecutive(list):
 #   l, r = 0, 1
 #   count = 0
