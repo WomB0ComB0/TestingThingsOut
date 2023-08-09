@@ -492,3 +492,26 @@
             # output[word] += 1
     # return output
 # print(word_freq(words))
+
+# Itterative
+# def factorial(n):
+    # result = 1
+    # for i in range(n, 1, -1):
+        # result *= i
+    # return result
+# print(factorial(0))
+# print(factorial(1))
+# print(factorial(3))
+# print(factorial(5))
+
+# Recursive
+def factorial(n):
+    if n < 2:
+        return 1
+    else:
+        return n * factorial(n-1) # multiply n by the factorial of n-1, because n! = n * (n-1)!
+    # Because its recursive, it will keep calling itself until n == 0 or n == 1
+print(factorial(0))
+print(factorial(1))
+print(factorial(3))
+print(factorial(5))
