@@ -494,31 +494,54 @@
 # print(word_freq(words))
 
 # This is from the Leetcode problem 34. Find First and Last Position of Element in Sorted Array
-class Solution:
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
-        low, high = 0, len(nums)-1
-        while low <= high:
-            mid = (low + high)//2
-            if nums[mid] == target:
-                return [self.find_left(nums, target, low, mid), self.find_right(nums, target, mid, high)]
-            elif nums[mid] < target:
-                low = mid + 1
-            else:
-                high = mid - 1
-        return [-1, -1]
-    def find_left(self, nums, target, low, high):
-        while low < high:
-            mid = (low + high)//2
-            if nums[mid] == target:
-                high = mid
-            else:
-                low = mid + 1
-        return low
-    def find_right(self, nums, target, low, high):
-        while low < high:
-            mid = (low + high)//2 + 1
-            if nums[mid] == target:
-                low = mid
-            else:
-                high = mid - 1
-        return low
+# class Solution:
+    # def searchRange(self, nums: List[int], target: int) -> List[int]:
+        # low, high = 0, len(nums)-1
+        # while low <= high:
+            # mid = (low + high)//2
+            # if nums[mid] == target:
+                # return [self.find_left(nums, target, low, mid), self.find_right(nums, target, mid, high)]
+            # elif nums[mid] < target:
+                # low = mid + 1
+            # else:
+                # high = mid - 1
+        # return [-1, -1]
+    # def find_left(self, nums, target, low, high):
+        # while low < high:
+            # mid = (low + high)//2
+            # if nums[mid] == target:
+                # high = mid
+            # else:
+                # low = mid + 1
+        # return low
+    # def find_right(self, nums, target, low, high):
+        # while low < high:
+            # mid = (low + high)//2 + 1
+            # if nums[mid] == target:
+                # low = mid
+            # else:
+                # high = mid - 1
+        # return low
+# Itterative
+# def factorial(n):
+    # result = 1
+    # for i in range(n, 1, -1):
+        # result *= i
+    # return result
+# print(factorial(0))
+# print(factorial(1))
+# print(factorial(3))
+# print(factorial(5))
+
+# Recursive
+# def factorial(n):
+    # if n < 2:
+        # return 1
+    # else:
+        # return n * factorial(n-1) # multiply n by the factorial of n-1, because n! = n * (n-1)!
+    # Because its recursive, it will keep calling itself until n == 0 or n == 1
+# print(factorial(0))
+# print(factorial(1))
+# print(factorial(3))
+# print(factorial(5))
+
