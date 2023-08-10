@@ -492,3 +492,33 @@
             # output[word] += 1
     # return output
 # print(word_freq(words))
+
+# This is from the Leetcode problem 34. Find First and Last Position of Element in Sorted Array
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        low, high = 0, len(nums)-1
+        while low <= high:
+            mid = (low + high)//2
+            if nums[mid] == target:
+                return [self.find_left(nums, target, low, mid), self.find_right(nums, target, mid, high)]
+            elif nums[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return [-1, -1]
+    def find_left(self, nums, target, low, high):
+        while low < high:
+            mid = (low + high)//2
+            if nums[mid] == target:
+                high = mid
+            else:
+                low = mid + 1
+        return low
+    def find_right(self, nums, target, low, high):
+        while low < high:
+            mid = (low + high)//2 + 1
+            if nums[mid] == target:
+                low = mid
+            else:
+                high = mid - 1
+        return low
