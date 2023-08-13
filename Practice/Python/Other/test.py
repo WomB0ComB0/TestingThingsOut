@@ -545,3 +545,83 @@
 # print(factorial(3))
 # print(factorial(5))
 
+# def are_anagrams(word1, word2):
+#   firstWord = set()
+#   secondWord = set()
+  
+#   for word in word1:
+#     firstWord.add(word)
+#   for word in word2:
+#     secondWord.add(word)
+    
+#   return firstWord == secondWord 
+
+# print(are_anagrams("dad","add")) # True
+# print(are_anagrams("boy","girl")) # False
+# print(are_anagrams("lady","bird")) # False
+# print(are_anagrams("not","ton")) # True
+
+# def palindrome(s):
+#   return s == s[::-1]
+# print(palindrome("dad"), ": This is the function palindrome")
+
+# def palindrome_r(s):
+#   if len(s) <= 1:
+#     return True
+#   if s[0] == s[-1]:
+#     return palindrome_r(s[1:-1])
+#   else:
+#     return False
+# print(palindrome_r("dad"), ": This is the function palindrome_r")
+
+# def double_sum(nums):
+    # current_sum = 0
+    # for i in range(0, len(nums)):
+        # current_sum += 2 * nums[i]
+    # return current_sum
+# print(double_sum([4, 2, 10, 5])) # 42, because (4*2) + (2*2) + (10*2) + (5*2) = 42
+
+# a = 12
+# b = 8
+# while a > b:
+    # a -= 2
+    # print(a, b)
+    # b -= 1
+    # print(a - 1, b)
+
+# def abracadabra(head):
+    # list = head
+    # while list:
+        # if(list.next == None):
+            # break
+        # if (list.val == list.next.val):
+            # list.next = list.next.next
+        # else:
+            # list = list.next
+    # return head
+# print(abracadabra([1,2,2,3,4,5,5, 6, 7]))
+
+# A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# print(A[1][2])
+
+# def maximumOccurringCharacter(text):
+    # result = {}
+    # for i in text:
+        # if i in result:
+            # result[i] += 1
+        # else:
+            # result[i] = 1
+    # return max(result, key=result.get)
+# print(maximumOccurringCharacter("abbbaacc"))
+
+def maxDifference(px):
+    l, r = 0, 1
+    max_diff = px[r] - px[l]
+    while r < len(px):
+        if px[l] > px[r]:
+            l = r
+        else:
+            max_diff = max(max_diff, px[r] - px[l])
+        r += 1
+    return max_diff
+print(maxDifference([7, 1, 2, 5]))
