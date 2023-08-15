@@ -1,6 +1,7 @@
 public class CheckingAccount extends BankAccount {
-    private final double FEE = 2.0; // Default withdrawal fee
+    private final double FEE = 0.15; // Default withdrawal fee
     
+    @Override
     public CheckingAccount(String name, double amount) {
         super(name, amount); // Call the constructor of the parent class
         accountNumber = "CHK" + accountNumber;

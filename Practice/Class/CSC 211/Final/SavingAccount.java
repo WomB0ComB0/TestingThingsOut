@@ -1,6 +1,6 @@
 public class SavingsAccount extends BankAccount {
-    private double rate;
-    private int savingsNumber;
+    private double rate = 0.025; // Interest rate of 2.5%
+    private int savingsNumber = 0;
     
     public SavingsAccount(String name, double amount) {
         super(name, amount); // Call the constructor of the parent class
@@ -20,6 +20,8 @@ public class SavingsAccount extends BankAccount {
         double interest = getBalance() * rate;
         deposit(interest);
     }
-
-    @Override
-   
+ 
+    public String getAccountNumber() {
+        return accountNumber + "-" + savingsNumber;
+    }
+}
