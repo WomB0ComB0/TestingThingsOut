@@ -1,19 +1,31 @@
+/**
+ * Represents a checking account that extends the {@link BankAccount} class.
+ */
 public class CheckingAccount extends BankAccount {
-    private final double FEE = 0.15; // Default withdrawal fee
-    
-    @Override
+    private final double FEE = 0.15;
+
+    /**
+     * Constructs a new CheckingAccount object with the specified owner's name and initial balance.
+     *
+     * @param name   The name of the account owner.
+     * @param amount The initial balance of the account.
+     */
     public CheckingAccount(String name, double amount) {
-        super(name, amount); // Call the constructor of the parent class
-        accountNumber = "CHK" + accountNumber;
+        super(name, amount);
+        setAccountNumber(getAccountNumber() + "-10");
     }
 
+    /**
+     * Withdraws money from the account, including a withdrawal fee.
+     *
+     * @param amount The amount to withdraw.
+     * @return true if the withdrawal was successful, false otherwise.
+     */
+    @Override
     public boolean withdraw(double amount) {
         if (amount > 0) {
-            double totalAmount = amount + FEE; // Apply the withdrawal fee
-            if (getBalance() >= totalAmount) {
-                setBalance(getBalance() - totalAmount);
-                System.out.println("Withdrawn: $" + amount);
-                System.out.println("Fee: $" + FEE);
+            double totalAmount = amount + FEE;
+            if (getBalance() >= totalAmount && super.withdraw(totalAmount)) {
                 return true;
             } else {
                 System.out.println("Insufficient balance or invalid amount.");
