@@ -493,6 +493,35 @@
     # return output
 # print(word_freq(words))
 
+# This is from the Leetcode problem 34. Find First and Last Position of Element in Sorted Array
+# class Solution:
+    # def searchRange(self, nums: List[int], target: int) -> List[int]:
+        # low, high = 0, len(nums)-1
+        # while low <= high:
+            # mid = (low + high)//2
+            # if nums[mid] == target:
+                # return [self.find_left(nums, target, low, mid), self.find_right(nums, target, mid, high)]
+            # elif nums[mid] < target:
+                # low = mid + 1
+            # else:
+                # high = mid - 1
+        # return [-1, -1]
+    # def find_left(self, nums, target, low, high):
+        # while low < high:
+            # mid = (low + high)//2
+            # if nums[mid] == target:
+                # high = mid
+            # else:
+                # low = mid + 1
+        # return low
+    # def find_right(self, nums, target, low, high):
+        # while low < high:
+            # mid = (low + high)//2 + 1
+            # if nums[mid] == target:
+                # low = mid
+            # else:
+                # high = mid - 1
+        # return low
 # Itterative
 # def factorial(n):
     # result = 1
@@ -505,13 +534,94 @@
 # print(factorial(5))
 
 # Recursive
-def factorial(n):
-    if n < 2:
-        return 1
-    else:
-        return n * factorial(n-1) # multiply n by the factorial of n-1, because n! = n * (n-1)!
+# def factorial(n):
+    # if n < 2:
+        # return 1
+    # else:
+        # return n * factorial(n-1) # multiply n by the factorial of n-1, because n! = n * (n-1)!
     # Because its recursive, it will keep calling itself until n == 0 or n == 1
-print(factorial(0))
-print(factorial(1))
-print(factorial(3))
-print(factorial(5))
+# print(factorial(0))
+# print(factorial(1))
+# print(factorial(3))
+# print(factorial(5))
+
+# def are_anagrams(word1, word2):
+#   firstWord = set()
+#   secondWord = set()
+  
+#   for word in word1:
+#     firstWord.add(word)
+#   for word in word2:
+#     secondWord.add(word)
+    
+#   return firstWord == secondWord 
+
+# print(are_anagrams("dad","add")) # True
+# print(are_anagrams("boy","girl")) # False
+# print(are_anagrams("lady","bird")) # False
+# print(are_anagrams("not","ton")) # True
+
+# def palindrome(s):
+#   return s == s[::-1]
+# print(palindrome("dad"), ": This is the function palindrome")
+
+# def palindrome_r(s):
+#   if len(s) <= 1:
+#     return True
+#   if s[0] == s[-1]:
+#     return palindrome_r(s[1:-1])
+#   else:
+#     return False
+# print(palindrome_r("dad"), ": This is the function palindrome_r")
+
+# def double_sum(nums):
+    # current_sum = 0
+    # for i in range(0, len(nums)):
+        # current_sum += 2 * nums[i]
+    # return current_sum
+# print(double_sum([4, 2, 10, 5])) # 42, because (4*2) + (2*2) + (10*2) + (5*2) = 42
+
+# a = 12
+# b = 8
+# while a > b:
+    # a -= 2
+    # print(a, b)
+    # b -= 1
+    # print(a - 1, b)
+
+# def abracadabra(head):
+    # list = head
+    # while list:
+        # if(list.next == None):
+            # break
+        # if (list.val == list.next.val):
+            # list.next = list.next.next
+        # else:
+            # list = list.next
+    # return head
+# print(abracadabra([1,2,2,3,4,5,5, 6, 7]))
+
+# A = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+# print(A[1][2])
+
+# def maximumOccurringCharacter(text):
+    # result = {}
+    # for i in text:
+        # if i in result:
+            # result[i] += 1
+        # else:
+            # result[i] = 1
+    # return max(result, key=result.get)
+# print(maximumOccurringCharacter("abbbaacc"))
+
+def maxDifference(px):
+    l, r = 0, 1
+    max_diff = px[r] - px[l]
+    while r < len(px):
+        if px[l] > px[r]:
+            l = r
+        else:
+            max_diff = max(max_diff, px[r] - px[l])
+        r += 1
+    return max_diff
+print(maxDifference([7, 1, 2, 5]))
