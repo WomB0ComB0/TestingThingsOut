@@ -22,4 +22,7 @@ public class SavingsAccount extends BankAccount {
     }
 
     @Override
-   
+    public String getAccountNumber() {
+        return accountNumber + "-" + savingsNumber;
+    }
+}
