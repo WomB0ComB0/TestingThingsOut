@@ -614,14 +614,105 @@
     # return max(result, key=result.get)
 # print(maximumOccurringCharacter("abbbaacc"))
 
-def maxDifference(px):
-    l, r = 0, 1
-    max_diff = px[r] - px[l]
-    while r < len(px):
-        if px[l] > px[r]:
-            l = r
-        else:
-            max_diff = max(max_diff, px[r] - px[l])
-        r += 1
-    return max_diff
-print(maxDifference([7, 1, 2, 5]))
+# def maxDifference(px):
+    # l, r = 0, 1
+    # max_diff = px[r] - px[l]
+    # while r < len(px):
+        # if px[l] > px[r]:
+            # l = r
+        # else:
+            # max_diff = max(max_diff, px[r] - px[l])
+        # r += 1
+    # return max_diff
+# print(maxDifference([7, 1, 2, 5]))
+
+# def maxSubsetSumNoAdjacent(array):
+#     filtered = []
+#     if not array:
+#         return 0
+#     elif len(array) == 2:
+#         return max(array)
+#     for i in range(0, len(array)):
+#         if not(i in filtered):
+#             filtered.append(array[i])
+    
+# def maxSubsetSumNoAdjacent(array):
+    # if not array:
+        # return 0
+    # elif len(array) == 1:
+        # return array[0]
+    # maxSums = array[:]
+    # maxSums[1] = max(array[0], array[1])
+    # for i in range(2, len(array)):
+        # maxSums[i] = max(maxSums[i-1], maxSums[i-2] + array[i])
+    # return maxSums[-1]
+# print(maxSubsetSumNoAdjacent([75, 105, 120, 75, 90, 135])) # 330
+
+
+# def maxSubArray(nums):
+    # maxSum = nums[0]
+    # currSum = 0
+    # for i in range(0, len(nums)):
+        # if currSum < 0:
+            # currSum = 0
+        # currSum += nums[i]
+        # maxSum = max(maxSum, currSum)
+    # return maxSum
+# print(maxSubArray([1,2,3,4,5,6,7,8,9,10])) # 55
+
+# import math
+# print(math.ceil(1905/100))
+
+# array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# print(len(array))
+
+# def solution(inputArray):
+    # result = []
+    # for i in range(len(inputArray) - 1):
+        # result.append(inputArray[i] * inputArray[i + 1])
+    # return max(result)
+# print(solution([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+
+# Ratiorg got statues of different sizes as a present from CodeMaster for his birthday, each statue having an non-negative integer size. Since he likes to make things perfect, he wants to arrange them from smallest to largest so that each statue will be bigger than the previous one exactly by 1. He may need some additional statues to be able to accomplish that. Help him figure out the minimum number of additional statues needed.
+
+# def solution(statues):
+    # count = 0
+    # statues.sort()
+    # for i in range(len(statues) - 1):
+        # if statues[i] + 1 != statues[i + 1]:
+            # count += statues[i + 1] - statues[i] - 1
+    # return count
+# print(solution([6, 2, 3, 8])) # 3
+
+# def solution(sequence):
+    # dropped = False
+    # last = prev = min(sequence) - 1
+    # for elm in sequence:
+        # if elm <= last:
+            # if dropped:
+                # return False
+            # else:
+                # dropped = True
+            # if elm <= prev:
+                # prev = last
+            # elif elm >= prev:
+                # prev = last = elm
+        # else:
+            # prev, last = last, elm
+    # return True
+
+# Given matrix, a rectangular matrix of integers, where each value represents the cost of the room, your task is to return the total sum of all rooms that are suitable for the CodeBots (ie: add up all the values that don't appear below a 0).
+def solution(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = 0
+    for col in range(cols):
+        for row in range(rows):
+            if matrix[row][col] == 0:
+                continue
+            else:
+                result += matrix[row][col]
+    return result
+print(solution([[0, 1, 1, 2], 
+          [0, 5, 0, 0], 
+          [2, 0, 3, 3]]))
