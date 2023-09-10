@@ -702,17 +702,33 @@
     # return True
 
 # Given matrix, a rectangular matrix of integers, where each value represents the cost of the room, your task is to return the total sum of all rooms that are suitable for the CodeBots (ie: add up all the values that don't appear below a 0).
-def solution(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    result = 0
-    for col in range(cols):
-        for row in range(rows):
-            if matrix[row][col] == 0:
-                continue
-            else:
-                result += matrix[row][col]
-    return result
-print(solution([[0, 1, 1, 2], 
-          [0, 5, 0, 0], 
-          [2, 0, 3, 3]]))
+# def solution(matrix):
+    # rows = len(matrix)
+    # cols = len(matrix[0])
+    # result = 0
+    # for col in range(cols):
+        # for row in range(rows):
+            # if matrix[row][col] == 0:
+                # continue
+            # else:
+                # result += matrix[row][col]
+    # return result
+# print(solution([[0, 1, 1, 2], 
+        #   [0, 5, 0, 0], 
+        #   [2, 0, 3, 3]]))
+# def powerset(array):
+    # """
+    # Generates the powerset of a given array.
+    # The powerset of a set is the set of all possible subsets, including the empty subset and the set itself.
+    # Parameters:
+    # array (list): The input list for which the powerset needs to be generated.
+    # Returns:
+    # list: A list of lists representing the powerset of the input array.
+    # """
+    # subsets = [[]]  # Initialize the powerset with the empty subset
+    # for ele in array: # For each element in the input array
+        # for i in range(len(subsets)): # For each subset in the powerset
+            # currentSubset = subsets[i] # Get the current subset
+            # subsets.append(currentSubset + [ele])  # Add a new subset with the current element
+    # return subsets
+# print(powerset([1, 2, 3])) # [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]

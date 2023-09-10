@@ -7,6 +7,7 @@ const App = () => {
   console.log('Render')
   const [searchField, setSearchField] = useState('');
   const [monsters, setMonsters] = useState([]);
+  const [stringField, setStringField] = useState('');
   const [filteredMonsters, setFilteredMonsters] = useState(monsters); 
 
   useEffect(() => {
@@ -20,7 +21,6 @@ const App = () => {
       return monster.name.toLowerCase().includes(searchField);
     });
     setFilteredMonsters(newFilteredMonsters);
-    console.log('useEffect', filteredMonsters);
   }, [searchField, monsters]);
   
   const onSearchChange = (e) => {
@@ -28,12 +28,16 @@ const App = () => {
     setSearchField(searchFieldString);
   }
 
+  const onStringChange = (e) => {
+    setStringField(e.target.value);
+  }
   
   console.log('filteredMonsters', filteredMonsters);
   return (
     <div className="App">
       <h1 className='app-title'>Monsters Rolodex</h1>
       <SearchBox className='monsters-search-box' placeholder='Search monsters' onChangeHandler={onSearchChange} />
+      <SearchBox className='monsters-search-box' placeholder='Search monsters' onChangeHandler={onStringChange} />
       <CardList monsters={filteredMonsters} />
     </div>
   );
