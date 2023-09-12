@@ -1,5 +1,7 @@
 import java.util.Scanner;
 /**
+ * @author Mike Odnis
+ * @since 2023-09-12 (September 12, 2023)
  * This class encrypts user input using a simple Caesar cipher and generates a crypto-quote.
  * It preserves character case, handles non-alphabetical characters, and spaces.
  */
