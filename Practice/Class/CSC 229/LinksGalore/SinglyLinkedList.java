@@ -1,0 +1,115 @@
+public class SinglyLinkedList<E> implements Cloneable {
+    
+  //---------------- nested Node class ----------------
+  private static class Node<E> {
+    private E element;                // reference to the element stored at this node
+    private Node<E> next;             // reference to the subsequent node in the list
+    public Node(E e, Node<E> n) {
+     element = e;
+     next = n;
+    }
+     public E getElement( ) { return element; }
+     public Node<E> getNext( ) { return next; }
+     public void setNext(Node<E> n) { next = n; }
+  } // close nested Node class
+  
+// instance variables of the SinglyLinkedList
+   private Node<E> head = null;             // head node of the list (or null if empty)
+   private Node<E> tail = null;             // last node of the list (or null if empty)
+   private int size = 0;                    // number of nodes in the list
+   public SinglyLinkedList( ) { }           // constructs an initially empty list
+   // access methods
+  //  public int size( ) { return size; }
+   public boolean isEmpty( ) { return size == 0; }
+   public int size( ) {
+      int count = 0;
+      Node<E> tracker = head;
+      while (tracker != null) {
+          count++;
+          tracker = tracker.getNext();
+      }
+      System.out.println("The length of the doubly linked list is:" + count);
+      return count;
+   }
+   public E first( ) {             // returns (but does not remove) the first element
+     if (isEmpty( )) return null;
+     return head.getElement( );
+   }
+   public E last( ) {              // returns (but does not remove) the last element
+     if (isEmpty( )) return null;
+     return tail.getElement( );
+   }
+
+   // update methods
+   public void addFirst(E e) {         // adds element e to the front of the list
+     head = new Node<>(e, head);       // create and link a new node
+     if (size == 0)
+       tail = head;                    // special case: new node becomes tail also
+     size++;
+   }
+   public void addLast(E e) {          // adds element e to the end of the list
+     Node<E> newest = new Node<>(e, null);      // node will eventually be the tail
+     if (isEmpty( ))
+       head = newest;                  // special case: previously empty list
+     else
+       tail.setNext(newest);           // new node after existing tail
+     tail = newest;                    // new node becomes the tail
+     size++;
+   }
+   public E removeFirst( ) {           // removes and returns the first element
+     if (isEmpty( )) return null;      // nothing to remove
+     E answer = head.getElement( );
+     head = head.getNext( );           // will become null if list had only one node
+     size--;
+     if (size == 0)
+       tail = null;                    // special case as list is now empty
+     return answer;
+   }
+
+
+   public void displayList() {
+       Node<E> tracker = head;
+       if (isEmpty( ))
+         System.out.println("The list is empty.");  
+       else
+         while (tracker != null) {
+             System.out.println("Element is: " + tracker.getElement() + " ");
+             tracker = tracker.getNext();
+         }      
+   }
+
+    //  @Override
+    //  public SinglyLinkedList<E> clone( ) throws CloneNotSupportedException {
+    //    System.out.println("clone(): entry point head = " + head);
+
+    //    // always use inherited Object.clone() to create the initial copy
+    //    SinglyLinkedList<E> other = (SinglyLinkedList<E>) super.clone();
+    //    System.out.println("clone(): instantiated other");
+       
+    //    if (size > 0) {    // we need independent chain of nodes
+    //      System.out.println("clone(): size = " + size);
+    //      System.out.println("clone(): head = " + head);
+    //      other.head = new Node<>(head.getElement(), null);
+    //      System.out.println("clone(): other.head = " + other.head);
+    //      Node<E> walk = head.getNext();   // walk through the remainder of the original list
+    //      Node<E>otherTail = other.head;   // remember most recently created node
+    //      while (walk != null) {           //make a new node storing the same element
+    //        Node<E> newest = new Node<>(walk.getElement(), null);
+    //        otherTail.setNext(newest);   //link previous node to this one
+    //        otherTail = newest;
+    //        walk = walk.getNext();
+    //      }
+    //    }
+    //    return other;
+    //  }    
+
+   
+   public Node<E> penultimate() {
+       if (size < 2)
+           throw new IllegalStateException("List must have at least two elements");
+       Node<E> walk = head;
+       while(walk.getNext().getNext() != null)
+           walk = walk.getNext();
+       return walk;
+   }
+} // close SinglyLinkedList class
