@@ -62,6 +62,12 @@ public class DoublySize<E> {
     header.setNext(trailer); // header is followed by trailer
   }
 
+  /**
+   * Returns the number of elements in the specified DoublySize list.
+   *
+   * @param list The DoublySize list for which to determine the size.
+   * @return The size of the specified list.
+   */
   public int size(DoublySize<E> list) {
     int size = 0;
     DoublySize.Node<E> node = list.header.getNext();
@@ -69,6 +75,7 @@ public class DoublySize<E> {
       size++;
       node = node.getNext();
     }
+    System.out.println("Size of the list is: " + size);
     return size;
   }
 
