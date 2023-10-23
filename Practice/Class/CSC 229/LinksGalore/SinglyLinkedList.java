@@ -86,4 +86,11 @@ public class SinglyLinkedList<E> implements Cloneable {
            walk = walk.getNext();
        return walk;
    }
+  public void removeDuplicates() {
+  }
+  public Integer findNthFromEnd(int nthFromEnd) {
+    return null;
+  }
+  public void reverseList() {
+  }
 } // close SinglyLinkedList class
