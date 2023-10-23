@@ -76,33 +76,7 @@ public class SinglyLinkedList<E> implements Cloneable {
              System.out.println("Element is: " + tracker.getElement() + " ");
              tracker = tracker.getNext();
          }      
-   }
-
-    //  @Override
-    //  public SinglyLinkedList<E> clone( ) throws CloneNotSupportedException {
-    //    System.out.println("clone(): entry point head = " + head);
-
-    //    // always use inherited Object.clone() to create the initial copy
-    //    SinglyLinkedList<E> other = (SinglyLinkedList<E>) super.clone();
-    //    System.out.println("clone(): instantiated other");
-       
-    //    if (size > 0) {    // we need independent chain of nodes
-    //      System.out.println("clone(): size = " + size);
-    //      System.out.println("clone(): head = " + head);
-    //      other.head = new Node<>(head.getElement(), null);
-    //      System.out.println("clone(): other.head = " + other.head);
-    //      Node<E> walk = head.getNext();   // walk through the remainder of the original list
-    //      Node<E>otherTail = other.head;   // remember most recently created node
-    //      while (walk != null) {           //make a new node storing the same element
-    //        Node<E> newest = new Node<>(walk.getElement(), null);
-    //        otherTail.setNext(newest);   //link previous node to this one
-    //        otherTail = newest;
-    //        walk = walk.getNext();
-    //      }
-    //    }
-    //    return other;
-    //  }    
-
+   }  
    
    public Node<E> penultimate() {
        if (size < 2)

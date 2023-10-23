@@ -732,3 +732,33 @@
             # subsets.append(currentSubset + [ele])  # Add a new subset with the current element
     # return subsets
 # print(powerset([1, 2, 3])) # [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
+
+# a, b, c, d, *e, f, g = range(20) # *e = 3,4,5,6,7,8,9,10,11,12,13,14
+# print(len(e)) # 14
+
+# for i in range(10): # 0,1,2,3,4,5,6,7,8,9
+    # if i > 5:
+        # print(i)
+        # break
+# else:
+    # print("7")
+
+# try:
+    # print(1)
+    # print(1+ "1" == 2)
+    # print(2)
+# except TypeError:
+    # print(3)
+# else:
+    # print(4)
+
+for i in range(10):
+    try:
+        if 10 / i == 2.0:
+            break
+    except ZeroDivisionError:
+        print(1)
+    else:
+        print(2)
+
+join() # join() is a string method that takes a list of strings as an argument, and returns a string consisting of the list elements joined by a separator string.
