@@ -1,5 +1,6 @@
 import java.util.Stack;
 import java.util.LinkedList;
+// What happens when you attempt to pop an element from an empty stack?
 
 public class MainDriver {
   public static void main(String[] args) {
