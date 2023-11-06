@@ -11,8 +11,5 @@ public class MainDriver {
     queue.enqueue(8);
     queue.enqueue(9);
     queue.enqueue(10);
-    if (!queue.isEmpty()) {
-      System.out.println(queue.dequeue());
-    }
   }
 }

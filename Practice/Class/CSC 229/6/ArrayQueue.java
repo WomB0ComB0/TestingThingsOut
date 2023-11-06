@@ -35,4 +35,31 @@ public class ArrayQueue<E> implements Queue<E> {
       sz--;
       return answer;
     }
+
+    public String toString() {
+      StringBuilder sb = new StringBuilder("(");
+      int k = f;
+      for (int j = 0; j < sz; j++) {
+        if (j > 0) sb.append(", ");
+        sb.append(data[k]);
+        k = (k + 1) % data.length;
+      }
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public static void main(String[] args) {
+      ArrayQueue<Integer> queue = new ArrayQueue<>(10);
+      queue.enqueue(1);
+      queue.enqueue(2);
+      queue.enqueue(3);
+      queue.enqueue(4);
+      queue.enqueue(5);
+      queue.enqueue(6);
+      queue.enqueue(7);
+      queue.enqueue(8);
+      queue.enqueue(9);
+      queue.enqueue(10);
+      System.out.println(queue);
+    }
   }
