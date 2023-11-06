@@ -752,13 +752,25 @@
 # else:
     # print(4)
 
-for i in range(10):
-    try:
-        if 10 / i == 2.0:
-            break
-    except ZeroDivisionError:
-        print(1)
-    else:
-        print(2)
+# for i in range(10):
+#     try:
+#         if 10 / i == 2.0:
+#             break
+#     except ZeroDivisionError:
+#         print(1)
+#     else:
+#         print(2)
 
-join() # join() is a string method that takes a list of strings as an argument, and returns a string consisting of the list elements joined by a separator string.
+# join() # join() is a string method that takes a list of strings as an argument, and returns a string consisting of the list elements joined by a separator string.
+
+import pandas as pd
+
+df1 = pd.DataFrame({'key': ['A', 'B', 'C', 'D'],
+                    'value1': [1, 2, 3, 4]})
+print(df1)
+df2 = pd.DataFrame({'key': ['B', 'D', 'E', 'F'],
+                    'value2': [5, 6, 7, 8]})
+print(df2)
+merged_df = pd.merge(df1, df2, on='key', how='outer')
+
+print(merged_df)
