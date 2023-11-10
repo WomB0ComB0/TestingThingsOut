@@ -3,7 +3,7 @@ public class ArrayQueue<E> implements Queue<E> {
     private int f = 0;
     private int sz = 0;
     public ArrayQueue() {
-      this(1000);
+      this(30);
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +60,7 @@ public class ArrayQueue<E> implements Queue<E> {
       queue.enqueue(8);
       queue.enqueue(9);
       queue.enqueue(10);
+      queue.first();
       System.out.println(queue);
     }
   }
