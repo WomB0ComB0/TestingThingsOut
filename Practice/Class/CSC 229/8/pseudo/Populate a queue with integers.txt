@@ -1,0 +1,38 @@
+// Populate a queue with integers
+Queue originalQueue
+originalQueue.enqueue(50)
+originalQueue.enqueue(120)
+originalQueue.enqueue(80)
+originalQueue.enqueue(90)
+originalQueue.enqueue(110)
+
+// Copy the queue into a stack, maintaining order and eliminating values > 100
+Stack stackFromQueue
+while originalQueue is not empty
+    current = originalQueue.dequeue()
+    if current <= 100
+        stackFromQueue.push(current)
+
+// Print the stack after eliminating values greater than 100
+print "Stack from Queue with values <= 100:", stackFromQueue
+
+// Populate a stack with integers
+Stack originalStack
+originalStack.push(70)
+originalStack.push(130)
+originalStack.push(40)
+originalStack.push(110)
+
+// Remove values greater than 100 from the stack
+Stack tempStack
+while originalStack is not empty
+    current = originalStack.pop()
+    if current <= 100
+        tempStack.push(current)
+
+// Restore the original order to the original stack
+while tempStack is not empty
+    originalStack.push(tempStack.pop())
+
+// Print the modified stack
+print "Modified Stack with values <= 100:", originalStack
