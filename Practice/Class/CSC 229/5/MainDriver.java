@@ -7,7 +7,7 @@ public class MainDriver {
   public static boolean isMatched(String expression){
     final String opening = "({[";
     final String closing = ")}]";
-    Stack<Character> buffer = new LinkedStack<>();
+    Stack<Character> buffer = new Stack<>();
     for (char c : expression.toCharArray()) {
       if (opening.indexOf(c) != -1) {
         buffer.push(c);
@@ -23,7 +23,7 @@ public class MainDriver {
     return buffer.isEmpty();
   }
   public static boolean isHTMLMatched(String html){
-    Stack<String> buffer = new LinkedStack<>();
+    Stack<String> buffer = new Stack<>();
     int j = html.indexOf('<');
     while (j != -1) {
       int k = html.indexOf('>', j + 1);
