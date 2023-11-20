@@ -1,0 +1,24 @@
+{
+  "page": {
+    "landing": {
+      "title": "Welcome to the landing page",
+      "description": "This is the landing page"
+    },
+    "search": {
+      "title": "Welcome to the search page",
+      "description": "This is the search page"
+    }
+  },
+  "site": {
+    "section": {
+      "navigation": {
+        "home": "Home",
+        "search": "Search"
+      },
+      "footer": {
+        "about": "About",
+        "contact": "Contact"
+      }
+    }
+  }
+}
