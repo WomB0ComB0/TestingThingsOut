@@ -1,5 +1,7 @@
-import ctypes
 import subprocess
+import schedule
+import time
+import ctypes
 import sys
 
 
@@ -41,6 +43,7 @@ import sys
 #     except subprocess.CalledProcessError as e:
 #         print(f"Error: {e}")
 
+
 def run_winget_upgrade():
     try:
         # Run the winget upgrade --all command
@@ -49,4 +52,13 @@ def run_winget_upgrade():
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
-run_winget_upgrade()
+
+# Schedule the function to run every two days
+schedule.every(2).days.do(run_winget_upgrade)
+
+# Run the scheduled tasks
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+# nohup python winget.py &
