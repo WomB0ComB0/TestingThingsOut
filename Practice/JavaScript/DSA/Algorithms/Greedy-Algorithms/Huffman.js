@@ -2,10 +2,10 @@
 function buildFrequencyTable(string) {
     let frequencyTable = {};
     for (let char of string) {
-      frequencyTable[char] = frequencyTable[char] + 1 || 1;
+        frequencyTable[char] = frequencyTable[char] + 1 || 1;
     }
     return frequencyTable;
-  }
+}
 
 // Build the Huffman tree
 
@@ -24,7 +24,7 @@ function buildHuffmanTree(frequencyTable) {
         nodes.push(new Node(char, frequencyTable[char]));
     }
 
-    while (nodes.length >  1) {
+    while (nodes.length > 1) {
         nodes.sort((a, b) => a.frequency - b.frequency);
 
         let left = nodes.shift();
@@ -38,7 +38,7 @@ function buildHuffmanTree(frequencyTable) {
     return nodes[0];
 }
 
-function encode(root, string , enoocding = '') {
+function encode(root, string, enoocding = '') {
     if (!root) return;
     if (!root.left && !root.right) {
         console.log(`${root.char} : ${enoocding}`);
@@ -50,8 +50,8 @@ function encode(root, string , enoocding = '') {
 function decode(root, encoded) {
     let current = root
     let decored = ''
-    for (let bit of encoded ) {
-        if  (bit  === '0') {
+    for (let bit of encoded) {
+        if (bit === '0') {
             current = current.left;
         } else {
             current = current.right;
