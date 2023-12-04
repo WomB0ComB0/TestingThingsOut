@@ -67,6 +67,33 @@ function binarySearch(arr, val) {
   return arr[mid] === val ? mid : -1;
 }
 
+// _____________________Reverse String_________________________
+
+/**
+ * @param {string} s
+ * @return {string} - The reversed string.
+*/
+function reverse(s) {
+  return s.split("").reverse().join("");
+}
+
+/**
+ * @param {string} s
+ * @return {string} - The reversed string.
+*/
+function reverse(s) {
+  return [...s].reverse().join("");
+}
+
+/**
+ * @param {string} s
+ * @return {string} - The reversed string.
+ * @description - This solution works for Unicode strings.
+*/
+function reverse(s) {
+  return s.split(/(?:)/u).reverse().join("");
+}
+
 // _____________________________________________________________
 
 /**
