@@ -1,9 +1,22 @@
+// 🌟
+/**
+ * Represents a TreeNode for a binary tree.
+ * @constructor
+ * @param {*} val - The value of the node.
+ * @param {TreeNode|null} left - The left child of the node.
+ * @param {TreeNode|null} right - The right child of the node.
+ */
 function TreeNode(val = 0, left = null, right = null) {
   this.val = val;
   this.left = left;
   this.right = right;
 }
 
+/**
+ * Performs an inorder traversal recursively on a binary tree.
+ * @param {TreeNode|null} tree - The root node of the binary tree.
+ * @returns {Array} - The result of the inorder traversal.
+ */
 function inorderRecursive(tree) {
   const result = [];
 
@@ -20,6 +33,11 @@ function inorderRecursive(tree) {
   return result;
 }
 
+/**
+ * Performs an inorder traversal iteratively on a binary tree.
+ * @param {TreeNode|null} tree - The root node of the binary tree.
+ * @returns {Array} - The result of the inorder traversal.
+ */
 function inorderIterative(tree) {
   const stack = [];
   const result = [];
@@ -39,6 +57,11 @@ function inorderIterative(tree) {
   return result;
 }
 
+/**
+ * Performs a preorder traversal recursively on a binary tree.
+ * @param {TreeNode|null} tree - The root node of the binary tree.
+ * @returns {Array} - The result of the preorder traversal.
+ */
 function preorderRecursive(tree) {
   const result = [];
 
@@ -55,6 +78,11 @@ function preorderRecursive(tree) {
   return result;
 }
 
+/**
+ * Performs a preorder traversal iteratively on a binary tree.
+ * @param {TreeNode|null} root - The root node of the binary tree.
+ * @returns {Array} - The result of the preorder traversal.
+ */
 function preorderTraversal(root) {
   if (!root) return [];
 
@@ -72,6 +100,11 @@ function preorderTraversal(root) {
   return result;
 }
 
+/**
+ * Performs a postorder traversal recursively on a binary tree.
+ * @param {TreeNode|null} tree - The root node of the binary tree.
+ * @returns {Array} - The result of the postorder traversal.
+ */
 function postorderRecursive(tree) {
   const result = [];
 
@@ -88,6 +121,11 @@ function postorderRecursive(tree) {
   return result;
 }
 
+/**
+ * Performs a postorder traversal iteratively on a binary tree.
+ * @param {TreeNode|null} root - The root node of the binary tree.
+ * @returns {Array} - The result of the postorder traversal.
+ */
 function postorderTraversal(root) {
   if (!root) return [];
 

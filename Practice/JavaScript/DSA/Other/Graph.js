@@ -1,18 +1,35 @@
+/**
+ * Represents a graph using an adjacency list.
+ * @constructor
+ * @param {number} noOfVertices - The number of vertices in the graph.
+ */
 class Graph {
   constructor(noOfVertices) {
     this.noOfVertices = noOfVertices;
     this.AdjList = new Map();
   }
 
+  /**
+   * Adds a new vertex to the graph.
+   * @param {*} v - The vertex to be added.
+   */
   addVertex(v) {
     this.AdjList.set(v, []);
   }
 
+  /**
+   * Adds an undirected edge between two vertices.
+   * @param {*} v - The first vertex.
+   * @param {*} w - The second vertex.
+   */
   addEdge(v, w) {
     this.AdjList.get(v).push(w);
     this.AdjList.get(w).push(v);
   }
 
+  /**
+   * Prints the graph with vertices and their adjacency lists.
+   */
   printGraph() {
     var get_keys = this.AdjList.keys();
 
@@ -26,6 +43,10 @@ class Graph {
     }
   }
 
+  /**
+   * Performs breadth-first search (BFS) starting from a given node.
+   * @param {*} startingNode - The starting node for BFS.
+   */
   bfs(startingNode) {
     var visited = [];
     for (var i = 0; i < this.noOfVertices; i++) visited[i] = false;
@@ -53,11 +74,20 @@ class Graph {
     }
   }
 
+  /**
+   * Performs depth-first search (DFS) starting from a given node.
+   * @param {*} startingNode - The starting node for DFS.
+   */
   dfs(startingNode) {
     var visited = {};
     this.DFSUtil(startingNode, visited);
   }
 
+  /**
+   * Helper function for DFS traversal.
+   * @param {*} vert - The current vertex being visited.
+   * @param {Object} visited - An object to track visited vertices.
+   */
   DFSUtil(vert, visited) {
     visited[vert] = true;
     console.log(vert);
@@ -90,8 +120,7 @@ g.addEdge('E', 'F');
 g.addEdge('E', 'C');
 g.addEdge('C', 'F');
 
-// prints all vertex and
-// its adjacency list
+// prints all vertex and its adjacency list
 // A -> B D E
 // B -> A C
 // C -> B E F

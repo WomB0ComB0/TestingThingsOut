@@ -1,57 +1,43 @@
-// Map is a colleciton of elements where each element is stored as a Key, value pair. Map objects can hold both objects and primitive values as either key or value. When we iterate over teh map object it returns the key, and value pair in the same order as inserted.
+// Map is a collection of elements where each element is stored as a Key, value pair. Map objects can hold both objects and primitive values as either key or value. When we iterate over teh map object it returns the key, and value pair in the same order as inserted.
 // new Map([it])
 
-// Parameter:
-// it -- it is any iterable object whose values are stores as key, value pair, if the parameter is not specified then a new map is created is empty.
+// Create a new Map
+const sampleMap = new Map();
 
-const map1 = new Map([
-    [1, 2],
-    [2, 3],
-    [3, 4] 
+// set(): Adds elements to the Map
+sampleMap.set(1, 'One');
+sampleMap.set(2, 'Two');
+sampleMap.set(3, 'Three');
+
+// get(): Retrieve elements from the Map
+console.log('Value for key 2:', sampleMap.get(2));
+
+// has(): Check if a key exists
+console.log('Does the map have key 4?', sampleMap.has(4));
+
+// size: Get the number of elements in the Map
+console.log('Number of elements in the map:', sampleMap.size);
+
+// forEach(): Iterate over key-value pairs
+console.log('Iterating over the map:');
+sampleMap.forEach((value, key) => {
+    console.log(`Key: ${key}, Value: ${value}`);
+});
+
+// delete(): Remove an element by key
+const deleted = sampleMap.delete(1);
+console.log('Was key 1 deleted?', deleted);
+
+// clear(): Remove all elements from the Map
+sampleMap.clear();
+console.log('Map after clearing:', sampleMap);
+
+// Create a new Map with an iterable (entries)
+const iterableMap = new Map([
+    ['a', 1],
+    ['b', 2],
+    ['c', 3],
 ]);
 
-console.log(map1.get(1));
-console.log(map1)
-
-const map2 = new Map([
-    ['firstname', 'sumit'],
-    ['lastname', 'ghosh'],
-    ['website', 'geeksforgeeks'] 
-]);
-
-console.log(map2.get('firstname'));
-console.log(map2)
-
-//  map3 contains 
-// Whole number => [1, 2, 3, 4]
-// Decimal number => [1.1, 1.2, 1.3, 1.4]
-// Negative number => [-1, -2, -3, -4]
-
-const map3 = new Map([
-    ["whole numbers", [1, 2, 3, 4]],
-    ["Decimal numbers", [1.1, 1.2, 1.3, 1.4]],
-    ["Negative numbers", [-1, -2, -3, -4]]
-])
-
-console.log(map3.get("whole numbers"));
-console.log(map3)
-
-// map 4 contains
-// storing arrays both as key and value
-// "first name", "Last name" => "sumit", "ghosh"
-// "friend 1", "sourav" => "friend 2", "rahul"
-
-const map4 = new Map([
-    [
-        ["first name", "last name"],
-        ["sumit", "ghosh"]
-    ],
-    [
-        ["friend 1", "friend 2"],
-        ["sourav", "rahul"]
-    ]
-]);
-
-console.log(map4.get(["first name", "last name"]));
-console.log(map4)
-
+console.log('Value for key "b" in iterableMap:', iterableMap.get('b'));
+console.log('Number of elements in iterableMap:', iterableMap.size);
