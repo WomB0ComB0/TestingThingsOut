@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let flags = 0
   let squares = []
   let isGameOver = false
-  var clickSound = new Audio('/Practice/JavaScript/Projects/MineSweeper/Music/click.mp3'); 
-  var bombSound = new Audio('/Practice/JavaScript/Projects/MineSweeper/Music/bomb.mp3');
-  var winSound = new Audio('/Practice/JavaScript/Projects/MineSweeper/Music/win.mp3');
-  var flagSound = new Audio('/Practice/JavaScript/Projects/MineSweeper/Music/flag.mp3');
+  var clickSound = new Audio('./Music/click.mp3'); 
+  var bombSound = new Audio('./Music/bomb.mp3');
+  var winSound = new Audio('./Music/win.mp3');
+  var flagSound = new Audio('./Music/flag.mp3');
 
   function createBoard() { //create Board
     flagsLeft.innerHTML = bombAmount
