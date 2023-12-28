@@ -815,10 +815,8 @@
 # var2 = set(var1)
 # print(var2)
 
-# import time
 
 # st = time.time()
-# from typing import List
 
 # nums = [0, 1, 0, 3, 12]
 
@@ -852,5 +850,26 @@
 #             non_zero += 1
 #     print(nums)
 # moveZeroes1(nums)
+# et = time.time()
+# print(et - st, "seconds")
+
+# from typing import List
+# import time
+
+# st = time.time()
+# nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# k = 3
+
+
+# def findMaxAverage(nums: List[int], k: int) -> float:
+#     currSum = maxSum = sum(nums[:k])
+#     for i in range(k, len(nums)):
+#         currSum += nums[i] - nums[i - k]
+#         maxSum = max(maxSum, currSum)
+#     return maxSum / k
+
+
+# result = findMaxAverage(nums, k)
+# print(result)
 # et = time.time()
 # print(et - st, "seconds")
