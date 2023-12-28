@@ -1,11 +1,13 @@
 /**
  * @author Mike Odnis
  * @since 2023-08-31 (August 31, 2023)
- * The MainDriver class contains the main method to demonstrate the usage of the Payroll class.
+ *        The MainDriver class contains the main method to demonstrate the usage
+ *        of the Payroll class.
  */
 public class MainDriver {
     /**
-     * The main method creates a Payroll object for an employee, sets their hours worked and hourly rate,
+     * The main method creates a Payroll object for an employee, sets their hours
+     * worked and hourly rate,
      * and then displays the employee's gross pay.
      *
      * @param args the command line arguments (not used in this example)
