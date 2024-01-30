@@ -56,13 +56,13 @@
 # print(power(2, 3))
 
 # num = int(input())
-# def fib(n):
-# if n == 0:
-# return 0
-# elif n == 1:
-# return 1
-# else:
-# return fib(n-1) + fib(n-2)
+# def fib(n: int) -> int:
+#   if n == 0:
+#     return 0
+#   elif n == 1:
+#     return 1
+#   else:
+#     return fib(n-1) + fib(n-2)
 # print(fib(num))
 
 # num = int(input())
@@ -876,3 +876,58 @@
 # print(result)
 # et = time.time()
 # print(et - st, "seconds")
+
+# stack = []
+
+# while True:
+#     # Read a character
+#     char = input("Enter a character (or press Enter to finish): ")
+
+#     # If the character is '(', push it on the stack
+#     if char == "(":
+#         stack.append(char)
+#     # If the character is ')' and the stack is not empty, pop from the stack
+#     elif char == ")" and stack:
+#         stack.pop()
+#     # If the character is ')' and the stack is empty, print "unbalanced" and exit
+#     elif char == ")" and not stack:
+#         print("unbalanced")
+#         break
+
+# If the stack is empty, print "balanced"; otherwise, print "unbalanced"
+# if not stack:
+#     print("balanced")
+# else:
+#     print("unbalanced")
+
+
+class CamelCase:
+    def __init__(self, input: str):
+        self.input = input
+
+    def encode(self) -> str:
+        words = self.input.split()
+        for i in range(len(words)):
+            words[i] = words[i][0].upper() + words[i][1:].lower()
+        words[0] = words[0].lower()
+        return "".join(words)
+
+    def decode(self) -> str:
+        res = []
+        for i in range(len(self.input)):
+            if self.input[i].isupper():
+                res.append(" ")
+            res.append(self.input[i])
+        return "".join(res).strip().casefold().capitalize()
+camel_instance = CamelCase("The quick brown fox jumps over the lazy dog")
+camel_instance2 = CamelCase("theQuickBrownFoxJumpsOverTheLazyDog")
+print(camel_instance.encode())
+print(camel_instance2.decode())
+
+
+def drawTree(height: int) -> str:
+    result = ""
+    for i in range(height):
+        result += " " * (height - i - 1) + "*" * (2 * i + 1) + "\n"
+    return result
+print(drawTree(5))
