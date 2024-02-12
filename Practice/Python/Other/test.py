@@ -876,3 +876,14 @@
 # print(result)
 # et = time.time()
 # print(et - st, "seconds")
+
+# from typing import List
+# import collections 
+# class Solution:
+#     def majorityElement(self, nums: List[int]) -> int:
+#         res = collections.Counter(nums)
+#         if len(nums)== 1:
+#             return nums[0]
+#         return max(res, key=res.get)
+# solution = Solution()
+# print(solution.majorityElement([3,2,3])) # 3
