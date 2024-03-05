@@ -553,3 +553,137 @@ let rec appLoop state =
   | true -> appLoop (state + v)
   | _ -> if i <> "x" then appLoop state
 appLoop 0
+
+// While loops
+let echoUserInput (getInput: unit -> string) = 
+  let mutable input = getInput()
+  while not (input.ToUpper().Equals("QUIT")) do
+    let printfn "You entered: %s" input
+    input <- getInput()
+echoUserInput (fun () -> printfn "Type something and press enter"  System.Console.ReadLine())
+
+// For loops, practical implementation
+
+//(1)
+type MpaaRating =
+| G
+| PG
+| PG13
+| R
+| NC17
+
+// (2)
+type Movie = {
+  Title: string;
+  Year: int;
+  Rating: MpaRating option
+}
+
+// (3)
+let movies = [
+  {
+    Title = "The Last Witch Hunter";
+    Year = 2014;
+    Rating = None
+  },
+  {
+    Title = "Riddick";
+    Year = 2013;
+    Rating = Some(R)
+  },
+  {
+    Title = "Babylon A.D.";
+    Year = 2008;
+    Rating = Some(PG13)
+  }
+]
+
+// (4)
+// for {
+//   Title = t;
+//   Year = y;
+//   Rating = Some(r)
+// } in movies do printfn "%s (%i) - "%A" t y r
+
+// You don't need loops
+
+type House = { Address: string; Price: decimal }
+
+let houses = 
+  [
+    |
+      {
+        Address = "1 Acacia Avenue";
+        Price = 250_000m
+      },
+      {
+        Address = "2 Bradley Street";
+        Price = 380_000m
+      },
+      {
+        Address = "1 Carlton Road";
+        Price = 98_000m
+      }
+    |
+  ]
+let cheapHouses =
+  houses |> Array.filter (fun h -> h.Price  <  100_000m)
+  // [|{Address = "1 Carlton Road"; Price =  98_000M;}|]
+printfn "%A" cheapHouses
+
+
+// Sample examples
+
+type House = { Address: string; Price: decimal }
+module House =
+  let private random = System.Random(Seed = 1)
+  /// Make an array of 'count' random houses
+  let getRandom count = 
+    Array.init count (fun i -> {
+      Address = sprintf "%i Stochastic Street" (i + 1)
+      Price = random.Next(50_000, 500_000) |> decimal
+    })
+
+module Distance =
+  let private random = System.Random(Seed = 1)
+  /// Try to get the distance to the nearest school.
+  /// (result are simulated)
+  let tryToSchool (house: House) = 
+    // Because we simulate results, the house
+    // parameter isn't actually used.
+    let dist = random.Next(10) |> double
+    if dist < 5. thn
+      Some dist
+    else
+      None
+type PriceBand = | Cheap | Medium | Expensive
+module PriceBand = 
+  // Return a price band based on price.
+  let fromPrice (price: decimal) = 
+    if price <  100_000m then
+      Cheap
+    elif price < 200_000m then
+      Medium
+    else
+      Expensive
+
+// Branching
+let isEven number = 
+  if number % 2 = 0 then
+    printfn "%i is even" number
+  else
+    printfn "%i is odd" number
+
+let isEven number =
+  if number = 0 then
+    printfn "zero"
+  elif number % 2 = 0 then
+    printfn "%i is even" number
+  else
+    printfn "%i is odd" number
+
+let isEven number = 
+  match number % 2 with
+  | 0 -> printfn "%i is even" number
+  | _ -> printfn "%i is odd" number
+
