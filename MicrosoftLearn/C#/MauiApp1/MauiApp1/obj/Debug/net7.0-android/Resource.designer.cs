@@ -14,7 +14,7 @@ namespace MauiApp1
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.99.25")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.99.94")]
 	public partial class Resource
 	{
 		
