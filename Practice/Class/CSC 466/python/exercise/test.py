@@ -13,7 +13,7 @@ def compute_gaussian_probab(x: int, mean: int, var: int) -> int:
 
 def main():
     df = pd.read_csv(
-        "C:\\Users\\airwo\Documents\\GitHub\\TestingThingsOut\\Practice\\Class\\CSC 466\\python\\exercise\\iris.csv"
+        "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\practice\\class\\csc 466\\python\\exercise\\iris.csv"
     )
     dfrandom = df.sample(frac=1, random_state=1119).reset_index(drop=True)
     df1 = dfrandom.iloc[:, 0:4].astype(float)
