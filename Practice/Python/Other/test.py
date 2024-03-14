@@ -878,7 +878,7 @@
 # print(et - st, "seconds")
 
 # from typing import List
-# import collections 
+# import collections
 # class Solution:
 #     def majorityElement(self, nums: List[int]) -> int:
 #         res = collections.Counter(nums)
@@ -911,33 +911,56 @@
 #     print("unbalanced")
 
 
-class CamelCase:
-    def __init__(self, input: str):
-        self.input = input
+# class CamelCase:
+#     def __init__(self, input: str):
+#         self.input = input
 
-    def encode(self) -> str:
-        words = self.input.split()
-        for i in range(len(words)):
-            words[i] = words[i][0].upper() + words[i][1:].lower()
-        words[0] = words[0].lower()
-        return "".join(words)
+#     def encode(self) -> str:
+#         words = self.input.split()
+#         for i in range(len(words)):
+#             words[i] = words[i][0].upper() + words[i][1:].lower()
+#         words[0] = words[0].lower()
+#         return "".join(words)
 
-    def decode(self) -> str:
-        res = []
-        for i in range(len(self.input)):
-            if self.input[i].isupper():
-                res.append(" ")
-            res.append(self.input[i])
-        return "".join(res).strip().casefold().capitalize()
-camel_instance = CamelCase("The quick brown fox jumps over the lazy dog")
-camel_instance2 = CamelCase("theQuickBrownFoxJumpsOverTheLazyDog")
-print(camel_instance.encode())
-print(camel_instance2.decode())
+#     def decode(self) -> str:
+#         res = []
+#         for i in range(len(self.input)):
+#             if self.input[i].isupper():
+#                 res.append(" ")
+#             res.append(self.input[i])
+#         return "".join(res).strip().casefold().capitalize()
+# camel_instance = CamelCase("The quick brown fox jumps over the lazy dog")
+# camel_instance2 = CamelCase("theQuickBrownFoxJumpsOverTheLazyDog")
+# print(camel_instance.encode())
+# print(camel_instance2.decode())
 
 
-def drawTree(height: int) -> str:
-    result = ""
-    for i in range(height):
-        result += " " * (height - i - 1) + "*" * (2 * i + 1) + "\n"
-    return result
-print(drawTree(5))
+# def drawTree(height: int) -> str:
+#     result = ""
+#     for i in range(height):
+#         result += " " * (height - i - 1) + "*" * (2 * i + 1) + "\n"
+#     return result
+# print(drawTree(5))
+
+
+class Solution:
+
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+
+        count = {0: 1}
+
+        cur_sum = 0
+
+        total_sub = 0
+
+        for num in nums:
+
+            cur_sum += num
+
+            if cur_sum - goal in count:
+
+                total_sub += count[cur_sum - goal]
+
+            count[cur_sum] = count.get(cur_sum, 0) + 1
+
+        return total_sub
