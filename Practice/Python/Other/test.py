@@ -944,23 +944,47 @@
 
 
 class Solution:
-
     def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
-
         count = {0: 1}
-
-        cur_sum = 0
-
-        total_sub = 0
-
+        cur_sum, total_sub = 0, 0
         for num in nums:
-
             cur_sum += num
-
             if cur_sum - goal in count:
-
                 total_sub += count[cur_sum - goal]
-
             count[cur_sum] = count.get(cur_sum, 0) + 1
-
         return total_sub
+# def two_out_of3(a: bool, b: bool, c: bool) -> bool:
+#     res = [int(a), int(b), int(c)]
+#     return True if sum(res) == 2 else False
+
+# print(two_out_of3(True, True, True)) # True
+
+# def next_palindrome(a: int) -> int:
+#     a += 1
+#     while str(a) != str(a)[::-1]:
+#         a += 1
+#     return a
+
+# print(next_palindrome(99)) # 101
+
+# def all_digits_even(k: int) -> bool:
+#     k = list(str(k))
+#     res =  [char for char in k if int(char) % 2 == 0]
+#     return True if len(res) > 0 else False
+# print(all_digits_even(12))
+
+
+# def factorial(d: int) -> int:
+#     if d == 0:
+#         return 1
+#     if d == 1:
+#         return 1      
+#     return d * (factorial(d - 1))
+
+# def is_strong(n: int) -> bool:
+#     n = list(str(n))
+#     res = [factorial(int(strong)) for strong in n]
+#     return True if sum(res) == int("".join(n)) else False
+
+# def next_leap_year(yyyy: int) -> int:
+#     return yyyy + 4 - yyyy % 4
