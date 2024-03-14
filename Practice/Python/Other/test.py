@@ -878,7 +878,7 @@
 # print(et - st, "seconds")
 
 # from typing import List
-# import collections 
+# import collections
 # class Solution:
 #     def majorityElement(self, nums: List[int]) -> int:
 #         res = collections.Counter(nums)
@@ -911,33 +911,73 @@
 #     print("unbalanced")
 
 
-class CamelCase:
-    def __init__(self, input: str):
-        self.input = input
+# class CamelCase:
+#     def __init__(self, input: str):
+#         self.input = input
 
-    def encode(self) -> str:
-        words = self.input.split()
-        for i in range(len(words)):
-            words[i] = words[i][0].upper() + words[i][1:].lower()
-        words[0] = words[0].lower()
-        return "".join(words)
+#     def encode(self) -> str:
+#         words = self.input.split()
+#         for i in range(len(words)):
+#             words[i] = words[i][0].upper() + words[i][1:].lower()
+#         words[0] = words[0].lower()
+#         return "".join(words)
 
-    def decode(self) -> str:
-        res = []
-        for i in range(len(self.input)):
-            if self.input[i].isupper():
-                res.append(" ")
-            res.append(self.input[i])
-        return "".join(res).strip().casefold().capitalize()
-camel_instance = CamelCase("The quick brown fox jumps over the lazy dog")
-camel_instance2 = CamelCase("theQuickBrownFoxJumpsOverTheLazyDog")
-print(camel_instance.encode())
-print(camel_instance2.decode())
+#     def decode(self) -> str:
+#         res = []
+#         for i in range(len(self.input)):
+#             if self.input[i].isupper():
+#                 res.append(" ")
+#             res.append(self.input[i])
+#         return "".join(res).strip().casefold().capitalize()
+# camel_instance = CamelCase("The quick brown fox jumps over the lazy dog")
+# camel_instance2 = CamelCase("theQuickBrownFoxJumpsOverTheLazyDog")
+# print(camel_instance.encode())
+# print(camel_instance2.decode())
 
 
-def drawTree(height: int) -> str:
-    result = ""
-    for i in range(height):
-        result += " " * (height - i - 1) + "*" * (2 * i + 1) + "\n"
-    return result
-print(drawTree(5))
+# def drawTree(height: int) -> str:
+#     result = ""
+#     for i in range(height):
+#         result += " " * (height - i - 1) + "*" * (2 * i + 1) + "\n"
+#     return result
+# print(drawTree(5))
+
+
+# def two_out_of3(a: bool, b: bool, c: bool) -> bool:
+#     res = [int(a), int(b), int(c)]
+#     return True if sum(res) == 2 else False
+
+# print(two_out_of3(True, True, True)) # True
+
+# def next_palindrome(a: int) -> int:
+#     a += 1
+#     while str(a) != str(a)[::-1]:
+#         a += 1
+#     return a
+
+# print(next_palindrome(99)) # 101
+
+# def all_digits_even(k: int) -> bool:
+#     k = list(str(k))
+#     res =  [char for char in k if int(char) % 2 == 0]
+#     return True if len(res) > 0 else False
+# print(all_digits_even(12))
+
+
+def factorial(d: int) -> int:
+    if d == 0:
+        return 1
+    if d == 1:
+        return 1      
+    return d * (factorial(d - 1))
+
+def is_strong(n: int) -> bool:
+    n = list(str(n))
+    res = [factorial(int(strong)) for strong in n]
+    return True if sum(res) == int("".join(n)) else False
+print(is_strong(145))
+
+def next_leap_year(yyyy: int) -> int:
+    return yyyy + 4 - yyyy % 4
+
+print(next_leap_year(2011))
