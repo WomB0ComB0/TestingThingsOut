@@ -83,3 +83,45 @@ function numSubarraysWithSum(nums: number[], goal: number): number {
     }
     return total_sub
 };
+
+
+function productExceptSelf(nums: number[]): number[] {
+    const n: number = nums.length;
+    let left: Array<number> = Array(n).fill(1);
+    let right: Array<number> = Array(n).fill(1);
+    let res: Array<number> = Array(n).fill(1)
+
+    for (let i = 1; i < nums.length; i++) {
+        left[i] = left[i - 1] * nums[i - 1]
+    };
+
+    for (let i = n - 2; i >= 0; i--) {
+        right[i] = right[i + 1] * nums[i + 1];
+    }
+
+    for (let i = 0; i < n; i++) {
+        res[i] = left[i] * right[i];
+    }
+
+    return res;
+};
+
+function findMaxLength(nums:  Array<number>): number {
+    const N = nums.length;
+    
+    let first: object  = {}
+    
+    let current: number = 0
+    let longest: number = 0
+    first[current] = 0
+
+    for (let i = 0; i < N; i++) {
+        current += nums[i] ? 1 : -1
+        if (first.hasOwnProperty(current))
+            longest = Math.max(longest, i - first[current] + 1)
+        else
+            first[current] = i + 1
+    }
+
+    return longest
+}

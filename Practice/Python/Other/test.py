@@ -953,6 +953,8 @@
 #                 total_sub += count[cur_sum - goal]
 #             count[cur_sum] = count.get(cur_sum, 0) + 1
 #         return total_sub
+
+
 # def two_out_of3(a: bool, b: bool, c: bool) -> bool:
 #     res = [int(a), int(b), int(c)]
 #     return True if sum(res) == 2 else False
@@ -1026,3 +1028,137 @@ print(classify(12))  # abundant
 print(classify(6))  # perfect
 print(classify(8))  # deficient
 print(classify(28)) # perfect
+#     return yyyy + 4 - yyyy % 4from functools import reduce
+# class Solution:
+#     def productExceptSelf(self, nums: List[int]) -> List[int]:
+#         res = []
+#         n = len(nums)
+#         left_products = [1] * n
+#         right_products = [1] * n
+#         res = [1] * n
+
+#         for i in range(1, n):
+#             left_products[i] = left_products[i - 1] * nums[i - 1]
+
+#         for i in range(n - 2, -1, -1):
+#             right_products[i] = right_products[i + 1] * nums[i + 1]
+#         for i in range(n):
+#             res[i] = left_products[i] * right_products[i]
+#         # print(reduce((lambda x, y: x * y),nums)) -> cummulative product of list
+#         return res
+
+
+# def double_it(n: int) -> int:
+#     while n <= 100:
+#         n *= 2
+#         print(n)
+
+# print(double_it(2))
+
+
+# def main():
+#     dictionary = dict()
+#     dictionary["learning"] = "awesome"
+#     dictionary["coding"] = "fun"
+#     dictionary["learn"] = "awesome"
+#     dictionary["code"] = "fun"
+
+#     dictionary = remove_keys_containing_string(dictionary, "learn")
+#     print(dictionary)
+
+# def remove_keys_containing_string(dictionary: dict, remove: str):
+#     new_dictionary = dict()
+#     for key in dictionary.keys():
+#         if remove not in key:
+#             new_dictionary[key] = dictionary[key]
+#     return new_dictionary
+
+# main()
+
+
+# Fill Karel
+
+# from stanfordkarel import (
+#     move,
+#     right_is_clear,
+#     facing_east,
+#     turn_left,
+#     right_is_blocked,
+#     not_facing_east,
+#     put_beeper,
+#     beepers_present,
+#     facing_west,
+#     pick_beeper,
+#     no_beepers_present,
+#     not_facing_west,
+#     front_is_clear,
+#     beepers_in_bag,
+#     facing_south,
+#     front_is_blocked,
+#     no_beepers_in_bag,
+#     not_facing_south,
+#     left_is_clear,
+#     facing_north,
+#     left_is_blocked,
+#     run_karel_program,
+# )
+
+# from karel.stanfordkarel import *
+
+
+# def main():
+#     fill_world()
+
+
+# def fill_world():
+#     while front_is_clear():
+#         fill_row()
+#         move_to_next_row()
+
+
+# def fill_row():
+#     while front_is_clear() or no_beepers_present():
+#         put_beeper()
+#         if front_is_clear():
+#             move()
+
+
+# def move_to_next_row():
+#     turn_left()
+#     turn_left()
+#     while beepers_present():
+#         move()
+#         if front_is_blocked() and facing_west():
+#             turn_right()
+
+
+# def turn_right():
+#     turn_left()
+#     turn_left()
+#     turn_left()
+
+
+# if __name__ == "__main__":
+#     run_karel_program()
+
+from typing import List
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        N = len(nums)
+
+        first = {}
+        
+        current = 0
+        longest = 0
+
+        first[current] = 0
+        for i in range(N):
+            if nums[i] == 0:
+                nums[i] = -1
+            current += nums[i]
+            if current in first:
+                longest = max(longest, i + 1 - first[current])
+            else:
+                first[current] = i + 1
+        return longest
+    
