@@ -125,3 +125,70 @@ function findMaxLength(nums:  Array<number>): number {
 
     return longest
 }
+
+
+function minimizeStringValue(s: string): string {
+    let t0 = new Date().getTime();
+    let cache: { [key: string]: string} = {}
+    let f: { [key: string]: number } = {};
+    if (cache[s]) return cache[s]
+    for (let c of s) {
+        if (c !== '?') {
+            if (f[c]) {
+                f[c]++;
+            } else {
+                f[c] = 1;
+            }
+        }
+    }
+
+    let h: [number, string][] = [];
+    for (let c = 'a'.charCodeAt(0); c <= 'z'.charCodeAt(0); c++) {
+        let char = String.fromCharCode(c);
+        h.push([f[char] || 0, char]);
+    }
+
+    h.sort((a, b) => a[0] - b[0] || a[1].localeCompare(b[1]));
+
+    let q: string[] = [];
+    let ans: string[] = [];
+
+    for (let c of s) {
+        if (c === '?') {
+            let [count, now] = h.shift();
+            q.push(now);
+            h.push([count + 1, now]);
+            h.sort((a, b) => a[0] - b[0] || a[1].localeCompare(b[1]));
+        }
+    }
+
+    q.sort();
+
+    for (let c of s) {
+        if (c === '?') {
+            ans.push(q.shift());
+        } else {
+            ans.push(c);
+        }
+    }
+
+    cache[s] = ans.join("");
+
+    let t1 = new Date().getTime();
+    console.log(`Execution time: ${t1 - t0} milliseconds.`);
+    return cache[s];
+}
+
+function maximum69Number (num: number): number {
+    const s = num.toString()
+    let i = -1
+    for (let j = 0; j < s.length; j++){
+        if (s[j] == "6") { i = j
+            break
+        }
+    }
+    if (i == -1) { return num }
+    else { 
+        return parseInt(s.substring(0, i) + "9" + s.substring(i+1))
+    }
+};
