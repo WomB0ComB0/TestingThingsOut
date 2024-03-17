@@ -989,6 +989,45 @@
 #     return True if sum(res) == int("".join(n)) else False
 
 # def next_leap_year(yyyy: int) -> int:
+#     return yyyy + 4 - yyyy % 4
+
+
+# def num_digits(p: int) -> int:
+#     return len(list(str(p)))
+
+
+# print(num_digits(123))
+
+
+# def is_armstrong(n: int) -> bool:
+#     n = list(str(n))
+#     res = [pow(int(armstrong), 3) for armstrong in n]
+#     return sum(res) == int("".join(n))
+
+
+# print(is_armstrong(153))
+
+
+class Classification(enumerate):
+    abundant = "abundant"
+    perfect = "perfect"
+    deficient = "deficient"
+
+
+def classify(k: int) -> int:
+    res = sum([i for i in range(1, k) if k % i == 0])
+    if res == k:
+        return Classification.perfect
+    elif res > k:
+        return Classification.abundant
+    else:
+        return Classification.deficient
+
+
+print(classify(12))  # abundant
+print(classify(6))  # perfect
+print(classify(8))  # deficient
+print(classify(28)) # perfect
 #     return yyyy + 4 - yyyy % 4from functools import reduce
 # class Solution:
 #     def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -1145,3 +1184,6 @@ class Solution:
             else:
                 ans.append(c)
         return "".join(ans)
+                first[current] = i + 1
+        return longest
+    
