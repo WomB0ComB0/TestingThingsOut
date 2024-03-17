@@ -1147,7 +1147,7 @@ print(classify(28)) # perfect
 #         N = len(nums)
 
 #         first = {}
-        
+
 #         current = 0
 #         longest = 0
 
@@ -1161,16 +1161,20 @@ print(classify(28)) # perfect
 #             else:
 #                 first[current] = i + 1
 #         return longest
+
+import collections
+import heapq
+import string
 class Solution:
     def minimizeStringValue(self, s: str) -> str:
-        f = Counter(s)
+        f = collections.Counter(s)
         h = []
         for c in string.ascii_lowercase:
             heapq.heappush(h,  (f[c], c))
-        
+
         q = []
         ans = []
-        
+
         for c in s:
             if c == "?":
                 count, now = heapq.heappop(h)
@@ -1184,6 +1188,26 @@ class Solution:
             else:
                 ans.append(c)
         return "".join(ans)
+
+from typing import List
+
+
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        N = len(nums)
+
+        first = {}
+
+        current = 0
+        longest = 0
+
+        first[current] = 0
+        for i in range(N):
+            if nums[i] == 0:
+                nums[i] = -1
+            current += nums[i]
+            if current in first:
+                longest = max(longest, i + 1 - first[current])
+            else:
                 first[current] = i + 1
         return longest
-    
