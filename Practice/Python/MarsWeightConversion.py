@@ -19,15 +19,30 @@ class Sanitization:
         self.weight = self.includes_science_notation()
 
     def clean_input(self) -> str:
-        return re.sub(r"[^\d.]", "", self.user_input)
-    
+        invalid_characters = re.findall(r"[!@#$%^&*()_+=,<>?/;:|\\]", self.user_input)
+
+        cleansed = re.sub(r"[^\d.]", "", self.user_input)
+
+        if invalid_characters:
+            for char in invalid_characters:
+                cleansed = cleansed.replace(
+                    char, ""
+                )
+
+        if cleansed:
+            return cleansed
+        else:
+            raise ValueError(
+                f"Invalid input. Please enter a valid weight and remove the invalid characters from {self.user_input}"
+            )
+
     def includes_science_notation(self) -> float:
         def pure_float() -> bool:
             return "." in self.cleaned_input and "e" not in self.cleaned_input
-        
+
         def is_integer() -> bool:
             return "." not in self.cleaned_input and "e" not in self.cleaned_input
-          
+
         if "k" in self.user_input.lower():
             return self.convert_weight_to_metric()
         elif "l" in self.user_input.lower():
@@ -35,7 +50,7 @@ class Sanitization:
         elif pure_float() or is_integer():
             return float(self.cleaned_input)
         else:
-            raise ValueError("Invalid input. Please enter a valid weight.")
+            raise ValueError("Invalid input. Please enter a valid notation.")
 
     def convert_weight_to_metric(self) -> float:
         return float(self.cleaned_input) * 0.453592
@@ -90,7 +105,6 @@ class TestMarsWeightConversion:
                 else:
                     print(f"{key.replace('_', ' ').title()}: {value}\n")
             print("\n")
-
 
 def main():
     user_input = input("Enter your weight on Earth: ")
