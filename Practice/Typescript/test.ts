@@ -192,3 +192,57 @@ function maximum69Number (num: number): number {
         return parseInt(s.substring(0, i) + "9" + s.substring(i+1))
     }
 };
+
+function findMinArrowShots(points: number[][]): number {
+    if (points.length === 0) return 0;
+    
+    points.sort((a, b) => a[1] - b[1]);
+
+    let total: number = 0;
+    let end_point: number = Number.NEGATIVE_INFINITY;
+
+    for (let i of points) {
+        if (i[0] > end_point) {
+            total += 1 
+            end_point = i[1];
+        }
+    }
+
+    return total
+};
+
+function findMinArrowShots(points: number[][]): number {
+    const N = points.length
+
+    const START = 0
+    const END = 1
+
+    let events: Array<[number, number, number]> = []
+    for (let index = 0; index < N; index++) {
+        let [s, e] = points[index]
+        events.push([s, START, index])
+        events.push([e, END, index])
+    }
+    events.sort((a, b) => a[0] - b[0])
+
+    let bursted: boolean[] = Array(N).fill(false)
+    let current: Set<number> = new Set()
+    let shots: number = 0
+
+    for (let [x, t, index] of events) {
+        if (t === START) {
+            current.add(index)
+        } else {
+            if (bursted[index]) {
+                continue
+            }
+            shots += 1
+            for (let c of current) {
+                bursted[c] = true
+            }
+        }
+    }
+
+    return shots
+
+}

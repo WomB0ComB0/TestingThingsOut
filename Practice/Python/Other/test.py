@@ -1171,6 +1171,80 @@
 #         h = []
 #         for c in string.ascii_lowercase:
 #             heapq.heappush(h,  (f[c], c))
+# class Solution:
+    # def minimizeStringValue(self, s: str) -> str:
+        # f = Counter(s)
+        # h = []
+        # for c in string.ascii_lowercase:
+            # heapq.heappush(h,  (f[c], c))
+        # 
+        # q = []
+        # ans = []
+        # 
+        # for c in s:
+            # if c == "?":
+                # count, now = heapq.heappop(h)
+                # q.append(now)
+                # heapq.heappush(h, (count + 1, now))
+        # q.sort()
+        # q = collections.deque(q)
+        # for c  in s:
+            # if c == "?":
+                # ans.append(q.popleft())
+            # else:
+                # ans.append(c)
+        # return "".join(ans)
+                # first[current] = i + 1
+        # return longest
+
+# class Solution:
+    # def findMinArrowShots(self, points: List[List[int]]) -> int:
+        # N = len(points)
+        # 
+        # START, END = 0, 1
+        # events = []
+        # for index, (s, e) in enumerate(points):
+            # events.append((s, START, index))
+            # events.append((e, END, index))
+        # events.sort()
+
+        # bursted = [False] * N
+        # current = set()
+        # shots = 0
+
+        # for x, t, index in events:
+            # if t == START:
+                # current.add(index)
+            # else:
+                # if bursted[index]:
+                    # continue
+                # shots += 1
+                # for c in current:
+                    # bursted[c] = True
+        # 
+        # return shots
+# 
+# class Solution:
+    # def findMinArrowShots(self, points):
+        # points.sort(key = lambda x: x[1])
+# 
+        # total, end_point = 0, float("-inf")
+# 
+        # for i in points:
+            # if i[0] > end_point:
+                # total += 1 
+                # end_point = i[1]
+# 
+        # return total
+# import collections
+# import heapq
+# import string
+# class Solution:
+#     def minimizeStringValue(self, s: str) -> str:
+#         f = collections.Counter(s)
+#         h = []
+#         for c in string.ascii_lowercase:
+#             heapq.heappush(h,  (f[c], c))
 
 #         q = []
 #         ans = []
