@@ -1008,26 +1008,26 @@
 # print(is_armstrong(153))
 
 
-class Classification(enumerate):
-    abundant = "abundant"
-    perfect = "perfect"
-    deficient = "deficient"
+# class Classification(enumerate):
+#     abundant = "abundant"
+#     perfect = "perfect"
+#     deficient = "deficient"
 
 
-def classify(k: int) -> int:
-    res = sum([i for i in range(1, k) if k % i == 0])
-    if res == k:
-        return Classification.perfect
-    elif res > k:
-        return Classification.abundant
-    else:
-        return Classification.deficient
+# def classify(k: int) -> int:
+#     res = sum([i for i in range(1, k) if k % i == 0])
+#     if res == k:
+#         return Classification.perfect
+#     elif res > k:
+#         return Classification.abundant
+#     else:
+#         return Classification.deficient
 
 
-print(classify(12))  # abundant
-print(classify(6))  # perfect
-print(classify(8))  # deficient
-print(classify(28)) # perfect
+# print(classify(12))  # abundant
+# print(classify(6))  # perfect
+# print(classify(8))  # deficient
+# print(classify(28)) # perfect
 #     return yyyy + 4 - yyyy % 4from functools import reduce
 # class Solution:
 #     def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -1162,52 +1162,84 @@ print(classify(28)) # perfect
 #                 first[current] = i + 1
 #         return longest
 
-import collections
-import heapq
-import string
-class Solution:
-    def minimizeStringValue(self, s: str) -> str:
-        f = collections.Counter(s)
-        h = []
-        for c in string.ascii_lowercase:
-            heapq.heappush(h,  (f[c], c))
+# import collections
+# import heapq
+# import string
+# class Solution:
+#     def minimizeStringValue(self, s: str) -> str:
+#         f = collections.Counter(s)
+#         h = []
+#         for c in string.ascii_lowercase:
+#             heapq.heappush(h,  (f[c], c))
 
-        q = []
-        ans = []
+#         q = []
+#         ans = []
 
-        for c in s:
-            if c == "?":
-                count, now = heapq.heappop(h)
-                q.append(now)
-                heapq.heappush(h, (count + 1, now))
-        q.sort()
-        q = collections.deque(q)
-        for c  in s:
-            if c == "?":
-                ans.append(q.popleft())
-            else:
-                ans.append(c)
-        return "".join(ans)
+#         for c in s:
+#             if c == "?":
+#                 count, now = heapq.heappop(h)
+#                 q.append(now)
+#                 heapq.heappush(h, (count + 1, now))
+#         q.sort()
+#         q = collections.deque(q)
+#         for c  in s:
+#             if c == "?":
+#                 ans.append(q.popleft())
+#             else:
+#                 ans.append(c)
+#         return "".join(ans)
 
-from typing import List
+# from typing import List
 
 
-class Solution:
-    def findMaxLength(self, nums: List[int]) -> int:
-        N = len(nums)
+# class Solution:
+#     def findMaxLength(self, nums: List[int]) -> int:
+#         N = len(nums)
 
-        first = {}
+#         first = {}
 
-        current = 0
-        longest = 0
+#         current = 0
+#         longest = 0
 
-        first[current] = 0
-        for i in range(N):
-            if nums[i] == 0:
-                nums[i] = -1
-            current += nums[i]
-            if current in first:
-                longest = max(longest, i + 1 - first[current])
-            else:
-                first[current] = i + 1
-        return longest
+#         first[current] = 0
+#         for i in range(N):
+#             if nums[i] == 0:
+#                 nums[i] = -1
+#             current += nums[i]
+#             if current in first:
+#                 longest = max(longest, i + 1 - first[current])
+#             else:
+#                 first[current] = i + 1
+#         return longest
+
+
+# def is_curzon(num: int) -> bool:
+#     return (pow(2, num) + 1) % ((2 * num) + 1) == 0
+
+
+# print(is_curzon(5))  # True
+
+
+# def is_valid_triangle(side1: int, side2: int, side3: int) -> bool:
+#     return (side1 + side2) > side3
+
+
+# def is_circularprime(num: int) -> bool:
+#     num = list(str(num))
+#     N = len(num)
+#     def is_prime(num: int) -> bool: ⭐
+#         if num < 2:
+#             return False
+#         for i in range(2, num):
+#             if num % i == 0:
+#                 return False
+#         return True
+#     for _ in range(N, -1, -1):
+#         curr_num = int("".join(num))
+#         if is_prime(curr_num):
+#             num = num[-1:] + num[:-1]
+#         else:
+#             return False
+#     return True
+
+# print(is_circularprime(1193))  # True
