@@ -246,3 +246,41 @@ function findMinArrowShots(points: number[][]): number {
     return shots
 
 }
+
+/**
+ * This function calculates the least interval required to execute tasks,
+ * with a cooling interval between tasks of the same type.
+ * @param tasks An array of strings representing different tasks.
+ * @param n The cooling interval, i.e., the minimum time interval required between tasks of the same type.
+ * @returns The least interval required to execute all tasks.
+ */
+function leastInterval(tasks: string[], n: number): number {
+    // Count occurrences of each task
+    let counts: number[] = Object.values(Counter(tasks));
+
+    // Find the maximum count of any task
+    let max_count: number = Math.max(...counts);
+
+    // Count the number of tasks with the maximum count
+    let max_count_count: number = counts.filter((x) => x === max_count).length;
+
+    // Calculate the least interval required
+    return Math.max(tasks.length, (max_count - 1) * (n + 1) + max_count_count);
+}
+
+/**
+ * This function counts occurrences of each task in the given array.
+ * @param tasks An array of strings representing different tasks.
+ * @returns An object with keys as task names and values as their occurrences.
+ */
+function Counter(tasks: string[]): { [s: string]: number; } | ArrayLike<number> {
+    let count: { [s: string]: number; } = {};
+    for (let t of tasks) {
+        if (count[t]) {
+            count[t] += 1; // Increment the count if the task has occurred before
+        } else {
+            count[t] = 1; // Set the count to 1 if it's the first occurrence of the task
+        }
+    }
+    return count;
+}
