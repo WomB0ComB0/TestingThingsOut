@@ -284,3 +284,51 @@ function Counter(tasks: string[]): { [s: string]: number; } | ArrayLike<number> 
     }
     return count;
 }
+
+
+function generate(numRows: number): number[][] {
+    let rows: number[][] = [[1]]; // 2d array
+    for (let i = 1; i < numRows; i++) {
+        let row: number[] = [1]; // 1st element of each row is 1
+        for (let j = 1; j < rows[i - 1].length; j++) {
+            let num: number = rows[i - 1][j - 1] + rows[i - 1][j]; // Calculate the number
+            row.push(num); // Add the number to the row
+        }
+        row.push(1);
+        rows.push(row);
+    }
+    return rows;
+};
+
+function mergeInBetween(list1: ListNode | null, a: number, b: number, list2: ListNode | null): ListNode | null {
+    let new_head1: ListNode = new ListNode(-1, list1);
+    let new_head2: ListNode = new ListNode(-1, list2);
+
+    function find(head: ListNode, x: number): ListNode {
+        let current: ListNode = head;
+        let count: number = 0;
+        while (current.next !== null && count < x) {
+            count += 1;
+            current = current.next;
+        }
+        return current;
+    }
+
+    function find_last(head: ListNode): ListNode {
+        let current: ListNode = head;
+        while (current.next !== null) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    let anode: ListNode = find(new_head1, a);
+    let bnode_after: ListNode = find(new_head1, b).next.next;
+
+    anode.next = list2;
+    let list2_last: ListNode = find_last(new_head2);
+
+    list2_last.next = bnode_after;
+
+    return new_head1.next;
+};
