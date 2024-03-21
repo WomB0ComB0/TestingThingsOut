@@ -1336,3 +1336,7 @@
 #         if is_prime(int(num[i])):
 #             res.append(num[i])
 #     return int("".join(res))
+
+
+# How does the is_prime function determine if a number is prime?
+

@@ -285,6 +285,7 @@ function Counter(tasks: string[]): { [s: string]: number; } | ArrayLike<number> 
     return count;
 }
 
+
 function generate(numRows: number): number[][] {
     let rows: number[][] = [[1]]; // 2d array
     for (let i = 1; i < numRows; i++) {
