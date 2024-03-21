@@ -74,7 +74,8 @@ y = x # Note: No separate memory will be allocated for y
 
 # Cloning / Copy: Making a copy
 x = [10, 20, 30, 40]
-y = x[:] <=> y = x.copy()
+y = x[:]
+y = x.copy()
 x[1] = 99
 print(x)
 print(y) # Note: changes made in one list will not reflect other
