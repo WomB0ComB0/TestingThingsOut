@@ -111,7 +111,7 @@ let partition list =
 partition [1..10] // ([2; 4; 6; 8; 10], [1; 3; 5; 7; 9]) <-- returns tuple
 //25. Write a function in F# to find the frequency of each element in a given list
 let frequency list = 
-    list
+    list 
     |> List.groupBy id 
     |> List.map (fun (k, v) -> (k, List.length v))
 frequency [1;2;3;4;5;5;6;6;7;8;9;9;10] // [(1, 1); (2, 1); (3, 1); (4, 1); (5, 2); (6, 2); (7, 1); (8, 1); (9, 2); (10, 1)] <- returns list of tuples

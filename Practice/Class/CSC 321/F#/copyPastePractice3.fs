@@ -31,57 +31,126 @@ let rec length list =
   | [] -> 0
   | _::tail -> 1 + length tail
 
-let reverseList list  List.rev list 
+let reverseList list  = List.rev list 
 
 type Shape =
   | Circle of float
   | Rectangle of float * float
   | Triangle of float * float * float
 
-let area =
+let area shape =
+  match shape with
+  | Circle r -> 3.14 * r * r
+  | Rectangle w h -> w * h
+  | Triangle a b c ->
+      let s = (a + b + c) / 2.0
+      sqrt (s * (s - a) * (s - b) * (s - c))
 
-let mergeLists =
+let mergeLists l1 l2 =
+  List.sort (fun x y -> x - y) (l1 @ l2)
 
-let averageGrades =
+let grades = 
+  [
+    ("John", 90)
+    ("Mike", 85)
+    ("Alice", 95)
+  ]
 
-let removeDuplicates =
+let averageGrades grades =
+  let total = List.sumBy snd grades
+  let count = List.length grades
+  total / count
 
-let fibonacci =
+let removeDuplicates list = List.distinct list
 
-let leftFold =
+let rec fibonacci n=
+  match n with
+  | 0 -> 0
+  | 1 -> 1
+  | _ -> fibonacci (n - 1) + fibonacci (n - 2)
 
-let evenNumbers =
+let leftFold list = List.fold (fun acc x -> acc + x) 0
 
-let isSorted =
+let evenNumbers = seq { for i in 0..20 do if i % 2 = 0 then yield i }
 
-let median =
+let isSorted list = List.sort list = list
 
-let partition =
+let median list =
+  let sortedList = List.sort list
+  let length = List.length sortedList
+  match length % 2 with
+  | 0 ->
+    let m1 = List.item (length / 2 - 1)
+    sortedList
+    let m2 = List.item (length / 2) sortedList
+    (m1 + m2) / 2.0
+  | _ -> float (List.item (length / 2 ) sortedList)
 
-let frequency =
+let partition list =
+  List.partition (fun x -> x % 2 = 0) list
 
-let removeLast =
+let frequency list =
+  list
+  |>  List.groupBy id
+  |>  List.map (fun (k, v) -> (k, List.length v))
 
-let nthFibonacci =
+let removeLast list =
+  match list with
+  | [] -> []
+  | _::[] -> []
+  | head::tail -> head::(removeLast tail)
 
-let isPalindrome =
+let rec nthFibonacci n =
+  match n with
+  | 0 -> 0
+  | 1 -> 1
+  | _ -> nthFibonacci (n - 1) + nthFibonacci (n - 2)
 
-let shuffle =
+let isPalindrome str =
+  let reversed = List.rev (List.ofSeq str)
+  List.ofSeq str = reversed
 
-let dotProduct =
+let shuffle list =
+  let rnd = System.Random()
+  List.sortBy (fun _ -> rnd.Next()) list
 
-let primes =
+let (|Even|Odd|) n = if n % 2 = 0 then Even else Odd
 
-let hasDuplicates =
+let dotProduct v1 v2 =
+  List.map2 (*) v1 v2
+  |> List.sum
 
-let rotateLeft =
+let isPrime n =
+  let upper = int (sqrt (float n))
+  let rec checkDivisor divisor =
+    divisor > upper || (n % divisor <> 0 && checkDivisor (divisor + 1))
+  checkDivisor 2
+
+let primes = seq { for i in 2..100 do if isPrime i then yield i }
+
+let hasDuplicates list =
+  let sortedList = List.sort list
+  let rec checkDuplicates list = 
+    match list with
+    | [] -> false
+    | _::[] -> false
+    | h1::h2::tail -> if h1 = h2 then true else checkDuplicates (h2::tail)
+  checkDuplicates sortedList
+
+let rotateLeft list n =
+  let length = List.length list
+  let n = n % lenght
+  (List.skip n list) @ (List.take n list)
 
 let rotateLeftNth =
 
-let intersection =
+let intersection l1 l2 =
+  List.filter (fun x -> List.contains x l2) l1
 
-let sumOfDigits =
-
+let rec sumOfDigits n =
+  match n with
+  | 0 -> 0
+  | _ -> n % 10 + sumOfDigits (n / 10)
 
 let test = 
   [
