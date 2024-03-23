@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "khQwmTOfw6R69azE5AESxGoPQ2kdpNC38/n+KBHi6TooAYQIPVFkTiVZzmXEpySFQJmy6SJwLNySgY5jEwNP1w==",
+  "dgSpecHash": "qi5EbbMLA7+yxn/obpG80YxPrUhzKRkbTUkvooE0p0ZhI0SUe6uh9ydgTGnH85PHc83KY0ktKNE5L7w6h3OXMw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
   "expectedPackageFiles": [
@@ -129,9 +129,9 @@
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.controls.runtime.maccatalyst\\7.0.101\\microsoft.maui.controls.runtime.maccatalyst.7.0.101.nupkg.sha512",
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.essentials.ref.maccatalyst\\7.0.101\\microsoft.maui.essentials.ref.maccatalyst.7.0.101.nupkg.sha512",
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.essentials.runtime.maccatalyst\\7.0.101\\microsoft.maui.essentials.runtime.maccatalyst.7.0.101.nupkg.sha512",
-    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.16\\microsoft.netcore.app.runtime.win-x64.7.0.16.nupkg.sha512",
-    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.16\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.16.nupkg.sha512",
-    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.16\\microsoft.aspnetcore.app.runtime.win-x64.7.0.16.nupkg.sha512",
+    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.17\\microsoft.netcore.app.runtime.win-x64.7.0.17.nupkg.sha512",
+    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.17\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.17.nupkg.sha512",
+    "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.17\\microsoft.aspnetcore.app.runtime.win-x64.7.0.17.nupkg.sha512",
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.core.ref.win\\7.0.101\\microsoft.maui.core.ref.win.7.0.101.nupkg.sha512",
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.core.runtime.win\\7.0.101\\microsoft.maui.core.runtime.win.7.0.101.nupkg.sha512",
     "C:\\Users\\Mike Odnis\\.nuget\\packages\\microsoft.maui.controls.ref.win\\7.0.101\\microsoft.maui.controls.ref.win.7.0.101.nupkg.sha512",

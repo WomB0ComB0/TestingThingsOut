@@ -1340,3 +1340,76 @@
 
 # How does the is_prime function determine if a number is prime?
 
+# from typing import List
+# def kaprekar_seq(n: int) -> List[int]:
+#     n = sorted(str(n), reverse=True)
+#     n2 = sorted(n, reverse=False)
+#     book = []
+#     if n == n2:
+#         return book.append(int("".join(n)))
+#     book.append(int("".join(n)))
+#     product = 0
+#     while product != 6174:
+#         product = int("".join(n)) - int("".join(n2))
+#         n = sorted(str(product), reverse=True)
+#         n2 = sorted(n, reverse=False)
+#         book.append(product)
+#     return book
+
+# print(kaprekar_seq(1945)) # 6174
+
+# how do I get the value from a node in a linked list?
+
+# from typing import List, Optional
+# def isPalindrome(self, head: Optional[ListNode]) -> bool:
+#     res = ""
+#     cur = head
+#     while cur:
+#         res += str(cur.val)
+#         cur = cur.next
+#     return res == res[::-1]
+
+
+# from typing import List
+# def fizz_buzz(n: int) -> List[str]:
+#     res = []
+#     for i in range(1, n + 1):
+#         if i % 3 == 0:
+#             res.append("Fizz")
+#         elif i % 5 == 0:
+#             res.append("Buzz")
+#         elif (i  % 3 == 0) and (i % 5 == 0):
+#             res.append("FizzBuzz")
+#     return res
+
+
+# print(
+#     fizz_buzz(15)
+# )  # ["1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz"]
+
+
+# def vowel_to_upper_cons_to_lower(string: str) -> str:
+#     vowels = "aeiouy"
+#     string = list(string)
+#     N = len(string)
+#     for i in range(N):
+#         if string[i] in vowels:
+#             string[i] = string[i].upper()
+#         else:
+#             string[i] = string[i].lower()
+#     return "".join(string)
+
+# print(vowel_to_upper_cons_to_lower("Hello")) # "hEllO"
+
+# from typing import List 
+# def split_Even_Odd_Sublist(num_array: List[int]) -> List[List[int]]:
+#     res = [[] for _ in range(2)]
+#     for i in range(len(num_array)):
+#         if  num_array[i] % 2 == 0: 
+#             res[0].append(num_array[i])
+#         else:
+#             res[1].append(num_array[i])
+#     return res
+
+# print(split_Even_Odd_Sublist([1, 2, 3, 4, 5, 6, 7, 8, 9])) # [[2, 4, 6, 8], [1, 3, 5, 7, 9]]
+

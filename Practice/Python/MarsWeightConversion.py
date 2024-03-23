@@ -1,4 +1,16 @@
 class MarsWeightConversion:
+    # Different cases in python
+    # 1. Camel Case: This is the most common naming convention for variables. It starts with a lowercase letter and then every new word starts with a capital letter.
+    # 2. Pascal Case: This is similar to camel case, but the first letter is also capitalized.
+    # 3. Snake Case: This is the most common naming convention for variables. It starts with a lowercase letter and then every new word starts with an underscore.
+    # 4. Uppercase: This is the most common naming convention for constants. It is all uppercase and words are separated by underscores.
+    # 5. Kebab Case: This is similar to snake case, but the underscores are replaced with hyphens.
+    
+    # OOP paradigms are what?
+    # 1. Encapsulation: Encapsulation is the mechanism of hiding of data implementation by restricting access to public methods. Instance variables are kept private and accessor methods are made public to achieve this.
+    # 2. Inheritance: Inheritance is a mechanism wherein a new class is derived from an existing class. The derived class inherits features from the base class, adding new features to it. This results into re-usability of code.
+    # 3. Polymorphism: Polymorphism is the ability of a programming language to present the same interface for several different underlying data types.
+    
     # __init__ is a reserved method in Python classes. It is known as a constructor in object oriented concepts. This method called when an object is created from the class and it allows the class to initialize the attributes of the class.
     def __init__(self, weight: str) -> None:
         self.weight = weight
@@ -67,7 +79,6 @@ class Sanitization:
     def convert_weight_to_imperial(self) -> float:
         return float(self.cleaned_input) / 0.453592
 
-
 # ⚠️ Tests ⚠️
 import re
 class TestMarsWeightConversion:
@@ -120,8 +131,8 @@ def main():
     # print(type(user_input))
     user_input = input("Enter your weight on Earth: ")
     # You call the Sanitization class and pass the user_input as an argument to the class. The class then returns the weight attribute.
-    weight_conversion = Sanitization(user_input)
-    print(MarsWeightConversion(weight_conversion.weight).__str__())
+    # weight_conversion = Sanitization(user_input)
+    print(MarsWeightConversion(user_input).__str__())
 
     # test = TestMarsWeightConversion("100")
     # print(test.test_mars_weight_conversion())
