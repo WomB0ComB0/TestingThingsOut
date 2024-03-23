@@ -332,3 +332,96 @@ function mergeInBetween(list1: ListNode | null, a: number, b: number, list2: Lis
 
     return new_head1.next;
 };
+
+// 396
+
+function maxRotateFunction(nums: number[]): number {
+    const N: number = nums.length;
+    const INF: number = Number.POSITIVE_INFINITY;
+
+    let best: number = -INF;
+    let f0: number = 0;
+    let total: number = 0;
+
+    for (let i = 0; i < N; i++) {
+        f0 += i * nums[i];
+        total += nums[i];
+    }
+
+    best = Math.max(best, f0);
+    let lf: number = f0;
+
+    for (let i = 1; i < N; i++) {
+        let f: number = lf + total - (N * nums[N - i]);
+        best = Math.max(best, f);
+        lf = f;
+    }
+
+    return best;
+    
+};
+
+function isPalindrome(head: ListNode | null): boolean {
+    let arr: Array<number> = []
+    while (head != null) {
+        arr.push(head.val)
+        head = head.next
+    }
+    return arr.join("") === arr.reverse().join("")
+};
+
+function reorderList(head: ListNode | null): void {
+    let slow: ListNode | null = head;
+    let fast: ListNode | null = head?.next;
+    while (fast !== null && fast.next !== null) {
+        slow = slow?.next;
+        fast = fast.next.next;
+    }
+
+    let second: ListNode | null = slow?.next;
+    slow!.next = null;
+    let prev: ListNode | null = null;
+    while (second !== null) {
+        let tmp: ListNode | null = second.next;
+        second.next = prev;
+        prev = second;
+        second = tmp;
+    }
+
+    let first: ListNode | null = head;
+    second = prev;
+    while (second !== null) {
+        let tmp1: ListNode | null = first?.next;
+        let tmp2: ListNode | null = second.next;
+        first!.next = second;
+        second.next = tmp1;
+        first = tmp1;
+        second = tmp2;
+    }
+};
+
+/**class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        # Find middle
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next 
+        # Reverse second half
+        second = slow.next
+        prev = slow.next = None
+        while second:
+            tmp = second.next
+            second.next = prev
+            prev = second
+            second = tmp
+        # merge two halfs
+        first, second = head, prev
+        while second:
+            tmp1, tmp2 = first.next, second.next
+            first.next = second
+            second.next = tmp1
+            first, second = tmp1, tmp2*/
