@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RazorPagesPizza")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26b1b81eaa6338dd3c07fe60a5a230a966429ae2")]
 [assembly: System.Reflection.AssemblyProductAttribute("RazorPagesPizza")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RazorPagesPizza")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
