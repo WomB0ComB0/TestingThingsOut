@@ -400,28 +400,55 @@ function reorderList(head: ListNode | null): void {
     }
 };
 
-/**class Solution:
-    def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        # Find middle
-        slow, fast = head, head.next
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next 
-        # Reverse second half
-        second = slow.next
-        prev = slow.next = None
-        while second:
-            tmp = second.next
-            second.next = prev
-            prev = second
-            second = tmp
-        # merge two halfs
-        first, second = head, prev
-        while second:
-            tmp1, tmp2 = first.next, second.next
-            first.next = second
-            second.next = tmp1
-            first, second = tmp1, tmp2*/
+function findTheDifference(s: string, t: string): string {
+    let count: { [s: string]: number } = {};
+    for (let c of s) {
+        if (count[c]) {
+            count[c] += 1;
+        } else {
+            count[c] = 1;
+        }
+    }
+
+    for (let c of t) {
+        if (count[c]) {
+            count[c] -= 1;
+        } else {
+            return c;
+        }
+    }
+
+    return "";
+};
+
+
+
+function maximumLengthSubstring(s: string): number {
+    const N: number = s.length
+    let best: number = 0 
+
+    for (let i = 0; i < N; i++){
+        let f: { [s: string]: number } = {}
+        for (let j = i; j < N; j++){
+            f[s[j]] = f[s[j]] ? f[s[j]] + 1 : 1
+            if (Math.max(...Object.values(f)) <= 2){
+                best = Math.max(best, j - i + 1)
+            } else {
+                break
+            }
+        }
+    }
+    return best
+};
+
+function Counter(tasks: string[]): { [s: string]: number; } | ArrayLike<number> {
+    let count: { [s: string]: number; } = {};
+    for (let t of tasks) {
+        if (count[t]) {
+            count[t] += 1;
+        } else {
+            count[t] = 1;
+        }
+    }
+    return count;
+}

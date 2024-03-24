@@ -1401,11 +1401,11 @@
 
 # print(vowel_to_upper_cons_to_lower("Hello")) # "hEllO"
 
-# from typing import List 
+# from typing import List
 # def split_Even_Odd_Sublist(num_array: List[int]) -> List[List[int]]:
 #     res = [[] for _ in range(2)]
 #     for i in range(len(num_array)):
-#         if  num_array[i] % 2 == 0: 
+#         if  num_array[i] % 2 == 0:
 #             res[0].append(num_array[i])
 #         else:
 #             res[1].append(num_array[i])
@@ -1413,3 +1413,51 @@
 
 # print(split_Even_Odd_Sublist([1, 2, 3, 4, 5, 6, 7, 8, 9])) # [[2, 4, 6, 8], [1, 3, 5, 7, 9]]
 
+
+# class Solution:
+#     def tribonacci(self, n: int) -> int:
+#         if n == 0:
+#             return 0
+#         if n == 1 or n == 2:
+#             return 1
+#         dp = [0] * (n + 1)
+#         dp[1] = dp[2] = 1
+#         for i in range(3, n + 1):
+#             dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+#         return dp[n]
+
+
+# class Solution:
+#     def minOperations(self, k: int) -> int:
+#         nums = [1]
+#         num_operations = 0
+
+#         if sum(nums) >= k:
+#             return 0
+
+#         while True:
+#             max_num = max(nums)
+
+#             if max_num * 2 >= k:
+#                 nums.append(max_num)
+#             else:
+#                 nums.append(max_num * 2)
+
+#             num_operations += 1
+
+#             if sum(nums) >= k:
+#                 break
+
+#         operations_dict = dict()
+#         for i in range(num_operations):
+#             if nums[i] == nums[i + 1]:
+#                 operation = "increase"
+#                 element = nums[i]
+#             else:
+#                 operation = "duplicate"
+#                 element = nums[i] * 2
+#             operations_dict[i] = {"operation": operation, "element": element}
+        
+#         for i in range(len(operations_dict)):
+#             if operations_dict[i]["operation"] == "increase":
+                
