@@ -452,3 +452,73 @@ function Counter(tasks: string[]): { [s: string]: number; } | ArrayLike<number> 
     }
     return count;
 }
+
+function findDifference(nums1: number[], nums2: number[]): number[][] {
+    let a: Set<number> = new Set(nums1.filter(x => !nums2.includes(x)));
+    let b: Set<number> = new Set(nums2.filter(x => !nums1.includes(x)));
+    const res: number[][] = [];
+    res.push(Array.from(a));
+    res.push(Array.from(b));
+    return res;
+};
+
+function largestAltitude(gain: number[]): number {
+    let max: number = 0;
+    let current: number = 0;
+    for (let g of gain) {
+        current += g;
+        max = Math.max(max, current);
+    }
+    return max;
+};
+
+function singleNumber(nums: number[]): number {
+    let f: { [s: string]: number } = {}
+    for (const num of nums) {
+        f[num] = f[num] ? f[num] + 1 : 1
+    }
+    for (const key in f) {
+        if (f[key] === 1) {
+            return parseInt(key)
+        }
+    }
+    return -1
+};
+
+
+function singleNumber(nums: number[]): number {
+    let res = 0;
+    for(let num of nums) res ^= num;
+    return res;
+};
+
+function pivotIndex(nums: number[]): number {
+    for (const i of nums) {
+        let left: number = nums.slice(0, i).reduce((a, b) => a + b, 0);
+        let right: number = nums.slice(i + 1).reduce((a, b) => a + b, 0);
+        if (left === right) return i;
+    }  
+    return -1;
+};
+
+class TreeNode {
+    val: number
+    left: TreeNode | null
+    right: TreeNode | null
+    constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+        this.val = (val===undefined ? 0 : val)
+        this.left = (left===undefined ? null : left)
+        this.right = (right===undefined ? null : right)
+    }
+}
+
+
+function searchBST(root: TreeNode | null, val: number): TreeNode | null {
+    switch (true) {
+        case root == null || root.val === val: return null;
+        case val < root!.val: return searchBST(root.left, val);
+        default: return searchBST(root.right, val);
+    }
+};
+
+

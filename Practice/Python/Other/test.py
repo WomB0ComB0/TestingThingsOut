@@ -1457,7 +1457,49 @@
 #                 operation = "duplicate"
 #                 element = nums[i] * 2
 #             operations_dict[i] = {"operation": operation, "element": element}
-        
+
 #         for i in range(len(operations_dict)):
 #             if operations_dict[i]["operation"] == "increase":
-                
+
+# from typing import List
+# class Solution:
+#     def largestAltitude(self, gain: List[int]) -> int:
+#       max_val, alt = 0, 0
+#       for i in gain:
+#         alt += i
+#         max_val = max(alt, max_val)
+#       return max_val
+
+# print(Solution().largestAltitude([-5, 1, 5, 0, -7])) # 1
+
+# import collections
+# from typing import List
+# class Solution:
+#     def singleNumber(self, nums: List[int]) -> int:
+#         return min(collections.Counter(nums), key=collections.Counter(nums).get)
+
+# print(Solution().singleNumber([4, 1, 2, 1, 2])) # 4
+
+
+# from typing import Optional
+
+
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# class Solution:
+#     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+#         current = root
+#         res = []
+#         while current:
+#             if current.val == val:
+#                 res.append(current)
+#             elif current.val < val:
+#                 current = current.right
+#             else:
+#                 current = current.left
+#         return res
+# print(Solution().searchBST([4, 2, 7, 1, 3], 2)) # [2, 1, 3]
