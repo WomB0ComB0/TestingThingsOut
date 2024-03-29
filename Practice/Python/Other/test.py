@@ -1503,3 +1503,31 @@
 #                 current = current.left
 #         return res
 # print(Solution().searchBST([4, 2, 7, 1, 3], 2)) # [2, 1, 3]
+
+
+# class Solution:
+#     def romanToInt(self, s: str) -> int:
+#         d = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+#         sum = 0
+#         N = len(s)
+#         i = 0
+#         while i < N:
+#           if i < N - 1 and d[s[i]] < d[s[i + 1]]:
+#             sum += d[s[i+1]] - d[s[i]]
+#             i += 2
+#           else:
+#             sum += d[s[i]]
+#             i += 1
+#         return sum
+
+from typing import List
+from collections import Counter
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = Counter(nums)
+        return [num for num, _ in count.most_common(k)]
+
+
+print(Solution.topKFrequent(
+  
+))
