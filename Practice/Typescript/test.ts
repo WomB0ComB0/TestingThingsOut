@@ -521,4 +521,270 @@ function searchBST(root: TreeNode | null, val: number): TreeNode | null {
     }
 };
 
+function firstMissingPositive(nums: number[]): number {
+    let n: number = nums.length
+    if (n == 0) return 1
+
+    for (let i = 0; i < n; i++) {
+        while ((nums[i] >= 1 && nums[i] <= n) && (nums[nums[i] - 1] != nums[i])) 
+            swap(i, nums[i] - 1, nums)
+    }
+    for (let i = 0; i < n; i++)
+        if (nums[i]) return i + 1
+    return n + 1 
+};
+
+function swap( i: number, j: number, array: number[]) {
+    const temp = array[j];
+    array[j] = array[i];
+    array[i] = temp;
+    return array;
+}
+
+function numSubarrayProductLessThanK(nums: number[], k: number): number {
+    let res: number = 0;
+    let l: number = 0;
+    let product: number = 1;
+    for (let r = 0; r < nums.length; r++) {
+        product *= nums[r];
+        while (l <= r && product >= k) {
+            product /= nums[l];
+            l += 1;
+        }
+        res += (r - l + 1);
+    }
+    return res;
+};
+
+
+function hammingWeight(n: number): number {
+    let count: number = 0;
+    while (n) {
+        // Increment count if the last bit is 1
+        count += n & 1;
+        // Right shift the number by 1 bit
+        n >>>= 1;
+    }
+    return count;  
+};
+
+function queryString(s: string, n: number): boolean {
+    for (let i = 1; i <= n; i++) {
+        if (!s.includes(i.toString(2))) return false;
+    }
+    return true;
+};
+
+class MinHeap<T> {
+    heap: T[];
+    constructor() {
+        this.heap = [];
+    }
+
+    size(): number {
+        return this.heap.length;
+    }
+
+    push(val: T): void {
+        this.heap.push(val);
+        this.bubbleUp();
+    }
+
+    pop(): T | undefined {
+        if (this.size() === 0) return undefined;
+        this.swap(0, this.size() - 1);
+        const popped = this.heap.pop();
+        this.bubbleDown();
+        return popped;
+    }
+
+    peek(): T | null {
+        return this.size() === 0 ? null : this.heap[0];
+    }
+
+    private bubbleUp(): void {
+        let current = this.size() - 1;
+        while (current > 0) {
+            let parent = Math.floor((current - 1) / 2);
+            if (this.heap[current] < this.heap[parent]) {
+                this.swap(current, parent);
+                current = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    private bubbleDown(): void {
+        let current = 0;
+        while (current < this.size()) {
+            let left = 2 * current + 1;
+            let right = 2 * current + 2;
+            let smallest = current;
+            if (left < this.size() && this.heap[left] < this.heap[smallest]) {
+                smallest = left;
+            }
+            if (right < this.size() && this.heap[right] < this.heap[smallest]) {
+                smallest = right;
+            }
+            if (smallest !== current) {
+                this.swap(current, smallest);
+                current = smallest;
+            } else {
+                break;
+            }
+        }
+    }
+
+    private swap(i: number, j: number): void {
+        [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+    }
+}
+
+class KthLargest {
+    private minHeap: MinHeap<number>;
+    private k: number;
+
+    constructor(k: number, nums: number[]) {
+        this.minHeap = new MinHeap();
+        this.k = k;
+
+        for (let num of nums) {
+            this.add(num);
+        }
+    }
+
+    add(val: number): number | null {
+        this.minHeap.push(val);
+        while (this.minHeap.size() > this.k) {
+            this.minHeap.pop();
+        }
+        return this.minHeap.peek();
+    }
+}
+
+function maxSubarrayLength(nums: number[], k: number): number {
+    let counts: {[key: number]: number } = {}
+    let max_length: number = 0
+    let left: number = 0
+    for (let right = 0; right < nums.length; right++) {
+        counts[nums[right]] = counts[nums[right]] ? counts[nums[right]] + 1 : 1
+        while (counts[nums[right]] > k) {
+            counts[nums[left]] -= 1
+            left += 1
+        }
+        max_length = Math.max(max_length, right - left + 1)
+    }
+    return max_length
+};
+
+function deleteMiddle(head: ListNode | null): ListNode | null {
+    if (!head || !head.next) {
+        return null;
+    }
+    let curr: ListNode | null = head;
+    let count: number = 0;
+    while (curr) {
+        count++;
+        curr = curr.next;
+    }
+    let mid: number = Math.floor(count / 2);
+    curr = head;
+    let prev: ListNode | null = null;
+    while (mid > 0) {
+        prev = curr;
+        if (curr) curr = curr.next;
+        mid--;
+    }
+    if (prev && curr) prev.next = curr.next;
+    return head;
+}
+
+function groupAnagrams(strs: string[]): string[][] {
+    // { "": ["", ""] } 
+    let res: { [key: string]: string[] } = {};
+    for (let s of strs) { // ["eat", "tea", "tan", "ate", "nat", "bat"]
+        let count: number[] = Array(26).fill(0); // [0, 0, 0, 0, 0, 0, ...]
+        for (let c of s) { // "eat"
+            count[c.charCodeAt(0) - "a".charCodeAt(0)] += 1; // [1, 0, 0, 0, 1, 0, ...]
+        }
+        let key: string = count.join(","); // "1,0,0,0,1,0,0,0,1
+        if (res[key]) { // { "1,0,0,0,1,0,0,0,1": ["eat", "tea", "ate"] }
+            res[key].push(s); // ["eat", "tea", "ate"]
+        } else {
+            res[key] = [s];
+        }
+    }
+    return Object.values(res); // [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+};
+
+
+function subarraysWithKDistinct(nums: number[], k: number): number {
+        function atMostK(k: number): number {
+            let count: { [key: number]: number } = {};
+            let res = 0, l = 0;
+            for (let r = 0; r < nums.length; r++) {
+                count[nums[r]] = (count[nums[r]] || 0) + 1;
+                if (count[nums[r]] === 1) {
+                    k--;
+                }
+                while (k < 0) {
+                    count[nums[l]]--;
+                    if (count[nums[l]] === 0) {
+                        k++;
+                    }
+                    l++;
+                }
+                res += r - l + 1;
+            }
+            return res;
+        }
+        return atMostK(k) - atMostK(k - 1);
+    }
+
+function isPalindrome(x: number): boolean {
+    return  x < 0 ? false : x.toString().split("").reverse().join("") === x.toString()
+};
+
+function longestCommonPrefix(strs: string[]): string {
+    strs.sort();
+    let shortest: string = strs[0];
+    let longest: string = strs[strs.length - 1];
+    let res: string = "";
+    for (let i = 0; i < Math.min(shortest.length, longest.length); i++) {
+        if (shortest[i] !== longest[i]) return res;
+        res += shortest[i];
+    }
+    return res;
+};
+
+function strStr(haystack: string, needle: string): number {
+    const N: number = needle.length;
+    const M: number = haystack.length;
+    for (let i = 0; i < M - N + 1; i++)
+        if (haystack.substring(i, N + i) === needle) return i;
+    return -1;
+};
+
+function searchInsert(nums: number[], target: number): number {
+    let removedDuplicates = [...new Set(nums)];
+    let found: number = !removedDuplicates.indexOf(target) ? removedDuplicates.indexOf(target) : -1;
+    if (found === -1) {
+        removedDuplicates.push(target);
+        removedDuplicates.sort((a, b) => a - b);
+        return removedDuplicates.indexOf(target);
+    }
+    return found;
+};
+
+function lengthOfLastWord(s: string): number {
+    return s.trim().replace(" ", " ").split(" ").pop()!.length;
+};
+
+/**
+ * 
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        return len(s.strip().replace(" ", " ").split(" ")[-1])
+*/
 
