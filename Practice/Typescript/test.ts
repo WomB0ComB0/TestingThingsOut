@@ -787,4 +787,93 @@ class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         return len(s.strip().replace(" ", " ").split(" ")[-1])
 */
+function maxNumberOfBalloons(text: string): number {
+    let counter: { [s: string]: number } = {}
+    let balloon: string = 'balloon'
 
+    for (const c of text)
+        if (balloon.includes(c)) counter[c] = counter[c] ? counter[c] + 1 : 1
+    if (balloon.split("").some(c => !counter[c])) return 0
+    else return Math.min(counter['b'], counter['a'], Math.floor(counter['l'] / 2), Math.floor(counter['o'] / 2), counter['n'])
+};
+
+/**
+ * 
+ * class Solution:
+    def maxNumberOfBalloons(self, text: str) -> int:
+        counter = defaultdict(int)
+        balloon = 'balloon'
+
+        for c in text:
+            if c in balloon:
+                counter[c] += 1
+            
+        if any(c not in counter for c in balloon):
+            return 0
+        else:
+            return min(counter['b'], counter['a'], counter['l']//2, counter['o']//2, counter['n'])
+*/
+
+function romanToInt(s: string): number {
+    let d: { [s: string]: number } = { "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000 }
+    let sum: number = 0
+    const N: number = s.length
+    let i: number = 0
+    while (i < N) {
+        if (i < N - 1 && d[s[i]] < d[s[i + 1]]) {
+            sum += d[s[i + 1]] - d[s[i]]
+            i += 2
+        } else {
+            sum += d[s[i]]
+            i += 1
+        }
+    }
+    return sum
+};
+
+function summaryRanges(nums: number[]): string[] {
+    if (!nums) return []
+    let lower: number = nums[0]    
+    let upper: number = nums[0]
+    let res: string[] = []
+
+    const N: number = nums.length
+
+    for (let i = 0; i < N; i++) {
+        if (nums[i] != nums[i - 1] + 1) {
+            (lower == upper) 
+            ? res.push(lower.toString())
+            : res.push(`${lower}->${upper}`)
+
+            lower = nums[i]
+        }
+        upper = nums[i]
+    }
+    (lower == upper)
+    ? res.push(lower.toString())
+    : res.push(`${lower}->${upper}`)
+};
+
+/**
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        if not nums: return []
+        lower = nums[0]
+        upper = nums[0]
+        res = []
+
+        N = len(nums)
+        for i in range(1, N):
+            if nums[i] != nums[i - 1]+1:
+                if lower == upper:
+                    res.append(str(lower))
+                else:
+                    res.append(f"{lower}->{upper}")
+                lower = nums[i]
+            upper = nums[i]
+        if lower == upper:
+            res.append(str(lower))
+        else:
+            res.append(f"{lower}->{upper}")
+        return res
+*/
