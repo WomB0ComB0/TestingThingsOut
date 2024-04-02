@@ -797,23 +797,6 @@ function maxNumberOfBalloons(text: string): number {
     else return Math.min(counter['b'], counter['a'], Math.floor(counter['l'] / 2), Math.floor(counter['o'] / 2), counter['n'])
 };
 
-/**
- * 
- * class Solution:
-    def maxNumberOfBalloons(self, text: str) -> int:
-        counter = defaultdict(int)
-        balloon = 'balloon'
-
-        for c in text:
-            if c in balloon:
-                counter[c] += 1
-            
-        if any(c not in counter for c in balloon):
-            return 0
-        else:
-            return min(counter['b'], counter['a'], counter['l']//2, counter['o']//2, counter['n'])
-*/
-
 function romanToInt(s: string): number {
     let d: { [s: string]: number } = { "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000 }
     let sum: number = 0
@@ -854,26 +837,60 @@ function summaryRanges(nums: number[]): string[] {
     : res.push(`${lower}->${upper}`)
 };
 
+function countSubarrays(nums: number[], minK: number, maxK: number): number {
+    const N: number = nums.length;
+    function calc(nums: number[]): number {
+        let last_min_index: number | null = null
+        let last_max_index: number | null = null
+        let total: number = 0
+        for (let index = 0; index < nums.length; index++) {
+            let x: number = nums[index]
+            if (x == minK) last_min_index = index
+            if (x == maxK) last_max_index = index
+            if (last_min_index !== null && last_max_index !== null) {
+                total += Math.min(last_min_index, last_max_index) + 1
+            }
+        }
+        return total
+    }
+
+    let total: number = 0
+
+    for (let [g, vs] of groupby(nums, x => minK <= x && x <= maxK)) {
+        if (g) total += calc(vs)
+    }
+    return total
+};
+
+function groupby<T>(iterable: T[], key: (x: T) => boolean): [boolean, T[]][] {
+    let groups: [boolean, T[]][] = []
+    let group: [boolean, T[]] = [false, []]
+    for (let x of iterable) {
+        if (key(x) !== group[0]) {
+            group = [key(x), []]
+            groups.push(group)
+        }
+        group[1].push(x)
+    }
+    return groups
+}
+
+function lengthOfLastWord(s: string): number {
+    let res: number = 0
+    while (s[s.length - 1] == " ") s = s.slice(0, -1);
+    for (let x = 0; x < s.length; x++) {
+        if (s[x] === " ") break
+        res++
+    }
+    return res
+};
+
+function isIsomorphic(s: string, t: string): boolean {
+    return new Set([...s].map((x, i) => [x, t[i]]).values()).size == new Set(s).size && new Set(s).size == new Set(t).size
+};
+
 /**
 class Solution:
-    def summaryRanges(self, nums: List[int]) -> List[str]:
-        if not nums: return []
-        lower = nums[0]
-        upper = nums[0]
-        res = []
-
-        N = len(nums)
-        for i in range(1, N):
-            if nums[i] != nums[i - 1]+1:
-                if lower == upper:
-                    res.append(str(lower))
-                else:
-                    res.append(f"{lower}->{upper}")
-                lower = nums[i]
-            upper = nums[i]
-        if lower == upper:
-            res.append(str(lower))
-        else:
-            res.append(f"{lower}->{upper}")
-        return res
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s,t))) == len(set(s)) == len(set(t))
 */

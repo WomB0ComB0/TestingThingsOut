@@ -1798,33 +1798,33 @@
 
 # print(manhattan_distance([1, 1], [0, 0])) # 2
 
-from typing import List
+# from typing import List
 
-class Solution:
-    def minimumDistance(self, points: List[List[int]]) -> int:
-        min_max_distance = float('inf')
-        for i in range(len(points)):
-            point_removed = points.pop(i)
-            max_distance = self.calculate_max_distance(points)
-            min_max_distance = min(min_max_distance, max_distance)
-            points.insert(i, point_removed)
-        return min_max_distance
+# class Solution:
+#     def minimumDistance(self, points: List[List[int]]) -> int:
+#         min_max_distance = float('inf')
+#         for i in range(len(points)):
+#             point_removed = points.pop(i)
+#             max_distance = self.calculate_max_distance(points)
+#             min_max_distance = min(min_max_distance, max_distance)
+#             points.insert(i, point_removed)
+#         return min_max_distance
 
-    def calculate_max_distance(self, points: List[List[int]]) -> int:
-        max_distance = 0
-        for i in range(len(points)):
-            for j in range(i + 1, len(points)):
-                max_distance = max(max_distance, self.manhattan_distance(points[i], points[j]))
-        return max_distance
+#     def calculate_max_distance(self, points: List[List[int]]) -> int:
+#         max_distance = 0
+#         for i in range(len(points)):
+#             for j in range(i + 1, len(points)):
+#                 max_distance = max(max_distance, self.manhattan_distance(points[i], points[j]))
+#         return max_distance
 
-    def manhattan_distance(self, point1: list, point2: list) -> int:
-        return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
+#     def manhattan_distance(self, point1: list, point2: list) -> int:
+#         return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
-print(Solution().minimumDistance([[3, 10], [5, 15], [10, 2], [4, 4]]))  # Output: 12
-print(Solution().minimumDistance([[1, 1], [1, 1], [1, 1]]))  # Output: 0
-print(
-    Solution().minimumDistance([[3, 2], [3, 9], [7, 10], [4, 4], [8, 10], [2, 7]])
-)  # Output: 4
+# print(Solution().minimumDistance([[3, 10], [5, 15], [10, 2], [4, 4]]))  # Output: 12
+# print(Solution().minimumDistance([[1, 1], [1, 1], [1, 1]]))  # Output: 0
+# print(
+#     Solution().minimumDistance([[3, 2], [3, 9], [7, 10], [4, 4], [8, 10], [2, 7]])
+# )  # Output: 4
 # class Solution:
 #     def romanToInt(self, s: str) -> int:
 #         d = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
@@ -1840,14 +1840,55 @@ print(
 #             i += 1
 #         return sum
 
-from typing import List
-from collections import Counter
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = Counter(nums)
-        return [num for num, _ in count.most_common(k)]
+# from typing import List
+# from collections import Counter
+# class Solution:
+#     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+#         count = Counter(nums)
+#         return [num for num, _ in count.most_common(k)]
 
 
-print(Solution.topKFrequent(
-  
-))
+# print(Solution.topKFrequent(
+
+# ))
+
+
+# from itertools import groupby
+# class Solution:
+#     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+#         N = len(nums)
+
+#         def calc(nums):
+#             N = len(nums)
+
+#             last_min_index = None
+#             last_max_index = None
+
+#             total = 0
+#             for index, x in enumerate(nums):
+#                 if x == minK:
+#                     last_min_index = index
+
+#                 if x == maxK:
+#                     last_max_index = index
+
+#                 if last_min_index is not None and last_max_index is not None:
+#                     total += min(last_min_index, last_max_index) + 1
+#             return total
+
+#         total = 0
+#         for g, vs in groupby(nums, key=lambda x: minK <= x <= maxK):
+#             if g:
+#                 total += calc(list(vs))
+#         return total
+
+
+# LIMIT = 50
+# def print_pyram(n: int) -> None:
+#     for i in range(1, n + 1):
+#         for _ in range(i):
+#             print(format(i,"^2"), " ", sep="", end="")
+#         print("", sep="")
+
+# print(print_pyram(LIMIT))
+
