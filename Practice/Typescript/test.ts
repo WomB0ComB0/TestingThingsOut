@@ -889,8 +889,22 @@ function isIsomorphic(s: string, t: string): boolean {
     return new Set([...s].map((x, i) => [x, t[i]]).values()).size == new Set(s).size && new Set(s).size == new Set(t).size
 };
 
-/**
-class Solution:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        return len(set(zip(s,t))) == len(set(s)) == len(set(t))
-*/
+function exist(board: string[][], word: string): boolean {
+    function dfs(i: number, j: number, k: number, vis: Set<string>): boolean {
+        if (k == word.length) return true
+        if (vis.has(`${i},${j}`) || i < 0 || i == board.length || j < 0 || j == board[0].length) return false
+        if (board[i][j] != word[k]) return false
+        if (board[i][j] == word[k]) k += 1
+        vis.add(`${i},${j}`)
+        let u: boolean = dfs(i - 1, j, k, vis)
+        let d: boolean = dfs(i + 1, j, k, vis)
+        let l: boolean = dfs(i, j - 1, k, vis)
+        let r: boolean = dfs(i, j + 1, k, vis)
+        vis.delete(`${i},${j}`)
+        return u || d || l || r
+    }
+    for (let i = 0; i < board.length; i++)
+        for (let j = 0; j < board[0].length; j++)
+            if (dfs(i, j, 0, new Set())) return true
+    return false
+};
