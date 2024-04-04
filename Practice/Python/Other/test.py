@@ -1893,76 +1893,134 @@
 # print(print_pyram(LIMIT))
 
 
-class Solution:
-    def exist(self, board, word):
-        def backtrack(i, j, k):
-            if k == len(word): return True
-            if (
-                i < 0
-                or i >= len(board)
-                or j < 0
-                or j >= len(board[0])
-                or board[i][j] != word[k]
-            ): return False
+# class Solution:
+#     def exist(self, board, word):
+#         def backtrack(i, j, k):
+#             if k == len(word): return True
+#             if (
+#                 i < 0
+#                 or i >= len(board)
+#                 or j < 0
+#                 or j >= len(board[0])
+#                 or board[i][j] != word[k]
+#             ): return False
 
-            temp = board[i][j]
-            board[i][j] = ""
+#             temp = board[i][j]
+#             board[i][j] = ""
 
-            if (
-                backtrack(i + 1, j, k + 1)
-                or backtrack(i - 1, j, k + 1)
-                or backtrack(i, j + 1, k + 1)
-                or backtrack(i, j - 1, k + 1)
-            ): return True
+#             if (
+#                 backtrack(i + 1, j, k + 1)
+#                 or backtrack(i - 1, j, k + 1)
+#                 or backtrack(i, j + 1, k + 1)
+#                 or backtrack(i, j - 1, k + 1)
+#             ): return True
 
-            board[i][j] = temp
-            return False
+#             board[i][j] = temp
+#             return False
 
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if backtrack(i, j, 0):
-                    return True
-        return False
-from typing import List
-class Solution:
-    def exist(self, A: List[List[str]], S: str) -> bool:
-        R, C = len(A), len(A[0])
-        V = [[False]*C for r in range(R)]
-        def dfs(r, c, p):
-            if V[r][c] or A[r][c] != S[p]: return False
-            V[r][c] = True
-            if p+1 == len(S): return True
-            for i, j in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
-                if i < 0 or i >= R or j < 0 or j >= C: continue
-                if dfs(i, j, p+1): return True
-            V[r][c] = False
-            return False
-        return any(dfs(r, c, 0) for r in range(R) for c in range(C))
+#         for i in range(len(board)):
+#             for j in range(len(board[0])):
+#                 if backtrack(i, j, 0):
+#                     return True
+#         return False
+# from typing import List
+# class Solution:
+#     def exist(self, A: List[List[str]], S: str) -> bool:
+#         R, C = len(A), len(A[0])
+#         V = [[False]*C for r in range(R)]
+#         def dfs(r, c, p):
+#             if V[r][c] or A[r][c] != S[p]: return False
+#             V[r][c] = True
+#             if p+1 == len(S): return True
+#             for i, j in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
+#                 if i < 0 or i >= R or j < 0 or j >= C: continue
+#                 if dfs(i, j, p+1): return True
+#             V[r][c] = False
+#             return False
+#         return any(dfs(r, c, 0) for r in range(R) for c in range(C))
 
 
-class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
-        def dfs(i, j, k, vis):
-            if k == len(word):
-                return True
-            if (i, j) in vis or i < 0 or i == len(board) or j < 0 or j == len(board[0]):
-                return False
-            if board[i][j] != word[k]:
-                return False
-            if board[i][j] == word[k]:
-                k += 1
-            vis.add((i, j))
-            u, d, l, r = (
-                dfs(i - 1, j, k, vis),
-                dfs(i + 1, j, k, vis),
-                dfs(i, j - 1, k, vis),
-                dfs(i, j + 1, k, vis),
-            )
-            vis.remove((i, j))
-            return u or d or l or r
+# class Solution:
+#     def exist(self, board: List[List[str]], word: str) -> bool:
+#         def dfs(i, j, k, vis):
+#             if k == len(word):
+#                 return True
+#             if (i, j) in vis or i < 0 or i == len(board) or j < 0 or j == len(board[0]):
+#                 return False
+#             if board[i][j] != word[k]:
+#                 return False
+#             if board[i][j] == word[k]:
+#                 k += 1
+#             vis.add((i, j))
+#             u, d, l, r = (
+#                 dfs(i - 1, j, k, vis),
+#                 dfs(i + 1, j, k, vis),
+#                 dfs(i, j - 1, k, vis),
+#                 dfs(i, j + 1, k, vis),
+#             )
+#             vis.remove((i, j))
+#             return u or d or l or r
 
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if dfs(i, j, 0, set()):
-                    return True
-        return False
+#         for i in range(len(board)):
+#             for j in range(len(board[0])):
+#                 if dfs(i, j, 0, set()):
+#                     return True
+#         return False
+
+
+# def pyramid_a1(size: int) -> None:
+#     output = []
+#     for line_num in range(1, size + 1):
+#         output += [" " * (size - line_num) + "*" * ((line_num * 2) - 1)]
+#     print("\n".join(output))
+
+# print(pyramid_a1(8))
+
+
+# def patternC(size: int) -> None:
+#     output = []
+#     for line_num in range(1, size + 1):
+#         space = size - line_num
+#         output += [
+#           " " * space +
+#           (
+#     "@" if line_num == 1 else f"@{'-' * (((line_num * 2)) - 3)}@"
+#           )
+#         ]
+
+#     print("\n".join(output))
+# print(patternC(20))
+
+
+# def upside_down_triangle(length: int) -> None:
+#     for i in range(length):
+#         print(" " * i + "*" * (2 * (length - i) - 1))
+# print(upside_down_triangle(7))
+
+
+# def right_angle(length: int) -> None:
+#     for i in range(length):
+#         print("*" * (i + 1))
+# print(right_angle(7))
+
+
+# def right_angle_opp(length: int) -> None:
+#     for i in range(length):
+#       print(" " * (length - i) + "*" * i)
+# print(right_angle_opp(7))
+
+
+# def diamond(length: int) -> None:
+#     for i in range((length // 2)):
+#         print(" " * (length - i - 1) + "*" * (2 * i + 1))
+#     print(" " * (length // 2) + "*" * length)
+#     for i in range((length // 2) - 1, -1, -1):
+#         print(" " * (length - i - 1) + "*" * (2 * i + 1))
+# print(diamond(13))
+
+# class Solution:
+#     def maxDepth(self, s: str) -> int:
+#         return max(
+#             accumulate(map(lambda c: 1 if c == "(" else -1 if c == ")" else 0, s))
+#         )
+

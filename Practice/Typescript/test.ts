@@ -908,3 +908,14 @@ function exist(board: string[][], word: string): boolean {
             if (dfs(i, j, 0, new Set())) return true
     return false
 };
+
+function maxDepth(s: string): number {
+    let res: number = 0
+    let stack: string[] = []
+    for (let c of s) {
+        if (c == '(') stack.push('(')
+        if (c == ')') stack.pop()
+        res = Math.max(res, stack.length)
+    }
+    return res
+};
