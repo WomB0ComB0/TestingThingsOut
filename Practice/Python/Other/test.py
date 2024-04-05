@@ -1505,6 +1505,326 @@
 # print(Solution().searchBST([4, 2, 7, 1, 3], 2)) # [2, 1, 3]
 
 
+# def length(seq) -> int:
+#     if isinstance(seq, (str, list, tuple, set, dict, range, bytes)):
+#         return len(seq)
+#     elif isinstance(seq, int):
+#         return len(str(seq))
+#     elif isinstance(seq, float):
+#         return len(str(seq).replace(".", ""))
+#     else:
+#         return seq
+
+
+# print(length("hello"))  # 5
+# print(length([1, 2, 3, 4, 5]))  # 5
+# print(length((1, 2, 3, 4, 5)))  # 5
+# print(length({1, 2, 3, 4, 5}))  # 5
+# print(length({"one": 1, "two": 2, "three": 3}))  # 3
+# print(length(range(5)))  # 5
+# print(length(12345))  # 5
+# print(length(b"hello"))  # 5
+# print(length(12345.0))  # 5
+# print(length(True))  # 4
+
+# from itertools import accumulate
+# def summation(seq) -> int:
+#     res = [i for i in seq if isinstance(i, int)]
+#     return list(accumulate(res))[-1]
+
+# print(summation([1, 2, 3, 4, 5])) # 15
+
+
+# from typing import List
+# def kaprekar_seq(n: int, book: List[int] = None) -> List[int]:
+#     if book is None:
+#         book = []
+#     n = sorted(str(n), reverse=True)
+#     n2 = sorted(n, reverse=False)
+#     if n == n2:
+#         book.append(int("".join(n)))
+#         return book
+#     book.append(int("".join(n)))
+#     product = int("".join(n)) - int("".join(n2))
+#     n = sorted(str(product), reverse=True)
+#     n2 = sorted(n, reverse=False)
+#     book.append(product)
+#     if product != 6174:
+#         return kaprekar_seq(product, book)
+#     return book
+
+
+# print(kaprekar_seq(1945)) # 6174
+# def isInc(n: int) -> bool:
+#     prev = n % 10
+#     if n < 10:
+#         return True
+#     elif n > 10:
+#         return isInc(n // 10) and prev > n // 10 % 10
+
+# from typing import List
+# class Solution:
+#     def firstMissingPositive(self, nums: List[int]) -> int:
+#         if not nums:
+#             return 1
+
+#         n = len(nums)
+#         for i in range(n):
+#             while 1 <= nums[i] <= n and nums[nums[i] - 1] != nums[i]:
+#                 nums[nums[i] - 1], nums[i] = nums[i], nums[nums[i] - 1]
+
+#         for i in range(n):
+#             if nums[i] != i + 1:
+#                 return i + 1
+
+#         return n + 1
+# nums = list(range(1, 10001))
+# print(Solution().firstMissingPositive([1, 2, 0])) # 3
+# print(Solution().firstMissingPositive(nums)) # 100001
+
+# from typing import List
+# def collatz_seq(q: int) -> List[int]:
+#   if q == 1:
+#     return [1]
+#   elif q % 2 == 0:
+#     return [q] + collatz_seq(q  // 2)
+#   else:
+#     return [q] + collatz_seq(3 * q + 1)
+
+# print(collatz_seq(13)) # [12, 6, 3, 10, 5, 16, 8, 4, 2, 1]
+
+
+# class Solution:
+#     def hammingWeight(self, n: int) -> int:
+#         return bin(n)[2:].count('1')
+
+# def variable_to_camel_case(text: str) -> str:
+#     for i, str in enumerate(text):
+#         if i == 0:
+#           continue
+#         if str == "_":
+#             text = text.replace(str, "")
+#             text = text[:i] + text[i].upper() + text[i + 1:]
+#     return text
+
+# print(variable_to_camel_case("hello_world")) # "helloWorld"
+
+
+# def camel_case_to_snake_case(camel: str) -> str:
+#     for i, str in enumerate(camel):
+#         if str.isupper():
+#             camel = camel.replace(str, "_" + str.lower())
+#     return camel
+
+# print(camel_case_to_snake_case("helloWorld")) # "hello_world"
+
+# import time
+
+# def anagram(s1: str, s2: str) -> bool:
+#   return len(set(s2) & set(s1)) == len(s2)
+
+# print(anagram("listen", "silent")) # True
+
+# from collections import Counter
+
+# def anagrams2(s1: str, s2: str) -> bool:
+#   return Counter(s1) == Counter(s2)
+
+# print(anagrams2("listen", "silent")) # True
+
+# def convertToSeconds(s: str) -> int:
+#     return int(s[:2]) * 3600 + int(s[3:5]) * 60 + int(s[6:])
+
+# print(convertToSeconds("12:30:15"))  # 45015
+
+# from typing import Optional
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# class Solution:
+#     def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         if not head or not head.next:
+#             return None
+#         curr = head
+#         count = 0
+#         while curr:
+#             count += 1
+#             curr = curr.next
+#         mid = count // 2
+#         curr = head
+#         prev = None
+#         while mid:
+#             prev = curr
+#             curr = curr.next
+#             mid -= 1
+#         prev.next = curr.next
+#         return head
+
+
+# from typing import List
+# from collections import defaultdict
+# class Solution:
+#     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+#         # Dictionary to store groups of anagrams
+#         res = defaultdict(list)
+#         # Iterate through the list of strings
+#         for s in strs:
+#             # Initialize count list with 26 zeros, representing the 26 letters of the English alphabet
+#             count = [0] * 26
+#             # Iterate through the characters of the string
+#             for c in s:
+#                 # Increment the count of the character at its position in the alphabet
+#                 count[ord(c) - ord("a")] += 1
+#             # Convert the count list to a tuple to make it hashable and use as a key in the dictionary
+#             # Add the original string to the list corresponding to the tuple key
+#             res[tuple(count)].append(s)
+#         # Return the values of the dictionary, which are lists of grouped anagrams
+#         return res.values()
+
+# print(Solution().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])) # [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+
+# def pascal_output(size: int) -> str:
+#   res = []
+#   space = " "
+#   for i in range(size):
+#     res.append(
+#       space * (size - i - 1) +
+#       " ".join(str(11 ** i))
+#     )
+#   return "\n".join(res)
+
+# print(pascal_output(5))
+
+
+# def upto_n(n: int) -> str:
+#     res = []
+#     row = []
+#     count = 1
+#     while count <= n:
+#         for i in range(len(res) + 1):
+#             if count <= n:
+#                 row.append(str(count))
+#                 count += 1
+#         res.append(" ".join(row))
+#         row = []
+#     res.append("**")
+#     return "\n".join(res)
+# print(upto_n(15))
+
+# from typing import List
+# from collections import defaultdict
+
+
+# class Solution:
+#     def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+#         def atMostK(k: int) -> int:
+#             count = defaultdict(int)
+#             res = l = 0
+#             for r in range(len(nums)):
+#                 if count[nums[r]] == 0:
+#                     k -= 1
+#                 count[nums[r]] += 1
+#                 while k < 0:
+#                     count[nums[l]] -= 1
+#                     if count[nums[l]] == 0:
+#                         k += 1
+#                     l += 1
+#                 res += r - l + 1
+#             return res
+#         return atMostK(k) - atMostK(k - 1)
+# print(Solution().subarraysWithKDistinct([1, 2, 1, 3, 4], 3)) # 7
+
+
+# class Solution:
+#     def strStr(self, haystack: str, needle: str) -> int:
+#         N = len(needle)
+#         for i in range(len(haystack) - N + 1):
+#             if haystack[i:N + i] == needle:
+#                 return i
+#         return -1
+
+
+# print(Solution().strStr("hello", "ll")) # 2
+# from typing import List
+# class Solution:
+#     def searchInsert(nums: List[int], target: int) -> int:
+#         found = -1 if not nums.index(target) else nums.index(target)
+#         if found == -1:
+#             nums.append(target)
+#             nums.sort()
+#             return nums.index(target)
+#         return found
+# print(Solution.searchInsert([1, 3, 5, 6], 5)) # 2
+
+
+# class Solution:
+#     def lengthOfLastWord(self, s: str) -> int:
+#         return len(s.strip().replace(" ", " ").split(" ")[-1])
+
+# from typing import List
+# class Solution:
+#     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+#         """
+#         Do not return anything, modify nums1 in-place instead.
+#         """
+#         nums1 = [i for i in  nums1 if nums[i] != 0]
+#         nums2 = [i for i in  nums2 if nums[i] != 0]
+#         print(f"1{nums1}, 2{nums2}")
+#         return [1, 2, 2, 3, 5, 6]
+
+# from typing import List
+# class Solution:
+#     def countAlternatingSubarrays(nums: List[int]) -> int:
+#         count = 0
+#         length = 1
+
+#         for i in range(1, len(nums)):
+#             if nums[i] != nums[i - 1]:
+#                 length += 1
+#             else:
+#                 count += (length * (length + 1)) // 2
+#                 length = 1
+
+#         count += (length * (length + 1)) // 2
+#         return count
+# nums = [0, 1, 1, 1]
+# print(Solution.countAlternatingSubarrays(nums))
+
+
+# def manhattan_distance(point1: list, point2: list) -> int:
+#     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
+
+# print(manhattan_distance([1, 1], [0, 0])) # 2
+
+# from typing import List
+
+# class Solution:
+#     def minimumDistance(self, points: List[List[int]]) -> int:
+#         min_max_distance = float('inf')
+#         for i in range(len(points)):
+#             point_removed = points.pop(i)
+#             max_distance = self.calculate_max_distance(points)
+#             min_max_distance = min(min_max_distance, max_distance)
+#             points.insert(i, point_removed)
+#         return min_max_distance
+
+#     def calculate_max_distance(self, points: List[List[int]]) -> int:
+#         max_distance = 0
+#         for i in range(len(points)):
+#             for j in range(i + 1, len(points)):
+#                 max_distance = max(max_distance, self.manhattan_distance(points[i], points[j]))
+#         return max_distance
+
+#     def manhattan_distance(self, point1: list, point2: list) -> int:
+#         return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
+
+# print(Solution().minimumDistance([[3, 10], [5, 15], [10, 2], [4, 4]]))  # Output: 12
+# print(Solution().minimumDistance([[1, 1], [1, 1], [1, 1]]))  # Output: 0
+# print(
+#     Solution().minimumDistance([[3, 2], [3, 9], [7, 10], [4, 4], [8, 10], [2, 7]])
+# )  # Output: 4
 # class Solution:
 #     def romanToInt(self, s: str) -> int:
 #         d = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
@@ -1527,6 +1847,8 @@
 # class Solution:
 
 #     def topKFrequent(nums: List[int], k: int) -> List[int]:
+# class Solution:
+#     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 #         count = Counter(nums)
 #         return [num for num, _ in count.most_common(k)]
 
@@ -1569,21 +1891,182 @@
 # print(rus_mult_print(13, 17))
 
 # def upside_down_triangle(length: int):
+# print(Solution.topKFrequent(
+
+# ))
+
+
+# from itertools import groupby
+# class Solution:
+#     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+#         N = len(nums)
+
+#         def calc(nums):
+#             N = len(nums)
+
+#             last_min_index = None
+#             last_max_index = None
+
+#             total = 0
+#             for index, x in enumerate(nums):
+#                 if x == minK:
+#                     last_min_index = index
+
+#                 if x == maxK:
+#                     last_max_index = index
+
+#                 if last_min_index is not None and last_max_index is not None:
+#                     total += min(last_min_index, last_max_index) + 1
+#             return total
+
+#         total = 0
+#         for g, vs in groupby(nums, key=lambda x: minK <= x <= maxK):
+#             if g:
+#                 total += calc(list(vs))
+#         return total
+
+
+# LIMIT = 50
+# def print_pyram(n: int) -> None:
+#     for i in range(1, n + 1):
+#         for _ in range(i):
+#             print(format(i,"^2"), " ", sep="", end="")
+#         print("", sep="")
+
+# print(print_pyram(LIMIT))
+
+
+# class Solution:
+#     def exist(self, board, word):
+#         def backtrack(i, j, k):
+#             if k == len(word): return True
+#             if (
+#                 i < 0
+#                 or i >= len(board)
+#                 or j < 0
+#                 or j >= len(board[0])
+#                 or board[i][j] != word[k]
+#             ): return False
+
+#             temp = board[i][j]
+#             board[i][j] = ""
+
+#             if (
+#                 backtrack(i + 1, j, k + 1)
+#                 or backtrack(i - 1, j, k + 1)
+#                 or backtrack(i, j + 1, k + 1)
+#                 or backtrack(i, j - 1, k + 1)
+#             ): return True
+
+#             board[i][j] = temp
+#             return False
+
+#         for i in range(len(board)):
+#             for j in range(len(board[0])):
+#                 if backtrack(i, j, 0):
+#                     return True
+#         return False
+# from typing import List
+# class Solution:
+#     def exist(self, A: List[List[str]], S: str) -> bool:
+#         R, C = len(A), len(A[0])
+#         V = [[False]*C for r in range(R)]
+#         def dfs(r, c, p):
+#             if V[r][c] or A[r][c] != S[p]: return False
+#             V[r][c] = True
+#             if p+1 == len(S): return True
+#             for i, j in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)]:
+#                 if i < 0 or i >= R or j < 0 or j >= C: continue
+#                 if dfs(i, j, p+1): return True
+#             V[r][c] = False
+#             return False
+#         return any(dfs(r, c, 0) for r in range(R) for c in range(C))
+
+
+# class Solution:
+#     def exist(self, board: List[List[str]], word: str) -> bool:
+#         def dfs(i, j, k, vis):
+#             if k == len(word):
+#                 return True
+#             if (i, j) in vis or i < 0 or i == len(board) or j < 0 or j == len(board[0]):
+#                 return False
+#             if board[i][j] != word[k]:
+#                 return False
+#             if board[i][j] == word[k]:
+#                 k += 1
+#             vis.add((i, j))
+#             u, d, l, r = (
+#                 dfs(i - 1, j, k, vis),
+#                 dfs(i + 1, j, k, vis),
+#                 dfs(i, j - 1, k, vis),
+#                 dfs(i, j + 1, k, vis),
+#             )
+#             vis.remove((i, j))
+#             return u or d or l or r
+
+#         for i in range(len(board)):
+#             for j in range(len(board[0])):
+#                 if dfs(i, j, 0, set()):
+#                     return True
+#         return False
+
+
+# def pyramid_a1(size: int) -> None:
+#     output = []
+#     for line_num in range(1, size + 1):
+#         output += [" " * (size - line_num) + "*" * ((line_num * 2) - 1)]
+#     print("\n".join(output))
+
+# print(pyramid_a1(8))
+
+
+# def patternC(size: int) -> None:
+#     output = []
+#     for line_num in range(1, size + 1):
+#         space = size - line_num
+#         output += [
+#           " " * space +
+#           (
+#     "@" if line_num == 1 else f"@{'-' * (((line_num * 2)) - 3)}@"
+#           )
+#         ]
+
+#     print("\n".join(output))
+# print(patternC(20))
+
+
+# def upside_down_triangle(length: int) -> None:
 #     for i in range(length):
 #         print(" " * i + "*" * (2 * (length - i) - 1))
 # print(upside_down_triangle(7))
 
+<<<<<<< HEAD
 # def right_angle(length: int):
+=======
+
+# def right_angle(length: int) -> None:
+>>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
 #     for i in range(length):
 #         print("*" * (i + 1))
 # print(right_angle(7))
 
+<<<<<<< HEAD
 # def right_angle_opp(length: int):
 #     for i in range(length):
 #         print(" " * (length - i) + "*" * i)
 # print(right_angle_opp(7))
 
 # def diamond(length: int):
+=======
+
+# def right_angle_opp(length: int) -> None:
+#     for i in range(length):
+#       print(" " * (length - i) + "*" * i)
+# print(right_angle_opp(7))
+
+
+# def diamond(length: int) -> None:
+>>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
 #     for i in range((length // 2)):
 #         print(" " * (length - i - 1) + "*" * (2 * i + 1))
 #     print(" " * (length // 2) + "*" * length)
@@ -1591,8 +2074,17 @@
 #         print(" " * (length - i - 1) + "*" * (2 * i + 1))
 # print(diamond(13))
 
+<<<<<<< HEAD
 from math import floor, sqrt
 class Solution:
     def mySqrt(self, x: int) -> int:
         return floor(sqrt(x))
 print(Solution.mySqrt(9))
+=======
+# class Solution:
+#     def maxDepth(self, s: str) -> int:
+#         return max(
+#             accumulate(map(lambda c: 1 if c == "(" else -1 if c == ")" else 0, s))
+#         )
+
+>>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
