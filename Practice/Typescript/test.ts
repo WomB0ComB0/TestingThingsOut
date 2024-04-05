@@ -1,3 +1,4 @@
+import { react } from '@vitejs/plugin-react';
 class RecentCounter {
     data: Deque;
     k: number;
@@ -588,6 +589,37 @@ function summaryRanges(nums: number[]): string[] {
     : res.push(`${lower}->${upper}`)
 };
 
+function countSubarrays(nums: number[], k: number): number {
+    const maxCount: number = Math.max(...nums)
+    let res: number = 0
+    let l: number = 0
+    let count: number = 0
+    for (const right of nums) {
+        if (right === maxCount) count += 1
+        while (count >= k) {
+            if (nums[l] === maxCount) count -= 1
+            l += 1
+        }
+        res += l
+    }
+    return res   
+};
+
+/**
+ * class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        maxCount = max(nums)
+        res, l, count = 0, 0, 0
+        N = len(nums)
+        for right in range(N):
+            if nums[right] == maxCount: count += 1
+            while count >= k:
+                if nums[l] == maxCount: count -= 1
+                l += 1
+            res += l
+        return res
+*/
+
 /**
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
@@ -610,4 +642,22 @@ class Solution:
         else:
             res.append(f"{lower}->{upper}")
         return res
+*/
+
+function isIsomorphic(s: string, t: string): boolean {
+    return new Set(zip(s, t)).size === new Set(s).size && new Set(s).size === new Set(t).size;
+};
+
+function zip(s: string, t: string): string[] {
+    let res: string[] = []
+    for (let i = 0; i < s.length; i++) {
+        res.push(s[i] + t[i])
+    }
+    return res
+}
+/**
+ * 
+ * class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s,t))) == len(set(s)) == len(set(t))
 */
