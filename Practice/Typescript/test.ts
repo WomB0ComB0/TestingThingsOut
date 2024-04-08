@@ -11,7 +11,7 @@ class RecentCounter {
 
     ping(t: number): number {
         this.calls += 1;
-        ((! this.data || this.data[-1][0]) > t) ? this.data.addFront([t, 1]) : this.data[-1][0] += 1;
+        ((!this.data || this.data[-1][0]) > t) ? this.data.addFront([t, 1]) : this.data[-1][0] += 1;
 
         while (this.data[0][0] < t - this.k)
             this.calls -= this.data.removeFront()[1];
@@ -76,11 +76,11 @@ function numSubarraysWithSum(nums: number[], goal: number): number {
     let count: object = { 0: 1 }
     let cur_sum: number = 0
     let total_sub: number = 0
-    for (const num of nums){
+    for (const num of nums) {
         cur_sum += num
         if (count.hasOwnProperty(cur_sum - goal))
             total_sub += count[cur_sum - goal]
-        count[cur_sum] =  count[cur_sum] ? count[cur_sum] + 1 : 1
+        count[cur_sum] = count[cur_sum] ? count[cur_sum] + 1 : 1
     }
     return total_sub
 };
@@ -107,11 +107,11 @@ function productExceptSelf(nums: number[]): number[] {
     return res;
 };
 
-function findMaxLength(nums:  Array<number>): number {
+function findMaxLength(nums: Array<number>): number {
     const N = nums.length;
-    
-    let first: object  = {}
-    
+
+    let first: object = {}
+
     let current: number = 0
     let longest: number = 0
     first[current] = 0
@@ -130,7 +130,7 @@ function findMaxLength(nums:  Array<number>): number {
 
 function minimizeStringValue(s: string): string {
     let t0 = new Date().getTime();
-    let cache: { [key: string]: string} = {}
+    let cache: { [key: string]: string } = {}
     let f: { [key: string]: number } = {};
     if (cache[s]) return cache[s]
     for (let c of s) {
@@ -180,23 +180,24 @@ function minimizeStringValue(s: string): string {
     return cache[s];
 }
 
-function maximum69Number (num: number): number {
+function maximum69Number(num: number): number {
     const s = num.toString()
     let i = -1
-    for (let j = 0; j < s.length; j++){
-        if (s[j] == "6") { i = j
+    for (let j = 0; j < s.length; j++) {
+        if (s[j] == "6") {
+            i = j
             break
         }
     }
     if (i == -1) { return num }
-    else { 
-        return parseInt(s.substring(0, i) + "9" + s.substring(i+1))
+    else {
+        return parseInt(s.substring(0, i) + "9" + s.substring(i + 1))
     }
 };
 
 function findMinArrowShots(points: number[][]): number {
     if (points.length === 0) return 0;
-    
+
     points.sort((a, b) => a[1] - b[1]);
 
     let total: number = 0;
@@ -204,7 +205,7 @@ function findMinArrowShots(points: number[][]): number {
 
     for (let i of points) {
         if (i[0] > end_point) {
-            total += 1 
+            total += 1
             end_point = i[1];
         }
     }
@@ -359,7 +360,7 @@ function maxRotateFunction(nums: number[]): number {
     }
 
     return best;
-    
+
 };
 
 function isPalindrome(head: ListNode | null): boolean {
@@ -418,7 +419,6 @@ function findTheDifference(s: string, t: string): string {
             return c;
         }
     }
-
     return "";
 };
 
@@ -426,13 +426,13 @@ function findTheDifference(s: string, t: string): string {
 
 function maximumLengthSubstring(s: string): number {
     const N: number = s.length
-    let best: number = 0 
+    let best: number = 0
 
-    for (let i = 0; i < N; i++){
+    for (let i = 0; i < N; i++) {
         let f: { [s: string]: number } = {}
-        for (let j = i; j < N; j++){
+        for (let j = i; j < N; j++) {
             f[s[j]] = f[s[j]] ? f[s[j]] + 1 : 1
-            if (Math.max(...Object.values(f)) <= 2){
+            if (Math.max(...Object.values(f)) <= 2) {
                 best = Math.max(best, j - i + 1)
             } else {
                 break
@@ -489,7 +489,7 @@ function singleNumber(nums: number[]): number {
 
 function singleNumber(nums: number[]): number {
     let res = 0;
-    for(let num of nums) res ^= num;
+    for (let num of nums) res ^= num;
     return res;
 };
 
@@ -498,7 +498,7 @@ function pivotIndex(nums: number[]): number {
         let left: number = nums.slice(0, i).reduce((a, b) => a + b, 0);
         let right: number = nums.slice(i + 1).reduce((a, b) => a + b, 0);
         if (left === right) return i;
-    }  
+    }
     return -1;
 };
 
@@ -507,9 +507,9 @@ class TreeNode {
     left: TreeNode | null
     right: TreeNode | null
     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-        this.val = (val===undefined ? 0 : val)
-        this.left = (left===undefined ? null : left)
-        this.right = (right===undefined ? null : right)
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
     }
 }
 
@@ -527,15 +527,15 @@ function firstMissingPositive(nums: number[]): number {
     if (n == 0) return 1
 
     for (let i = 0; i < n; i++) {
-        while ((nums[i] >= 1 && nums[i] <= n) && (nums[nums[i] - 1] != nums[i])) 
+        while ((nums[i] >= 1 && nums[i] <= n) && (nums[nums[i] - 1] != nums[i]))
             swap(i, nums[i] - 1, nums)
     }
     for (let i = 0; i < n; i++)
         if (nums[i]) return i + 1
-    return n + 1 
+    return n + 1
 };
 
-function swap( i: number, j: number, array: number[]) {
+function swap(i: number, j: number, array: number[]) {
     const temp = array[j];
     array[j] = array[i];
     array[i] = temp;
@@ -566,7 +566,7 @@ function hammingWeight(n: number): number {
         // Right shift the number by 1 bit
         n >>>= 1;
     }
-    return count;  
+    return count;
 };
 
 function queryString(s: string, n: number): boolean {
@@ -665,7 +665,7 @@ class KthLargest {
 }
 
 function maxSubarrayLength(nums: number[], k: number): number {
-    let counts: {[key: number]: number } = {}
+    let counts: { [key: number]: number } = {}
     let max_length: number = 0
     let left: number = 0
     for (let right = 0; right < nums.length; right++) {
@@ -721,30 +721,30 @@ function groupAnagrams(strs: string[]): string[][] {
 
 
 function subarraysWithKDistinct(nums: number[], k: number): number {
-        function atMostK(k: number): number {
-            let count: { [key: number]: number } = {};
-            let res = 0, l = 0;
-            for (let r = 0; r < nums.length; r++) {
-                count[nums[r]] = (count[nums[r]] || 0) + 1;
-                if (count[nums[r]] === 1) {
-                    k--;
-                }
-                while (k < 0) {
-                    count[nums[l]]--;
-                    if (count[nums[l]] === 0) {
-                        k++;
-                    }
-                    l++;
-                }
-                res += r - l + 1;
+    function atMostK(k: number): number {
+        let count: { [key: number]: number } = {};
+        let res = 0, l = 0;
+        for (let r = 0; r < nums.length; r++) {
+            count[nums[r]] = (count[nums[r]] || 0) + 1;
+            if (count[nums[r]] === 1) {
+                k--;
             }
-            return res;
+            while (k < 0) {
+                count[nums[l]]--;
+                if (count[nums[l]] === 0) {
+                    k++;
+                }
+                l++;
+            }
+            res += r - l + 1;
         }
-        return atMostK(k) - atMostK(k - 1);
+        return res;
     }
+    return atMostK(k) - atMostK(k - 1);
+}
 
 function isPalindrome(x: number): boolean {
-    return  x < 0 ? false : x.toString().split("").reverse().join("") === x.toString()
+    return x < 0 ? false : x.toString().split("").reverse().join("") === x.toString()
 };
 
 function longestCommonPrefix(strs: string[]): string {
@@ -782,12 +782,6 @@ function lengthOfLastWord(s: string): number {
     return s.trim().replace(" ", " ").split(" ").pop()!.length;
 };
 
-/**
- * 
-class Solution:
-    def lengthOfLastWord(self, s: str) -> int:
-        return len(s.strip().replace(" ", " ").split(" ")[-1])
-*/
 function maxNumberOfBalloons(text: string): number {
     let counter: { [s: string]: number } = {}
     let balloon: string = 'balloon'
@@ -817,7 +811,7 @@ function romanToInt(s: string): number {
 
 function summaryRanges(nums: number[]): string[] {
     if (!nums) return []
-    let lower: number = nums[0]    
+    let lower: number = nums[0]
     let upper: number = nums[0]
     let res: string[] = []
 
@@ -825,20 +819,19 @@ function summaryRanges(nums: number[]): string[] {
 
     for (let i = 0; i < N; i++) {
         if (nums[i] != nums[i - 1] + 1) {
-            (lower == upper) 
-            ? res.push(lower.toString())
-            : res.push(`${lower}->${upper}`)
+            (lower == upper)
+                ? res.push(lower.toString())
+                : res.push(`${lower}->${upper}`)
 
             lower = nums[i]
         }
         upper = nums[i]
     }
     (lower == upper)
-    ? res.push(lower.toString())
-    : res.push(`${lower}->${upper}`)
+        ? res.push(lower.toString())
+        : res.push(`${lower}->${upper}`)
 };
 
-<<<<<<< HEAD
 function countSubarrays(nums: number[], k: number): number {
     const maxCount: number = Math.max(...nums)
     let res: number = 0
@@ -852,47 +845,8 @@ function countSubarrays(nums: number[], k: number): number {
         }
         res += l
     }
-    return res   
+    return res
 };
-
-/**
- * class Solution:
-    def countSubarrays(self, nums: List[int], k: int) -> int:
-        maxCount = max(nums)
-        res, l, count = 0, 0, 0
-        N = len(nums)
-        for right in range(N):
-            if nums[right] == maxCount: count += 1
-            while count >= k:
-                if nums[l] == maxCount: count -= 1
-                l += 1
-            res += l
-        return res
-*/
-
-/**
-class Solution:
-    def summaryRanges(self, nums: List[int]) -> List[str]:
-        if not nums: return []
-        lower = nums[0]
-        upper = nums[0]
-        res = []
-
-        N = len(nums)
-        for i in range(1, N):
-            if nums[i] != nums[i - 1]+1:
-                if lower == upper:
-                    res.append(str(lower))
-                else:
-                    res.append(f"{lower}->{upper}")
-                lower = nums[i]
-            upper = nums[i]
-        if lower == upper:
-            res.append(str(lower))
-        else:
-            res.append(f"{lower}->{upper}")
-        return res
-*/
 
 function isIsomorphic(s: string, t: string): boolean {
     return new Set(zip(s, t)).size === new Set(s).size && new Set(s).size === new Set(t).size;
@@ -911,7 +865,6 @@ function zip(s: string, t: string): string[] {
     def isIsomorphic(self, s: str, t: str) -> bool:
         return len(set(zip(s,t))) == len(set(s)) == len(set(t))
 */
-=======
 function countSubarrays(nums: number[], minK: number, maxK: number): number {
     const N: number = nums.length;
     function calc(nums: number[]): number {
@@ -994,4 +947,148 @@ function maxDepth(s: string): number {
     }
     return res
 };
->>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
+
+function addBinary(a: string, b: string): string {
+    let stack: string[] = []
+    let carry: number = 0
+    let i: number = a.length
+    let j: number = b.length
+
+    while (i >= 0 || j >= 0 || carry) {
+        if (i >= 0) {
+            carry += parseInt(a[i])
+            i -= 1
+        }
+        if (j >= 0) {
+            carry += parseInt(b[j])
+            j -= 1
+        }
+        stack.push((carry % 2).toString())
+        carry = Math.floor(carry / 2)
+    }
+    return stack.reverse().join("")
+};
+
+function strongPasswordChecker(password: string): number {
+    if (password.length < 3) return (6 - password.length);  
+    let missingFixCount = 0; 
+    const numberIsMissing = !(new RegExp(/\d+/).test(password)); 
+    const lowerCaseIsMissing = !(new RegExp(/([a-z])+/).test(password)); 
+    const upperCaseIsMissing = !(new RegExp(/([A-Z])+/).test(password)); 
+    missingFixCount += numberIsMissing ? 1 : 0; 
+    missingFixCount += lowerCaseIsMissing ? 1 : 0; 
+    missingFixCount += upperCaseIsMissing ? 1 : 0; 
+    const repeatingPatterns = password.match(/(.)\1{2,}/g) ?? []; 
+    const repeatingPatternLengths = repeatingPatterns.map(item => item.length); 
+    if (password.length < 7) { 
+        let steps = 0; 
+        for (let pattern of repeatingPatterns)
+            steps += pattern.length / 3; 
+        steps = Math.max(steps, missingFixCount); 
+        let missingCharCount = 6 - password.length; 
+        return Math.max(missingCharCount, steps); 
+    }
+    if (password.length <= 20) { 
+        let steps = 0;
+        for (let pattern of repeatingPatterns) 
+            steps += pattern.length / 3; 
+        return Math.max(steps, missingFixCount); 
+    } 
+    let deleteSteps = 0; 
+    const excessLength = password.length - 20; 
+    for (let index = 0; index < repeatingPatternLengths.length && deleteSteps < excessLength; index++) { 
+        let length = repeatingPatternLengths[index]; 
+        let remainder = length % 3; 
+        if (remainder === 0) { 
+            deleteSteps += 1; 
+            repeatingPatternLengths[index] -=1; 
+        }
+    } for (let index = 0; index < repeatingPatternLengths.length && deleteSteps < excessLength; index++) { 
+        let length = repeatingPatternLengths[index]; 
+        let remainder = length % 3; 
+        if (remainder === 1) { 
+            deleteSteps+=2; 
+            repeatingPatternLengths[index] -=2; 
+        } 
+    } for (let index = 0; index < repeatingPatternLengths.length; index++) 
+        while (3 <= excessLength - deleteSteps && repeatingPatternLengths[index] > 2) 
+            deleteSteps+=3; repeatingPatternLengths[index] -= 3;
+    let replaceSteps = 0; 
+    repeatingPatternLengths.forEach((item)=> replaceSteps += Math.floor(item/3)); 
+    return Math.max(excessLength, deleteSteps) + Math.max(replaceSteps, missingFixCount);
+};
+
+function getSmallestString(s: string, k: number): string {
+        const orda: number = 'a'.charCodeAt(0);
+
+        let ans: string[] = [];
+
+        for (let c of s) {
+            let offset = c.charCodeAt(0) - orda;
+
+            if (offset <= 26 - offset) {
+                let delta = Math.min(k, offset);
+                let newc = String.fromCharCode(c.charCodeAt(0) - delta);
+                k -= delta;
+                ans.push(newc);
+            } else {
+                if (k >= 26 - offset) {
+                    let newc = "a";
+                    k -= 26 - offset;
+                    ans.push(newc);
+                } else {
+                    let delta = Math.min(k, offset);
+                    let newc = String.fromCharCode(c.charCodeAt(0) - delta);
+                    k -= delta;
+                    ans.push(newc);
+                }
+            }
+        }
+        return ans.join("");
+    }
+
+function minOperationsToMakeMedianK(nums: number[], k: number): number {
+    const N: number = nums.length;
+    nums.sort();
+
+    let total: number = 0
+    total += Math.abs(nums[Math.floor(N / 2)] - k);
+
+    nums[Math.floor(N / 2)] = k;
+
+    for (let i = 0; i < Math.floor(N / 2); i++) {
+        if (nums[Math.floor(N / 2)] < nums[i]) {
+            total += Math.abs(nums[Math.floor(N / 2)] - nums[i]);
+        }
+    }
+
+    for (let i = Math.floor(N / 2) + 1; i < N; i++) {
+        if (nums[Math.floor(N / 2)] > nums[i]) {
+            total += Math.abs(nums[Math.floor(N / 2)] - nums[i]);
+        }
+    }
+
+    return total
+};
+
+
+/**
+ * 
+ * class Solution:
+    def minOperationsToMakeMedianK(self, nums: List[int], k: int) -> int:
+        N = len(nums)
+        nums.sort()
+        
+        total = 0
+        total += abs(nums[N // 2] - k)
+
+        nums[N // 2] = k
+
+        for i in range(N // 2):
+            if nums[N // 2] < nums[i]:
+                total += abs(nums[N // 2] - nums[i])
+        for i in range(N // 2 + 1,  N):
+            if nums[N // 2] > nums[i]:
+                total += abs(nums[N // 2] - nums[i])
+        return total
+*/

@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+% move semantics means that you can move the internal resources of an object to another object instead of copying them
+% A 2d array could either present as arr[i][j] or *(*(arr[i] + i) +j)
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+\section*{Move Semantics}
+One of the most prominent features C++11 introduced was move semantics. You can use it to optimize copying and assignments by moving (“stealing”) internal resources from a source object to a destination object instead of copying those contents. This can be done provided the source no longer needs its internal value or state (because it is about to be discarded).
+
+Move semantics have a significant influence on the design of templates, and special rules were introduced to support move semantics in generic code.
+
+\subsection*{Perfect Forwarding}
+Suppose you want to write generic code that forwards the basic property of passed arguments:
+\begin{itemize}
+\item The modifiable object should be forwarded so that they can still be modified
+\item Constant objects should be forwarded as read-only objects.
+\item Movable objects (objects we can “steal” from because they are about to expire) should be forwarded as movable objects
+\end{itemize}
+
+Copying can be quite time-consuming at runtime when a large amount of data is involved. Often, you just want to transfer ownership of resources from one object to another. You could make a copy and destroy the original, but this is often inefficient. Instead, you can move.
+
+Move semantics is move’s corollary to copy semantics, and it requires that after an object y is moved into, an object x, x is equivalent to the former value of y. After the move y is in a special state called the moved-from state. You can perform only two operations on moved-from objects: (re)assign or destroy them. Not that moving an object y  into an object x isn’t just a renaming: these are separate objects with separate storage and potentially separate lifetimes.
+Similar to how you specify copying behavior, you specify how objects move with move constructors and move assignment operators. 
+
+\section*{Value Categories}
+Every expression has two important characteristics: its type and its value category. A value category describes what kinds of operations are valid for the expression. Thanks to the evolutionary nature of C++, value categories are complicated: an expression can be a “generalized lvalue” (glvalue), a “pure rvalue” (prvalue), an “expiring value” (xvalue), an lvalue (a glvalue that isn’t an xvalue), or na rvalue (a prvalue or an xvalue).
+An lvalue is any value that has a name, and an rvalue is anything that isn’t an lvalue.
+
+\begin{lstlisting}[language=C++, caption=Lvalues and Rvalues]
+#include <cstdio>
+void ref_type(int &x) {
+    printf("lvalue reference  %d\n", x);
+}
+void ref_type(int &&x) {
+    printf("rvalue reference  %d\n", x);
+}
+int main() {
+    auto x = 1;
+    ref_type(x);
+    ref_type(2);
+    ref_type(x + 2);	
+}
+\end{lstlisting}
+
+The int \&x version takes an lvalue reference, and the int \&\&x takes an rvalue reference. You invoke ref\_type three times. First, you invoke the lvalue reference version, because x is an lvalue (it has a name). Second, you invoke the rvalue reference version because 2 is an integer literal without a name. Third, the result of adding 2 to x is not bound to a name, so it’s an rvalue.
+
+You can cast an lvalue reference to an rvalue reference using the std::move function from the <utility> header.
+
+\begin{lstlisting}[language=C++, caption=Move constructor]
+template <typename T>
+Array<T>::Array(Array&& moved)
+    : size(moved, size), elements(moved.elements)
+{
+    std::cout << "Array of " << size << " elements moved" << std::endl;
+    moved.elements = nullptr	// Otherwise destructor of moved would delete[] elements!
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++, caption=Move Assignment Operator]
+template <typename T>
+Array<T>& Array<T>::operator=(Array&& rhs)
+{
+    std::cout << "Array of " << rhs.size << " elements moved (assignment)" << std::endl;
+    
+    if  (this != &rhs)		// prevent trouble with self-assignments
+    {
+        delete[] elements;	// delete[] all existing elements
+        elements = rhs.elements;	// copy the elements pointer and the size
+        size = rhs.size;
+        
+        rhs.elements = nullptr;	// make sure rhs does not delete[] elements
+    }
+    return *this;				// return this
+}
+\end{lstlisting}
+
+\section*{So what is “Move” For?}
+\begin{lstlisting}[language=C++, caption=Move usage]
+template <typename T>
+void Array<T>::push_back(T&& element)
+{
+    newArray[size] = std::move(element);	// Move the new element…
+}
+\end{lstlisting}
+
+If you have something that you don’t need anymore, move will cast it to an rvalue so that the move constructor is called and not the copy constructor. 
+
+\section*{A common pitfall - moving non-resources}
+There is one common pitfall when using default-created move assignments: classes that mix simple types with more advanced types. Compared to more advanced types, simple types such as integers, Booleans, and such are simply copied when moved as they don’t handle any resources.
+
+When a simple type is mixed with a resource-owning type, the move assignment becomes a mixture of move and copy.
+
+Here is an example of  a class which will fail:
+\begin{lstlisting}[language=C++, caption=Example of a failing class]
+class TowerList {
+    public:
+        TowerList() : max_height_idx_{1”, tower_heights_{25.0f, 44.0f, 12.0f} {}
+        auto get_max_tower_height() const {
+    return max_height_idx_ >= 0 ?
+        tower_heights_[max_height_idx] : 0.0f;
+}
+std::vector<float> tower_heights_{};
+int max_height_idx_{-1};
+};
+};
+\end{lstlisting}
+
+The TowerList class will have undefined behavior if it is handled like this.
+\begin{lstlisting}[language=C++, caption=Example of undefined behavior]+
+auto a = TowerList{};
+auto b = std::move(a);
+auto max_height = a.get_max_tower_height ();
+\end{lstlisting}
+
+The undefined behavior happens as the tower\_heights\_ vector is moved and is therefore empty. The max\_height\_idx\_ on the other hand, is copied and therefore still has value 2 in the moved-from object a. When the get \_max\_tower\_height()  is called, the function will try to access tower\_heights\_ at index 2 and the program will crash. 
+
+In these cases, the move-constructor/assignment is better implemented by simply swapping the members like this:
+\begin{lstlisting}[language=C++, caption=Corrected move-constructor/assignment]
+TowerList(TowerList&& t1) noexcept {
+    std::swap(tower_heights_, t1.tower_heights_);
+std::swap(max_height_idx_, t1.max_height_idx_);
+}
+auto& operator=(TowerList&& t1) no except {
+std::swap(tower_heights_, t1.tower_heights_);
+std::swap(max_height_idx_, t1.max_height_idx_);
+return *this;
+}
+\end{lstlisting}
+
+\end{document}

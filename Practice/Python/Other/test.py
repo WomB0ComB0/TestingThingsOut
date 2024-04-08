@@ -2040,24 +2040,19 @@
 #         print(" " * i + "*" * (2 * (length - i) - 1))
 # print(upside_down_triangle(7))
 
-<<<<<<< HEAD
 # def right_angle(length: int):
-=======
 
 # def right_angle(length: int) -> None:
->>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
 #     for i in range(length):
 #         print("*" * (i + 1))
 # print(right_angle(7))
 
-<<<<<<< HEAD
 # def right_angle_opp(length: int):
 #     for i in range(length):
 #         print(" " * (length - i) + "*" * i)
 # print(right_angle_opp(7))
 
 # def diamond(length: int):
-=======
 
 # def right_angle_opp(length: int) -> None:
 #     for i in range(length):
@@ -2066,7 +2061,6 @@
 
 
 # def diamond(length: int) -> None:
->>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
 #     for i in range((length // 2)):
 #         print(" " * (length - i - 1) + "*" * (2 * i + 1))
 #     print(" " * (length // 2) + "*" * length)
@@ -2074,17 +2068,38 @@
 #         print(" " * (length - i - 1) + "*" * (2 * i + 1))
 # print(diamond(13))
 
-<<<<<<< HEAD
-from math import floor, sqrt
-class Solution:
-    def mySqrt(self, x: int) -> int:
-        return floor(sqrt(x))
-print(Solution.mySqrt(9))
-=======
+# from math import floor, sqrt
 # class Solution:
+#         return floor(sqrt(x))
+# print(Solution.mySqrt(9))
+
 #     def maxDepth(self, s: str) -> int:
-#         return max(
 #             accumulate(map(lambda c: 1 if c == "(" else -1 if c == ")" else 0, s))
 #         )
+# bin()
 
->>>>>>> 67a8b857a7932fd35936dddf3816239bc63a1924
+# def rps_evaluation(player_one: str, player_two:str) -> int:
+#     if player_one == player_two:
+#         return 0
+#     if (player_one == "Rock" and player_two == "Scissors") or (player_one == "Scissors" and player_two == "Paper") or (player_one == "Paper" and player_two == "Rock"):
+#         return 1
+#     else:
+#         return -1
+
+# def length_longest_substring(s: str) -> int:
+#     if not s: return 0
+#     N = len(s)
+#     l, r = 0, 0
+#     seen = set()
+#     max_length = 0
+#     while l < N and r < N:
+#         if s[r] not in seen:
+#             seen.add(s[r])
+#             r += 1
+#             max_length = max(max_length, r - l)
+#         else:
+#             seen.remove(s[l])
+#             l += 1
+#     return max_length
+
+# print(length_longest_substring("pwwkew"))
