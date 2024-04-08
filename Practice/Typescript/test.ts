@@ -865,6 +865,7 @@ function zip(s: string, t: string): string[] {
     def isIsomorphic(self, s: str, t: str) -> bool:
         return len(set(zip(s,t))) == len(set(s)) == len(set(t))
 */
+
 function countSubarrays(nums: number[], minK: number, maxK: number): number {
     const N: number = nums.length;
     function calc(nums: number[]): number {
@@ -1071,24 +1072,172 @@ function minOperationsToMakeMedianK(nums: number[], k: number): number {
     return total
 };
 
+function makeGood(s: string): string {
+    let stack: string[] = []
+    for (let char of s) {
+        if (stack) {
+            if (
+                char.toLowerCase() == stack[stack.length - 1]!.toLowerCase() &&
+                char != stack[stack.length - 1]
+            ) {
+                stack.pop()
+            } else {
+                stack.push(char)
+            }
+        } else {
+            stack.push(char)
+        }
+    }
+    return stack.join("")
+};
 
-/**
- * 
- * class Solution:
-    def minOperationsToMakeMedianK(self, nums: List[int], k: int) -> int:
-        N = len(nums)
-        nums.sort()
-        
-        total = 0
-        total += abs(nums[N // 2] - k)
+type PartialDeep<T> = {
+    [P in keyof T]?: T[P] extends object ? PartialDeep<T[P]> : T[P];
+};
 
-        nums[N // 2] = k
+function minRemoveToMakeValid(s: string): string {
+    let opens: number = 0
+    let closes: number = s.split('').reduce((acc, val) => acc + Number(val === ")"), 0);
+    const stack: string[] = []
+    for (const char of s) {
+        if (char === "(") {
+            if (closes > 0 && opens < closes) {
+                stack.push(char)
+                opens += 1
+            }
+        } else if (char === ")") {
+            if (opens > 0) {
+                stack.push(char)
+                opens -= 1
+            }
+            closes -= 1
+        } else {
+            stack.push(char)
+        }
+    }
+    return stack.join('')
+};
 
-        for i in range(N // 2):
-            if nums[N // 2] < nums[i]:
-                total += abs(nums[N // 2] - nums[i])
-        for i in range(N // 2 + 1,  N):
-            if nums[N // 2] > nums[i]:
-                total += abs(nums[N // 2] - nums[i])
-        return total
-*/
+function reverseBits(n: number): number {
+    let bString: string = n.toString(2);
+    bString = bString.padStart(32, '0');
+    let reversedString: string = bString.split('').reverse().join('');
+    return parseInt(reversedString, 2);
+};
+
+function checkValidString(s: string): boolean {
+    let lo: number = 0
+    let hi: number = 0
+
+    for (let c of s) {
+        lo += c == "(" ? 1 : -1
+        hi += c != ")" ? 1 : -1
+        if (hi < 0) break
+        lo = Math.max(lo, 0)
+    }
+    return lo == 0
+};
+
+function deleteDuplicates(head: ListNode | null): ListNode | null {
+    if (head == null || head.next == null) return head;
+    let curr: ListNode | null = head;
+    while (curr && curr.next) {
+        if (curr.val == curr.next.val) {
+            curr.next = curr.next.next;
+        } else {
+            curr = curr.next;
+        }
+    }
+    return head;
+};
+
+function containsNearbyDuplicate(nums: number[], k: number): boolean {
+    let d: { [s: number]: number } = {}
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] in d && Math.abs(d[nums[i]] - i) <= k) return true
+        d[nums[i]] = i
+    }
+    return false
+};
+
+
+
+function longestMonotonicSubarray(nums: number[]): number {
+    return Math.max(longest_increasing(nums).length, longest_decreasing(nums).length)
+};
+
+function longest_increasing(nums: number[]): number[] {
+    let res: number[][] = []
+    for (let left = 0; left < nums.length; left++) {
+        for (let right = left; right < nums.length; right++) {
+            if (nums.slice(left, right).every((x, i) => x < nums[i + 1])) {
+                res.push(nums.slice(left, right + 1))
+            }
+        }
+    }
+    return res.reduce((acc, val) => acc.length > val.length ? acc : val, [])
+}
+
+function longest_decreasing(nums: number[]): number[] {
+    let res: number[][] = []
+    for (let left = 0; left < nums.length; left++) {
+        for (let right = left; right < nums.length; right++) {
+            if (nums.slice(left, right).every((x, i) => x > nums[i + 1])) {
+                res.push(nums.slice(left, right + 1))
+            }
+        }
+    }
+    return res.reduce((acc, val) => acc.length > val.length ? acc : val, [])
+}
+
+class MyQueue {
+    queue: { key?: number };
+    head: number;
+    tail: number;
+
+    constructor() {
+        this.queue = {};
+        this.head = 0;
+        this.tail = 0;
+    }
+
+    size() {
+        return this.tail - this.head;
+    }
+
+    enqueue(value: number): void {
+        this.queue[this.tail] = value;
+        this.tail++;
+    }
+
+    dequeue(): number {
+        const value = this.queue[this.head];
+        delete this.queue[this.head];
+        this.head++;
+        return value;
+    }
+
+    peek(): number {
+        return this.queue[this.head];
+    }
+}
+
+function countStudents(students: number[], sandwiches: number[]): number {
+    let queue: MyQueue = new MyQueue();
+    for (let student of students) {
+        queue.enqueue(student);
+    }
+    let count: number = 0;
+    while (queue.size() > 0) {
+        if (queue.peek() === sandwiches[0]) {
+            queue.dequeue();
+            sandwiches.shift();
+            count = 0;
+        } else {
+            queue.enqueue(queue.dequeue());
+            count++;
+            if (count === queue.size()) break;
+        }
+    }
+    return queue.size();
+};

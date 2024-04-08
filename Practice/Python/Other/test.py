@@ -2069,6 +2069,12 @@
 # print(diamond(13))
 
 # from math import floor, sqrt
+# from math import floor, sqrt
+# class Solution:
+#     def mySqrt(self, x: int) -> int:
+#         return floor(sqrt(x))
+# print(Solution.mySqrt(9))
+
 # class Solution:
 #         return floor(sqrt(x))
 # print(Solution.mySqrt(9))
@@ -2103,3 +2109,162 @@
 #     return max_length
 
 # print(length_longest_substring("pwwkew"))
+
+# class Solution:
+#     def makeGood(s: str) -> str:
+#         N = len(s)
+#         if N == 1:  return s
+#         l, r = 0, 1
+#         while r <= N - 1:
+#             if (
+#                 s[l].isupper() and s[r].islower() and s[l].lower() == s[r]
+#                 or s[l].islower() and s[r].isupper() and s[l].upper() == s[r]
+#             ):
+#                 s = s[:l] + s[r + 1 :]
+#                 N -= 2
+#                 l = 0
+#                 r = 1
+#             else:
+#                 l += 1
+#                 r += 1
+#         return s
+
+# print(Solution.makeGood("leEeetcode")) # "leetcode"
+
+
+# class Solution:
+#     def makeGood(self, s: str) -> str:
+#         stack = []
+#         for char in s:
+#             if stack:
+#                 if char.lower() == stack[-1].lower() and char != stack[-1]:
+#                     stack.pop()
+#                 else:
+#                     stack.append(char)
+#             else:
+#                 stack.append(char)
+#         return "".join(stack)
+
+# def line(line_num:int) -> str:
+#     return start_line() + repeat_middle(line_num + 1) + end_line()
+
+# def start_line() -> str:
+#     return '@'
+
+# def end_line() -> str:
+#     return '@'
+
+# def repeat_middle(line_num: int) -> str:
+#     return '-' * line_num
+
+# def pyramid_b1(size: int) -> list[str]:
+#     pyramid = []
+#     pyramid.append(end_line())
+#     for line_num in range(size):
+#         pyramid.append(line(line_num))
+#     return pyramid
+
+# def format_pyramid(pyramid: list[str]) -> str:
+#     WIDTH = 30
+#     CRLF = '\n'
+#     result = []
+#     for line in pyramid:
+#         result.append(line.center(WIDTH))
+#     return CRLF.join(result)
+
+# print(format_pyramid(pyramid_b1(10)))
+
+# def patternC(size: int) -> None:
+#     output = []
+#     for line_num in range(1, size + 1):
+#         space = size - line_num
+#         output += [
+#             " " * space
+#             + ("@" if line_num == 1 else f"@{'-' * (((line_num * 2)) - 3)}@")
+#         ]
+
+#     print("\n".join(output))
+
+
+# print(patternC(20))
+# from bitstring import BitArray
+
+
+# class Solution:
+#     @staticmethod
+#     def reverseBits(n: int) -> int:
+#         bString: str = bin(n)[2:]  # Convert to binary and remove '0b'
+#         bString = bString.zfill(32)  # Pad with zeros to ensure 32 bits
+#         reversedString: str = bString[::-1]  # Reverse the string
+#         return int(reversedString, 2)  # Convert back to integer
+
+# print(Solution.reverseBits(0b00000010100101000001111010011100))
+
+# class Solution:
+#     def checkValidString(self, s: str) -> bool:
+#         lo = hi = 0
+#         for c in s:
+#             lo += 1 if c == "(" else -1
+#             hi += 1 if c != ")" else -1
+#             if hi < 0:
+#                 break
+#             lo = max(lo, 0)
+#         return lo == 0
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# from typing import Optional
+# class Solution:
+#     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         if not head or not head.next:
+#             return head
+#         curr = head
+#         while curr and curr.next:
+#             if curr.val == curr.next.val:
+#                 curr.next = curr.next.next
+#             else:
+#                 curr = curr.next
+#         return head
+
+
+# from typing import List
+# class Solution:
+#     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+#         hset = {}
+#         for idx in range(len(nums)):
+#             if nums[idx] in hset and abs(idx - hset[nums[idx]]) <= k:
+#                 return True
+#             hset[nums[idx]] = idx
+#         return False
+
+# print(Solution.containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2))
+
+
+def longestMonotonicSubarray(nums: list[int]) -> int:
+    return len(max(longest_increasing(nums), longest_decreasing(nums)))
+
+
+def longest_increasing(nums: list[int]) -> list[int]:
+    res: list[list[int]] = []
+    for left in range(len(nums)):
+        for right in range(left, len(nums)):
+            if all(nums[i] < nums[i + 1] for i in range(left, right)):
+                res.append(nums[left : right + 1])
+    return max(res, key=len)
+
+
+def longest_decreasing(nums: list[int]) -> list[int]:
+    res: list[list[int]] = []
+    for left in range(len(nums)): 
+        for right in range(left, len(nums)):
+            if all(nums[i] > nums[i + 1] for i in range(left, right)):
+                res.append(nums[left : right + 1])
+    return max(res, key=len)
+
+
+print(longest_decreasing([1, 4, 3, 3, 2]))
+print(longest_increasing([1, 4, 3, 3, 2]))
+print(longestMonotonicSubarray([1, 4, 3, 3, 2]))
