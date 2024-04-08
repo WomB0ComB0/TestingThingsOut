@@ -1842,12 +1842,55 @@
 
 # from typing import List
 # from collections import Counter
+
+
+# class Solution:
+
+#     def topKFrequent(nums: List[int], k: int) -> List[int]:
 # class Solution:
 #     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 #         count = Counter(nums)
 #         return [num for num, _ in count.most_common(k)]
 
 
+# print(Solution.topKFrequent([1, 1, 1, 2, 2, 3], 2))
+
+# class Solution:
+#     def countSubarrays(self, nums: List[int], k: int) -> int:
+#         maxCount = max(Counter(nums), key=Counter(nums).get)
+#         res = []
+#         l = 0
+#         for right, num in enumerate(nums):
+#             count = 0
+#             if num == maxCount:
+#                 count += 1
+#             while count > k:
+#                 if nums[l] == maxCount:
+#                     count -= 1
+#                 l += 1
+#             res.append()
+#         return res
+
+# print(Solution.countSubarrays([1, 2, 1, 2, 3], 2)) # 7
+# class Solution:
+#     def isIsomorphic(self, s: str, t: str) -> bool:
+#         return len(set(zip(s,t))) == len(set(s)) == len(set(t))
+
+# def rus_mult_print(a: int, b: int) -> None:
+#     runningTotal = 0
+#     while a > 0:
+#         if a % 2 != 0:
+#             print(f"{a:2d} {b:3d} +")
+#             runningTotal += b
+#         else:
+#             print(f"{a:2d} {b:3d} x")
+#         a //= 2
+#         b *= 2
+#     print(f"= {runningTotal}")
+
+# print(rus_mult_print(13, 17))
+
+# def upside_down_triangle(length: int):
 # print(Solution.topKFrequent(
 
 # ))
@@ -1997,12 +2040,19 @@
 #         print(" " * i + "*" * (2 * (length - i) - 1))
 # print(upside_down_triangle(7))
 
+# def right_angle(length: int):
 
 # def right_angle(length: int) -> None:
 #     for i in range(length):
 #         print("*" * (i + 1))
 # print(right_angle(7))
 
+# def right_angle_opp(length: int):
+#     for i in range(length):
+#         print(" " * (length - i) + "*" * i)
+# print(right_angle_opp(7))
+
+# def diamond(length: int):
 
 # def right_angle_opp(length: int) -> None:
 #     for i in range(length):
@@ -2017,6 +2067,12 @@
 #     for i in range((length // 2) - 1, -1, -1):
 #         print(" " * (length - i - 1) + "*" * (2 * i + 1))
 # print(diamond(13))
+
+from math import floor, sqrt
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        return floor(sqrt(x))
+print(Solution.mySqrt(9))
 
 # class Solution:
 #     def maxDepth(self, s: str) -> int:
@@ -2183,8 +2239,3 @@ def longest_decreasing(nums: list[int]) -> list[int]:
 print(longest_decreasing([1, 4, 3, 3, 2]))
 print(longest_increasing([1, 4, 3, 3, 2]))
 print(longestMonotonicSubarray([1, 4, 3, 3, 2]))
-
-
-class Solution:
-    def getSmallestString(self, s: str, k: int) -> str:
-        
