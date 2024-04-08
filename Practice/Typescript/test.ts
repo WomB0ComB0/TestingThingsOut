@@ -10,7 +10,7 @@ class RecentCounter {
 
     ping(t: number): number {
         this.calls += 1;
-        ((! this.data || this.data[-1][0]) > t) ? this.data.addFront([t, 1]) : this.data[-1][0] += 1;
+        ((!this.data || this.data[-1][0]) > t) ? this.data.addFront([t, 1]) : this.data[-1][0] += 1;
 
         while (this.data[0][0] < t - this.k)
             this.calls -= this.data.removeFront()[1];
@@ -75,11 +75,11 @@ function numSubarraysWithSum(nums: number[], goal: number): number {
     let count: object = { 0: 1 }
     let cur_sum: number = 0
     let total_sub: number = 0
-    for (const num of nums){
+    for (const num of nums) {
         cur_sum += num
         if (count.hasOwnProperty(cur_sum - goal))
             total_sub += count[cur_sum - goal]
-        count[cur_sum] =  count[cur_sum] ? count[cur_sum] + 1 : 1
+        count[cur_sum] = count[cur_sum] ? count[cur_sum] + 1 : 1
     }
     return total_sub
 };
@@ -106,11 +106,11 @@ function productExceptSelf(nums: number[]): number[] {
     return res;
 };
 
-function findMaxLength(nums:  Array<number>): number {
+function findMaxLength(nums: Array<number>): number {
     const N = nums.length;
-    
-    let first: object  = {}
-    
+
+    let first: object = {}
+
     let current: number = 0
     let longest: number = 0
     first[current] = 0
@@ -129,7 +129,7 @@ function findMaxLength(nums:  Array<number>): number {
 
 function minimizeStringValue(s: string): string {
     let t0 = new Date().getTime();
-    let cache: { [key: string]: string} = {}
+    let cache: { [key: string]: string } = {}
     let f: { [key: string]: number } = {};
     if (cache[s]) return cache[s]
     for (let c of s) {
@@ -179,23 +179,24 @@ function minimizeStringValue(s: string): string {
     return cache[s];
 }
 
-function maximum69Number (num: number): number {
+function maximum69Number(num: number): number {
     const s = num.toString()
     let i = -1
-    for (let j = 0; j < s.length; j++){
-        if (s[j] == "6") { i = j
+    for (let j = 0; j < s.length; j++) {
+        if (s[j] == "6") {
+            i = j
             break
         }
     }
     if (i == -1) { return num }
-    else { 
-        return parseInt(s.substring(0, i) + "9" + s.substring(i+1))
+    else {
+        return parseInt(s.substring(0, i) + "9" + s.substring(i + 1))
     }
 };
 
 function findMinArrowShots(points: number[][]): number {
     if (points.length === 0) return 0;
-    
+
     points.sort((a, b) => a[1] - b[1]);
 
     let total: number = 0;
@@ -203,7 +204,7 @@ function findMinArrowShots(points: number[][]): number {
 
     for (let i of points) {
         if (i[0] > end_point) {
-            total += 1 
+            total += 1
             end_point = i[1];
         }
     }
@@ -358,7 +359,7 @@ function maxRotateFunction(nums: number[]): number {
     }
 
     return best;
-    
+
 };
 
 function isPalindrome(head: ListNode | null): boolean {
@@ -425,13 +426,13 @@ function findTheDifference(s: string, t: string): string {
 
 function maximumLengthSubstring(s: string): number {
     const N: number = s.length
-    let best: number = 0 
+    let best: number = 0
 
-    for (let i = 0; i < N; i++){
+    for (let i = 0; i < N; i++) {
         let f: { [s: string]: number } = {}
-        for (let j = i; j < N; j++){
+        for (let j = i; j < N; j++) {
             f[s[j]] = f[s[j]] ? f[s[j]] + 1 : 1
-            if (Math.max(...Object.values(f)) <= 2){
+            if (Math.max(...Object.values(f)) <= 2) {
                 best = Math.max(best, j - i + 1)
             } else {
                 break
@@ -488,7 +489,7 @@ function singleNumber(nums: number[]): number {
 
 function singleNumber(nums: number[]): number {
     let res = 0;
-    for(let num of nums) res ^= num;
+    for (let num of nums) res ^= num;
     return res;
 };
 
@@ -497,7 +498,7 @@ function pivotIndex(nums: number[]): number {
         let left: number = nums.slice(0, i).reduce((a, b) => a + b, 0);
         let right: number = nums.slice(i + 1).reduce((a, b) => a + b, 0);
         if (left === right) return i;
-    }  
+    }
     return -1;
 };
 
@@ -506,9 +507,9 @@ class TreeNode {
     left: TreeNode | null
     right: TreeNode | null
     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-        this.val = (val===undefined ? 0 : val)
-        this.left = (left===undefined ? null : left)
-        this.right = (right===undefined ? null : right)
+        this.val = (val === undefined ? 0 : val)
+        this.left = (left === undefined ? null : left)
+        this.right = (right === undefined ? null : right)
     }
 }
 
@@ -526,15 +527,15 @@ function firstMissingPositive(nums: number[]): number {
     if (n == 0) return 1
 
     for (let i = 0; i < n; i++) {
-        while ((nums[i] >= 1 && nums[i] <= n) && (nums[nums[i] - 1] != nums[i])) 
+        while ((nums[i] >= 1 && nums[i] <= n) && (nums[nums[i] - 1] != nums[i]))
             swap(i, nums[i] - 1, nums)
     }
     for (let i = 0; i < n; i++)
         if (nums[i]) return i + 1
-    return n + 1 
+    return n + 1
 };
 
-function swap( i: number, j: number, array: number[]) {
+function swap(i: number, j: number, array: number[]) {
     const temp = array[j];
     array[j] = array[i];
     array[i] = temp;
@@ -565,7 +566,7 @@ function hammingWeight(n: number): number {
         // Right shift the number by 1 bit
         n >>>= 1;
     }
-    return count;  
+    return count;
 };
 
 function queryString(s: string, n: number): boolean {
@@ -664,7 +665,7 @@ class KthLargest {
 }
 
 function maxSubarrayLength(nums: number[], k: number): number {
-    let counts: {[key: number]: number } = {}
+    let counts: { [key: number]: number } = {}
     let max_length: number = 0
     let left: number = 0
     for (let right = 0; right < nums.length; right++) {
@@ -720,30 +721,30 @@ function groupAnagrams(strs: string[]): string[][] {
 
 
 function subarraysWithKDistinct(nums: number[], k: number): number {
-        function atMostK(k: number): number {
-            let count: { [key: number]: number } = {};
-            let res = 0, l = 0;
-            for (let r = 0; r < nums.length; r++) {
-                count[nums[r]] = (count[nums[r]] || 0) + 1;
-                if (count[nums[r]] === 1) {
-                    k--;
-                }
-                while (k < 0) {
-                    count[nums[l]]--;
-                    if (count[nums[l]] === 0) {
-                        k++;
-                    }
-                    l++;
-                }
-                res += r - l + 1;
+    function atMostK(k: number): number {
+        let count: { [key: number]: number } = {};
+        let res = 0, l = 0;
+        for (let r = 0; r < nums.length; r++) {
+            count[nums[r]] = (count[nums[r]] || 0) + 1;
+            if (count[nums[r]] === 1) {
+                k--;
             }
-            return res;
+            while (k < 0) {
+                count[nums[l]]--;
+                if (count[nums[l]] === 0) {
+                    k++;
+                }
+                l++;
+            }
+            res += r - l + 1;
         }
-        return atMostK(k) - atMostK(k - 1);
+        return res;
     }
+    return atMostK(k) - atMostK(k - 1);
+}
 
 function isPalindrome(x: number): boolean {
-    return  x < 0 ? false : x.toString().split("").reverse().join("") === x.toString()
+    return x < 0 ? false : x.toString().split("").reverse().join("") === x.toString()
 };
 
 function longestCommonPrefix(strs: string[]): string {
@@ -816,7 +817,7 @@ function romanToInt(s: string): number {
 
 function summaryRanges(nums: number[]): string[] {
     if (!nums) return []
-    let lower: number = nums[0]    
+    let lower: number = nums[0]
     let upper: number = nums[0]
     let res: string[] = []
 
@@ -824,17 +825,17 @@ function summaryRanges(nums: number[]): string[] {
 
     for (let i = 0; i < N; i++) {
         if (nums[i] != nums[i - 1] + 1) {
-            (lower == upper) 
-            ? res.push(lower.toString())
-            : res.push(`${lower}->${upper}`)
+            (lower == upper)
+                ? res.push(lower.toString())
+                : res.push(`${lower}->${upper}`)
 
             lower = nums[i]
         }
         upper = nums[i]
     }
     (lower == upper)
-    ? res.push(lower.toString())
-    : res.push(`${lower}->${upper}`)
+        ? res.push(lower.toString())
+        : res.push(`${lower}->${upper}`)
 };
 
 function countSubarrays(nums: number[], minK: number, maxK: number): number {
@@ -918,4 +919,208 @@ function maxDepth(s: string): number {
         res = Math.max(res, stack.length)
     }
     return res
+};
+
+
+
+function makeGood(s: string): string {
+    let stack: string[] = []
+    for (let char of s) {
+        if (stack) {
+            if (
+                char.toLowerCase() == stack[stack.length - 1]!.toLowerCase() &&
+                char != stack[stack.length - 1]
+            ) {
+                stack.pop()
+            } else {
+                stack.push(char)
+            }
+        } else {
+            stack.push(char)
+        }
+    }
+    return stack.join("")
+};
+
+type PartialDeep<T> = {
+    [P in keyof T]?: T[P] extends object ? PartialDeep<T[P]> : T[P];
+};
+
+function minRemoveToMakeValid(s: string): string {
+    let opens: number = 0
+    let closes: number = s.split('').reduce((acc, val) => acc + Number(val === ")"), 0);
+    const stack: string[] = []
+    for (const char of s) {
+        if (char === "(") {
+            if (closes > 0 && opens < closes) {
+                stack.push(char)
+                opens += 1
+            }
+        } else if (char === ")") {
+            if (opens > 0) {
+                stack.push(char)
+                opens -= 1
+            }
+            closes -= 1
+        } else {
+            stack.push(char)
+        }
+    }
+    return stack.join('')
+};
+
+/**
+ * class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        return "".join(reversed(self.remove_exceeding(reversed(self.remove_exceeding(s, "(", ")")), ")", "(")))
+    def remove_exceeding(self,s: list[str], opener: str, closer: str) -> list[str]:
+        chars = []
+        opened = 0
+        for char in s:
+            if char == opener:
+                chars.append(opener)
+                opened += 1
+            elif char == closer:
+                if opened > 0:
+                    chars.append(closer)
+                    opened -= 1
+            else:
+                chars.append(char)
+        return chars
+ * */
+
+function reverseBits(n: number): number {
+    let bString: string = n.toString(2);
+    bString = bString.padStart(32, '0');
+    let reversedString: string = bString.split('').reverse().join('');
+    return parseInt(reversedString, 2);
+};
+
+function checkValidString(s: string): boolean {
+    let lo: number = 0
+    let hi: number = 0
+
+    for (let c of s) {
+        lo += c == "(" ? 1 : -1
+        hi += c != ")" ? 1 : -1
+        if (hi < 0) break
+        lo = Math.max(lo, 0)
+    }
+    return lo == 0
+};
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function deleteDuplicates(head: ListNode | null): ListNode | null {
+    if (head == null || head.next == null) return head;
+    let curr: ListNode | null = head;
+    while (curr && curr.next) {
+        if (curr.val == curr.next.val) {
+            curr.next = curr.next.next;
+        } else {
+            curr = curr.next;
+        }
+    }
+    return head;
+};
+
+function containsNearbyDuplicate(nums: number[], k: number): boolean {
+    let d: { [s: number]: number } = {}
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] in d && Math.abs(d[nums[i]] - i) <= k) return true
+        d[nums[i]] = i
+    }
+    return false
+};
+
+
+
+function longestMonotonicSubarray(nums: number[]): number {
+    return Math.max(longest_increasing(nums).length, longest_decreasing(nums).length)
+};
+
+function longest_increasing(nums: number[]): number[] {
+    let res: number[][] = []
+    for (let left = 0; left < nums.length; left++) {
+        for (let right = left; right < nums.length; right++) {
+            if (nums.slice(left, right).every((x, i) => x < nums[i + 1])) {
+                res.push(nums.slice(left, right + 1))
+            }
+        }
+    }
+    return res.reduce((acc, val) => acc.length > val.length ? acc : val, [])
+}
+
+function longest_decreasing(nums: number[]): number[] {
+    let res: number[][] = []
+    for (let left = 0; left < nums.length; left++) {
+        for (let right = left; right < nums.length; right++) {
+            if (nums.slice(left, right).every((x, i) => x > nums[i + 1])) {
+                res.push(nums.slice(left, right + 1))
+            }
+        }
+    }
+    return res.reduce((acc, val) => acc.length > val.length ? acc : val, [])
+}
+
+class MyQueue {
+    queue: { key?: number };
+    head: number;
+    tail: number;
+
+    constructor() {
+        this.queue = {};
+        this.head = 0;
+        this.tail = 0;
+    }
+
+    size() {
+        return this.tail - this.head;
+    }
+
+    enqueue(value: number): void {
+        this.queue[this.tail] = value;
+        this.tail++;
+    }
+
+    dequeue(): number {
+        const value = this.queue[this.head];
+        delete this.queue[this.head];
+        this.head++;
+        return value;
+    }
+
+    peek(): number {
+        return this.queue[this.head];
+    }
+}
+
+function countStudents(students: number[], sandwiches: number[]): number {
+    let queue: MyQueue = new MyQueue();
+    for (let student of students) {
+        queue.enqueue(student);
+    }
+    let count: number = 0;
+    while (queue.size() > 0) {
+        if (queue.peek() === sandwiches[0]) {
+            queue.dequeue();
+            sandwiches.shift();
+            count = 0;
+        } else {
+            queue.enqueue(queue.dequeue());
+            count++;
+            if (count === queue.size()) break;
+        }
+    }
+    return queue.size();
 };
