@@ -1241,3 +1241,21 @@ function countStudents(students: number[], sandwiches: number[]): number {
     }
     return queue.size();
 };
+
+function timeRequiredToBuy(tickets: number[], k: number): number {
+    return tickets.reduce((acc, val, i) => acc + Math.min(val, tickets[k] - Number(i > k)), 0)
+};
+
+function deckRevealedIncreasing(deck: number[]): number[] {
+    const N: number = deck.length;
+    deck.sort((a, b) => a - b)
+    
+    let q: number[] = Array.from({ length: N }, (_, i) => i);
+    let res: number[] = Array(N).fill(0);
+
+    for (let card of deck) {
+        res[q.shift()!] = card;
+        if (q.length) q.push(q.shift()!);
+    }
+    return res;
+};

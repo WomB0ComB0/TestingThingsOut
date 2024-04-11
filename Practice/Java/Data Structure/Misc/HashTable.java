@@ -89,7 +89,7 @@
 import java.util.*;
 
 class HashTable {
-    public static void main(String args[]) {
+    public static void main(String args[]) { 
         Hashtable<Integer, Integer> ht = new Hashtable<Integer, Integer>();
 
         ht.put(123, 432);

@@ -2243,28 +2243,133 @@
 # print(Solution.containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2))
 
 
-def longestMonotonicSubarray(nums: list[int]) -> int:
-    return len(max(longest_increasing(nums), longest_decreasing(nums)))
+# def longestMonotonicSubarray(nums: list[int]) -> int:
+#     return len(max(longest_increasing(nums), longest_decreasing(nums)))
 
 
-def longest_increasing(nums: list[int]) -> list[int]:
-    res: list[list[int]] = []
-    for left in range(len(nums)):
-        for right in range(left, len(nums)):
-            if all(nums[i] < nums[i + 1] for i in range(left, right)):
-                res.append(nums[left : right + 1])
-    return max(res, key=len)
+# def longest_increasing(nums: list[int]) -> list[int]:
+#     res: list[list[int]] = []
+#     for left in range(len(nums)):
+#         for right in range(left, len(nums)):
+#             if all(nums[i] < nums[i + 1] for i in range(left, right)):
+#                 res.append(nums[left : right + 1])
+#     return max(res, key=len)
 
 
-def longest_decreasing(nums: list[int]) -> list[int]:
-    res: list[list[int]] = []
-    for left in range(len(nums)): 
-        for right in range(left, len(nums)):
-            if all(nums[i] > nums[i + 1] for i in range(left, right)):
-                res.append(nums[left : right + 1])
-    return max(res, key=len)
+# def longest_decreasing(nums: list[int]) -> list[int]:
+#     res: list[list[int]] = []
+#     for left in range(len(nums)):
+#         for right in range(left, len(nums)):
+#             if all(nums[i] > nums[i + 1] for i in range(left, right)):
+#                 res.append(nums[left : right + 1])
+#     return max(res, key=len)
 
 
-print(longest_decreasing([1, 4, 3, 3, 2]))
-print(longest_increasing([1, 4, 3, 3, 2]))
-print(longestMonotonicSubarray([1, 4, 3, 3, 2]))
+# print(longest_decreasing([1, 4, 3, 3, 2]))
+# print(longest_increasing([1, 4, 3, 3, 2]))
+# print(longestMonotonicSubarray([1, 4, 3, 3, 2]))
+
+
+# def solution(sides: list[tuple[int, int], tuple[int, int], tuple[int, int]]) -> bool:
+#     # Since the list contains sub-arrays of tuples we utilize two for loops
+#     # This just looks at tuple[int, int], tuple[int, int], tuple[int, int]
+#     for side in sides:
+#         # range(start, end, step)
+#         # this essentially just looks at the first, second, and third element of the tuple
+#         for i in range(0, 3, 3):
+#             print(side[i], side[i + 1], side[i + 2])
+#             """
+#                 AB + BC must be greater than AC, or AB + BC > AC
+#                 AB + AC must be greater than BC, or AB + AC > BC
+#                 BC + AC must be greater than AB, or BC + AC > AB
+#             """
+#             if (
+#                 side[i] + side[i + 1] > side[i + 2]
+#                 and side[i] + side[i + 2] > side[i + 1]
+#                 and side[i + 1] + side[i + 2] > side[i]
+#             ):
+#                 return True
+#     return False
+
+
+# print(solution([(7, 2, 2), (1, 2, 2), (7, 2, 2)]))
+
+
+# import math
+
+
+# def is_triangle(a, b, c):
+#     if a + b > c and a + c > b and b + c > a:
+#         return True
+#     return False
+
+
+# def is_triangle_validation(vertices: list) -> bool:
+#     if len(vertices) != 3:
+#         return False
+#     a = math.sqrt(
+#         (vertices[0][0] - vertices[1][0]) ** 2 + (vertices[0][1] - vertices[1][1]) ** 2
+#     )
+#     b = math.sqrt(
+#         (vertices[1][0] - vertices[2][0]) ** 2 + (vertices[1][1] - vertices[2][1]) ** 2
+#     )
+#     c = math.sqrt(
+#         (vertices[2][0] - vertices[0][0]) ** 2 + (vertices[2][1] - vertices[0][1]) ** 2
+#     )
+#     return is_triangle(a, b, c)
+
+
+# def main():
+#     vertices = [[3, 2], [-2, -3], [2, 3]]
+#     print(is_triangle_validation(vertices))
+
+
+# if __name__ == "__main__":
+#     main()
+
+# a, b = 0, 1
+# while b < 10:
+#     a, b = b , a + b
+
+
+# def roman2arabic(r: str) -> int:
+#     roman: dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+#     total: int = 0
+#     for i in range(len(r)):
+#         value: int = roman[r[i]]
+#         if (i + 1 < len(r) and roman[r[i + 1]] > value):
+#             total -= value
+#         else:
+#             total += value
+#     return total
+
+# print(roman2arabic(
+#   "VII"
+# ))
+
+def arabic2roman(a: int) -> str:
+    if (a == 0): return ""
+    
+    roman: dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    arabic: dict = {v: k for k, v in roman.items()}
+    
+    res: list[str] = []
+    a: list[str] = list(str(a))
+    
+    left = 0
+    for right in range(len(a)):
+      if (int(a[right]) > int(a[left])):
+        res.append(arabic[int(a[left])] + arabic[int(a[right])])
+        left = right + 1
+      else:
+        res.append(arabic[int(a[left])] * int(a[right]))
+        left = right + 1
+    return "".join(res)
+
+# def swap(arr: list[str]) -> list[str]:
+#   temp = arr[0]
+#   arr[0] = arr[1]
+#   arr[1] = temp
+#   return arr
+
+print(arabic2roman(12)) # "XII"
