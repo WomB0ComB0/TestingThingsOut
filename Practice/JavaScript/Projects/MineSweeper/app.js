@@ -7,10 +7,32 @@ document.addEventListener('DOMContentLoaded', () => {
   let flags = 0
   let squares = []
   let isGameOver = false
-  var clickSound = new Audio('./Music/click.mp3'); 
+  var clickSound = new Audio('./Music/click.mp3');
   var bombSound = new Audio('./Music/bomb.mp3');
   var winSound = new Audio('./Music/win.mp3');
   var flagSound = new Audio('./Music/flag.mp3');
+
+  document.querySelector('form').addEventListener('change', () => {
+    let difficulty = document.querySelector('input[name="difficulty"]:checked').value
+    setDifficulty(difficulty)
+  })
+
+  function setDifficulty(difficulty) {
+    let squareSize = 40; // size of each square in pixels
+    if (difficulty === 'easy') {
+      width = 10;
+      bombAmount = 20;
+    } else if (difficulty === 'medium') {
+      width = 15;
+      bombAmount = 50;
+    } else {
+      width = 20;
+      bombAmount = 100;
+    }
+    let actualSize = width * squareSize;
+    grid.style.height = actualSize + "px"
+    grid.style.width = actualSize + "px"
+  }
 
   function createBoard() { //create Board
     flagsLeft.innerHTML = bombAmount
