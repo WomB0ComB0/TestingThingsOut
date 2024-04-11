@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,28 +13,105 @@
   <script src="./background.js"></script>
   <!-- Source: https://github.com/kubowania/minesweeper/ -->
 </head>
+
 <body>
   <!-- score counter -->
-  
-  <div class="container">
+  <nav>
+
+  </nav>
+  <main>
+    <aside>
+      <details>
+        <summary>
+          Difficulty
+        </summary>
+        <form>
+          <label for=""></label>
+          <fieldset>
+            <label for="easy">
+              Easy
+              <input type="radio" name="difficulty" id="easy">
+            </label>
+            <label for="medium">
+              Medium
+              <input type="radio" name="difficulty" id="medium">
+            </label>
+            <label for="hard">
+              Hard
+              <input type="radio" name="difficulty" id="hard">
+            </label>
+          </fieldset>
+        </form>
+      </details>
+    </aside>
+    <section class="container">
       <h1>minesweeper</h1>
-    <div class="game-container">
-      <div class="grid"></div>
-      <div class="buttons">
-        <button onclick="reset()" id="reset">
-          <p>
-          reset
-          </p>
-        </button>
+      <div class="game-container">
+        <div class="grid"></div>
+        <div class="buttons">
+          <button onclick="reset()" id="reset">
+            <p>
+              reset
+            </p>
+          </button>
+        </div>
+        <div>Flags left:<span id="flags-left"></span></div>
+        <div id="result"></div>
       </div>
-      <div>Flags left:<span id="flags-left"></span></div>
-      <div id="result"></div>
-    </div>
-  </div>
+    </section>
+    <aside>
+      <details>
+        <summary>
+          Leaderboard
+        </summary>
+        <section>
+          <article>
+            <fieldset>
+              <ol>
+                <li>0:00</li>
+                <li>0:00</li>
+                <li>0:00</li>
+                <li>0:00</li>
+                <li>0:00</li>
+              </ol>
+              <span>
+                <button class="open-modal">
+                  Submit score
+                </button>
+              </span>
+            </fieldset>
+          </article>
+        </section>
+      </details>
+    </aside>
+    <dialog class="modal">
+      <button class="close-modal">
+        <i class=""> </i>
+      </button>
+      <form action="" method="post">
+        <label for="">
+          <fieldset disabled="disabled">
+            <input placeholder="Enter your name" class="" type="text" required />
+          </fieldset>
+        </label>
+        <label for="">
+          <fieldset class="">
+            <span>
+              Your score: <strong class="form-score"> </strong>
+            </span>
+          </fieldset>
+        </label>
+      </form>
+    </dialog>
+  </main>
+  <footer>
+
+  </footer>
   <script>
     function reset() {
       location.reload()
     }
   </script>
 </body>
+
 </html>
