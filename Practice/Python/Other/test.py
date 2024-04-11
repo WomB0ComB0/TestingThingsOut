@@ -2347,29 +2347,28 @@
 #   "VII"
 # ))
 
-def arabic2roman(a: int) -> str:
-    if (a == 0): return ""
-    
-    roman: dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-    arabic: dict = {v: k for k, v in roman.items()}
-    
+
+def arabic2roman(num: int) -> str:
+    values = {
+        1000: "M",
+        900: "CM",
+        500: "D",
+        400: "CD",
+        100: "C",
+        90: "XC",
+        50: "L",
+        40: "XL",
+        10: "X",
+        9: "IX",
+        5: "V",
+        4: "IV",
+        1: "I",
+    }
     res: list[str] = []
-    a: list[str] = list(str(a))
-    
-    left = 0
-    for right in range(len(a)):
-      if (int(a[right]) > int(a[left])):
-        res.append(arabic[int(a[left])] + arabic[int(a[right])])
-        left = right + 1
-      else:
-        res.append(arabic[int(a[left])] * int(a[right]))
-        left = right + 1
+    for value, numeral in values.items():
+        res.append(num // value * numeral)
+        num %= value
     return "".join(res)
 
-# def swap(arr: list[str]) -> list[str]:
-#   temp = arr[0]
-#   arr[0] = arr[1]
-#   arr[1] = temp
-#   return arr
 
-print(arabic2roman(12)) # "XII"
+print(arabic2roman(12))  # "XII"
