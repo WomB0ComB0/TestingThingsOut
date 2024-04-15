@@ -2348,27 +2348,27 @@
 # ))
 
 
-def arabic2roman(num: int) -> str:
-    values = {
-        1000: "M",
-        900: "CM",
-        500: "D",
-        400: "CD",
-        100: "C",
-        90: "XC",
-        50: "L",
-        40: "XL",
-        10: "X",
-        9: "IX",
-        5: "V",
-        4: "IV",
-        1: "I",
-    }
-    res: list[str] = []
-    for value, numeral in values.items():
-        res.append(num // value * numeral)
-        num %= value
-    return "".join(res)
+# def arabic2roman(num: int) -> str:
+#     values = {
+#         1000: "M",
+#         900: "CM",
+#         500: "D",
+#         400: "CD",
+#         100: "C",
+#         90: "XC",
+#         50: "L",
+#         40: "XL",
+#         10: "X",
+#         9: "IX",
+#         5: "V",
+#         4: "IV",
+#         1: "I",
+#     }
+#     res: list[str] = []
+#     for value, numeral in values.items():
+#         res.append(num // value * numeral)
+#         num %= value
+#     return "".join(res)
 
 
-print(arabic2roman(12))  # "XII"
+# print(arabic2roman(12))  # "XII"
