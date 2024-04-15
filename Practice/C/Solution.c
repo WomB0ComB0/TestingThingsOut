@@ -38,3 +38,46 @@ char* removeKdigits(char* num, int k) {
     ans[top+1] = '\0';
     return ans;
 }
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int sumNumbers(struct TreeNode* root) {
+    if(!root) return 0;
+    int stack[1000];
+    int top = -1;
+    int count = 0;
+    stack[++top] = root->val;
+    if(!root->left && !root->right){
+        count = root->val;
+    }
+    if(root->left){
+        count += dfs(root->left, stack, top);
+    }
+    if(root->right){
+        count += dfs(root->right, stack, top);
+    }
+    return count;
+}
+
+int dfs(struct TreeNode* root, int* stack, int top){
+    stack[++top] = root->val;
+    int count = 0;
+    if(!root->left && !root->right){
+        for(int i=0; i<=top; i++){
+            count = count*10 + stack[i];
+        }
+    }
+    if(root->left){
+        count += dfs(root->left, stack, top);
+    }
+    if(root->right){
+        count += dfs(root->right, stack, top);
+    }
+    return count;
+}

@@ -2347,6 +2347,27 @@
 #   "VII"
 # ))
 
+# def arabic2roman(num: int) -> str:
+#     values = {
+#         1000: "M",
+#         900: "CM",
+#         500: "D",
+#         400: "CD",
+#         100: "C",
+#         90: "XC",
+#         50: "L",
+#         40: "XL",
+#         10: "X",
+#         9: "IX",
+#         5: "V",
+#         4: "IV",
+#         1: "I",
+#     }
+#     res: list[str] = []
+#     for value, numeral in values.items():
+#         res.append(num // value * numeral)
+#         num %= value
+#     return "".join(res)
 
 # def arabic2roman(num: int) -> str:
 #     values = {
@@ -2372,3 +2393,294 @@
 
 
 # print(arabic2roman(12))  # "XII"
+# print(arabic2roman(12))  # "XII"
+
+# from typing import List
+# class Solution:
+#     def trap(self, height: List[int]) -> int:
+#         if not height:
+#             return 0
+#         l, r = 0, len(height) - 1
+#         leftMax, rightMax = height[l], height[r]
+#         res = 0
+#         while l < r:
+#             if leftMax < rightMax:
+#                 l += 1
+#                 leftMax = max(leftMax, height[l])
+#                 res += leftMax - height[l]
+#             else:
+#                 r -= 1
+#                 rightMax = max(rightMax, height[r])
+#                 res += rightMax - height[r]
+#         return res
+# from typing import List
+# class Solution:
+#     def maximalRectangle(self, matrix: List[List[str]]) -> int:
+#         n = len(matrix)
+#         m = len(matrix[0])
+#         prev = [0] * m
+#         ans = 0
+#         for i in range(n):
+#             curr = [0] * m
+#             for j in range(m):
+#                 if (matrix[i][j] == '1'): curr[j] = 1 + prev[j]
+#             for j in range(m):
+#                 mn = 1e9
+#                 for k in range(j, m):
+#                     mn = min(mn, curr[k])
+#                     ans = max(ans, mn * (k - j + 1))
+#             prev = curr
+#         return ans
+
+
+# class Solution:
+#     def maximalRectangle(self, matrix: List[List[str]]) -> int:
+#         if not matrix or not matrix[0]: return 0
+#         m = len(matrix)
+#         n = len(matrix[0])
+
+#         # For each column, keep track of the height of 1s in that column above the current row.
+#         # The last entry (`heights[n]`) is always equal to zero.
+#         heights = [0] * (n + 1)
+
+#         best = 0
+#         for row in matrix:
+#             # Update the column heights.
+#             for col in range(n):
+#                 heights[col] = heights[col] + 1 if row[col] == '1' else 0
+
+#             # Given a collection of heights (such as 3, 1, 3, 2, 2), find the largest rectangle.
+#             stack = [-1]
+#             for col in range(n + 1):
+#                 # Consider the rectangle from stack[-1] to col.
+#                 while heights[col] < heights[stack[-1]]:
+#                     h = heights[stack.pop()]
+#                     w = col - stack[-1] - 1
+#                     best = max(best, h * w)
+#                 stack.append(col)
+#         return best
+
+
+# class Solution:
+#     def scoreOfString(s: str) -> int:
+#         res: list[int] = []
+#         for c in range(len(s) - 1):
+#             res.append(abs(ord(s[c]) - ord(s[c + 1])))
+#         return sum(res)
+
+# print(Solution.scoreOfString("zaz"))
+
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def minRectanglesToCoverPoints(points: List[List[int]], w: int) -> int:
+#         # Sort the points by x-coordinate
+#         points.sort(key=lambda p: p[0])
+
+#         rectangles = 0
+#         i = 0
+#         while i < len(points):
+#             rectangles += 1
+#             j = i + 1
+#             while j < len(points) and points[j][0] - points[i][0] <= w:
+#                 j += 1
+#             i = j
+
+#         return rectangles
+
+# print(Solution.minRectanglesToCoverPoints([[2, 3], [1, 2]], 2))
+
+# import heapq
+# from typing import List
+
+
+# class Solution:
+#     @staticmethod
+#     def minimumTime(n: int, edges: List[List[int]], disappear: List[int]) -> List[int]:
+#         graph = [[] for _ in range(n)]
+#         for u, v, length in edges:
+#             graph[u].append((v, length))
+#             graph[v].append((u, length))
+
+#         time = [float("inf")] * n
+#         time[0] = 0
+#         pq = [(0, 0)]
+
+#         while pq:
+#             t, node = heapq.heappop(pq)
+#             if t > time[node]:
+#                 continue
+#             for v, length in graph[node]:
+#                 if t + length < time[v] and t + length < disappear[v]:
+#                     time[v] = t + length
+#                     heapq.heappush(pq, (time[v], v))
+
+#         return [t if t < float("inf") else -1 for t in time]
+
+
+# print(Solution.minimumTime(2, [[0, 1, 1]], [1,1]))
+
+
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def numberOfSubarrays(nums: List[int]) -> int:
+#         stack = []
+#         count = 0
+#         for num in nums:
+#             while stack and stack[-1] < num:
+#                 stack.pop()
+#             stack.append((num, stack.count((num,)) if stack else 1))
+#             count += stack[-1][1]
+#         return count
+
+# print(Solution.numberOfSubarrays([3, 3, 3]))
+
+# from typing import Optional
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     @staticmethod
+#     def sumOfLeftLeaves(root: Optional[TreeNode]) -> int:
+#         if root is None: return 0
+#         res = 0
+#         def dfs(
+#             node: Optional[TreeNode],
+#             is_left: bool,
+#         ):
+#             nonlocal res
+#             if not node.left and not node.right and is_left:
+#                 res += node.val
+#             if node.left:
+#                 dfs(node.left, True)
+#             if node.right:
+#                 dfs(node.right, False)
+
+
+#         dfs(root, False)
+#         return res
+
+# print(Solution.sumOfLeftLeaves([3,9,20,None ,None,15,7]))
+
+# class Solution:
+#     @staticmethod
+#     def findLatestTime(s: str) -> str:
+#         hour = s[:2]
+#         minutes = s[3:]
+
+#         if "?" in hour:
+#             if hour.index("?") == 0:
+#                 hour = hour.replace(
+#                     "?", "1" if hour[1] != "?" and hour[1] <= "9" else "0"
+#                 )
+#             elif (hour[0] == "0" or hour[0] == "1") and hour[1] == "?":
+#                 hour = hour.replace("?", "1")
+#         if "?" in minutes:
+#             if minutes.index("?") == 0:
+#                 minutes = minutes.replace(
+#                     "?", "5" if minutes[1] != "?" and minutes[1] <= "9" else "9"
+#                 )
+#             else:
+#                 minutes = minutes.replace("?", "9")
+
+#         return f"{hour}:{minutes}"
+# print(Solution.findLatestTime("1?:?4"))
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def maximumPrimeDifference(nums: List[int]) -> int:
+#         def is_prime(n: int) -> bool:
+#             if n < 2:
+#                 return False
+#             for i in range(2, int(n ** 0.5) + 1):
+#                 if n % i == 0:
+#                     return False
+#             return True
+#         indexes = []
+#         for i, num in enumerate(nums):
+#             if is_prime(num):
+#                 indexes.append(i)
+#         print(indexes)
+#         return abs(indexes[-1] - indexes[0]) if indexes else 0
+
+# print(Solution.maximumPrimeDifference([4,2,9,5,3]))
+
+
+# import heapq
+# from typing import List
+
+# class Solution:
+#     @staticmethod
+#     def kthSmallestAmount(coins: List[int], k: int) -> int:
+#         max_val = max(coins) * k
+#         dp = [float("inf")] * (max_val + 1)
+#         dp[0] = 0
+
+#         for coin in coins:
+#             for j in range(coin, max_val + 1):
+#                 dp[j] = min(dp[j], dp[j - coin] + 1)
+
+#         for j in range(len(dp)):
+#             if dp[j] >= k:
+#                 return j
+
+# print(Solution.kthSmallestAmount([3, 6, 9], 3))  # Output: 9
+# print(Solution.kthSmallestAmount([5, 2], 7))  # Output: 12
+
+# from typing import List
+
+
+# class Solution:
+#     @staticmethod
+#     def minimumValueSum(nums: List[int], andValues: List[int]) -> int:
+#         n, m = len(nums), len(andValues)
+#         dp = [[float("inf")] * (m + 1) for _ in range(n + 1)]
+#         dp[0][0] = 0
+#         for i in range(1, n + 1):
+#             min_val = nums[i - 1]
+#             for j in range(i, 0, -1):
+#                 min_val &= nums[j - 1]
+#                 for k in range(1, min(j, m) + 1):
+#                     dp[i][k] = min(dp[i][k], dp[j - 1][k - 1] + min_val)
+#         return dp[n][m] if dp[n][m] != float("inf") else -1
+
+
+# print(Solution.minimumValueSum([1, 4, 3, 3, 2], [0, 3, 3, 2]))  # Output: 12
+# print(Solution.minimumValueSum([2, 3, 5, 7, 7, 7, 5], [0, 7, 5]))  # Output: 17
+# print(Solution.minimumValueSum([1, 2, 3, 4], [2]))  # Output: -1
+
+from typing import List, Optional
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    @staticmethod
+    def sumNumbers(root: Optional[TreeNode]) -> int:
+        def dfs(node, stack) -> int:
+            if not node:
+                return 0
+            stack.append(str(node.val))
+            count = 0
+            if not node.left and not node.right:
+                count += int("".join(stack))
+            else:
+                count += dfs(node.left, stack)
+                count += dfs(node.right, stack)
+            stack.pop()
+            return count
+
+        return dfs(root, [])
+
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+print(Solution.sumNumbers(root))

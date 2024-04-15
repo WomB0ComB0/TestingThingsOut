@@ -1,31 +1,28 @@
+import java.*;
+
 class Solution {
-    public String removeKdigits(String num, int k) {
-        Stack<Character> stack = new Stack<>();
-        for (char digit : num.toCharArray()) {
-            while (k > 0 && !stack.isEmpty() && stack.peek() > digit) {
-                stack.pop();
-                k--;
-            }
-            if (digit === '0' && stack.isEmpty()) {
-                continue;
-            }
-            stack.push(digit);
+    public int sumNumbers(TreeNode root) {
+        Stack<String> stack = new Stack<>();
+        return dfs(root, stack);
+    }
+
+    public int dfs(TreeNode root, Stack<String> stack) {
+        if (root == null) {
+            return 0;
         }
 
-        while (k > 0 && !stack.isEmpty()) {
+        stack.push(String.valueOf(root.val));
+        if (root.left == null && root.right == null) {
+            int sum = 0;
+            for (String s : stack) {
+                sum = sum * 10 + Integer.parseInt(s);
+            }
             stack.pop();
-            k--;
+            return sum;
         }
-
-        if (stack.isEmpty()) {
-            return "0";
-        }
-
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.append(stack.pop());
-        }
-        sb.reverse();
-        return sb.toString();
+        int left = dfs(root.left, stack);
+        int right = dfs(root.right, stack);
+        stack.pop();
+        return left + right;
     }
 }
