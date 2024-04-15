@@ -1259,3 +1259,78 @@ function deckRevealedIncreasing(deck: number[]): number[] {
     }
     return res;
 };
+
+
+function trap(height: number[]): number {
+    let left: number = 0, right: number = height.length - 1, leftMax: number = 0, rightMax: number = 0, res: number = 0;
+    while (left < right) {
+        if (height[left] < height[right]) {
+            height[left] >= leftMax ? leftMax = height[left] : res += leftMax - height[left];
+            left++;
+        } else {
+            height[right] >= rightMax ? rightMax = height[right] : res += rightMax - height[right];
+            right--;
+        }
+    }
+    return res;
+};
+
+function maximalRectangle(matrix: string[][]): number {
+    if (!matrix.length) return 0;
+    for (let col = 0; col < matrix[0].length; col += 1) {
+        matrix[0][col] = String(parseInt(matrix[0][col]));
+        for (let row = 1; row < matrix.length; row += 1)
+            matrix[row][col] = String((parseInt(matrix[row - 1][col]) + parseInt(matrix[row][col])) * parseInt(matrix[row][col]));
+    }
+    
+    let res: number = 0;
+    for (let row = 0; row < matrix.length; row += 1) {
+        const stack: [number, number][] = [];
+        matrix[row].push("0");
+        for (let col = 0; col < matrix[0].length; col += 1) {
+            let popIndex = col;
+            while (stack.length > 0 && stack[stack.length - 1][0] >= Number(matrix[row][col])) {
+                popIndex = stack[stack.length - 1][1];
+                res = Math.max(res, stack.pop()![0] * (col - popIndex));
+            }
+            stack.push([Number(matrix[row][col]), popIndex]);
+        }
+    }
+    return res;
+}; 
+//  class TreeNode {
+//       val: number
+//       left: TreeNode | null
+//       right: TreeNode | null
+//       constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+//           this.val = (val===undefined ? 0 : val)
+//           this.left = (left===undefined ? null : left)
+//           this.right = (right===undefined ? null : right)
+//       }
+//   }
+ 
+function sumOfLeftLeaves(root: TreeNode | null): number {
+    if (root === null) return 0;
+    let sum: number = 0;
+    if (root.left !== null && root.left.left === null && root.left.right === null) sum += root.left.val 
+    sum += sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+    return sum;
+};
+
+
+function sumNumbers(root: TreeNode | null): number {
+    return dfs(root, []);
+};
+
+function dfs(node: TreeNode | null, stack: string[]): number {
+    let sum: number = 0;
+    if (node === null) return 0;
+    stack.push(node.val.toString());
+    if (node.left === null && node.right === null) {
+        sum += parseInt(stack.join(""));
+    }
+    sum += dfs(node.left, stack);
+    sum += dfs(node.right, stack);
+    stack.pop();
+    return sum;
+}
