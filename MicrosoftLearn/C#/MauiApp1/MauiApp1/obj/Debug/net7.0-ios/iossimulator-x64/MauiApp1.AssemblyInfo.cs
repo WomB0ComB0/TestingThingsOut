@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MauiApp1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+f03248301836bfa9d8da46756fe323f938312b3d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+445ec69251803413b78741397cfe8b19005c9a2c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MauiApp1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MauiApp1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

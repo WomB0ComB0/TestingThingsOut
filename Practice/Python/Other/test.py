@@ -2628,35 +2628,111 @@
 # print(Solution.minimumValueSum([2, 3, 5, 7, 7, 7, 5], [0, 7, 5]))  # Output: 17
 # print(Solution.minimumValueSum([1, 2, 3, 4], [2]))  # Output: -1
 
-from typing import List, Optional
+# from typing import List, Optional
 
 
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+
+# class Solution:
+#     @staticmethod
+#     def sumNumbers(root: Optional[TreeNode]) -> int:
+#         def dfs(node, stack) -> int:
+#             if not node:
+#                 return 0
+#             stack.append(str(node.val))
+#             count = 0
+#             if not node.left and not node.right:
+#                 count += int("".join(stack))
+#             else:
+#                 count += dfs(node.left, stack)
+#                 count += dfs(node.right, stack)
+#             stack.pop()
+#             return count
+
+#         return dfs(root, [])
+
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# print(Solution.sumNumbers(root))
+
+# from itertools import accumulate
+# def sum_of_digit(n: int) -> int:
+#     return list(accumulate(range(n)))[-1]
+
+# print(sum_of_digit(8))
+
+
+# def sum_of_digits2(n: int) -> None:
+#     n = list(str(n))
+#     print(n)
+#     res = [int(i) for i in range(len(n))]
+#     return sum(res)
+#     # return sum(int(n))
+
+# print(sum_of_digits2(12))
+
+
+# def num_sum(n: int) -> int:
+#     if n == 0:
+#         return 0
+#     return n % 10 + num_sum(n // 10)
+
+# Implement a function to calculate the gross salary of an employee for the month of March. He is expecting 10% of HRA and 12% of TA on his basic salary. This month every employee will receive a $500 as a bonus.
+# def gross_salary(salary: int, hra_percent: int = 10, ta_percent: int = 12, bonus: int = 500) -> float:
+#     hra_percent, ta_percent = (hra_percent / 100) * salary, (ta_percent / 100) * salary
+#     gross = salary + hra_percent + ta_percent + bonus
+#     return gross.__round__(2)
+
+from typing import Optional
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+class Solution:
+    def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
+        if depth == 1: return TreeNode(val, root)
+        def dfs(root, level):
+            if not root: return
+            if level + 1 == depth:
+                temp, root.left = root.left, TreeNode(val)
+                if temp: root.left.left = temp
+                temp, root.right = root.right, TreeNode(val)
+                if temp: root.right.right = temp
+            dfs(root.left, level + 1)
+            dfs(root.right, level + 1)
+        dfs(root, 1)
+        return root
+# from itertools import accumulate
+# def sum_of_nums(*n: int) -> int:
+#     return list(accumulate(n))[-1]
 
+# print(sum_of_nums(1, 2, 3, 4, 5))
+
+# def cal_sum(*nums):
+#     total = 0
+#     print(type(nums))
+#     for item in nums:
+#         total += item
+#         return total
+
+# print(cal_sum(10, 20, 30))
 
 class Solution:
-    @staticmethod
-    def sumNumbers(root: Optional[TreeNode]) -> int:
-        def dfs(node, stack) -> int:
-            if not node:
-                return 0
-            stack.append(str(node.val))
-            count = 0
-            if not node.left and not node.right:
-                count += int("".join(stack))
-            else:
-                count += dfs(node.left, stack)
-                count += dfs(node.right, stack)
-            stack.pop()
-            return count
-
-        return dfs(root, [])
-
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-print(Solution.sumNumbers(root))
+    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+        h = []
+        def dfs(root, curr):
+            if not root: return
+            if not root.left and not root.right:
+                heapq.heappush(h, chr(root.val + 97) + curr)
+            dfs(root.left, (chr(root.val + 97) + curr))
+            dfs(root.right, (chr(root.val + 97) + curr))
+            return
+        dfs(root, "")
+        return h[0]

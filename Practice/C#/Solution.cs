@@ -75,3 +75,68 @@ public class Solution {
         return dfs(root.left, sum) + dfs(root.right, sum);
     }
 }
+
+public class Solution {
+    public TreeNode AddOneRow(TreeNode root, int val, int depth) {
+        if(depth == 1)
+        {
+            TreeNode newRoot = new TreeNode(val);
+            newRoot.left = root;
+            return newRoot;
+        }
+        
+        Queue<TreeNode> q = new Queue<TreeNode>();
+        q.Enqueue(root);
+        int level = 1;
+        
+        while(q.Count > 0)
+        {
+            int size = q.Count;
+            for(int i = 0; i < size; i++)
+            {
+                TreeNode node = q.Dequeue();
+                if(level == depth - 1)
+                {
+                    TreeNode left = new TreeNode(val);
+                    TreeNode right = new TreeNode(val);
+                    left.left = node.left;
+                    right.right = node.right;
+                    node.left = left;
+                    node.right = right;
+                }
+                if(node.left != null)
+                    q.Enqueue(node.left);
+                if(node.right != null)
+                    q.Enqueue(node.right);
+            }
+            level++;
+        }
+        
+        return root;
+    }
+}
+
+
+public class Solution {
+    public string SmallestFromLeaf(TreeNode root) {
+        string res = "";
+        dfs(root, "", ref res);
+        return res;
+    }
+    public void dfs(TreeNode root, string path, ref string res)
+    {
+        if(root == null)
+            return;
+        
+        path = (char)(root.val + 'a') + path;
+        
+        if(root.left == null && root.right == null)
+        {
+            if(string.IsNullOrEmpty(res) || string.Compare(path, res) < 0)
+                res = path;
+        }
+        
+        dfs(root.left, path, ref res);
+        dfs(root.right, path, ref res);
+    }
+}

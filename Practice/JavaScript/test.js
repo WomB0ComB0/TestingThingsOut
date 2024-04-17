@@ -51,3 +51,55 @@ function dfs(node, path) {
   let right = dfs(node.right, path.slice());
   return left + right;
 }
+
+/**
+ * @param {TreeNode} root
+ * @param {number} val
+ * @param {number} depth
+ * @return {TreeNode}
+ */
+var addOneRow = function (root, val, depth) {
+  if (depth === 1) {
+    let newRoot = new TreeNode(val);
+    newRoot.left = root;
+    return newRoot;
+  }
+  return () => {
+    let queue = [root];
+    let level = 1;
+    while (queue.length) {
+      let size = queue.length;
+      for (let i = 0; i < size; i++) {
+        let node = queue.shift();
+        if (level === depth - 1) {
+          let left = new TreeNode(val);
+          let right = new TreeNode(val);
+          left.left = node.left;
+          right.right = node.right;
+          node.left = left;
+          node.right = right;
+        }
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+      level++;
+    }
+    return root;
+  }
+};
+
+var smallestFromLeaf = function (root) {
+  let result = '';
+  dfs(root, '');
+  return result;
+};
+
+function dfs(node, path) {
+  if (!node) return;
+  path = String.fromCharCode(node.val + 97) + path;
+  if (!node.left && !node.right) {
+    result = result ? result < path ? result : path : path;
+  }
+  dfs(node.left, path);
+  dfs(node.right, path);
+}

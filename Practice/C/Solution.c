@@ -81,3 +81,99 @@ int dfs(struct TreeNode* root, int* stack, int top){
     }
     return count;
 }
+
+struct TreeNode* addOneRow(struct TreeNode* root, int val, int depth) {
+    if(depth == 1){
+        struct TreeNode* newRoot = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+        newRoot->val = val;
+        newRoot->left = root;
+        newRoot->right = NULL;
+        return newRoot;
+    }
+    
+    struct TreeNode* layer[1000];
+    int layerSize = 1;
+    layer[0] = root;
+    
+    for(int i=2; i<depth; i++){
+        struct TreeNode* nextLayer[1000];
+        int nextLayerSize = 0;
+        for(int j=0; j<layerSize; j++){
+            struct TreeNode* node = layer[j];
+            if(node->left){
+                nextLayer[nextLayerSize++] = node->left;
+            }
+            if(node->right){
+                nextLayer[nextLayerSize++] = node->right;
+            }
+        }
+        layerSize = nextLayerSize;
+        for(int j=0; j<layerSize; j++){
+            layer[j] = nextLayer[j];
+        }
+    }
+    
+    for(int i=0; i<layerSize; i++){
+        struct TreeNode* node = layer[i];
+        struct TreeNode* left = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+        left->val = val;
+        left->left = node->left;
+        left->right = NULL;
+        node->left = left;
+        
+        struct TreeNode* right = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+        right->val = val;
+        right->left = NULL;
+        right->right = node->right;
+        node->right = right;
+    }
+    
+    return root;
+}
+
+#define MIN_CHAR 'a'
+
+void dfs(struct TreeNode* root, char* sb, int depth, char** sans) {
+    if (root == NULL) {
+        return;
+    }
+
+    sb[depth] = root->val + MIN_CHAR;
+    if (root->left == NULL && root->right == NULL) {
+        sb[depth + 1] = '\0';
+        char* rev = strdup(sb);
+        strrev(rev);
+        if (*sans == NULL || strcmp(rev, *sans) < 0) {
+            free(*sans);
+            *sans = rev;
+        } else {
+            free(rev);
+        }
+    } else {
+        dfs(root->left, sb, depth + 1, sans);
+        dfs(root->right, sb, depth + 1, sans);
+    }
+}
+
+void strrev(char *str) {
+    if (str) {
+        char *end = str + strlen(str) - 1;
+        
+        while (str < end) {
+            char temp = *str;
+            *str = *end;
+            *end = temp;
+
+            str++;
+            end--;
+        }
+    }
+}
+
+char* smallestFromLeaf(struct TreeNode* root) {
+    char* sb = malloc(8501);
+    char* sans = NULL;
+    dfs(root, sb, 0, &sans);
+    free(sb);
+    return sans;
+}

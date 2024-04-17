@@ -1334,3 +1334,34 @@ function dfs(node: TreeNode | null, stack: string[]): number {
     stack.pop();
     return sum;
 }
+
+function addOneRow(root: TreeNode | null, val: number, depth: number): TreeNode | null {
+    if (depth === 1) {
+        return new TreeNode(val, root, null);
+    }
+    if (root === null) return null;
+    if (depth === 2) {
+        root.left = new TreeNode(val, root.left, null);
+        root.right = new TreeNode(val, null, root.right);
+    } else {
+        addOneRow(root.left, val, depth - 1);
+        addOneRow(root.right, val, depth - 1);
+    }
+    return root;
+};
+
+function smallestFromLeaf(root: TreeNode | null): string {
+    let heap: string[] = [];
+    dfs(root, "", heap);
+    return heap.sort()[0];
+};
+
+function dfs(node: TreeNode | null, path: string, heap: string[]): void {
+    if (node === null) return;
+    path = String.fromCharCode(node.val + 97) + path;
+    if (node.left === null && node.right === null) {
+        heap.push(path);
+    }
+    dfs(node.left, path, heap);
+    dfs(node.right, path, heap);
+}
