@@ -37,6 +37,7 @@ class Solution {
         dfs(root, val, depth, 1);
         return root;
     }
+
     public void dfs(TreeNode root, int val, int depth, int curDepth) {
         if (root == null) {
             return;
@@ -57,9 +58,11 @@ class Solution {
 
 class Heap {
     private List<String> list;
+
     public Heap() {
         list = new ArrayList<>();
     }
+
     public void add(String s) {
         list.add(s);
         int index = list.size() - 1;
@@ -75,6 +78,7 @@ class Heap {
             }
         }
     }
+
     public String peek() {
         return list.get(0);
     }
@@ -87,6 +91,7 @@ class Solution {
         dfs(root, new ArrayList<>(), res);
         return res[0];
     }
+
     public void dfs(TreeNode root, List<Character> list, String[] res) {
         if (root == null) {
             return;
@@ -123,4 +128,31 @@ class Solution {
  * s.pop()
  * sol(root)
  * return res
- */ 
+ */
+
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int res = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                res += 4 * grid[i][j];
+                if (i > 0) {
+                    res -= grid[i][j] * grid[i - 1][j];
+                }
+                if (j > 0) {
+                    res -= grid[i][j] * grid[i][j - 1];
+                }
+                if (i < m - 1) {
+                    res -= grid[i][j] * grid[i + 1][j];
+                }
+                if (j < n - 1) {
+                    res -= grid[i][j] * grid[i][j + 1];
+                }
+            }
+        }
+        return res;
+    }
+}

@@ -2713,26 +2713,26 @@
 #     gross = salary + hra_percent + ta_percent + bonus
 #     return gross.__round__(2)
 
-from typing import Optional
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
-        if depth == 1: return TreeNode(val, root)
-        def dfs(root, level):
-            if not root: return
-            if level + 1 == depth:
-                temp, root.left = root.left, TreeNode(val)
-                if temp: root.left.left = temp
-                temp, root.right = root.right, TreeNode(val)
-                if temp: root.right.right = temp
-            dfs(root.left, level + 1)
-            dfs(root.right, level + 1)
-        dfs(root, 1)
-        return root
+# from typing import Optional
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
+#         if depth == 1: return TreeNode(val, root)
+#         def dfs(root, level):
+#             if not root: return
+#             if level + 1 == depth:
+#                 temp, root.left = root.left, TreeNode(val)
+#                 if temp: root.left.left = temp
+#                 temp, root.right = root.right, TreeNode(val)
+#                 if temp: root.right.right = temp
+#             dfs(root.left, level + 1)
+#             dfs(root.right, level + 1)
+#         dfs(root, 1)
+#         return root
 # from itertools import accumulate
 # def sum_of_nums(*n: int) -> int:
 #     return list(accumulate(n))[-1]
@@ -2748,15 +2748,46 @@ class Solution:
 
 # print(cal_sum(10, 20, 30))
 
+# class TreeNode:
+#     def __init__(
+
+#     ) -> None:
+# from typing import Optional
+# class Solution:
+#     def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+#         h = []
+#         def dfs(root, curr):
+#             if not root: return
+#             if not root.left and not root.right:
+#                 heapq.heappush(h, chr(root.val + 97) + curr)
+#             dfs(root.left, (chr(root.val + 97) + curr))
+#             dfs(root.right, (chr(root.val + 97) + curr))
+#             return
+#         dfs(root, "")
+#         return h[0]
+from typing import List
 class Solution:
-    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
-        h = []
-        def dfs(root, curr):
-            if not root: return
-            if not root.left and not root.right:
-                heapq.heappush(h, chr(root.val + 97) + curr)
-            dfs(root.left, (chr(root.val + 97) + curr))
-            dfs(root.right, (chr(root.val + 97) + curr))
-            return
-        dfs(root, "")
-        return h[0]
+    @staticmethod
+    def islandPerimeter(grid: List[List[int]]) -> int:
+        R: int = len(grid)
+        C: int = len(grid[0])
+
+        perimeter: int = 0
+        for row in range(R):
+            for col in range(C):
+                if grid[row][col] == 1:
+                    perimeter += 4
+                    if row > 0 and grid[row - 1][col] == 1:
+                        perimeter -= 2
+                    if col > 0 and grid[row][col - 1] == 1:
+                        perimeter -= 2
+        return perimeter
+print(
+    Solution.islandPerimeter([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]])
+)
+# if (
+#    backtrack(i + 1, j, k + 1)
+#    or backtrack(i - 1, j, k + 1)
+#    or backtrack(i, j + 1, k + 1)
+#    or backtrack(i, j - 1, k + 1)
+# ): return True
