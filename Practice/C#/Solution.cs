@@ -161,3 +161,75 @@ public class Solution {
         return perimeter;
     }
 }
+
+int numIslands(char** grid, int gridSize, int* gridColSize) {
+    if(gridSize == 0)
+        return 0;
+    
+    int rows = gridSize;
+    int cols = *gridColSize;
+    int count = 0;
+    
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            if(grid[i][j] == '1')
+            {
+                dfs(grid, rows, cols, i, j);
+                count++;
+            }
+        }
+    }
+    
+    return count;
+}
+
+void dfs(char** grid, int rows, int cols, int i, int j)
+{
+    if(i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] == '0')
+        return;
+    
+    grid[i][j] = '0';
+    dfs(grid, rows, cols, i + 1, j);
+    dfs(grid, rows, cols, i - 1, j);
+    dfs(grid, rows, cols, i, j + 1);
+    dfs(grid, rows, cols, i, j - 1);
+}
+
+
+public class Solution {
+    public int NumIslands(char[][] grid) {
+        if(grid.Length == 0)
+            return 0;
+        
+        int rows = grid.Length;
+        int cols = grid[0].Length;
+        int count = 0;
+        
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++)
+            {
+                if(grid[i][j] == '1')
+                {
+                    dfs(grid, rows, cols, i, j);
+                    count++;
+                }
+            }
+        }
+        
+        return count;        
+    }
+    public void dfs(char[][] grid, int rows, int cols, int i, int j)
+    {
+        if(i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] == '0')
+            return;
+        
+        grid[i][j] = '0';
+        dfs(grid, rows, cols, i + 1, j);
+        dfs(grid, rows, cols, i - 1, j);
+        dfs(grid, rows, cols, i, j + 1);
+        dfs(grid, rows, cols, i, j - 1);
+    }
+}

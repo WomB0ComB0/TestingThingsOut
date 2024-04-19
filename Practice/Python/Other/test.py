@@ -2791,3 +2791,30 @@ print(
 #    or backtrack(i, j + 1, k + 1)
 #    or backtrack(i, j - 1, k + 1)
 # ): return True
+
+
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        return self.count_islands(grid)
+    
+    def flood_fill(self, grid: list[list[str]], r: int, c: int) -> None:
+        if not (0 <= r < len(grid) and 0 <= c < len(grid[0])): return
+        if grid[r][c] == '0': return
+
+        grid[r][c] = '0'
+        for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+            self.flood_fill(grid, r+dr, c+dc)
+
+
+    def count_islands(self, grid: list[list[str]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+
+        ct = 0
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c] == '0': continue
+                self.flood_fill(grid, r, c)
+                ct += 1
+        return ct
+

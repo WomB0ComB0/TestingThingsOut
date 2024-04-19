@@ -1379,3 +1379,55 @@ function islandPerimeter(grid: number[][]): number {
     }
     return res;
 };
+
+function numIslands(grid: string[][]): number {
+    let res: number = 0;
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[0].length; col++) {
+            if (grid[row][col] === "1") {
+                res += 1;
+                dfs(grid, row, col);
+            }
+        }
+    }
+    return res;
+};
+
+const dfs = (grid: string[][], row: number, col: number): void => {
+    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] === "0") return;
+    grid[row][col] = "0";
+    dfs(grid, row + 1, col);
+    dfs(grid, row - 1, col);
+    dfs(grid, row, col + 1);
+    dfs(grid, row, col - 1);
+}
+
+enum Check { LAND = "1",  VISITED = "2" }
+type Grid = Check[][];
+
+function numIslands(grid: Grid): number {
+    const dx: number[] = [0, 0, -1, 1];
+    const dy: number[] = [-1, 1, 0, 0];
+    const n: number = grid.length, m: number = grid[0].length;
+
+    const dfs = (x: number, y: number): void => {
+        grid[x][y] = Check.VISITED;
+        for (let i = 0; i < dx.length; i++){
+            const nx = x + dx[i];
+            const ny = y + dy[i];
+            if (0 <= nx && nx < n && 0 <= ny && ny < m && grid[nx][ny] === Check.LAND){
+                dfs(nx, ny);
+            }
+        }
+    };
+    let ans = 0;
+    for (let i = 0; i < n; i++){
+        for (let j = 0; j < m; j++){
+            if (grid[i][j] === Check.LAND){
+                dfs(i, j);
+                ans++;
+            }
+        }
+    }
+    return ans;
+};
