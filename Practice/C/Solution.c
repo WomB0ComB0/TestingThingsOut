@@ -200,3 +200,42 @@ int islandPerimeter(int** grid, int gridSize, int* gridColSize) {
     }
     return res;
 }
+
+
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+int** findFarmland(int** land, int landSize, int* landColSize, int* returnSize, int** returnColumnSizes) {
+    int maxFarmlands = landSize * (*landColSize);  // Maximum possible number of farmlands
+    int** farmlands = (int**)malloc(maxFarmlands * sizeof(int*));
+    *returnColumnSizes = (int*)malloc(maxFarmlands * sizeof(int));
+    *returnSize = 0;
+    for (int i = 0; i < landSize; i++) {
+        for (int j = 0; j < *landColSize; j++) {
+            if (land[i][j] == 1) {
+                int row = i, col = j;
+                while (row < landSize && land[row][j] == 1) {
+                    row++;
+                }
+                while (col < *landColSize && land[i][col] == 1) {
+                    col++;
+                }
+                for (int x = i; x < row; x++) {
+                    for (int y = j; y < col; y++) {
+                        land[x][y] = 0;  // Mark as visited
+                    }
+                }
+                farmlands[*returnSize] = (int*)malloc(4 * sizeof(int));
+                farmlands[*returnSize][0] = i;
+                farmlands[*returnSize][1] = j;
+                farmlands[*returnSize][2] = row - 1;
+                farmlands[*returnSize][3] = col - 1;
+                (*returnColumnSizes)[*returnSize] = 4;
+                (*returnSize)++;
+            }
+        }
+    }
+    return farmlands;
+}

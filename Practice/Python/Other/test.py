@@ -2765,56 +2765,139 @@
 #             return
 #         dfs(root, "")
 #         return h[0]
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def islandPerimeter(grid: List[List[int]]) -> int:
+#         R: int = len(grid)
+#         C: int = len(grid[0])
+
+#         perimeter: int = 0
+#         for row in range(R):
+#             for col in range(C):
+#                 if grid[row][col] == 1:
+#                     perimeter += 4
+#                     if row > 0 and grid[row - 1][col] == 1:
+#                         perimeter -= 2
+#                     if col > 0 and grid[row][col - 1] == 1:
+#                         perimeter -= 2
+#         return perimeter
+# print(
+#     Solution.islandPerimeter([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]])
+# )
+# # if (
+# #    backtrack(i + 1, j, k + 1)
+# #    or backtrack(i - 1, j, k + 1)
+# #    or backtrack(i, j + 1, k + 1)
+# #    or backtrack(i, j - 1, k + 1)
+# # ): return True
+
+
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         return self.count_islands(grid)
+
+#     def flood_fill(self, grid: list[list[str]], r: int, c: int) -> None:
+#         if not (0 <= r < len(grid) and 0 <= c < len(grid[0])): return
+#         if grid[r][c] == '0': return
+
+#         grid[r][c] = '0'
+#         for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+#             self.flood_fill(grid, r+dr, c+dc)
+
+
+#     def count_islands(self, grid: list[list[str]]) -> int:
+#         m = len(grid)
+#         n = len(grid[0])
+
+#         ct = 0
+#         for r in range(m):
+#             for c in range(n):
+#                 if grid[r][c] == '0': continue
+#                 self.flood_fill(grid, r, c)
+#                 ct += 1
+#         return ct
+
+
+# def display_in_reverse_order(*strings) -> str:
+#     res: list[str] = []
+#     for i in strings:
+#         res.insert(0, i[::-1])
+#     return "".join(res)
+
+
+# print(display_in_reverse_order("Hello", "world"))
+
+
+# def count_vowels_const(filename: str) -> tuple:
+#     vowels_count = 0
+#     consonants_count = 0
+#     vowels = set("aeiouy")
+#     with open(filename, "r") as file:
+#         for line in file:
+#             for char in line.lower():
+#                 if char.isalpha():
+#                     if char in vowels:
+#                         vowels_count += 1
+#                     else:
+#                         consonants_count += 1
+#     return vowels_count, consonants_count
+
+
+# def check_file_char(char: str) -> str:
+#     vowels = set("aeiouy")
+#     char = char.lower()
+#     if char.isalpha():
+#         if char in vowels:
+#             return "vowel"
+#         else:
+#             return "consonant"
+#     else:
+#         return "neither"
+
+# import os
+
+# print(os.getcwd())
+# from collections import defaultdict
+
+
+# def student_ranking_from_file(filename: str):
+#     book = defaultdict(list)
+#     with open(filename, "r") as file:
+#         for line in file:
+#             name, score = line.split()
+#             book[int(score)].append(name)
+#     for score in book:
+#         book[score].sort()
+#     return sorted(book.items(), key=lambda x: (-x[0], x[1]))
+
+
+# def world(*guess: str, answer: str) -> None:
+#     if (
+#         len(guess) != len(answer)
+#     ): print("Please make the lengths of both words equal")
+
+#     for i in range(5):
+#         guess = input()
+#         if guess != answer:
+
+#     print(f"Out of guesses!\n The answer was {answer}")
+
 from typing import List
 class Solution:
-    @staticmethod
-    def islandPerimeter(grid: List[List[int]]) -> int:
-        R: int = len(grid)
-        C: int = len(grid[0])
-
-        perimeter: int = 0
-        for row in range(R):
-            for col in range(C):
-                if grid[row][col] == 1:
-                    perimeter += 4
-                    if row > 0 and grid[row - 1][col] == 1:
-                        perimeter -= 2
-                    if col > 0 and grid[row][col - 1] == 1:
-                        perimeter -= 2
-        return perimeter
-print(
-    Solution.islandPerimeter([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]])
-)
-# if (
-#    backtrack(i + 1, j, k + 1)
-#    or backtrack(i - 1, j, k + 1)
-#    or backtrack(i, j + 1, k + 1)
-#    or backtrack(i, j - 1, k + 1)
-# ): return True
-
-
-class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        return self.count_islands(grid)
-    
-    def flood_fill(self, grid: list[list[str]], r: int, c: int) -> None:
-        if not (0 <= r < len(grid) and 0 <= c < len(grid[0])): return
-        if grid[r][c] == '0': return
-
-        grid[r][c] = '0'
-        for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
-            self.flood_fill(grid, r+dr, c+dc)
-
-
-    def count_islands(self, grid: list[list[str]]) -> int:
-        m = len(grid)
-        n = len(grid[0])
-
-        ct = 0
-        for r in range(m):
-            for c in range(n):
-                if grid[r][c] == '0': continue
-                self.flood_fill(grid, r, c)
-                ct += 1
-        return ct
-
+    def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
+        m, n = len(land), len(land[0])
+        groups = []
+        for y1 in range(m):
+            for x1 in range(n):
+                if not land[y1][x1]:
+                    continue
+                if (y1 and land[y1 - 1][x1]) or (x1 and land[y1][x1 - 1]):
+                    continue
+                y2, x2 = y1, x1
+                while y2 + 1 < m and land[y2 + 1][x2]:
+                    y2 += 1
+                while x2 + 1 < n and land[y2][x2 + 1]:
+                    x2 += 1
+                groups.append([y1, x1, y2, x2])
+        return groups

@@ -147,3 +147,32 @@ const dfs = (grid, i, j) => {
   dfs(grid, i, j - 1);
   dfs(grid, i, j + 1);
 }
+
+/**
+ * @param {number[][]} land
+ * @return {number[][]}
+ */
+var findFarmland = function (land) {
+  let result = [];
+  for (let i = 0; i < land.length; i++) {
+    for (let j = 0; j < land[0].length; j++) {
+      if (land[i][j] === 1) {
+        let farmland = [i, j];
+        dfs(land, i, j, farmland);
+        result.push(farmland);
+      }
+    }
+  }
+  return result;
+};
+
+const dfs = (land, i, j, farmland) => {
+  if (i < 0 || j < 0 || i >= land.length || j >= land[0].length || land[i][j] === 0) return;
+  land[i][j] = 0;
+  farmland[2] = i;
+  farmland[3] = j;
+  dfs(land, i - 1, j, farmland);
+  dfs(land, i + 1, j, farmland);
+  dfs(land, i, j - 1, farmland);
+  dfs(land, i, j + 1, farmland);
+}

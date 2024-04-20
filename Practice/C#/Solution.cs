@@ -233,3 +233,43 @@ public class Solution {
         dfs(grid, rows, cols, i, j - 1);
     }
 }
+
+
+public class Solution {
+    public int[][] FindFarmland(int[][] land) {
+        List<int[]> res = new List<int[]>();
+        int rows = land.Length;
+        int cols = land[0].Length;
+        
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < cols; j++)
+            {
+                if(land[i][j] == 1)
+                {
+                    int[] farmland = new int[4];
+                    farmland[0] = i;
+                    farmland[1] = j;
+                    dfs(land, i, j, farmland);
+                    res.Add(farmland);
+                }
+            }
+        }
+        
+        return res.ToArray();
+    }
+    public void dfs(int[][] land, int i, int j, int[] farmland)
+    {
+        if(i < 0 || i >= land.Length || j < 0 || j >= land[0].Length || land[i][j] == 0)
+            return;
+        
+        land[i][j] = 0;
+        farmland[2] = Math.Max(farmland[2], i);
+        farmland[3] = Math.Max(farmland[3], j);
+        
+        dfs(land, i + 1, j, farmland);
+        dfs(land, i - 1, j, farmland);
+        dfs(land, i, j + 1, farmland);
+        dfs(land, i, j - 1, farmland);
+    }
+}

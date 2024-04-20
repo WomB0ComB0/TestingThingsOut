@@ -185,3 +185,39 @@ class Solution {
         dfs(grid, i, j + 1);
     }
 }
+
+class Solution {
+    public int[][] findFarmland(int[][] land) {
+        int m = land.length;
+        int n = land[0].length;
+        List<int[]> list = new ArrayList<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (land[i][j] == 1) {
+                    int[] cur = new int[] { i, j, i, j };
+                    dfs(land, i, j, cur);
+                    list.add(cur);
+                }
+            }
+        }
+        int[][] res = new int[list.size()][4];
+        for (int i = 0; i < list.size(); i++) {
+            res[i] = list.get(i);
+        }
+        return res;
+    }
+
+    public void dfs(int[][] land, int i, int j, int[] cur) {
+        if (i < 0 || i >= land.length || j < 0 || j >= land[0].length || land[i][j] == 0) {
+            return;
+        }
+        cur[2] = Math.max(cur[2], i);
+        cur[3] = Math.max(cur[3], j);
+        land[i][j] = 0;
+        dfs(land, i + 1, j, cur);
+        dfs(land, i - 1, j, cur);
+        dfs(land, i, j + 1, cur);
+        dfs(land, i, j - 1, cur);
+    }
+}

@@ -1,4 +1,4 @@
-import { react } from '@vitejs/plugin-react';
+
 class RecentCounter {
     data: Deque;
     k: number;
@@ -1430,4 +1430,59 @@ function numIslands(grid: Grid): number {
         }
     }
     return ans;
+};
+
+
+enum Check {
+    LAND = "1", 
+    VISITED = "2"
+}
+
+type Grid = Check[][];
+
+function numIslands(grid: Grid): number {
+    const dx: number[] = [0, 0, -1, 1];
+    const dy: number[] = [-1, 1, 0, 0];
+    const n = grid.length, m = grid[0].length;
+
+    const dfs = (x: number, y: number): void => {
+        grid[x][y] = Check.VISITED;
+        for (let i = 0; i < dx.length; i++){
+            const nx = x + dx[i];
+            const ny = y + dy[i];
+            if (0 <= nx && nx < n && 0 <= ny && ny < m && grid[nx][ny] === Check.LAND){
+                dfs(nx, ny);
+            }
+        }
+    };
+    let ans = 0;
+    for (let i = 0; i < n; i++){
+        for (let j = 0; j < m; j++){
+            if (grid[i][j] === Check.LAND){
+                dfs(i, j);
+                ans++;
+            }
+        }
+    }
+    return ans;
+};
+
+function findFarmland(land: number[][]): number[][] {
+    const res: Array<[number, number, number, number]> = [];
+    const n: number = land.length, m: number = land[0].length;
+    for (let row = 0; row < n; row++) {
+        for (let col = 0; col < m; col++) {
+            if (
+                land[row][col] === 1 &&
+                (row === 0 || land[row - 1][col] === 0) &&
+                (col === 0 || land[row][col - 1] === 0)
+            ) {
+                let r: number = row, c: number = col;
+                while (r < n - 1 && land[r + 1][col] === 1) r++;
+                while (c < m - 1 && land[row][c + 1] === 1) c++;
+                res.push([row, col, r, c]);
+            }
+        }
+    }
+    return res
 };
