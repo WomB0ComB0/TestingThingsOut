@@ -176,3 +176,34 @@ const dfs = (land, i, j, farmland) => {
   dfs(land, i, j - 1, farmland);
   dfs(land, i, j + 1, farmland);
 }
+
+/**
+ * @param {string[]} deadends
+ * @param {string} target
+ * @return {number}
+ */
+var openLock = function (deadends, target) {
+  let dead = new Set(deadends);
+  if (dead.has('0000')) return -1;
+  let queue = ['0000'];
+  let visited = new Set(queue);
+  let steps = 0;
+  while (queue.length) {
+    let size = queue.length;
+    for (let i = 0; i < size; i++) {
+      let current = queue.shift();
+      if (current === target) return steps;
+      for (let j = 0; j < 4; j++) {
+        for (let k = -1; k <= 1; k += 2) {
+          let next = current.slice(0, j) + (Number(current[j]) + k + 10) % 10 + current.slice(j + 1);
+          if (!visited.has(next) && !dead.has(next)) {
+            queue.push(next);
+            visited.add(next);
+          }
+        }
+      }
+    }
+    steps++;
+  }
+  return -1;
+};

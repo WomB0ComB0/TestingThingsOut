@@ -273,3 +273,61 @@ public class Solution {
         dfs(land, i, j - 1, farmland);
     }
 }
+
+public class Solution {
+    public int OpenLock(string[] deadends, string target) {
+        HashSet<string> vis = new HashSet<string>();
+        HashSet<string> deads = new HashSet<string>(deadends);
+        Queue<string> q = new Queue<string>();
+        q.Enqueue("0000");
+        int turns = 0;
+        
+        while(q.Count > 0)
+        {
+            int size = q.Count;
+            for(int i = 0; i < size; i++)
+            {
+                string curr = q.Dequeue();
+                if(curr == target)
+                    return turns;
+                if(deads.Contains(curr) || vis.Contains(curr))
+                    continue;
+                vis.Add(curr);
+                for(int j = 0; j < 4; j++)
+                {
+                    int up = (curr[j] - '0' + 1) % 10;
+                    int down = (curr[j] - '0' + 9) % 10;
+                    string upStr = curr.Substring(0, j) + up + curr.Substring(j + 1);
+                    string downStr = curr.Substring(0, j) + down + curr.Substring(j + 1);
+                    if(!vis.Contains(upStr))
+                        q.Enqueue(upStr);
+                    if(!vis.Contains(downStr))
+                        q.Enqueue(downStr);
+                }
+            }
+            turns++;
+        }
+        
+        return -1;    
+    }
+    
+}
+
+/**
+        vis = set()
+        q = Deque([("0000", 0)])
+        while q:
+            curr, turn = q.popleft()
+            if curr == target:
+                return turn
+            if curr in deadends or curr in vis:
+                continue
+            vis.add(curr)
+            for i, c in enumerate(curr):
+                up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
+                if up not in vis:
+                    q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
+                if down not in vis:
+                    q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
+        return -1
+*/ 

@@ -221,3 +221,39 @@ class Solution {
         dfs(land, i, j - 1, cur);
     }
 }
+
+
+class Solution {
+    public int openLock(String[] deadends, String target) {
+        Set<String> dead = new HashSet<>();
+        for (String s : deadends) { dead.add(s); }
+        if (dead.contains("0000")) { return -1; }
+        if (target.equals("0000")) { return 0; }
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("0000");
+        Set<String> visited = new HashSet<>();
+        visited.add("0000");
+        int res = 0;
+
+        while (!queue.isEmpty()) {
+            res++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String cur = queue.poll();
+                for (int j = 0; j < 4; j++) {
+                    for (int k = -1; k <= 1; k += 2) {
+                        char[] ch = cur.toCharArray();
+                        ch[j] = (char) ((ch[j] - '0' + k + 10) % 10 + '0');
+                        String next = new String(ch);
+                        if (next.equals(target)) { return res; }
+                        if (!dead.contains(next) && !visited.contains(next)) {
+                            queue.offer(next);
+                            visited.add(next);
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}

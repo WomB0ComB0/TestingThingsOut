@@ -2883,21 +2883,44 @@
 
 #     print(f"Out of guesses!\n The answer was {answer}")
 
-from typing import List
+# from typing import List
+# class Solution:
+#     def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
+#         m, n = len(land), len(land[0])
+#         groups = []
+#         for y1 in range(m):
+#             for x1 in range(n):
+#                 if not land[y1][x1]:
+#                     continue
+#                 if (y1 and land[y1 - 1][x1]) or (x1 and land[y1][x1 - 1]):
+#                     continue
+#                 y2, x2 = y1, x1
+#                 while y2 + 1 < m and land[y2 + 1][x2]:
+#                     y2 += 1
+#                 while x2 + 1 < n and land[y2][x2 + 1]:
+#                     x2 += 1
+#                 groups.append([y1, x1, y2, x2])
+#         return groups
+
+from typing import List, Deque
 class Solution:
-    def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
-        m, n = len(land), len(land[0])
-        groups = []
-        for y1 in range(m):
-            for x1 in range(n):
-                if not land[y1][x1]:
-                    continue
-                if (y1 and land[y1 - 1][x1]) or (x1 and land[y1][x1 - 1]):
-                    continue
-                y2, x2 = y1, x1
-                while y2 + 1 < m and land[y2 + 1][x2]:
-                    y2 += 1
-                while x2 + 1 < n and land[y2][x2 + 1]:
-                    x2 += 1
-                groups.append([y1, x1, y2, x2])
-        return groups
+    @staticmethod
+    def openLock(deadends: List[str], target: str) -> int:
+        vis = set()
+        q = Deque([("0000", 0)])
+        while q:
+            curr, turn = q.popleft()
+            if curr == target:
+                return turn
+            if curr in deadends or curr in vis:
+                continue
+            vis.add(curr)
+            for i, c in enumerate(curr):
+                up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
+                if up not in vis:
+                    q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
+                if down not in vis:
+                    q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
+        return -1
+
+print(Solution.openLock(["0201", "0101", "0102", "1212", "2002"], "0202"))

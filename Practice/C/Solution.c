@@ -239,3 +239,49 @@ int** findFarmland(int** land, int landSize, int* landColSize, int* returnSize, 
     }
     return farmlands;
 }
+
+int openLock(char** deadends, int deadendsSize, char* target) {
+    bool visited[10000] = {false};
+    for (int i = 0; i < deadendsSize; i++) {
+        visited[atoi(deadends[i])] = true;
+    }
+    if (visited[0]) {
+        return -1;
+    }
+    int targetNum = atoi(target);
+    if (targetNum == 0) {
+        return 0;
+    }
+    int steps = 0;
+    queue<int> q;
+    q.push(0);
+    visited[0] = true;
+    while (!q.empty()) {
+        steps++;
+        int size = q.size();
+        for (int i = 0; i < size; i++) {
+            int num = q.front();
+            q.pop();
+            for (int j = 1; j <= 1000; j *= 10) {
+                int digit = (num / j) % 10;
+                int up = num + (digit == 9 ? -9 * j : j);
+                if (up == targetNum) {
+                    return steps;
+                }
+                if (!visited[up]) {
+                    q.push(up);
+                    visited[up] = true;
+                }
+                int down = num + (digit == 0 ? 9 * j : -j);
+                if (down == targetNum) {
+                    return steps;
+                }
+                if (!visited[down]) {
+                    q.push(down);
+                    visited[down] = true;
+                }
+            }
+        }
+    }
+    return -1;
+}

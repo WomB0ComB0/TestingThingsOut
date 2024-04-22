@@ -1483,6 +1483,49 @@ function findFarmland(land: number[][]): number[][] {
                 res.push([row, col, r, c]);
             }
         }
-    }
+    }X
     return res
 };
+
+function openLock(deadends: string[], target: string): number {
+    let dead: Set<string> = new Set(deadends);
+    if (dead.has("0000")) return -1;
+    let queue: string[] = ["0000"];
+    let visited: Set<string> = new Set(["0000"]);
+    let level: number = 0;
+    while (queue.length) {
+        let size: number = queue.length;
+        for (let i = 0; i < size; i++) {
+            let current: string = queue.shift()!;
+            if (current === target) return level;
+            for (let j = 0; j < 4; j++) {
+                let up: string = upLock(current, j);
+                if (!visited.has(up) && !dead.has(up)) {
+                    queue.push(up);
+                    visited.add(up);
+                }
+                let down: string = downLock(current, j);
+                if (!visited.has(down) && !dead.has(down)) {
+                    queue.push(down);
+                    visited.add(down);
+                }
+            }
+        }
+        level++;
+    }
+    return -1;
+};
+
+function upLock(current: string, i: number): string {
+    let arr: string[] = current.split("");
+    if (arr[i] === "9") arr[i] = "0";
+    else arr[i] = String(Number(arr[i]) + 1);
+    return arr.join("");
+}
+
+function downLock(current: string, i: number): string {
+    let arr: string[] = current.split("");
+    if (arr[i] === "0") arr[i] = "9";
+    else arr[i] = String(Number(arr[i]) - 1);
+    return arr.join("");
+}
