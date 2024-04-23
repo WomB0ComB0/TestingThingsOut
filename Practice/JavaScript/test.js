@@ -207,3 +207,50 @@ var openLock = function (deadends, target) {
   }
   return -1;
 };
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+var findMinHeightTrees = function (n, edges) {
+  if (n === 1) return [0];
+  // Create adjacency list
+  const adjList = [...Array(n)].map((e) => new Set());
+  // Add edges to adjacency list
+  for (const [n1, n2] of edges) {
+    adjList[n1].add(n2);
+    adjList[n2].add(n1);
+  }
+  // Create a queue with all the leaf nodes
+  const deq = new Queue()
+  for (let index = 0; index <  adjList.length; index++) {
+    // If the node has only one neighbor, it is a leaf node
+    if (adjList[index].size === 1) {
+      // Add the leaf node to the queue
+      deq.enqueue(index);
+    }
+  }
+
+  // Remove the leaf nodes level by level
+  while (n > 2) {
+    let size = deq.size();
+    n -= size;
+    // Remove the leaf nodes
+    for (let i = 0; i < size; i++) {
+      let node = deq.dequeue();
+      // Get the only neighbor of the leaf node
+      for (let neighbor of adjList[node]) {
+        // Remove the leaf node from the neighbor
+        adjList[neighbor].delete(node);
+        // If the neighbor becomes a leaf node, add it to the queue
+        if (adjList[neighbor].size === 1) {
+          // Add the leaf node to the queue
+          deq.enqueue(neighbor);
+        }
+      }
+    }
+  }
+  // Return the remaining nodes in the queue
+  return deq.toArray();
+};

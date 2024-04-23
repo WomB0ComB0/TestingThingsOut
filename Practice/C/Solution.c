@@ -285,3 +285,127 @@ int openLock(char** deadends, int deadendsSize, char* target) {
     }
     return -1;
 }
+
+
+#include <stdlib.h>
+
+// Function to perform a breadth-first search (BFS) to find the deepest node(s)
+// starting from the given root.
+int bfs(struct TreeNode* root) {
+    // Initialize a queue for BFS traversal
+    struct TreeNode** queue = (struct TreeNode**)malloc(10000 * sizeof(struct TreeNode*));
+    int front = 0, rear = 0;
+    queue[rear++] = root;
+    int depth = 0;
+    
+    // Perform BFS
+    while (front < rear) {
+        int size = rear - front;
+        for (int i = 0; i < size; i++) {
+            struct TreeNode* node = queue[front++];
+            if (node->left) queue[rear++] = node->left;
+            if (node->right) queue[rear++] = node->right;
+        }
+        depth++;
+    }
+    
+    // Free memory
+    free(queue);
+    
+    return depth;
+}
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* findMinHeightTrees(int n, int** edges, int edgesSize, int* edgesColSize, int* returnSize) {
+    if (n == 1) {
+        *returnSize = 1;
+        int* result = (int*)malloc(sizeof(int));
+        result[0] = 0;
+        return result;
+    }
+
+    // Initialize adjacency list to store the graph
+    int** adj = (int**)malloc(n * sizeof(int*));
+    for (int i = 0; i < n; i++) {
+        adj[i] = (int*)malloc(0); // Initialize an empty array for each node
+    }
+    // Initialize an array to store the degree of each node
+    int* degree = (int*)calloc(n, sizeof(int));
+
+    // Populate adjacency list and degree array
+    for (int i = 0; i < edgesSize; i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        adj[u] = (int*)realloc(adj[u], (degree[u] + 1) * sizeof(int));
+        adj[u][degree[u]++] = v;
+        adj[v] = (int*)realloc(adj[v], (degree[v] + 1) * sizeof(int));
+        adj[v][degree[v]++] = u;
+    }
+
+    // Initialize a queue to store leaves
+    int* queue = (int*)malloc(n * sizeof(int));
+    int front = 0, rear = 0;
+    for (int i = 0; i < n; i++) {
+        if (degree[i] == 1) { // Leaf node
+            queue[rear++] = i;
+        }
+    }
+
+    // Remove leaves layer by layer until 1 or 2 nodes left
+    while (n > 2) {
+        int size = rear - front;
+        n -= size;
+        for (int i = 0; i < size; i++) {
+            int node = queue[front++];
+            for (int j = 0; j < degree[node]; j++) {
+                int neighbor = adj[node][j];
+                if (--degree[neighbor] == 1) {
+                    queue[rear++] = neighbor;
+                }
+            }
+        }
+    }
+
+    // Now, queue contains 1 or 2 nodes, representing potential roots
+    // Iterate through the queue and perform BFS to find the deepest node(s)
+    int* result = (int*)malloc(2 * sizeof(int));
+    *returnSize = 0;
+    for (int i = front; i < rear; i++) {
+        int root = queue[i];
+        // Initialize a binary tree node for BFS
+        struct TreeNode* tree = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+        tree->val = root;
+        tree->left = NULL;
+        tree->right = NULL;
+        // Perform BFS to find the depth
+        int depth = bfs(tree);
+        // Check if this depth is deeper than the current deepest depth
+        if (depth > *returnSize) {
+            *returnSize = depth;
+            result[0] = root;
+            result[1] = -1; // Reset the second element
+        } else if (depth == *returnSize) {
+            result[1] = root; // Store the second root
+        }
+        // Free memory allocated for the binary tree node
+        free(tree);
+    }
+
+    // If there's only one root, set the second root to -1
+    if (*returnSize == 1) {
+        result[1] = -1;
+    }
+
+    // Free memory
+    free(queue);
+    free(degree);
+    for (int i = 0; i < n; i++) {
+        free(adj[i]);
+    }
+    free(adj);
+
+    return result;
+}
+

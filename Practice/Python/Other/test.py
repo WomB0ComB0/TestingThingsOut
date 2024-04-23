@@ -2902,25 +2902,64 @@
 #                 groups.append([y1, x1, y2, x2])
 #         return groups
 
-from typing import List, Deque
-class Solution:
-    @staticmethod
-    def openLock(deadends: List[str], target: str) -> int:
-        vis = set()
-        q = Deque([("0000", 0)])
-        while q:
-            curr, turn = q.popleft()
-            if curr == target:
-                return turn
-            if curr in deadends or curr in vis:
-                continue
-            vis.add(curr)
-            for i, c in enumerate(curr):
-                up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
-                if up not in vis:
-                    q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
-                if down not in vis:
-                    q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
-        return -1
+# from typing import List, Deque
+# class Solution:
+#     @staticmethod
+#     def openLock(deadends: List[str], target: str) -> int:
+#         vis = set()
+#         q = Deque([("0000", 0)])
+#         while q:
+#             curr, turn = q.popleft()
+#             if curr == target:
+#                 return turn
+#             if curr in deadends or curr in vis:
+#                 continue
+#             vis.add(curr)
+#             for i, c in enumerate(curr):
+#                 up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
+#                 if up not in vis:
+#                     q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
+#                 if down not in vis:
+#                     q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
+#         return -1
 
-print(Solution.openLock(["0201", "0101", "0102", "1212", "2002"], "0202"))
+# print(Solution.openLock(["0201", "0101", "0102", "1212", "2002"], "0202"))
+
+from collections.abc import Callable
+def convert_to_list(n: int) -> list[str]:
+    return list(str(n))
+
+def num_to_digits(func: Callable[[int], list[str]], n) -> list[int]:
+    return list(map(int, func(n)))
+
+print(num_to_digits(convert_to_list, 1729))
+
+from typing import List
+from collections import defaultdict
+class Solution:
+    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+        visited = set()
+        adjList = defaultdict(list)
+        for edge in edges:
+            adjList[edge[0]].append(edge[1])
+            adjList[edge[1]].append(edge[0])
+        q = []
+        for i in range(0, n):
+            if len(adjList[i]) == 1:
+                q.append(i)
+        while n > 2:
+            visited = set()
+            for _ in range(0, len(q)):
+                node = q.pop(0)
+
+                for edge in adjList[node]:
+                    if edge in visited:
+                        continue
+                    adjList[edge].remove(node)
+
+                    if len(adjList[edge]) == 1:
+                        q.append(edge)
+                        visited.add(edge)
+                adjList.pop(node)
+                n -= 1
+        return [0] if (adjList == {0: []}) else q

@@ -1529,3 +1529,27 @@ function downLock(current: string, i: number): string {
     else arr[i] = String(Number(arr[i]) - 1);
     return arr.join("");
 }
+
+function findMinHeightTrees(n: number, edges: number[][]): number[] {
+    if (n === 1) return [0];
+    let adj: number[][] = Array.from({ length: n }, () => []);
+    for (let [u, v] of edges) {
+        adj[u].push(v);
+        adj[v].push(u);
+    }
+    let leaves: number[] = [];
+    for (let i = 0; i < n; i++) {
+        if (adj[i].length === 1) leaves.push(i);
+    }
+    while (n > 2) {
+        n -= leaves.length;
+        let newLeaves: number[] = [];
+        for (let leaf of leaves) {
+            let neighbor: number = adj[leaf].pop()!;
+            adj[neighbor] = adj[neighbor].filter((x) => x !== leaf);
+            if (adj[neighbor].length === 1) newLeaves.push(neighbor);
+        }
+        leaves = newLeaves;
+    }
+    return leaves;
+};

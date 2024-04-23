@@ -313,21 +313,47 @@ public class Solution {
     
 }
 
-/**
-        vis = set()
-        q = Deque([("0000", 0)])
-        while q:
-            curr, turn = q.popleft()
-            if curr == target:
-                return turn
-            if curr in deadends or curr in vis:
-                continue
-            vis.add(curr)
-            for i, c in enumerate(curr):
-                up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
-                if up not in vis:
-                    q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
-                if down not in vis:
-                    q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
-        return -1
-*/ 
+public class Solution {
+    public IList<int> FindMinHeightTrees(int n, int[][] edges) {
+        if(n == 1)
+            return new List<int>(){0};
+        
+        List<int>[] adj = new List<int>[n];
+        for(int i = 0; i < n; i++)
+            adj[i] = new List<int>();
+        
+        int[] degree = new int[n];
+        foreach(int[] edge in edges)
+        {
+            adj[edge[0]].Add(edge[1]);
+            adj[edge[1]].Add(edge[0]);
+            degree[edge[0]]++;
+            degree[edge[1]]++;
+        }
+        
+        Queue<int> q = new Queue<int>();
+        for(int i = 0; i < n; i++)
+        {
+            if(degree[i] == 1)
+                q.Enqueue(i);
+        }
+        
+        while(n > 2)
+        {
+            int size = q.Count;
+            n -= size;
+            for(int i = 0; i < size; i++)
+            {
+                int curr = q.Dequeue();
+                foreach(int neighbor in adj[curr])
+                {
+                    degree[neighbor]--;
+                    if(degree[neighbor] == 1)
+                        q.Enqueue(neighbor);
+                }
+            }
+        }
+        
+        return q.ToList();        
+    }
+}
