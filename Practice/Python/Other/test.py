@@ -2925,41 +2925,54 @@
 
 # print(Solution.openLock(["0201", "0101", "0102", "1212", "2002"], "0202"))
 
-from collections.abc import Callable
-def convert_to_list(n: int) -> list[str]:
-    return list(str(n))
+# from collections.abc import Callable
+# def convert_to_list(n: int) -> list[str]:
+#     return list(str(n))
 
-def num_to_digits(func: Callable[[int], list[str]], n) -> list[int]:
-    return list(map(int, func(n)))
+# def num_to_digits(func: Callable[[int], list[str]], n) -> list[int]:
+#     return list(map(int, func(n)))
 
-print(num_to_digits(convert_to_list, 1729))
+# print(num_to_digits(convert_to_list, 1729))
 
-from typing import List
-from collections import defaultdict
+# from typing import List
+# from collections import defaultdict
+# class Solution:
+#     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+#         visited = set()
+#         adjList = defaultdict(list)
+#         for edge in edges:
+#             adjList[edge[0]].append(edge[1])
+#             adjList[edge[1]].append(edge[0])
+#         q = []
+#         for i in range(0, n):
+#             if len(adjList[i]) == 1:
+#                 q.append(i)
+#         while n > 2:
+#             visited = set()
+#             for _ in range(0, len(q)):
+#                 node = q.pop(0)
+
+#                 for edge in adjList[node]:
+#                     if edge in visited:
+#                         continue
+#                     adjList[edge].remove(node)
+
+#                     if len(adjList[edge]) == 1:
+#                         q.append(edge)
+#                         visited.add(edge)
+#                 adjList.pop(node)
+#                 n -= 1
+#         return [0] if (adjList == {0: []}) else q
+
+
 class Solution:
-    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
-        visited = set()
-        adjList = defaultdict(list)
-        for edge in edges:
-            adjList[edge[0]].append(edge[1])
-            adjList[edge[1]].append(edge[0])
-        q = []
-        for i in range(0, n):
-            if len(adjList[i]) == 1:
-                q.append(i)
-        while n > 2:
-            visited = set()
-            for _ in range(0, len(q)):
-                node = q.pop(0)
+    def tribonacci(self, n: int) -> int:
+        if n == 0: return 0
+        if n == 1 or n == 2: return 1
+        dp = [0] * (n + 1)
+        dp[1] = dp[2] = 1
+        for i in range(3, n + 1):
+            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+        return dp[n]
 
-                for edge in adjList[node]:
-                    if edge in visited:
-                        continue
-                    adjList[edge].remove(node)
 
-                    if len(adjList[edge]) == 1:
-                        q.append(edge)
-                        visited.add(edge)
-                adjList.pop(node)
-                n -= 1
-        return [0] if (adjList == {0: []}) else q

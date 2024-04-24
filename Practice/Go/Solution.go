@@ -44,3 +44,28 @@ func remove(arr []int, target int) []int {
 		}
 	}
 }
+
+func tribonacci(n int) int {
+	if n == 0 {
+		return 0
+	}
+	if n == 1 || n == 2 {
+		return 1
+	}
+	a, b, c := 0, 1, 1
+	for i := 3; i <= n; i++ {
+		a, b, c = b, c, a+b+c
+	}
+	return c
+}
+
+func tribonacci(n int) int {
+	if n == 0 { return 0 }
+	if n == 1 || n == 2 { return 1 }
+	dp := make([]int, n+1)
+	dp[1], dp[2] = 1, 1
+	for i := 3; i <= n; i++ {
+		dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+	}
+	return dp[n]   
+}
