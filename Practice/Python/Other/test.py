@@ -2965,14 +2965,79 @@
 #         return [0] if (adjList == {0: []}) else q
 
 
+# class Solution:
+#     def tribonacci(self, n: int) -> int:
+#         if n == 0: return 0
+#         if n == 1 or n == 2: return 1
+#         dp = [0] * (n + 1)
+#         dp[1] = dp[2] = 1
+#         for i in range(3, n + 1):
+#             dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+#         return dp[n]
+
+# def euler1(n: int) -> int:
+#     return filter(lambda x: x % 3 == 0 or x % 5 == 0, 1000)
+
+# def is_special_array(l: list[int]) -> bool:
+#     even: list[int] = [l[i] for i in range(0, len(l), 2)]
+#     odd: list[int] = [l[i] for i in range(1, len(l), 2)]
+#     return all(x % 2 == 0 for x in even) and all(x % 2 != 0 for x in odd)
+
+# asd = [2, 7, 4, 9, 6, 1, 6, 3]
+# print(is_special_array(asd))
+
+# from math import gcd
+# from functools import reduce
+
+# def is_prim_pyth_triple(l: list[int]) -> bool:
+#     l.sort()
+#     if l[0] ** 2 + l[1] ** 2 != l[2] ** 2:
+#         return False
+#     if reduce(gcd, l) != 1:
+#         return False
+#     return True
+
+# print(is_prim_pyth_triple([4, 5, 3]))
+# print(is_prim_pyth_triple([7, 12, 13]))
+
+# def can_find(chars :list[str],  words :list[str]) -> bool:
+#     return all(any(char in word for word in words) for char in chars)
+
+# print(can_find(["at", "be", "th", "au"], ["beautiful", "the", "hat"]))
+# print(can_find(["ay", "be", "ta", "cu"], ["maybe", "beta", "abet", "course"]))
+# print(can_find(["th", "fo", "ma", "or"], ["the", "many", "for", "forest"]))
+# print(can_find(["oo", "mi", "ki", "la"], ["milk", "chocolate", "cooks"]))
+# print(can_find(["oo", "mi", "ki", "la"], ["milk", "chocolate", "cooks"]))
+
+
+# def euler2(limit: int)-> int:
+#     return
+
+
+# def make_armstrong(start: int, limit: int) -> list[int]:
+#     return
+
+# def split_even_odd_sublist(num_list: list[int]) -> tuple[list[int], list[int]]:
+#     return
+my_string = "Hello World"
+print([char for char in my_string if char not in "aeiouAEIOU"])
+
+from string import ascii_lowercase
 class Solution:
-    def tribonacci(self, n: int) -> int:
-        if n == 0: return 0
-        if n == 1 or n == 2: return 1
-        dp = [0] * (n + 1)
-        dp[1] = dp[2] = 1
-        for i in range(3, n + 1):
-            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
-        return dp[n]
+    @staticmethod
+    def longestIdealString(s: str, k: int) -> int:
+        dp = dict.fromkeys(ascii_lowercase, 0)
+        print(type(dp))
+        for c in s:
+            dp[c] = max(dp[d] + 1 for d in dp if abs(ord(c) - ord(d)) <= k)
+        return max(dp.values())
 
+print(Solution.longestIdealString("acfgbd", 2))
 
+def is_prime(num: int) -> bool:
+    if num < 2:
+        return False
+    for i in range(2, num):
+        if num % i == 0:
+            return False
+    return True

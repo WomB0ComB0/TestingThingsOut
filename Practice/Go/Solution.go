@@ -69,3 +69,16 @@ func tribonacci(n int) int {
 	}
 	return dp[n]   
 }
+
+func longestIdealString(s string, k int) int {
+	dp := make([]int, 26)
+	for i := 0; i < s.length(); i++ {
+		idx = s.charAt(i) - 'a'
+
+		left := max()
+	}``
+}
+
+func charAt(s string, index int) byte {
+	return s[index]
+}

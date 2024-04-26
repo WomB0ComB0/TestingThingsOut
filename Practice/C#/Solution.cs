@@ -373,3 +373,29 @@ public class Solution {
         return dp[n];
     }
 }
+
+enum Integer {
+    MIN_VALUE = -2147483648,
+}
+
+public class Solution {
+    public int LongestIdealString(string s, int k) {
+        int[] dp = new int[27];
+        for (int i = 0; i < s.Length; i++) {
+            int idx = s[i] - 'a';
+
+            int left = Math.Max((idx - k), 0);
+            int right = Math.Min((idx + k), 26);
+            int max = Integer.MinValue;
+            for (int j = left; j <= right; j++) {
+                max = Math.Max(max, dp[j]);
+            }
+            dp[idx] = max + 1;
+        }
+        max = int.MinValue;
+        foreach (int ele in dp) {
+            max = Math.Max(max, ele);
+        }
+        return max;
+    }
+}

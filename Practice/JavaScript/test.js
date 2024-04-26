@@ -224,7 +224,7 @@ var findMinHeightTrees = function (n, edges) {
   }
   // Create a queue with all the leaf nodes
   const deq = new Queue()
-  for (let index = 0; index <  adjList.length; index++) {
+  for (let index = 0; index < adjList.length; index++) {
     // If the node has only one neighbor, it is a leaf node
     if (adjList[index].size === 1) {
       // Add the leaf node to the queue
@@ -267,4 +267,22 @@ var tribonacci = function (n) {
     dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
   }
   return dp[n];
+};
+
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var longestIdealString = function (s, k) {
+  const cache = [...Array(26).fill(0)];
+  for (const char of s) {
+    const code = char.charCodeAt(0) - 97;
+    let max = 0;
+    for (let index = Math.max(code - k, 0); index < Math.min(code + k + 1, 26); index += 1) {
+      max = Math.max(max, cache[index] + 1);
+    }
+    cache[code] = max;
+  }
+  return Math.max(...cache);
 };

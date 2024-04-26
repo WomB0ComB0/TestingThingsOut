@@ -1563,3 +1563,16 @@ function tribonacci(n: number): number {
         dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
     return dp[n]
 };
+
+function longestIdealString(s: string, k: number): number {
+    const cache: number[] = [...Array(26).fill(0)];
+    for (const char of s) {
+        const code: number = char.charCodeAt(0) - 97;
+        let max: number = 0;
+        for (let index: number = Math.max(code - k, 0); index < Math.min(code + k + 1, 26); index++) {
+            max = Math.max(max, cache[index]);
+        }
+        cache[code] = max + 1;
+    }
+    return Math.max(...cache);
+};

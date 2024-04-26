@@ -437,3 +437,19 @@ int tribonacci(int n){
     }
     return dp[n];
 }
+
+int longestIdealString(char* s, int k) {
+    int* dp = (int*)malloc(26*sizeof(int));
+    for (char c = 'a'; c <= strlen(s); c++) {
+        int l = 0, ci = c - 'a';
+        for (int i = 0; i < 26; i++) {
+            if (abs(ci - i) <= k) l = max(l, dp[i] + 1);
+        }
+        dp[ci] = l;
+    }
+    int res = 0;
+    for (int i = 0; i < 26; i++) {
+        res = max(res, dp[i]);
+    }
+    return res;
+}

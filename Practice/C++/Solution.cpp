@@ -3,6 +3,60 @@
 #include <algorithm>
 #include <climits>
 #include <sstream>
+#include <queue>
+#include <unordered_set>
+#include <unordered_map>
+#include <stack>
+#include <string>
+#include <cmath>
+#include <numeric>
+#include <map>
+#include <set>
+#include <list>
+#include <deque>
+#include <bitset>
+#include <functional>
+#include <iterator>
+#include <utility>
+#include <array>
+#include <regex>
+#include <random>
+#include <chrono>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <future>
+#include <atomic>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+#include <cassert>
+#include <climits>
+#include <cfloat>
+#include <ciso646>
+#include <cstddef>
+#include <cinttypes>
+#include <cstdarg>
+#include <cwchar>
+#include <cwctype>
+#include <limits>
+#include <exception>
+#include <stdexcept>
+#include <new>
+#include <typeinfo>
+#include <initializer_list>
+#include <tuple>
+#include <scoped_allocator>
+#include <memory>
+#include <memory_resource>
+#include <climits>
+#include <cfloat>
+#include <cstdint>
+#include <cstddef>
+
+
 
 using namespace std;
 
@@ -278,5 +332,21 @@ public:
             dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
         }
         return dp[n];
+    }
+};
+
+
+class Solution {
+public:
+    int longestIdealString(string s, int k) {
+        vector<int> dp(26);
+        for (char c : s) {
+            int l = 0, ci = c - 'a';
+            for (int p = 0; p < 26; p++) {
+                if (abs(ci - p) <= k) l = max(l, dp[p] + 1);
+            }
+            dp[ci] = l;
+        }
+        return *max_element(dp.begin(), dp.end());
     }
 };
