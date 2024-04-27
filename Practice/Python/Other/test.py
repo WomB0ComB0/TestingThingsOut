@@ -2653,8 +2653,14 @@
 # print(Solution.minimumValueSum([1, 2, 3, 4], [2]))  # Output: -1
 
 # from typing import List, Optional
+# from typing import List, Optional
 
 
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
@@ -2699,3 +2705,597 @@ class Solution:
         )
         return 0
 print(Solution.numberOfSpecialChars("aaAbBcC"))
+# class Solution:
+#     @staticmethod
+#     def sumNumbers(root: Optional[TreeNode]) -> int:
+#         def dfs(node, stack) -> int:
+#             if not node:
+#                 return 0
+#             stack.append(str(node.val))
+#             count = 0
+#             if not node.left and not node.right:
+#                 count += int("".join(stack))
+#             else:
+#                 count += dfs(node.left, stack)
+#                 count += dfs(node.right, stack)
+#             stack.pop()
+#             return count
+
+#         return dfs(root, [])
+
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# print(Solution.sumNumbers(root))
+
+# from itertools import accumulate
+# def sum_of_digit(n: int) -> int:
+#     return list(accumulate(range(n)))[-1]
+
+# print(sum_of_digit(8))
+
+
+# def sum_of_digits2(n: int) -> None:
+#     n = list(str(n))
+#     print(n)
+#     res = [int(i) for i in range(len(n))]
+#     return sum(res)
+#     # return sum(int(n))
+
+# print(sum_of_digits2(12))
+
+
+# def num_sum(n: int) -> int:
+#     if n == 0:
+#         return 0
+#     return n % 10 + num_sum(n // 10)
+
+# Implement a function to calculate the gross salary of an employee for the month of March. He is expecting 10% of HRA and 12% of TA on his basic salary. This month every employee will receive a $500 as a bonus.
+# def gross_salary(salary: int, hra_percent: int = 10, ta_percent: int = 12, bonus: int = 500) -> float:
+#     hra_percent, ta_percent = (hra_percent / 100) * salary, (ta_percent / 100) * salary
+#     gross = salary + hra_percent + ta_percent + bonus
+#     return gross.__round__(2)
+
+# from typing import Optional
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
+#         if depth == 1: return TreeNode(val, root)
+#         def dfs(root, level):
+#             if not root: return
+#             if level + 1 == depth:
+#                 temp, root.left = root.left, TreeNode(val)
+#                 if temp: root.left.left = temp
+#                 temp, root.right = root.right, TreeNode(val)
+#                 if temp: root.right.right = temp
+#             dfs(root.left, level + 1)
+#             dfs(root.right, level + 1)
+#         dfs(root, 1)
+#         return root
+# from itertools import accumulate
+# def sum_of_nums(*n: int) -> int:
+#     return list(accumulate(n))[-1]
+
+# print(sum_of_nums(1, 2, 3, 4, 5))
+
+# def cal_sum(*nums):
+#     total = 0
+#     print(type(nums))
+#     for item in nums:
+#         total += item
+#         return total
+
+# print(cal_sum(10, 20, 30))
+
+# class TreeNode:
+#     def __init__(
+
+#     ) -> None:
+# from typing import Optional
+# class Solution:
+#     def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+#         h = []
+#         def dfs(root, curr):
+#             if not root: return
+#             if not root.left and not root.right:
+#                 heapq.heappush(h, chr(root.val + 97) + curr)
+#             dfs(root.left, (chr(root.val + 97) + curr))
+#             dfs(root.right, (chr(root.val + 97) + curr))
+#             return
+#         dfs(root, "")
+#         return h[0]
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def islandPerimeter(grid: List[List[int]]) -> int:
+#         R: int = len(grid)
+#         C: int = len(grid[0])
+
+#         perimeter: int = 0
+#         for row in range(R):
+#             for col in range(C):
+#                 if grid[row][col] == 1:
+#                     perimeter += 4
+#                     if row > 0 and grid[row - 1][col] == 1:
+#                         perimeter -= 2
+#                     if col > 0 and grid[row][col - 1] == 1:
+#                         perimeter -= 2
+#         return perimeter
+# print(
+#     Solution.islandPerimeter([[0, 1, 0, 0], [1, 1, 1, 0], [0, 1, 0, 0], [1, 1, 0, 0]])
+# )
+# # if (
+# #    backtrack(i + 1, j, k + 1)
+# #    or backtrack(i - 1, j, k + 1)
+# #    or backtrack(i, j + 1, k + 1)
+# #    or backtrack(i, j - 1, k + 1)
+# # ): return True
+
+
+# class Solution:
+#     def numIslands(self, grid: List[List[str]]) -> int:
+#         return self.count_islands(grid)
+
+#     def flood_fill(self, grid: list[list[str]], r: int, c: int) -> None:
+#         if not (0 <= r < len(grid) and 0 <= c < len(grid[0])): return
+#         if grid[r][c] == '0': return
+
+#         grid[r][c] = '0'
+#         for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+#             self.flood_fill(grid, r+dr, c+dc)
+
+
+#     def count_islands(self, grid: list[list[str]]) -> int:
+#         m = len(grid)
+#         n = len(grid[0])
+
+#         ct = 0
+#         for r in range(m):
+#             for c in range(n):
+#                 if grid[r][c] == '0': continue
+#                 self.flood_fill(grid, r, c)
+#                 ct += 1
+#         return ct
+
+
+# def display_in_reverse_order(*strings) -> str:
+#     res: list[str] = []
+#     for i in strings:
+#         res.insert(0, i[::-1])
+#     return "".join(res)
+
+
+# print(display_in_reverse_order("Hello", "world"))
+
+
+# def count_vowels_const(filename: str) -> tuple:
+#     vowels_count = 0
+#     consonants_count = 0
+#     vowels = set("aeiouy")
+#     with open(filename, "r") as file:
+#         for line in file:
+#             for char in line.lower():
+#                 if char.isalpha():
+#                     if char in vowels:
+#                         vowels_count += 1
+#                     else:
+#                         consonants_count += 1
+#     return vowels_count, consonants_count
+
+
+# def check_file_char(char: str) -> str:
+#     vowels = set("aeiouy")
+#     char = char.lower()
+#     if char.isalpha():
+#         if char in vowels:
+#             return "vowel"
+#         else:
+#             return "consonant"
+#     else:
+#         return "neither"
+
+# import os
+
+# print(os.getcwd())
+# from collections import defaultdict
+
+
+# def student_ranking_from_file(filename: str):
+#     book = defaultdict(list)
+#     with open(filename, "r") as file:
+#         for line in file:
+#             name, score = line.split()
+#             book[int(score)].append(name)
+#     for score in book:
+#         book[score].sort()
+#     return sorted(book.items(), key=lambda x: (-x[0], x[1]))
+
+
+# def world(*guess: str, answer: str) -> None:
+#     if (
+#         len(guess) != len(answer)
+#     ): print("Please make the lengths of both words equal")
+
+#     for i in range(5):
+#         guess = input()
+#         if guess != answer:
+
+#     print(f"Out of guesses!\n The answer was {answer}")
+
+# from typing import List
+# class Solution:
+#     def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
+#         m, n = len(land), len(land[0])
+#         groups = []
+#         for y1 in range(m):
+#             for x1 in range(n):
+#                 if not land[y1][x1]:
+#                     continue
+#                 if (y1 and land[y1 - 1][x1]) or (x1 and land[y1][x1 - 1]):
+#                     continue
+#                 y2, x2 = y1, x1
+#                 while y2 + 1 < m and land[y2 + 1][x2]:
+#                     y2 += 1
+#                 while x2 + 1 < n and land[y2][x2 + 1]:
+#                     x2 += 1
+#                 groups.append([y1, x1, y2, x2])
+#         return groups
+
+# from typing import List, Deque
+# class Solution:
+#     @staticmethod
+#     def openLock(deadends: List[str], target: str) -> int:
+#         vis = set()
+#         q = Deque([("0000", 0)])
+#         while q:
+#             curr, turn = q.popleft()
+#             if curr == target:
+#                 return turn
+#             if curr in deadends or curr in vis:
+#                 continue
+#             vis.add(curr)
+#             for i, c in enumerate(curr):
+#                 up, down = (int(c) + 1) % 10, (int(c) - 1) % 10
+#                 if up not in vis:
+#                     q.append((curr[:i] + str(up) + curr[i + 1 :], turn + 1))
+#                 if down not in vis:
+#                     q.append((curr[:i] + str(down) + curr[i + 1 :], turn + 1))
+#         return -1
+
+# print(Solution.openLock(["0201", "0101", "0102", "1212", "2002"], "0202"))
+
+# from collections.abc import Callable
+# def convert_to_list(n: int) -> list[str]:
+#     return list(str(n))
+
+# def num_to_digits(func: Callable[[int], list[str]], n) -> list[int]:
+#     return list(map(int, func(n)))
+
+# print(num_to_digits(convert_to_list, 1729))
+
+# from typing import List
+# from collections import defaultdict
+# class Solution:
+#     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+#         visited = set()
+#         adjList = defaultdict(list)
+#         for edge in edges:
+#             adjList[edge[0]].append(edge[1])
+#             adjList[edge[1]].append(edge[0])
+#         q = []
+#         for i in range(0, n):
+#             if len(adjList[i]) == 1:
+#                 q.append(i)
+#         while n > 2:
+#             visited = set()
+#             for _ in range(0, len(q)):
+#                 node = q.pop(0)
+
+#                 for edge in adjList[node]:
+#                     if edge in visited:
+#                         continue
+#                     adjList[edge].remove(node)
+
+#                     if len(adjList[edge]) == 1:
+#                         q.append(edge)
+#                         visited.add(edge)
+#                 adjList.pop(node)
+#                 n -= 1
+#         return [0] if (adjList == {0: []}) else q
+
+
+# class Solution:
+#     def tribonacci(self, n: int) -> int:
+#         if n == 0: return 0
+#         if n == 1 or n == 2: return 1
+#         dp = [0] * (n + 1)
+#         dp[1] = dp[2] = 1
+#         for i in range(3, n + 1):
+#             dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+#         return dp[n]
+
+# def euler1(n: int) -> int:
+#     return filter(lambda x: x % 3 == 0 or x % 5 == 0, 1000)
+
+# def is_special_array(l: list[int]) -> bool:
+#     even: list[int] = [l[i] for i in range(0, len(l), 2)]
+#     odd: list[int] = [l[i] for i in range(1, len(l), 2)]
+#     return all(x % 2 == 0 for x in even) and all(x % 2 != 0 for x in odd)
+
+# asd = [2, 7, 4, 9, 6, 1, 6, 3]
+# print(is_special_array(asd))
+
+# from math import gcd
+# from functools import reduce
+
+# def is_prim_pyth_triple(l: list[int]) -> bool:
+#     l.sort()
+#     if l[0] ** 2 + l[1] ** 2 != l[2] ** 2:
+#         return False
+#     if reduce(gcd, l) != 1:
+#         return False
+#     return True
+
+# print(is_prim_pyth_triple([4, 5, 3]))
+# print(is_prim_pyth_triple([7, 12, 13]))
+
+# def can_find(chars :list[str],  words :list[str]) -> bool:
+#     return all(any(char in word for word in words) for char in chars)
+
+# print(can_find(["at", "be", "th", "au"], ["beautiful", "the", "hat"]))
+# print(can_find(["ay", "be", "ta", "cu"], ["maybe", "beta", "abet", "course"]))
+# print(can_find(["th", "fo", "ma", "or"], ["the", "many", "for", "forest"]))
+# print(can_find(["oo", "mi", "ki", "la"], ["milk", "chocolate", "cooks"]))
+# print(can_find(["oo", "mi", "ki", "la"], ["milk", "chocolate", "cooks"]))
+
+
+# def euler2(limit: int)-> int:
+#     return
+
+
+# def make_armstrong(start: int, limit: int) -> list[int]:
+#     return
+
+# def split_even_odd_sublist(num_list: list[int]) -> tuple[list[int], list[int]]:
+#     return
+# my_string = "Hello World"
+# print([char for char in my_string if char not in "aeiouAEIOU"])
+
+# from string import ascii_lowercase
+# class Solution:
+#    @staticmethod
+#    def longestIdealString(s: str, k: int) -> int:
+#        dp = dict.fromkeys(ascii_lowercase, 0)
+#        print(type(dp))
+#        for c in s:
+#            dp[c] = max(dp[d] + 1 for d in dp if abs(ord(c) - ord(d)) <= k)
+#        return max(dp.values())
+#
+# print(Solution.longestIdealString("acfgbd", 2))
+
+# def is_prime(num: int) -> bool:
+#     if num < 2:
+#         return False
+#     for i in range(2, num):
+#         if num % i == 0:
+#             return False
+#     return True
+
+# def next_prime(n: int) -> int:
+#     n += 1
+#     while not is_prime(n):
+#         n += 1
+#     return n
+
+# def prime_sequence(limit: int)-> list[int]:
+#     res: list[int] = []
+#     for i in range(limit):
+#         res.append(next_prime(i))
+#     return list(set(res))
+
+# print(prime_sequence(20))
+
+# def repeat_sequence(string: str) -> str:
+#    res: str = ""
+#    arrow = "->"
+#    for i, char in enumerate(list(string)):
+#        res += char.upper()
+#        res += char.lower() * i
+#        if (i != len(string) - 1):
+#            res += arrow
+#    return res
+# print(repeat_sequence("UVWX"))
+
+# def split_even_odd_sublist(num_list: list[int]) -> tuple[list[int], list[int]]:
+#     even = list(filter(lambda x: x % 2 == 0, num_list))
+#     odd = list(filter(lambda x: x % 2 != 0, num_list))
+#     return (even, odd)
+#
+# print(split_even_odd_sublist([2, 4, 6, 8, 1, 3, 5, 7, 9, 11, 12, 14, 15, 21]))
+
+# def make_armstrong(start: int, limit: int)-> list[int]:
+#    return [num for num in range(start, limit) if num == sum(int(digit) ** len(str(num)) for digit in str(num))]
+#
+# print(make_armstrong(100, 1000))
+
+# def arm_strong(n: list[int]) -> int:
+#     num_digits = len(str(n))
+#     return n == sum(int(digit) ** num_digits for digit in str(n))
+
+# def digits(n: int) -> list[int]:
+#    return [int(digit) for digit in str(n)]
+
+
+# def fibonacci_sequence(limit: int):
+#    a, b = 0, 1
+#    while a <= limit:
+#        yield a
+#        a, b = b, a + b
+#
+#
+# def euler2(limit: int) -> int:
+#    return sum(x for x in fibonacci_sequence(limit) if x % 2 == 0)
+#
+
+# def fibonacci(n: int) -> int:
+#     if (n == 0):
+#         return 0
+#     elif (n == 1):
+#         return 1
+#     else:
+#         return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+# from functools import cache
+# class Solution:
+#   @staticmethod
+#   def minFallingPathSum(grid: list[list[int]]) -> int:
+#     if (len(grid[0]) == 1) : return grid[0][0]
+#     @cache
+#     def dfs(i, j):
+#       if i == len(grid): return 0
+#       if j < 0 or j == len(grid[0]): return float("inf")
+#       best = float("inf")
+#       for k in range(len(grid[0])):
+#         if k != j: best = min(best, dfs(i + 1, k))
+#       return grid[i][j] + best
+#     res = float("inf")
+#     for j in range(len(grid[0])):
+#       res = min(res, dfs(0, j))
+#     return res
+
+# from typing import List
+# class Solution:
+#     def minFallingPathSum(self, grid: List[List[int]]) -> int:
+#         N = len(grid)
+#         DP = grid[0]
+
+#         for i in range(1, N):
+#             indx1 = DP.index(min(DP))
+#             indx2 = DP.index(min(DP[:indx1] + DP[indx1 + 1 :]))
+#             for j in range(N):
+#                 if j != indx1:
+#                     grid[i][j] += DP[indx1]
+#                 else:
+#                     grid[i][j] += DP[indx2]
+#             DP = grid[i]
+
+#         return min(DP)
+
+
+# class Solution:
+#   def minFallingPathSum(self, grid: list[list[int]]) -> int:
+#     if (len(grid[0]) == 1) : return grid[0][0]
+#     @cache
+#     def dfs(i, j):
+#       if i == len(grid): return 0
+#       if j < 0 or j == len(grid[0]): return float("inf")
+#       best = float("inf")
+#       for k in range(len(grid[0])):
+#         if k != j: best = min(best, dfs(i + 1, k))
+#       return grid[i][j] + best
+#     res = float("inf")
+#     for j in range(len(grid[0])):
+#       res = min(res, dfs(0, j))
+#     return res
+
+# from typing import List
+# class Solution:
+#     def minFallingPathSum(self, grid: List[List[int]]) -> int:
+#         N = len(grid)
+#         DP = grid[0]
+
+#         for i in range(1, N):
+#             indx1 = DP.index(min(DP))
+#             indx2 = DP.index(min(DP[:indx1] + DP[indx1 + 1 :]))
+#             for j in range(N):
+#                 if j != indx1:
+#                     grid[i][j] += DP[indx1]
+#                 else:
+#                     grid[i][j] += DP[indx2]
+#             DP = grid[i]
+
+#         return min(DP)
+
+# from functools import cache
+# class Solution:
+#     def findRotateSteps(self, ring: str, key: str) -> int:
+#         return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)
+
+from typing import List
+class Solution:
+    def canMakeSquare(self, grid: List[List[str]]) -> bool:
+        R = len(grid)
+        C = len(grid[0])
+
+        for r in range(R):
+            for c in range(C):
+                if self.check_2_by_2(grid, r, c, "B"):
+                    return
+                if self.check_2_by_2(grid, r, c, "W"):
+                    return
+        return True
+    def check_2_by_2(
+        self, grid: List[List[str]], r: int, c: int, color: str
+    ) -> bool:
+        return (
+            grid[r][c] == color
+            and grid[r + 1][c] == color
+            and grid[r][c + 1] == color
+            and grid[r + 1][c + 1] == color
+        )
+def can_form_square(grid):
+    for i in range(len(grid) - 1):
+        for j in range(len(grid[0]) - 1):
+            square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
+            if max(square.count('B'), square.count('W')) >= 3:
+                return True
+    return False
+
+class Solution:
+    def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
+        res: int = 0
+        for i in range(len(grid) - 1):
+            for j in range(len(grid[0]) - 1):
+                square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
+                if square.count(1) == 3:
+                    res += 1
+        return res
+    
+class Solution:
+    def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
+        R, C = len(grid), len(grid[0])
+        rc = [0]*R
+        cc = [0]*C
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == 1:
+                    rc[r] += 1
+                    cc[c] += 1
+        res: int = 0
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == 1:
+                    res += (rc[r] - 1) * (cc[c] - 1)
+        return res
+
+class Solution:
+    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int :
+        MOD = int(1e9 + 7)
+        dp = [[0]*(one+1) for _ in range(zero+one+1)]
+        dp[0][0] = 1
+        for i in range(1, zero+one+1):
+            dp[i][0] = dp[i-1][0]
+            if i <= zero:
+                dp[i][0] = (dp[i][0] + dp[i-1][0]) % MOD
+            for j in range(1, min(i, one)+1):
+                dp[i][j] = dp[i-1][j]
+                if i <= zero + j:
+                    dp[i][j] = (dp[i][j] + dp[i-1][j-1]) % MOD
+                if j > limit:
+                    dp[i][j] = (dp[i][j] - dp[i-limit-1][j-1]) % MOD
+        return sum(dp[i][j] for i in range(zero+one+1) for j in range(1, one+1)) % MOD

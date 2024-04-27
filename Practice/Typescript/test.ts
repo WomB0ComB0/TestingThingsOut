@@ -1,4 +1,4 @@
-import { react } from '@vitejs/plugin-react';
+
 class RecentCounter {
     data: Deque;
     k: number;
@@ -1411,3 +1411,292 @@ class Solution:
             return False
         return dfs(source)
 */
+
+function addOneRow(root: TreeNode | null, val: number, depth: number): TreeNode | null {
+    if (depth === 1) {
+        return new TreeNode(val, root, null);
+    }
+    if (root === null) return null;
+    if (depth === 2) {
+        root.left = new TreeNode(val, root.left, null);
+        root.right = new TreeNode(val, null, root.right);
+    } else {
+        addOneRow(root.left, val, depth - 1);
+        addOneRow(root.right, val, depth - 1);
+    }
+    return root;
+};
+
+function smallestFromLeaf(root: TreeNode | null): string {
+    let heap: string[] = [];
+    dfs(root, "", heap);
+    return heap.sort()[0];
+};
+
+function dfs(node: TreeNode | null, path: string, heap: string[]): void {
+    if (node === null) return;
+    path = String.fromCharCode(node.val + 97) + path;
+    if (node.left === null && node.right === null) {
+        heap.push(path);
+    }
+    dfs(node.left, path, heap);
+    dfs(node.right, path, heap);
+}
+
+function islandPerimeter(grid: number[][]): number {
+    let res: number = 0;
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[0].length; col++) {
+            if (grid[row][col] === 1) {
+                res += 4;
+                if (row > 0 && grid[row - 1][col] === 1) res -= 2;
+                if (col > 0 && grid[row][col - 1] === 1) res -= 2;
+            }
+        }
+    }
+    return res;
+};
+
+function numIslands(grid: string[][]): number {
+    let res: number = 0;
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[0].length; col++) {
+            if (grid[row][col] === "1") {
+                res += 1;
+                dfs(grid, row, col);
+            }
+        }
+    }
+    return res;
+};
+
+const dfs = (grid: string[][], row: number, col: number): void => {
+    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] === "0") return;
+    grid[row][col] = "0";
+    dfs(grid, row + 1, col);
+    dfs(grid, row - 1, col);
+    dfs(grid, row, col + 1);
+    dfs(grid, row, col - 1);
+}
+
+enum Check { LAND = "1",  VISITED = "2" }
+type Grid = Check[][];
+
+function numIslands(grid: Grid): number {
+    const dx: number[] = [0, 0, -1, 1];
+    const dy: number[] = [-1, 1, 0, 0];
+    const n: number = grid.length, m: number = grid[0].length;
+
+    const dfs = (x: number, y: number): void => {
+        grid[x][y] = Check.VISITED;
+        for (let i = 0; i < dx.length; i++){
+            const nx = x + dx[i];
+            const ny = y + dy[i];
+            if (0 <= nx && nx < n && 0 <= ny && ny < m && grid[nx][ny] === Check.LAND){
+                dfs(nx, ny);
+            }
+        }
+    };
+    let ans = 0;
+    for (let i = 0; i < n; i++){
+        for (let j = 0; j < m; j++){
+            if (grid[i][j] === Check.LAND){
+                dfs(i, j);
+                ans++;
+            }
+        }
+    }
+    return ans;
+};
+
+
+enum Check {
+    LAND = "1", 
+    VISITED = "2"
+}
+
+type Grid = Check[][];
+
+function numIslands(grid: Grid): number {
+    const dx: number[] = [0, 0, -1, 1];
+    const dy: number[] = [-1, 1, 0, 0];
+    const n = grid.length, m = grid[0].length;
+
+    const dfs = (x: number, y: number): void => {
+        grid[x][y] = Check.VISITED;
+        for (let i = 0; i < dx.length; i++){
+            const nx = x + dx[i];
+            const ny = y + dy[i];
+            if (0 <= nx && nx < n && 0 <= ny && ny < m && grid[nx][ny] === Check.LAND){
+                dfs(nx, ny);
+            }
+        }
+    };
+    let ans = 0;
+    for (let i = 0; i < n; i++){
+        for (let j = 0; j < m; j++){
+            if (grid[i][j] === Check.LAND){
+                dfs(i, j);
+                ans++;
+            }
+        }
+    }
+    return ans;
+};
+
+function findFarmland(land: number[][]): number[][] {
+    const res: Array<[number, number, number, number]> = [];
+    const n: number = land.length, m: number = land[0].length;
+    for (let row = 0; row < n; row++) {
+        for (let col = 0; col < m; col++) {
+            if (
+                land[row][col] === 1 &&
+                (row === 0 || land[row - 1][col] === 0) &&
+                (col === 0 || land[row][col - 1] === 0)
+            ) {
+                let r: number = row, c: number = col;
+                while (r < n - 1 && land[r + 1][col] === 1) r++;
+                while (c < m - 1 && land[row][c + 1] === 1) c++;
+                res.push([row, col, r, c]);
+            }
+        }
+    }X
+    return res
+};
+
+function openLock(deadends: string[], target: string): number {
+    let dead: Set<string> = new Set(deadends);
+    if (dead.has("0000")) return -1;
+    let queue: string[] = ["0000"];
+    let visited: Set<string> = new Set(["0000"]);
+    let level: number = 0;
+    while (queue.length) {
+        let size: number = queue.length;
+        for (let i = 0; i < size; i++) {
+            let current: string = queue.shift()!;
+            if (current === target) return level;
+            for (let j = 0; j < 4; j++) {
+                let up: string = upLock(current, j);
+                if (!visited.has(up) && !dead.has(up)) {
+                    queue.push(up);
+                    visited.add(up);
+                }
+                let down: string = downLock(current, j);
+                if (!visited.has(down) && !dead.has(down)) {
+                    queue.push(down);
+                    visited.add(down);
+                }
+            }
+        }
+        level++;
+    }
+    return -1;
+};
+
+function upLock(current: string, i: number): string {
+    let arr: string[] = current.split("");
+    if (arr[i] === "9") arr[i] = "0";
+    else arr[i] = String(Number(arr[i]) + 1);
+    return arr.join("");
+}
+
+function downLock(current: string, i: number): string {
+    let arr: string[] = current.split("");
+    if (arr[i] === "0") arr[i] = "9";
+    else arr[i] = String(Number(arr[i]) - 1);
+    return arr.join("");
+}
+
+function findMinHeightTrees(n: number, edges: number[][]): number[] {
+    if (n === 1) return [0];
+    let adj: number[][] = Array.from({ length: n }, () => []);
+    for (let [u, v] of edges) {
+        adj[u].push(v);
+        adj[v].push(u);
+    }
+    let leaves: number[] = [];
+    for (let i = 0; i < n; i++) {
+        if (adj[i].length === 1) leaves.push(i);
+    }
+    while (n > 2) {
+        n -= leaves.length;
+        let newLeaves: number[] = [];
+        for (let leaf of leaves) {
+            let neighbor: number = adj[leaf].pop()!;
+            adj[neighbor] = adj[neighbor].filter((x) => x !== leaf);
+            if (adj[neighbor].length === 1) newLeaves.push(neighbor);
+        }
+        leaves = newLeaves;
+    }
+    return leaves;
+};
+
+function tribonacci(n: number): number {
+    if (n == 0) return 0
+    if (n == 1 || n == 2) return 1
+    let dp: Array<number> = Array(n + 1).fill(0)
+    dp[1] = dp[2] = 1
+    for (let i = 3; i < n + 1; i++) 
+        dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3]
+    return dp[n]
+};
+
+function longestIdealString(s: string, k: number): number {
+    const cache: number[] = [...Array(26).fill(0)];
+    for (const char of s) {
+        const code: number = char.charCodeAt(0) - 97;
+        let max: number = 0;
+        for (let index: number = Math.max(code - k, 0); index < Math.min(code + k + 1, 26); index++) {
+            max = Math.max(max, cache[index]);
+        }
+        cache[code] = max + 1;
+    }
+    return Math.max(...cache);
+};
+
+
+function minFallingPathSum(grid: number[][]): number {
+    const N: number = grid.length;
+    let DP: number[] = grid[0]
+
+    for (let i = 1; i < N; i++) {
+        let index1 = DP.indexOf(Math.min(...DP));
+        let index2 = DP.indexOf(Math.min(...DP.slice(0, index1).concat(DP.slice(index1 + 1))));
+        for (let j = 0; j < N; j++) {
+            if (j !== index1) {
+                grid[i][j] += DP[index1];
+            } else {
+                grid[i][j] += DP[index2];
+            }
+        }
+        DP = grid[i];
+    }
+    return Math.min(...DP);
+};
+
+
+function findRotateSteps(ring: string, key: string): number {
+    const N: number = ring.length;
+    const M: number = key.length;
+    let dp: number[][] = Array.from({ length: M }, () => Array(N).fill(Infinity));
+    let pos: { [s: string]: number[] } = {};
+    for (let i = 0; i < N; i++) {
+        if (ring[i] in pos) {
+            pos[ring[i]].push(i);
+        } else {
+            pos[ring[i]] = [i];
+        }
+    }
+    for (let i = 0; i < M; i++) {
+        for (let j of pos[key[i]]) {
+            if (i === 0) {
+                dp[i][j] = Math.min(j, N - j) + 1;
+            } else {
+                for (let k of pos[key[i - 1]]) {
+                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + Math.min(Math.abs(j - k), N - Math.abs(j - k)) + 1);
+                }
+            }
+        }
+    }
+    return Math.min(...dp[M - 1]);
+};
