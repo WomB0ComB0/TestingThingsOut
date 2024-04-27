@@ -3178,7 +3178,81 @@
 
 #         return min(DP)
 
-from functools import cache
+# from functools import cache
+# class Solution:
+#     def findRotateSteps(self, ring: str, key: str) -> int:
+#         return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)
+
+from typing import List
 class Solution:
-    def findRotateSteps(self, ring: str, key: str) -> int:
-        return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)
+    def canMakeSquare(self, grid: List[List[str]]) -> bool:
+        R = len(grid)
+        C = len(grid[0])
+
+        for r in range(R):
+            for c in range(C):
+                if self.check_2_by_2(grid, r, c, "B"):
+                    return
+                if self.check_2_by_2(grid, r, c, "W"):
+                    return
+        return True
+    def check_2_by_2(
+        self, grid: List[List[str]], r: int, c: int, color: str
+    ) -> bool:
+        return (
+            grid[r][c] == color
+            and grid[r + 1][c] == color
+            and grid[r][c + 1] == color
+            and grid[r + 1][c + 1] == color
+        )
+def can_form_square(grid):
+    for i in range(len(grid) - 1):
+        for j in range(len(grid[0]) - 1):
+            square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
+            if max(square.count('B'), square.count('W')) >= 3:
+                return True
+    return False
+
+class Solution:
+    def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
+        res: int = 0
+        for i in range(len(grid) - 1):
+            for j in range(len(grid[0]) - 1):
+                square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
+                if square.count(1) == 3:
+                    res += 1
+        return res
+    
+class Solution:
+    def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
+        R, C = len(grid), len(grid[0])
+        rc = [0]*R
+        cc = [0]*C
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == 1:
+                    rc[r] += 1
+                    cc[c] += 1
+        res: int = 0
+        for r in range(R):
+            for c in range(C):
+                if grid[r][c] == 1:
+                    res += (rc[r] - 1) * (cc[c] - 1)
+        return res
+
+class Solution:
+    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int :
+        MOD = int(1e9 + 7)
+        dp = [[0]*(one+1) for _ in range(zero+one+1)]
+        dp[0][0] = 1
+        for i in range(1, zero+one+1):
+            dp[i][0] = dp[i-1][0]
+            if i <= zero:
+                dp[i][0] = (dp[i][0] + dp[i-1][0]) % MOD
+            for j in range(1, min(i, one)+1):
+                dp[i][j] = dp[i-1][j]
+                if i <= zero + j:
+                    dp[i][j] = (dp[i][j] + dp[i-1][j-1]) % MOD
+                if j > limit:
+                    dp[i][j] = (dp[i][j] - dp[i-limit-1][j-1]) % MOD
+        return sum(dp[i][j] for i in range(zero+one+1) for j in range(1, one+1)) % MOD
