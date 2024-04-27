@@ -2652,35 +2652,50 @@
 # print(Solution.minimumValueSum([2, 3, 5, 7, 7, 7, 5], [0, 7, 5]))  # Output: 17
 # print(Solution.minimumValueSum([1, 2, 3, 4], [2]))  # Output: -1
 
-from typing import List, Optional
+# from typing import List, Optional
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+
+# class Solution:
+#     @staticmethod
+#     def sumNumbers(root: Optional[TreeNode]) -> int:
+#         def dfs(node, stack) -> int:
+#             if not node:
+#                 return 0
+#             stack.append(str(node.val))
+#             count = 0
+#             if not node.left and not node.right:
+#                 count += int("".join(stack))
+#             else:
+#                 count += dfs(node.left, stack)
+#                 count += dfs(node.right, stack)
+#             stack.pop()
+#             return count
+
+#         return dfs(root, [])
+
+# root = TreeNode(1)
+# root.left = TreeNode(2)
+# root.right = TreeNode(3)
+# print(Solution.sumNumbers(root))
+
+
+import random
 
 
 class Solution:
     @staticmethod
-    def sumNumbers(root: Optional[TreeNode]) -> int:
-        def dfs(node, stack) -> int:
-            if not node:
-                return 0
-            stack.append(str(node.val))
-            count = 0
-            if not node.left and not node.right:
-                count += int("".join(stack))
-            else:
-                count += dfs(node.left, stack)
-                count += dfs(node.right, stack)
-            stack.pop()
-            return count
-
-        return dfs(root, [])
-
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-print(Solution.sumNumbers(root))
+    def numberOfSpecialChars(word: str) -> int:
+        book = set()
+        print(book)
+        print(
+            sorted(word.split(" "))
+        )
+        return 0
+print(Solution.numberOfSpecialChars("aaAbBcC"))
