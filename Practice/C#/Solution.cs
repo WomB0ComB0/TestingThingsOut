@@ -399,3 +399,94 @@ public class Solution {
         return max;
     }
 }
+
+public class Solution {
+    public int MinFallingPathSum(int[][] grid) {
+        int n = grid.Length;
+        int res = int.MaxValue;
+        // dp[i][j] = min path sum from top to grid[i][j]
+        int[][] dp = new int[n][];
+        // initialize dp
+        for (int i = 0; i < n; i++) {
+            dp[i] = new int[n];
+            Array.Fill(dp[i], int.MaxValue);
+        }
+        // clone the first row
+        for (int i = 0; i < n; i++) {
+            dp[0][i] = grid[0][i];
+        }
+        
+        /*
+        You aren't necessarily performing a 3x3 matrix traversal, 
+        you are just checking the 3 elements in 
+        the row above the current element.
+        */
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                // Common patter in dp
+                int temp = int.MaxValue;
+                /*
+                We use ++k instead of k++ because we want to check the 3 
+                elements in the row above the current element
+                */
+                for (int k = 0; k < n; ++k) {
+                    // if j != k, we can take the min path sum from the previous row
+                    if (j  != k) {
+                        /*
+                            Cases for temp:
+                            1. dp[i - 1][k] is int.MaxValue, we can't take this path
+                            2. dp[i - 1][k] is not int.MaxValue, we can take this path
+                        */
+                        temp = Math.Min(temp, grid[i][j] + dp[i - 1][k]);
+                    }
+                    // if j == k, we can't take the same column from the previous row
+                    dp[i][j] = temp;
+                }
+            }
+        }
+        
+        // find the min path sum from the last row
+        for (int j = 0; j < n; j++) {
+            // we can take any path from the last row
+            res = Math.Min(res, dp[n - 1][j]);
+        }
+
+        return res;
+    }
+}
+
+public class Solution {
+    public int FindRotateSteps(string ring, string key) {
+        int n = ring.Length;
+        int m = key.Length;
+        int[][] dp = new int[m][];
+        for (int i = 0; i < m; i++) {
+            dp[i] = new int[n];
+            Array.Fill(dp[i], int.MaxValue);
+        }
+        Dictionary<char, List<int>> map = new Dictionary<char, List<int>>();
+        for (int i = 0; i < n; i++) {
+            if (!map.ContainsKey(ring[i])) {
+                map[ring[i]] = new List<int>();
+            }
+            map[ring[i]].Add(i);
+        }
+        for (int i = 0; i < n; i++) {
+            if (ring[i] == key[0]) {
+                dp[0][i] = Math.Min(i, n - i) + 1;
+            }
+        }
+        for (int i = 1; i < m; i++) {
+            foreach (int j in map[key[i]]) {
+                foreach (int k in map[key[i - 1]]) {
+                    dp[i][j] = Math.Min(dp[i][j], dp[i - 1][k] + Math.Min(Math.Abs(j - k), n - Math.Abs(j - k)) + 1);
+                }
+            }
+        }
+        int res = int.MaxValue;
+        for (int i = 0; i < n; i++) {
+            res = Math.Min(res, dp[m - 1][i]);
+        }
+        return res;
+    }
+}

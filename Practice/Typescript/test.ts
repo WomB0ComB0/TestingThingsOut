@@ -1576,3 +1576,50 @@ function longestIdealString(s: string, k: number): number {
     }
     return Math.max(...cache);
 };
+
+
+function minFallingPathSum(grid: number[][]): number {
+    const N: number = grid.length;
+    let DP: number[] = grid[0]
+
+    for (let i = 1; i < N; i++) {
+        let index1 = DP.indexOf(Math.min(...DP));
+        let index2 = DP.indexOf(Math.min(...DP.slice(0, index1).concat(DP.slice(index1 + 1))));
+        for (let j = 0; j < N; j++) {
+            if (j !== index1) {
+                grid[i][j] += DP[index1];
+            } else {
+                grid[i][j] += DP[index2];
+            }
+        }
+        DP = grid[i];
+    }
+    return Math.min(...DP);
+};
+
+
+function findRotateSteps(ring: string, key: string): number {
+    const N: number = ring.length;
+    const M: number = key.length;
+    let dp: number[][] = Array.from({ length: M }, () => Array(N).fill(Infinity));
+    let pos: { [s: string]: number[] } = {};
+    for (let i = 0; i < N; i++) {
+        if (ring[i] in pos) {
+            pos[ring[i]].push(i);
+        } else {
+            pos[ring[i]] = [i];
+        }
+    }
+    for (let i = 0; i < M; i++) {
+        for (let j of pos[key[i]]) {
+            if (i === 0) {
+                dp[i][j] = Math.min(j, N - j) + 1;
+            } else {
+                for (let k of pos[key[i - 1]]) {
+                    dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + Math.min(Math.abs(j - k), N - Math.abs(j - k)) + 1);
+                }
+            }
+        }
+    }
+    return Math.min(...dp[M - 1]);
+};

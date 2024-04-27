@@ -319,3 +319,60 @@ class Solution {
         return max;
     }
 }
+
+class Solution {
+    public int minFallingPathSum(int[][] grid) {
+        int n = grid.length, res = Integer.MAX_VALUE;
+        int[][] dp = new int[n][n];
+        for (int row[] : dp) { // Short hand for loop
+            // Fill the array with -1
+            Arrays.fill(row, -1);
+        }
+
+        for (int j = 0; j < n; ++j) {
+            // Fill the first row with the values of the first row of the grid
+            dp[0][j] = grid[0][j];
+        }
+
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                int temp = Integer.MAX_VALUE;
+
+                for (int k = 0; k < n; ++k) {
+                    if (j != k) {
+                        temp = Math.min(temp, grid[i][j] + dp[i - 1][k]);
+                    }
+
+                    dp[i][j] = temp;
+                }
+            }
+        }
+
+        for (int j = 0; j < n; ++j) {
+            // Find the minimum value in the last row
+            res = Math.min(res, dp[n - 1][j]);
+        }
+
+        return res;
+    }
+}
+
+class Solution {
+    public int findRotateSteps(String ring, String key) {
+        int n = ring.length(), m = key.length();
+        int[][] dp = new int[m + 1][n];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 0; j < n; j++) {
+                dp[i][j] = Integer.MAX_VALUE;
+                for (int k = 0; k < n; k++) {
+                    if (ring.charAt(k) == key.charAt(i)) {
+                        int diff = Math.abs(j - k);
+                        int step = Math.min(diff, n - diff);
+                        dp[i][j] = Math.min(dp[i][j], step + dp[i + 1][k]);
+                    }
+                }
+            }
+        }
+        return dp[0][0] + m;
+    }
+}

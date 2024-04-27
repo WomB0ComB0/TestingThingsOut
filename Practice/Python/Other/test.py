@@ -3019,25 +3019,166 @@
 
 # def split_even_odd_sublist(num_list: list[int]) -> tuple[list[int], list[int]]:
 #     return
-my_string = "Hello World"
-print([char for char in my_string if char not in "aeiouAEIOU"])
+# my_string = "Hello World"
+# print([char for char in my_string if char not in "aeiouAEIOU"])
 
-from string import ascii_lowercase
+# from string import ascii_lowercase
+# class Solution:
+#    @staticmethod
+#    def longestIdealString(s: str, k: int) -> int:
+#        dp = dict.fromkeys(ascii_lowercase, 0)
+#        print(type(dp))
+#        for c in s:
+#            dp[c] = max(dp[d] + 1 for d in dp if abs(ord(c) - ord(d)) <= k)
+#        return max(dp.values())
+#
+# print(Solution.longestIdealString("acfgbd", 2))
+
+# def is_prime(num: int) -> bool:
+#     if num < 2:
+#         return False
+#     for i in range(2, num):
+#         if num % i == 0:
+#             return False
+#     return True
+
+# def next_prime(n: int) -> int:
+#     n += 1
+#     while not is_prime(n):
+#         n += 1
+#     return n
+
+# def prime_sequence(limit: int)-> list[int]:
+#     res: list[int] = []
+#     for i in range(limit):
+#         res.append(next_prime(i))
+#     return list(set(res))
+
+# print(prime_sequence(20))
+
+# def repeat_sequence(string: str) -> str:
+#    res: str = ""
+#    arrow = "->"
+#    for i, char in enumerate(list(string)):
+#        res += char.upper()
+#        res += char.lower() * i
+#        if (i != len(string) - 1):
+#            res += arrow
+#    return res
+# print(repeat_sequence("UVWX"))
+
+# def split_even_odd_sublist(num_list: list[int]) -> tuple[list[int], list[int]]:
+#     even = list(filter(lambda x: x % 2 == 0, num_list))
+#     odd = list(filter(lambda x: x % 2 != 0, num_list))
+#     return (even, odd)
+#
+# print(split_even_odd_sublist([2, 4, 6, 8, 1, 3, 5, 7, 9, 11, 12, 14, 15, 21]))
+
+# def make_armstrong(start: int, limit: int)-> list[int]:
+#    return [num for num in range(start, limit) if num == sum(int(digit) ** len(str(num)) for digit in str(num))]
+#
+# print(make_armstrong(100, 1000))
+
+# def arm_strong(n: list[int]) -> int:
+#     num_digits = len(str(n))
+#     return n == sum(int(digit) ** num_digits for digit in str(n))
+
+# def digits(n: int) -> list[int]:
+#    return [int(digit) for digit in str(n)]
+
+
+# def fibonacci_sequence(limit: int):
+#    a, b = 0, 1
+#    while a <= limit:
+#        yield a
+#        a, b = b, a + b
+#
+#
+# def euler2(limit: int) -> int:
+#    return sum(x for x in fibonacci_sequence(limit) if x % 2 == 0)
+#
+
+# def fibonacci(n: int) -> int:
+#     if (n == 0):
+#         return 0
+#     elif (n == 1):
+#         return 1
+#     else:
+#         return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+# from functools import cache
+# class Solution:
+#   @staticmethod
+#   def minFallingPathSum(grid: list[list[int]]) -> int:
+#     if (len(grid[0]) == 1) : return grid[0][0]
+#     @cache
+#     def dfs(i, j):
+#       if i == len(grid): return 0
+#       if j < 0 or j == len(grid[0]): return float("inf")
+#       best = float("inf")
+#       for k in range(len(grid[0])):
+#         if k != j: best = min(best, dfs(i + 1, k))
+#       return grid[i][j] + best
+#     res = float("inf")
+#     for j in range(len(grid[0])):
+#       res = min(res, dfs(0, j))
+#     return res
+
+# from typing import List
+# class Solution:
+#     def minFallingPathSum(self, grid: List[List[int]]) -> int:
+#         N = len(grid)
+#         DP = grid[0]
+
+#         for i in range(1, N):
+#             indx1 = DP.index(min(DP))
+#             indx2 = DP.index(min(DP[:indx1] + DP[indx1 + 1 :]))
+#             for j in range(N):
+#                 if j != indx1:
+#                     grid[i][j] += DP[indx1]
+#                 else:
+#                     grid[i][j] += DP[indx2]
+#             DP = grid[i]
+
+#         return min(DP)
+
+
+# class Solution:
+#   def minFallingPathSum(self, grid: list[list[int]]) -> int:
+#     if (len(grid[0]) == 1) : return grid[0][0]
+#     @cache
+#     def dfs(i, j):
+#       if i == len(grid): return 0
+#       if j < 0 or j == len(grid[0]): return float("inf")
+#       best = float("inf")
+#       for k in range(len(grid[0])):
+#         if k != j: best = min(best, dfs(i + 1, k))
+#       return grid[i][j] + best
+#     res = float("inf")
+#     for j in range(len(grid[0])):
+#       res = min(res, dfs(0, j))
+#     return res
+
+# from typing import List
+# class Solution:
+#     def minFallingPathSum(self, grid: List[List[int]]) -> int:
+#         N = len(grid)
+#         DP = grid[0]
+
+#         for i in range(1, N):
+#             indx1 = DP.index(min(DP))
+#             indx2 = DP.index(min(DP[:indx1] + DP[indx1 + 1 :]))
+#             for j in range(N):
+#                 if j != indx1:
+#                     grid[i][j] += DP[indx1]
+#                 else:
+#                     grid[i][j] += DP[indx2]
+#             DP = grid[i]
+
+#         return min(DP)
+
+from functools import cache
 class Solution:
-    @staticmethod
-    def longestIdealString(s: str, k: int) -> int:
-        dp = dict.fromkeys(ascii_lowercase, 0)
-        print(type(dp))
-        for c in s:
-            dp[c] = max(dp[d] + 1 for d in dp if abs(ord(c) - ord(d)) <= k)
-        return max(dp.values())
-
-print(Solution.longestIdealString("acfgbd", 2))
-
-def is_prime(num: int) -> bool:
-    if num < 2:
-        return False
-    for i in range(2, num):
-        if num % i == 0:
-            return False
-    return True
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)

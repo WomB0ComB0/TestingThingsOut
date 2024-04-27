@@ -350,3 +350,55 @@ public:
         return *max_element(dp.begin(), dp.end());
     }
 };
+
+class Solution
+{
+public:
+    int minFallingPathSum(vector<vector<int>> &grid)
+    {
+        int n = grid.size(), ans = 5e6;
+        /*
+        This is a bottom-up approach, in which we start
+        from the second last row and move upwards
+        */
+        vector<vector<int>> dp(2, vector<int>(n, 0));
+        for (int i = n - 1; i > 0; i--)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                int res = 5e6;
+                for (int k = 0; k < n; k++)
+                {
+                    if (k != j)
+                        // We are taking the minimum of the previous row
+                        res = min(res, dp[!(i & 1)][k] + grid[i][k]);
+                }
+                // Updating the current row
+                // & 1 is used to alternate between the two rows
+                dp[i & 1][j] = res;
+            }
+        }
+        for (int i = 0; i < n; i++)
+            // Finding the minimum path sum in the first row
+            ans = min(ans, dp[1][i] + grid[0][i]);
+        return ans;
+    }
+};
+
+class Solution {
+public:
+    int findRotateSteps(string ring, string key) {
+        int n = ring.size();
+        vector<int> dp(n);
+        for (int i = key.size() - 1; i >= 0; i--) {
+            vector<int> dp2(n, INT_MAX);
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < n; k++) {
+                    if (key[i] == ring[k]) dp2[j] = min(dp2[j], dp[k] + min(abs(j - k), n - abs(j - k)) + 1);
+                }
+            }
+            swap(dp, dp2);
+        }
+        return dp[0];
+    }
+};

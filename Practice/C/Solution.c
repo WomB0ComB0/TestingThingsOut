@@ -453,3 +453,54 @@ int longestIdealString(char* s, int k) {
     }
     return res;
 }
+
+
+
+int minFallingPathSum(int** grid, int gridSize, int* gridColSize) {
+    int first_min = 0, second_min = 0, first_col = -1;
+    for(int i = 0; i < gridSize; i++) {
+        // Find the minimum and second minimum values in the current row
+        int a = 1e9, b = 1e9, c; // 1e9 = 10^9
+        for(int j = 0; j < gridColSize[i]; j++) {
+            // Update the current cell value
+            grid[i][j] += (j == first_col) ? second_min : first_min;
+            // Update the minimum and second minimum values
+            if(grid[i][j] < a) {
+                b = a;
+                a = grid[i][j];
+                c = j;
+            } else if(grid[i][j] < b) {
+                b = grid[i][j];
+            }
+        }
+        // Update the minimum and second minimum values for the next row
+        first_min = a;
+        second_min = b;
+        first_col = c;
+    }  
+    return first_min;
+}
+
+int findRotateSteps(char* ring, char* key) {
+    int n = strlen(ring), m = strlen(key);
+    int dp[m + 1][n];
+    memset(dp, 0x3f, sizeof(dp));
+    dp[0][0] = 0;
+    for (int i = 1; i <= m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (ring[j] == key[i - 1]) {
+                for (int k = 0; k < n; k++) {
+                    if (dp[i - 1][k] != 0x3f3f3f3f) {
+                        int diff = abs(j - k);
+                        dp[i][j] = fmin(dp[i][j], dp[i - 1][k] + fmin(diff, n - diff));
+                    }
+                }
+            }
+        }
+    }
+    int result = 0x3f3f3f3f;
+    for (int j = 0; j < n; j++) {
+        result = fmin(result, dp[m][j]);
+    }
+    return result + m;
+}

@@ -216,7 +216,7 @@ var openLock = function (deadends, target) {
 var findMinHeightTrees = function (n, edges) {
   if (n === 1) return [0];
   // Create adjacency list
-  const adjList = [...Array(n)].map((e) => new Set());
+  const adjList = [...Array(n)].map((_e) => new Set());
   // Add edges to adjacency list
   for (const [n1, n2] of edges) {
     adjList[n1].add(n2);
@@ -285,4 +285,79 @@ var longestIdealString = function (s, k) {
     cache[code] = max;
   }
   return Math.max(...cache);
+};
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var minFallingPathSum = function (grid) {
+  const n = grid.length;
+  for (let i = 1; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      let min = grid[i - 1][j];
+      if (j > 0) min = Math.min(min, grid[i - 1][j - 1]);
+      if (j < n - 1) min = Math.min(min, grid[i - 1][j + 1]);
+      grid[i][j] += min;
+    }
+  }
+  return Math.min(...grid[n - 1]);
+};
+
+
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var minFallingPathSum = function (grid) {
+  const N = grid.length;
+  let DP = grid[0]
+
+  for (let i = 1; i < N; i++) {
+    // We need to find the two smallest numbers in the previous row
+    let index1 = DP.indexOf(Math.min(...DP));
+    // We need to find the second smallest number in the previous row
+    let index2 = DP.indexOf(Math.min(...DP.slice(0, index1).concat(DP.slice(index1 + 1))));
+    for (let j = 0; j < N; j++) {
+      // If the current column is not the same as the first smallest number in the previous row
+      if (j !== index1) {
+        // Add the first smallest number in the previous row
+        grid[i][j] += DP[index1];
+      } else {
+        grid[i][j] += DP[index2];
+      }
+    }
+    // Update the DP array
+    DP = grid[i];
+  }
+  return Math.min(...DP);
+};
+
+
+
+/**
+ * @param {string} ring
+ * @param {string} key
+ * @return {number}
+ */
+var findRotateSteps = function (ring, key) {
+  const n = ring.length;
+  const m = key.length;
+  const pos = new Array(26).fill(0).map(() => new Array());
+  for (let i = 0; i < n; i++) {
+    pos[ring[i].charCodeAt(0) - 97].push(i);
+  }
+  const dp = new Array(m).fill(0).map(() => new Array(n).fill(Number.MAX_SAFE_INTEGER));
+  for (const i of pos[key[0].charCodeAt(0) - 97]) {
+    dp[0][i] = Math.min(i, n - i) + 1;
+  }
+  for (let i = 1; i < m; i++) {
+    for (const j of pos[key[i].charCodeAt(0) - 97]) {
+      for (const k of pos[key[i - 1].charCodeAt(0) - 97]) {
+        dp[i][j] = Math.min(dp[i][j], dp[i - 1][k] + Math.min(Math.abs(j - k), n - Math.abs(j - k)) + 1);
+      }
+    }
+  }
+  return Math.min(...dp[m - 1]);
 };
