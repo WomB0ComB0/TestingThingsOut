@@ -1623,3 +1623,31 @@ function findRotateSteps(ring: string, key: string): number {
     }
     return Math.min(...dp[M - 1]);
 };
+
+function sumOfDistancesInTree(n: number, edges: number[][]): number[] {
+    const graph: number[][] = Array.from({ length: n }, () => []);
+    const count: number[] = Array(n).fill(1);
+    const ans: number[] = Array(n).fill(0);
+    for (const [u, v] of edges) {
+        graph[u].push(v);
+        graph[v].push(u);
+    }
+    const dfs = (node: number, parent: number): void => {
+        for (const child of graph[node]) {
+            if (child === parent) continue;
+            dfs(child, node);
+            count[node] += count[child];
+            ans[node] += ans[child] + count[child];
+        }
+    };
+    const dfs2 = (node: number, parent: number): void => {
+        for (const child of graph[node]) {
+            if (child === parent) continue;
+            ans[child] = ans[node] - count[child] + n - count[child];
+            dfs2(child, node);
+        }
+    };
+    dfs(0, -1);
+    dfs2(0, -1);
+    return ans;
+};

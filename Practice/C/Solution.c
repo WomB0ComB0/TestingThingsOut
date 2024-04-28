@@ -504,3 +504,70 @@ int findRotateSteps(char* ring, char* key) {
     }
     return result + m;
 }
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* sumOfDistancesInTree(int n, int** edges, int edgesSize, int* edgesColSize, int* returnSize) {
+    int* result = (int*)malloc(n * sizeof(int));
+    int* count = (int*)malloc(n * sizeof(int));
+    int* sum = (int*)malloc(n * sizeof(int));
+    int** adj = (int**)malloc(n * sizeof(int*));
+    for (int i = 0; i < n; i++) {
+        adj[i] = (int*)malloc(0);
+    }
+    for (int i = 0; i < edgesSize; i++) {
+        int u = edges[i][0];
+        int v = edges[i][1];
+        if (count[u] < INT_MAX) {
+            adj[u] = (int*)realloc(adj[u], (count[u] + 1) * sizeof(int));
+            adj[u][count[u]++] = v;
+        }
+        if (count[v] < INT_MAX) {
+            adj[v] = (int*)realloc(adj[v], (count[v] + 1) * sizeof(int));
+            adj[v][count[v]++] = u;
+        }
+    }
+    dfs1(0, -1, adj, count, sum);
+    dfs2(0, -1, adj, count, sum, result, n);
+    free(count);
+    free(sum);
+    for (int i = 0; i < n; i++) {
+        free(adj[i]);
+    }
+    free(adj);
+    *returnSize = n;
+    return result;
+}
+
+void dfs1(int node, int parent, int** adj, int* count, int* sum) {
+    sum[node] = 0;
+    for (int i = 0; i < count[node]; i++) {
+        int neighbor = adj[node][i];
+        if (neighbor != parent) {
+            dfs1(neighbor, node, adj, count, sum);
+            sum[node] += sum[neighbor] + count[neighbor];
+        }
+    }
+}
+
+void dfs2(int node, int parent, int** adj, int* count, int* sum, int* result, int n) {
+    result[node] = sum[node];
+    for (int i = 0; i < count[node]; i++) {
+        int neighbor = adj[node][i];
+        if (neighbor != parent) {
+            int sum_node = sum[node], count_node = count[node];
+            int sum_neighbor = sum[neighbor], count_neighbor = count[neighbor];
+            sum[node] -= sum[neighbor] + count[neighbor];
+            count[node] -= count[neighbor];
+            sum[neighbor] += sum[node] + count[node];
+            count[neighbor] += count[node];
+            dfs2(neighbor, node, adj, count, sum, result, n);
+            sum[node] = sum_node;
+            count[node] = count_node;
+            sum[neighbor] = sum_neighbor;
+            count[neighbor] = count_neighbor;
+        }
+    }
+}

@@ -3205,7 +3205,8 @@ class Solution:
             and grid[r][c + 1] == color
             and grid[r + 1][c + 1] == color
         )
-def can_form_square(grid):
+
+def canMakeSquare(grid):
     for i in range(len(grid) - 1):
         for j in range(len(grid[0]) - 1):
             square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
@@ -3222,7 +3223,7 @@ class Solution:
                 if square.count(1) == 3:
                     res += 1
         return res
-    
+
 class Solution:
     def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
         R, C = len(grid), len(grid[0])
@@ -3256,3 +3257,56 @@ class Solution:
                 if j > limit:
                     dp[i][j] = (dp[i][j] - dp[i-limit-1][j-1]) % MOD
         return sum(dp[i][j] for i in range(zero+one+1) for j in range(1, one+1)) % MOD
+
+
+from functools import cache
+class Solution:
+    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
+        MOD = 10 ** 9  + 7 
+        N  = zero + one 
+
+        @cache
+        def go(zero, one, last):
+            if zero == 0 and one == 0:
+                return 1
+
+            total = 0
+            if last != 0:
+                for i in range(1, min(limit + 1, one + 1)):
+                    total += go(zero, one - i, 1)
+                    total %= MOD
+            return total % MOD
+        return go(zero, one, -1)
+
+
+from collections import defaultdict
+class Solution:
+        def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+            graph: dict[int, set[int]] = defaultdict(set)
+            for u, v in edges:
+                graph[u].add((v))
+                graph[v].add((u))
+            count: list[int] = [1] * n
+            ans: list[int] = [0] * n
+            @cache
+            def dfs(
+                node: int = 0, parent = None
+            ) -> None:
+                for child in graph[node]:
+                    if child != parent:
+                        dfs(child, node)
+                        count[node] += count[child]
+                        ans[node] += ans[child] + count[child]
+            @cache
+            def dfs2(
+                node: int = 0, parent = None
+            ) -> None:
+                for child in graph[node]:
+                    if child != parent:
+                        ans[child] = ans[node] - count[child] + n - count[child]
+                        dfs2(child, node)
+            dfs()
+            dfs2()
+            dfs.cache_clear()
+            dfs2.cache_clear()
+            return ans

@@ -176,3 +176,38 @@ func findRotateSteps(ring string, key string) int {
 	}
 	return n + dfs(0, 0) // every char in key needs to be pressed too
 }
+
+func sumOfDistancesInTree(n int, edges [][]int) []int {
+	graph := make([][]int, n)
+	for _, edge := range edges {
+		graph[edge[0]] = append(graph[edge[0]], edge[1])
+		graph[edge[1]] = append(graph[edge[1]], edge[0])
+	}
+	res := make([]int, n)
+	count := make([]int, n)
+	var dfs func(int, int)
+	dfs = func(node, parent int) {
+		for _, child := range graph[node] {
+			if child == parent {
+				continue
+			}
+			dfs(child, node)
+			count[node] += count[child]
+			res[node] += res[child] + count[child]
+		}
+		count[node]++
+	}
+	var dfs2 func(int, int)
+	dfs2 = func(node, parent int) {
+		for _, child := range graph[node] {
+			if child == parent {
+				continue
+			}
+			res[child] = res[node] - count[child] + n - count[child]
+			dfs2(child, node)
+		}
+	}
+	dfs(0, -1)
+	dfs2(0, -1)
+	return res
+}

@@ -490,3 +490,59 @@ public class Solution {
         return res;
     }
 }
+
+public class Solution {
+    int[] res;
+    int[] count;
+    int[] ans;
+    int N;
+    List<HashSet<int>> graph;
+    public int[] SumOfDistancesInTree(int N, int[][] edges) {
+        this.res = new int[n];
+        this.count = new int[n];
+        this.ans = new int[n];
+        this.graph = new List<HashSet<int>>();
+        for (int i = 0; i < N; i++) {
+            graph.Add(new HashSet<int>());
+        }
+        foreach (int[] edge in edges) {
+            graph[edge[0]].Add(edge[1]);
+            graph[edge[1]].Add(edge[0]);
+        }
+        PostOrder(0, -1, graph, count, ans);
+        PreOrder(0, -1, graph, count, ans, res);
+        return res;
+    }
+    private void PostOrder(int node, int parent, List<HashSet<int>> graph, int[] count, int[] ans) {
+        foreach (int child in graph[node]) {
+            if (child == parent) {
+                continue;
+            }
+            PostOrder(child, node, graph, count, ans);
+            count[node] += count[child];
+            ans[node] += ans[child] + count[child];
+        }
+        count[node]++;
+    }
+    private void PreOrder(int node, int parent, List<HashSet<int>> graph, int[] count, int[] ans, int[] res) {
+        res[node] = ans[node];
+        foreach (int child in graph[node]) {
+            if (child == parent) {
+                continue;
+            }
+            int parentCount = count[node];
+            int parentAns = ans[node];
+            int childCount = count[child];
+            int childAns = ans[child];
+            count[node] -= count[child];
+            ans[node] -= ans[child] + count[child];
+            count[child] += count[node];
+            ans[child] += ans[node] + count[node];
+            PreOrder(child, node, graph, count, ans, res);
+            count[node] = parentCount;
+            ans[node] = parentAns;
+            count[child] = childCount;
+            ans[child] = childAns;
+        }
+    }
+}

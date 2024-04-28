@@ -361,3 +361,37 @@ var findRotateSteps = function (ring, key) {
   }
   return Math.min(...dp[m - 1]);
 };
+
+
+/**
+ * @param {number} n
+ * @param {number[][]} edges
+ * @return {number[]}
+ */
+var sumOfDistancesInTree = function (n, edges) {
+  const graph = new Array(n).fill(0).map(() => new Array());
+  const count = new Array(n).fill(1);
+  const ans = new Array(n).fill(0);
+  const dfs = (node, parent) => {
+    for (const child of graph[node]) {
+      if (child === parent) continue;
+      dfs(child, node);
+      count[node] += count[child];
+      ans[node] += ans[child] + count[child];
+    }
+  };
+  const dfs2 = (node, parent) => {
+    for (const child of graph[node]) {
+      if (child === parent) continue;
+      ans[child] = ans[node] - count[child] + n - count[child];
+      dfs2(child, node);
+    }
+  };
+  for (const [u, v] of edges) {
+    graph[u].push(v);
+    graph[v].push(u);
+  }
+  dfs(0, -1);
+  dfs2(0, -1);
+  return ans;
+};

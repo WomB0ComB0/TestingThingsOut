@@ -376,3 +376,108 @@ class Solution {
         return dp[0][0] + m;
     }
 }
+
+public class Dictionary<K, V> {
+    private static final int SIZE = 16;
+    private Entry<K, V>[] table;
+
+    public Dictionary() {
+        table = new Entry[SIZE];
+    }
+
+    public void put(K key, V value) {
+        int index = key.hashCode() % SIZE;
+        Entry<K, V> entry = new Entry<>(key, value);
+        if (table[index] == null) {
+            table[index] = entry;
+        } else {
+            Entry<K, V> cur = table[index];
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+            cur.next = entry;
+        }
+    }
+
+    public V get(K key) {
+        int index = key.hashCode() % SIZE;
+        Entry<K, V> cur = table[index];
+        while (cur != null) {
+            if (cur.key.equals(key)) {
+                return cur.value;
+            }
+            cur = cur.next;
+        }
+        return null;
+    }
+
+    public boolean containsKey(K key) {
+        int index = key.hashCode() % SIZE;
+        Entry<K, V> cur = table[index];
+        while (cur != null) {
+            if (cur.key.equals(key)) {
+                return true;
+            }
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    private static class Entry<K, V> {
+        K key;
+        V value;
+        Entry<K, V> next;
+
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+}
+
+import java.util.*;
+
+class Solution {
+    Map<Integer, Set<Integer>> graph;
+    int[] count;
+    int[] res;
+    int N;
+    public int[] sumOfDistancesInTree(int N, int[][] edges) {
+        this.graph = new HashMap<>();
+        this.res = new int[N];
+        this.count = new int[N];
+
+        for (int[] edge : edges) {
+            graph.computeIfAbsent(edge[0], x -> new HashSet<>()).add(edge[1]);
+            graph.computeIfAbsent(edge[1], x -> new HashSet<>()).add(edge[0]);
+        }
+
+        Arrays.fill(count, 1);
+        dfs(graph, 0, -1, count, res);
+        dfs2(graph, 0, -1, count, res, N);
+        return res;
+    }
+
+    private void dfs(Map<Integer, Set<Integer>> graph, int root, int pre, int[] count, int[] res) {
+        Set<Integer> nextNodes = graph.get(root);
+        if (nextNodes != null) {
+            for (int next : nextNodes) {
+                if (next == pre) continue;
+                dfs(graph, next, root, count, res);
+                count[root] += count[next];
+                res[root] += res[next] + count[next];
+            }
+        }
+    }
+
+    private void dfs2(Map<Integer, Set<Integer>> graph, int root, int pre, int[] count, int[] res, int n) {
+        Set<Integer> nextNodes = graph.get(root);
+        if (nextNodes != null) {
+            for (int next : nextNodes) {
+                if (next == pre) continue;
+                res[next] = res[root] - count[next] + n - count[next];
+                dfs2(graph, next, root, count, res, n);
+            }
+        }
+    }
+}

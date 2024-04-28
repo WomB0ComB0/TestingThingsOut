@@ -402,3 +402,40 @@ public:
         return dp[0];
     }
 };
+
+class Solution
+{
+public:
+    vector<int> sumOfDistancesInTree(int n, vector<vector<int>> &edges)
+    {
+        vector<vector<int>> tree(n);
+        for (auto &e : edges)
+        {
+            tree[e[0]].push_back(e[1]);
+            tree[e[1]].push_back(e[0]);
+        }
+        vector<int> count(n, 1), res(n, 0);
+        function<void(int, int)> postOrder = [&](int node, int parent) {
+            for (int child : tree[node])
+            {
+                if (child == parent)
+                    continue;
+                postOrder(child, node);
+                count[node] += count[child];
+                res[node] += res[child] + count[child];
+            }
+        };
+        function<void(int, int)> preOrder = [&](int node, int parent) {
+            for (int child : tree[node])
+            {
+                if (child == parent)
+                    continue;
+                res[child] = res[node] - count[child] + n - count[child];
+                preOrder(child, node);
+            }
+        };
+        postOrder(0, -1);
+        preOrder(0, -1);
+        return res;
+    }
+};
