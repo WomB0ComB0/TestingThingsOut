@@ -1335,6 +1335,83 @@ function dfs(node: TreeNode | null, stack: string[]): number {
     return sum;
 }
 
+function isHappy(n: number): boolean {
+    if (n === 1) return true
+    if (n === 4) return false
+    let sum: number = 0
+    while (n) {
+        sum += (n % 10) ** 2
+        n = Math.floor(n / 10)
+    }
+    return isHappy(sum)
+};
+
+const calc = (n: string): number => {
+    let res: number[] = []
+    for (let c of n) {
+        res.push(parseInt(c) ** 2)
+    }
+    return res.reduce((acc, val) => acc + val, 0)
+}
+
+function validPath(n: number, edges: number[][], source: number, destination: number): boolean {
+    let adjList: {
+        [key: number]: number[]
+    } = {}
+    let visited: Set<number> = new Set()
+    if (source === destination) return true
+    for (let edge of edges) {
+        adjList[edge[0]] = adjList[edge[0]] ? adjList[edge[0]].concat(edge[1]) : [edge[1]]
+        adjList[edge[1]] = adjList[edge[1]] ? adjList[edge[1]].concat(edge[0]) : [edge[0]]
+    }
+    const dfs = (node: number): boolean => {
+        if (node === destination) return true
+        visited.add(node)
+        for (let neighbor of adjList[node]) {
+            if (!visited.has(neighbor)) {
+                if (dfs(neighbor)) return true
+            }
+        }
+        return false
+    }
+    return dfs(source)
+};
+
+/**
+ * from typing import List
+import collections
+
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+       
+        adjList = collections.defaultdict(list)
+        visited = set()
+
+        if source == destination:
+            return True
+
+       
+        for edge in edges:
+            adjList[edge[0]].append(edge[1])
+            adjList[edge[1]].append(edge[0])
+
+     
+        def dfs(node):
+          
+            if node == destination:
+                return True
+          
+            visited.add(node)
+            
+            for neighbor in adjList[node]:
+                if neighbor not in visited:
+                    if dfs(neighbor):
+                        return True
+         
+            return False
+        return dfs(source)
+*/
+
 function addOneRow(root: TreeNode | null, val: number, depth: number): TreeNode | null {
     if (depth === 1) {
         return new TreeNode(val, root, null);

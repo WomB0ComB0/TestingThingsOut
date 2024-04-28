@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj": {}
+    "C:\\Users\\airwo\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj": {
+    "C:\\Users\\airwo\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
+        "projectUniqueName": "C:\\Users\\airwo\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
         "projectName": "MauiApp1",
-        "projectPath": "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
-        "packagesPath": "C:\\Users\\Mike Odnis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mike Odnis\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\obj\\",
+        "projectPath": "C:\\Users\\airwo\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
+        "packagesPath": "C:\\Users\\airwo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\airwo\\documents\\github\\testingthingsout\\MicrosoftLearn\\C#\\MauiApp1\\MauiApp1\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Mike Odnis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\airwo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
