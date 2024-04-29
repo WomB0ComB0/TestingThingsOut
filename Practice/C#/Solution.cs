@@ -546,3 +546,25 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public int MinOperations(int[] nums, int k) {
+        int b = nums[0];
+        const int n = nums.Length;
+        for (int i = 1; i < n; i++) {
+            b ^= nums[i]
+        }
+        int res = 0;
+        
+        while (b != 0 || k != 0) {
+            int bit1 = b & 1;
+            int bit2 = k & 1;
+            if (bit1 != bit2) {
+                res++;
+            }
+            b >>= 1;
+            k >>= 1;
+        }
+        return res;
+    }
+}

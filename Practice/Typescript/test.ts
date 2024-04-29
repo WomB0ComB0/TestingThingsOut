@@ -1728,3 +1728,13 @@ function sumOfDistancesInTree(n: number, edges: number[][]): number[] {
     dfs2(0, -1);
     return ans;
 };
+
+function minOperations(nums: number[], k: number): number {
+    const bits: string = nums.reduce((acc, val) => acc ^ val, 0).toString(2).padStart(32, "0");
+    const target: string = (k >>> 0).toString(2).padStart(32, "0");
+    let res: number = 0;
+    for (let i = 0; i < 32; i++) {
+        res += bits[i] != target[i] ? 1 : 0;
+    }
+    return res
+};

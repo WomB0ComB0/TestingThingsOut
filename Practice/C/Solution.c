@@ -571,3 +571,32 @@ void dfs2(int node, int parent, int** adj, int* count, int* sum, int* result, in
         }
     }
 }
+
+#include <unordered_map>
+#include <algorithm>
+#include <climits>
+
+int minOperations(int* nums, int numsSize, int k) {
+    int b = nums[0]
+    for (int i = 1; i < numsSize; i++) {
+        b ^= nums[i];
+    }
+    int res = 0;
+    
+    while (b != 0 || k != 0) {
+        int bit1 = b & 1;
+        int bit2 = k & 1;
+        if (bit1 == 0 && bit2 == 0) {
+            b >>= 1;
+            k >>= 1;
+        } else if (bit1 == 1 && bit2 == 1) {
+            b >>= 1;
+            k >>= 1;
+        } else {
+            res++;
+            b >>= 1;
+            k >>= 1;
+        }
+    }
+    return res;
+}

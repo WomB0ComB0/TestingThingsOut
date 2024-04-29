@@ -395,3 +395,31 @@ var sumOfDistancesInTree = function (n, edges) {
   dfs2(0, -1);
   return ans;
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var minOperations = function (nums, k) {
+  const bits = nums.reduce((acc, val) => acc ^ val, 0).toString(2).padStart(32, "0");
+  const target = (k >>> 0).toString(2).padStart(32, "0");
+  let res = 0;
+  for (let index = 0; index < 32; index += 1) {
+    res += bits[index] !== target[index];
+  }
+  return res;
+};
+
+var minOperations = function (nums, k) {
+  var count = k;
+  for (let i = 0; i < nums.length; i++) {
+    count = count ^ nums[i];
+  }
+  var total = 0;
+  while (count) {
+    count = (count & count - 1);
+    total++;
+  }
+  return total
+}

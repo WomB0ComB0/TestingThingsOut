@@ -211,3 +211,16 @@ func sumOfDistancesInTree(n int, edges [][]int) []int {
 	dfs2(0, -1)
 	return res
 }
+
+func minOperations(nums []int, k int) int {
+	b := k
+	for _, num := range nums {
+		b ^= num
+	}
+	res := 0
+	for b > 0 {
+		b &= (b - 1)
+		res++
+	}
+	return res
+}

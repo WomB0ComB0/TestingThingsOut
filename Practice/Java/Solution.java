@@ -171,6 +171,7 @@ class Solution {
         }
         return res;
     }
+
     public void dfs(char[][] grid, int i, int j) {
         if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length) {
             return;
@@ -222,13 +223,18 @@ class Solution {
     }
 }
 
-
 class Solution {
     public int openLock(String[] deadends, String target) {
         Set<String> dead = new HashSet<>();
-        for (String s : deadends) { dead.add(s); }
-        if (dead.contains("0000")) { return -1; }
-        if (target.equals("0000")) { return 0; }
+        for (String s : deadends) {
+            dead.add(s);
+        }
+        if (dead.contains("0000")) {
+            return -1;
+        }
+        if (target.equals("0000")) {
+            return 0;
+        }
         Queue<String> queue = new LinkedList<>();
         queue.offer("0000");
         Set<String> visited = new HashSet<>();
@@ -245,7 +251,9 @@ class Solution {
                         char[] ch = cur.toCharArray();
                         ch[j] = (char) ((ch[j] - '0' + k + 10) % 10 + '0');
                         String next = new String(ch);
-                        if (next.equals(target)) { return res; }
+                        if (next.equals(target)) {
+                            return res;
+                        }
                         if (!dead.contains(next) && !visited.contains(next)) {
                             queue.offer(next);
                             visited.add(next);
@@ -260,16 +268,22 @@ class Solution {
 
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        if (n == 1) { return Arrays.asList(0); }
+        if (n == 1) {
+            return Arrays.asList(0);
+        }
         List<Set<Integer>> graph = new ArrayList<>();
-        for (int i = 0; i < n; i++) { graph.add(new HashSet<>()); }
+        for (int i = 0; i < n; i++) {
+            graph.add(new HashSet<>());
+        }
         for (int[] edge : edges) {
             graph.get(edge[0]).add(edge[1]);
             graph.get(edge[1]).add(edge[0]);
         }
         List<Integer> leaves = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if (graph.get(i).size() == 1) { leaves.add(i); }
+            if (graph.get(i).size() == 1) {
+                leaves.add(i);
+            }
         }
         while (n > 2) {
             n -= leaves.size();
@@ -277,7 +291,9 @@ class Solution {
             for (int leaf : leaves) {
                 int neighbor = graph.get(leaf).iterator().next();
                 graph.get(neighbor).remove(leaf);
-                if (graph.get(neighbor).size() == 1) { newLeaves.add(neighbor); }
+                if (graph.get(neighbor).size() == 1) {
+                    newLeaves.add(neighbor);
+                }
             }
             leaves = newLeaves;
         }
@@ -287,8 +303,12 @@ class Solution {
 
 class Solution {
     public int tribonacci(int n) {
-        if (n == 0) { return 0; }
-        if (n == 1 || n == 2) { return 1; }
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return 1;
+        }
         int[] dp = new int[n + 1];
         dp[1] = dp[2] = 1;
         for (int i = 3; i <= n; i++)
@@ -296,7 +316,6 @@ class Solution {
         return dp[n];
     }
 }
-
 
 class Solution {
     public int longestIdealString(String s, int k) {
@@ -442,6 +461,7 @@ class Solution {
     int[] count;
     int[] res;
     int N;
+
     public int[] sumOfDistancesInTree(int N, int[][] edges) {
         this.graph = new HashMap<>();
         this.res = new int[N];
@@ -462,7 +482,8 @@ class Solution {
         Set<Integer> nextNodes = graph.get(root);
         if (nextNodes != null) {
             for (int next : nextNodes) {
-                if (next == pre) continue;
+                if (next == pre)
+                    continue;
                 dfs(graph, next, root, count, res);
                 count[root] += count[next];
                 res[root] += res[next] + count[next];
@@ -474,10 +495,36 @@ class Solution {
         Set<Integer> nextNodes = graph.get(root);
         if (nextNodes != null) {
             for (int next : nextNodes) {
-                if (next == pre) continue;
+                if (next == pre)
+                    continue;
                 res[next] = res[root] - count[next] + n - count[next];
                 dfs2(graph, next, root, count, res, n);
             }
         }
+    }
+}
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int b = nums[0];
+        // XOR all the elements in the array
+        for (int i = 1; i < nums.length; i++) {
+            b = nums[i] ^ b;
+        }
+        int res = 0;
+
+        // XOR all the elements in the array with k
+        while (b != 0 || k != 0) {
+            // Get the last bit of b and k
+            int bit1 = b & 1;
+            int bit2 = k & 1;
+            if (bit1 != bit2) {
+                res++;
+            }
+            // Right shift b and k
+            b = b >> 1;
+            // Right shift k
+            k = k >> 1;
+        }
+        return res;
     }
 }

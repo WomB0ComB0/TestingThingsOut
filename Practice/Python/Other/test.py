@@ -3324,32 +3324,155 @@ class Solution:
 
 from collections import defaultdict
 class Solution:
-        def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
-            graph: dict[int, set[int]] = defaultdict(set)
-            for u, v in edges:
-                graph[u].add((v))
-                graph[v].add((u))
-            count: list[int] = [1] * n
-            ans: list[int] = [0] * n
-            @cache
-            def dfs(
+    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+        graph: dict[int, set[int]] = defaultdict(set)
+        for u, v in edges:
+            graph[u].add((v))
+            graph[v].add((u))
+        count: list[int] = [1] * n
+        ans: list[int] = [0] * n
+        @cache
+        def dfs(
                 node: int = 0, parent = None
             ) -> None:
-                for child in graph[node]:
-                    if child != parent:
-                        dfs(child, node)
-                        count[node] += count[child]
-                        ans[node] += ans[child] + count[child]
-            @cache
-            def dfs2(
+            for child in graph[node]:
+                if child != parent:
+                    dfs(child, node)
+                    count[node] += count[child]
+                    ans[node] += ans[child] + count[child]
+        @cache
+        def dfs2(
                 node: int = 0, parent = None
             ) -> None:
-                for child in graph[node]:
-                    if child != parent:
-                        ans[child] = ans[node] - count[child] + n - count[child]
-                        dfs2(child, node)
-            dfs()
-            dfs2()
-            dfs.cache_clear()
-            dfs2.cache_clear()
-            return ans
+            for child in graph[node]:
+                if child != parent:
+                    ans[child] = ans[node] - count[child] + n - count[child]
+                    dfs2(child, node)
+        dfs()
+        dfs2()
+        dfs.cache_clear()
+        dfs2.cache_clear()
+        return ans
+
+
+class Solution:
+    def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        # Base case
+        if nums1 == nums2: return 0
+        nums1.sort()
+        nums2.sort()
+        # Find the difference between the first elements of both arrays
+        res = nums2[0] - nums1[0]
+        for i in range(1, len(nums1)):
+            # If the difference between the elements of both arrays is not the same 
+            if nums2[i] - nums1[i] != res:
+                return 0
+        return res
+
+from math import inf
+class Solution:
+    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1.sort()
+        nums2.sort()
+        n = len(nums1)
+        ans = inf
+        for i in range(n):
+            # Remove the ith element from both arrays
+            for j in range(i + 1, n):
+                # Remove the jth element from both arrays
+                lst = nums1[:]
+                lst.pop(j)
+                lst.pop(i)
+                # Calculate the difference between the elements of both arrays
+                cur = [-lst[i] + nums2[i] for i in range(n - 2)]
+                # If the difference between the elements of both arrays is the same
+                if len(set(cur)) == 1 and cur[0] < ans:
+                    # Update the answer
+                    ans = cur[0]
+        return ans
+
+from collections import deque
+class Solution:
+    def minEnd(self, n: int, x: int) -> int:
+        # Convert the integer to a binary string
+        bit = list(int(a) for a in "{:060b}".format(x))
+        zeros = deque()
+        # Find the positions of the zeros in the binary string
+        # We're doing it in reverse, and the starting position is 59
+        # because the binary string has a length of 60
+        for i in range(59, -1, -1):
+            # If the bit is 0, add the position to the zeros list
+            if bit[i] == 0:
+                zeros.append(59 - i)
+        n -= 1
+        ans = x
+        # While there are zeros in the zeros list
+        while n and zeros:
+            # Get the position of the rightmost zero
+            r = n % 2
+            # If the rightmost zero is at the rightmost position
+            add = zeros.popleft()
+            if r:
+                # Add 2^add to the answer
+                # << is the left shift operator
+                # which shifts the bits of the number to the left
+                ans += 1 << add
+            n = n // 2
+        return ans
+
+
+class Solution:
+    def medianOfUniquenessArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        
+        def count(var):
+            right = 0
+            seen = {} # book keeping
+            
+            answer = 0
+            for left in range(n):
+                if left > 0:
+                    # remove the left element from the book keeping
+                    x = nums[left - 1]
+                    # decrement the count of the element
+                    seen[x] -= 1
+                    # if the count is 0, remove the element from the book keeping
+                    if seen[x] == 0:
+                        del seen[x]
+                # add elements to the book keeping
+                while right < n and len(seen) < var:
+                    x = nums[right]
+                    # increment the count of the element
+                    seen[x] = seen.get(x, 0) + 1
+                    right += 1
+                    
+                if len(seen) == var:
+                    # if the count of the elements is equal to var
+                    answer += n - right + 1
+                    
+            return answer
+        
+        ptr_left, ptr_right = 1, n # two pointer
+        # target value
+        target = (n**2 + n) // 4
+        
+        # binary search
+        while ptr_left != ptr_right:
+            ptr = (ptr_left + ptr_right + 1) // 2
+            
+            if count(ptr) > target:
+                ptr_left = ptr
+            else:
+                ptr_right = ptr - 1
+                
+        return ptr_left
+
+# class Solution:
+from operator import xor
+from functools import reduce
+def minOperations(nums: List[int], k: int) -> int:
+    return (reduce(xor, nums) ^ k).bit_count()
+
+
+#def bit_count(self):
+#    return bin(self).count("1")
