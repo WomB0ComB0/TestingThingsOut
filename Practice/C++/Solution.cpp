@@ -447,3 +447,24 @@ public:
         return __builtin_popcount(k);
     }
 };
+
+class Solution
+{
+public:
+    long long wonderfulSubstrings(string word)
+    {
+        long long wonderful = 0;
+        vector<int> seen(1 << 10 + 1);
+        seen[0]++;
+        int mask = 0;
+        for (int i = 0; i < word.size(); i++)
+        {
+            mask ^= 1 << (word[i] - 'a');
+            wonderful += seen[mask];
+            for (int c = 0; c < 10; c++)
+                wonderful += seen[mask ^ (1 << c)];
+            seen[mask]++;
+        }
+        return wonderful;
+    }
+};

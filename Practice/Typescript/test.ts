@@ -1738,3 +1738,63 @@ function minOperations(nums: number[], k: number): number {
     }
     return res
 };
+
+function reversePrefix(word: string, ch: string): string {
+    const enumerate: Array<[number, string]> = word.split('').map((char, index) => [index, char])
+    for (const [index, char] of enumerate) {
+        if (char === ch ) {
+            return  word.slice(0, index + 1).split('').reverse().join('') + word.slice(index + 1);
+        }
+    }
+    return word
+};
+
+
+function compareVersion(version1: string, version2: string): number {
+    const 
+        s1: string[] = version1.split("."),
+        s2: string[] = version2.split("."),
+        s1_n: number = s1.length,
+        s2_n: number = s2.length,
+        n: number = Math.min(s1.length, s2.length)
+
+    for (let i = 0; i < n; i++) {
+        if (parseInt(s1[i]) > parseInt(s2[i])) return 1;
+        if (parseInt(s2[i]) > parseInt(s1[i])) return -1;
+    }
+
+    if (s1_n < s2_n)
+        for (let i = s1_n; i < s2_n; i++) 
+            if (parseInt(s2[i]) != 0) return -1
+    if (s1_n > s2_n)
+        for (let i = s2_n; i < s1_n; i++)
+            if (parseInt(s1[i]) != 0) return 1
+    return 0
+};
+
+/**
+ * class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        s1: list[str] = version1.split(".")
+        s2: list[str] = version2.split(".")
+
+        smol = min(len(s1), len(s2))
+
+        for i in range(smol):
+            if int(s1[i]) > int(s2[i]):
+                return 1
+            elif int(s2[i]) > int(s1[i]):
+                return -1
+
+        if len(s1) < len(s2):
+            for i in range(len(s1), len(s2)):
+                if int(s2[i]) != 0:
+                    return -1
+
+        elif len(s1) > len(s2):
+            for i in range(len(s2), len(s1)):
+                if int(s1[i]) != 0:
+                    return 1
+        return 0
+
+*/

@@ -4,11 +4,14 @@ class DataPipeline: # class
         self.input_path = input_path
         self.output_path = output_path
     def extract_data(self) -> dict: # Code to extract data from input_path
-        pass
+        with open(self.input_path, 'r') as f:
+            data = f.read()
+            return data
     def transform_dat(self, data: dict) -> dict: # Code to transform data
-        pass
+        return data
     def save_data(self, data: dict) -> None: # Code to save data to output_path
-        pass
+        with open(self.output_path, 'w') as f:
+            f.write(data)
 data_pipeline = DataPipeline('data/input', 'data/output')
 raw_data = data_pipeline.extract_data() 
 transformed_data = data_pipeline.transform_dat(raw_data)

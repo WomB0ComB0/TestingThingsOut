@@ -423,3 +423,24 @@ var minOperations = function (nums, k) {
   }
   return total
 }
+
+/**
+ * @param {string} word
+ * @return {number}
+ */
+var wonderfulSubstrings = function (word) {
+  let wonderful = 0;
+  let seen = new Map([[0, 1]]);
+  let mask = 0;
+
+  for (let i = 0; i < word.length; i++) {
+    mask ^= 1 << (word.charCodeAt(i) - 97);
+    wonderful += seen.get(mask) || 0;
+    for (let j = 0; j < 10; j++) {
+      wonderful += seen.get(mask ^ (1 << j)) || 0;
+    }
+    seen.set(mask, (seen.get(mask) || 0) + 1);
+  }
+  return wonderful;
+};
+

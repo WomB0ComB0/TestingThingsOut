@@ -2700,10 +2700,10 @@ class Solution:
     def numberOfSpecialChars(word: str) -> int:
         book = set()
         print(book)
-        print(
-            sorted(word.split(" "))
-        )
+        print(sorted(word.split(" ")))
         return 0
+
+
 print(Solution.numberOfSpecialChars("aaAbBcC"))
 # class Solution:
 #     @staticmethod
@@ -3114,7 +3114,7 @@ print(Solution.numberOfSpecialChars("aaAbBcC"))
 #     even = list(filter(lambda x: x % 2 == 0, num_list))
 #     odd = list(filter(lambda x: x % 2 != 0, num_list))
 #     return (even, odd)
-#
+
 # print(split_even_odd_sublist([2, 4, 6, 8, 1, 3, 5, 7, 9, 11, 12, 14, 15, 21]))
 
 # def make_armstrong(start: int, limit: int)-> list[int]:
@@ -3227,6 +3227,8 @@ print(Solution.numberOfSpecialChars("aaAbBcC"))
 #         return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)
 
 from typing import List
+
+
 class Solution:
     def canMakeSquare(self, grid: List[List[str]]) -> bool:
         R = len(grid)
@@ -3239,9 +3241,8 @@ class Solution:
                 if self.check_2_by_2(grid, r, c, "W"):
                     return
         return True
-    def check_2_by_2(
-        self, grid: List[List[str]], r: int, c: int, color: str
-    ) -> bool:
+
+    def check_2_by_2(self, grid: List[List[str]], r: int, c: int, color: str) -> bool:
         return (
             grid[r][c] == color
             and grid[r + 1][c] == color
@@ -3249,29 +3250,37 @@ class Solution:
             and grid[r + 1][c + 1] == color
         )
 
+
 def canMakeSquare(grid):
     for i in range(len(grid) - 1):
         for j in range(len(grid[0]) - 1):
-            square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
-            if max(square.count('B'), square.count('W')) >= 3:
+            square = [grid[i][j], grid[i][j + 1], grid[i + 1][j], grid[i + 1][j + 1]]
+            if max(square.count("B"), square.count("W")) >= 3:
                 return True
     return False
+
 
 class Solution:
     def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
         res: int = 0
         for i in range(len(grid) - 1):
             for j in range(len(grid[0]) - 1):
-                square = [grid[i][j], grid[i][j+1], grid[i+1][j], grid[i+1][j+1]]
+                square = [
+                    grid[i][j],
+                    grid[i][j + 1],
+                    grid[i + 1][j],
+                    grid[i + 1][j + 1],
+                ]
                 if square.count(1) == 3:
                     res += 1
         return res
 
+
 class Solution:
     def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
         R, C = len(grid), len(grid[0])
-        rc = [0]*R
-        cc = [0]*C
+        rc = [0] * R
+        cc = [0] * C
         for r in range(R):
             for c in range(C):
                 if grid[r][c] == 1:
@@ -3284,29 +3293,35 @@ class Solution:
                     res += (rc[r] - 1) * (cc[c] - 1)
         return res
 
+
 class Solution:
-    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int :
+    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
         MOD = int(1e9 + 7)
-        dp = [[0]*(one+1) for _ in range(zero+one+1)]
+        dp = [[0] * (one + 1) for _ in range(zero + one + 1)]
         dp[0][0] = 1
-        for i in range(1, zero+one+1):
-            dp[i][0] = dp[i-1][0]
+        for i in range(1, zero + one + 1):
+            dp[i][0] = dp[i - 1][0]
             if i <= zero:
-                dp[i][0] = (dp[i][0] + dp[i-1][0]) % MOD
-            for j in range(1, min(i, one)+1):
-                dp[i][j] = dp[i-1][j]
+                dp[i][0] = (dp[i][0] + dp[i - 1][0]) % MOD
+            for j in range(1, min(i, one) + 1):
+                dp[i][j] = dp[i - 1][j]
                 if i <= zero + j:
-                    dp[i][j] = (dp[i][j] + dp[i-1][j-1]) % MOD
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD
                 if j > limit:
-                    dp[i][j] = (dp[i][j] - dp[i-limit-1][j-1]) % MOD
-        return sum(dp[i][j] for i in range(zero+one+1) for j in range(1, one+1)) % MOD
+                    dp[i][j] = (dp[i][j] - dp[i - limit - 1][j - 1]) % MOD
+        return (
+            sum(dp[i][j] for i in range(zero + one + 1) for j in range(1, one + 1))
+            % MOD
+        )
 
 
 from functools import cache
+
+
 class Solution:
     def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
-        MOD = 10 ** 9  + 7 
-        N  = zero + one 
+        MOD = 10**9 + 7
+        N = zero + one
 
         @cache
         def go(zero, one, last):
@@ -3319,10 +3334,13 @@ class Solution:
                     total += go(zero, one - i, 1)
                     total %= MOD
             return total % MOD
+
         return go(zero, one, -1)
 
 
 from collections import defaultdict
+
+
 class Solution:
     def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
         graph: dict[int, set[int]] = defaultdict(set)
@@ -3331,23 +3349,22 @@ class Solution:
             graph[v].add((u))
         count: list[int] = [1] * n
         ans: list[int] = [0] * n
+
         @cache
-        def dfs(
-                node: int = 0, parent = None
-            ) -> None:
+        def dfs(node: int = 0, parent=None) -> None:
             for child in graph[node]:
                 if child != parent:
                     dfs(child, node)
                     count[node] += count[child]
                     ans[node] += ans[child] + count[child]
+
         @cache
-        def dfs2(
-                node: int = 0, parent = None
-            ) -> None:
+        def dfs2(node: int = 0, parent=None) -> None:
             for child in graph[node]:
                 if child != parent:
                     ans[child] = ans[node] - count[child] + n - count[child]
                     dfs2(child, node)
+
         dfs()
         dfs2()
         dfs.cache_clear()
@@ -3358,18 +3375,22 @@ class Solution:
 class Solution:
     def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
         # Base case
-        if nums1 == nums2: return 0
+        if nums1 == nums2:
+            return 0
         nums1.sort()
         nums2.sort()
         # Find the difference between the first elements of both arrays
         res = nums2[0] - nums1[0]
         for i in range(1, len(nums1)):
-            # If the difference between the elements of both arrays is not the same 
+            # If the difference between the elements of both arrays is not the same
             if nums2[i] - nums1[i] != res:
                 return 0
         return res
 
+
 from math import inf
+
+
 class Solution:
     def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
         nums1.sort()
@@ -3391,7 +3412,10 @@ class Solution:
                     ans = cur[0]
         return ans
 
+
 from collections import deque
+
+
 class Solution:
     def minEnd(self, n: int, x: int) -> int:
         # Convert the integer to a binary string
@@ -3424,11 +3448,11 @@ class Solution:
 class Solution:
     def medianOfUniquenessArray(self, nums: List[int]) -> int:
         n = len(nums)
-        
+
         def count(var):
             right = 0
-            seen = {} # book keeping
-            
+            seen = {}  # book keeping
+
             answer = 0
             for left in range(n):
                 if left > 0:
@@ -3445,34 +3469,77 @@ class Solution:
                     # increment the count of the element
                     seen[x] = seen.get(x, 0) + 1
                     right += 1
-                    
+
                 if len(seen) == var:
                     # if the count of the elements is equal to var
                     answer += n - right + 1
-                    
+
             return answer
-        
-        ptr_left, ptr_right = 1, n # two pointer
+
+        ptr_left, ptr_right = 1, n  # two pointer
         # target value
         target = (n**2 + n) // 4
-        
+
         # binary search
         while ptr_left != ptr_right:
             ptr = (ptr_left + ptr_right + 1) // 2
-            
+
             if count(ptr) > target:
                 ptr_left = ptr
             else:
                 ptr_right = ptr - 1
-                
+
         return ptr_left
+
 
 # class Solution:
 from operator import xor
 from functools import reduce
+
+
 def minOperations(nums: List[int], k: int) -> int:
     return (reduce(xor, nums) ^ k).bit_count()
 
 
-#def bit_count(self):
+# def bit_count(self):
 #    return bin(self).count("1")
+
+
+class Solution:
+    def wonderfulSubstrings(self, word: str) -> int:
+        wonderful = 0
+        seen = defaultdict(int, {0: 1})
+        mask = 0
+
+        for index, char in enumerate(word):
+            mask ^= 1 << (ord(char) - ord("a"))
+            wonderful += seen[mask]
+            for c in range(10):
+                wonderful += seen[mask ^ (1 << c)]
+            seen[mask] += 1
+        return wonderful
+
+
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        s1: list[str] = version1.split(".")
+        s2: list[str] = version2.split(".")
+
+        smol = min(len(s1), len(s2))
+
+        for i in range(smol):
+            if int(s1[i]) > int(s2[i]):
+                return 1
+            elif int(s2[i]) > int(s1[i]):
+                return -1
+
+        if len(s1) < len(s2):
+            for i in range(len(s1), len(s2)):
+                if int(s2[i]) != 0:
+                    return -1
+
+        elif len(s1) > len(s2):
+            for i in range(len(s2), len(s1)):
+                if int(s1[i]) != 0:
+                    return 1
+        return 0
