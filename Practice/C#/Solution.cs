@@ -568,3 +568,21 @@ public class Solution {
         return res;
     }
 }
+
+
+    public class Solution {
+        public int NumRescueBoats(int[] people, int limit) {
+            Array.Sort(people);
+            int res = 0;
+            int left = 0;
+            int right = people.Length - 1;
+            while (left <= right) {
+                if (people[left] + people[right] <= limit) {
+                    left++;
+                }
+                right--;
+                res++;
+            }
+            return res;
+        }
+    }

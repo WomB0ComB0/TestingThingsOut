@@ -600,3 +600,19 @@ int minOperations(int* nums, int numsSize, int k) {
     }
     return res;
 }
+
+int numRescueBoats(int* people, int peopleSize, int limit) {
+    int res = 0;
+    int left = 0, right = peopleSize - 1;
+    sort(people, people + peopleSize);
+    while (left <= right) {
+        if (people[left] + people[right] <= limit) {
+            left++;
+        }
+        right--;
+        res++;
+    }
+    return res;
+}
+
+int sort

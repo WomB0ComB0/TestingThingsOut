@@ -1772,29 +1772,3 @@ function compareVersion(version1: string, version2: string): number {
     return 0
 };
 
-/**
- * class Solution:
-    def compareVersion(self, version1: str, version2: str) -> int:
-        s1: list[str] = version1.split(".")
-        s2: list[str] = version2.split(".")
-
-        smol = min(len(s1), len(s2))
-
-        for i in range(smol):
-            if int(s1[i]) > int(s2[i]):
-                return 1
-            elif int(s2[i]) > int(s1[i]):
-                return -1
-
-        if len(s1) < len(s2):
-            for i in range(len(s1), len(s2)):
-                if int(s2[i]) != 0:
-                    return -1
-
-        elif len(s1) > len(s2):
-            for i in range(len(s2), len(s1)):
-                if int(s1[i]) != 0:
-                    return 1
-        return 0
-
-*/
