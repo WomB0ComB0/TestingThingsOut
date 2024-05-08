@@ -586,3 +586,6 @@ public class Solution {
             return res;
         }
     }
+/**
+ * Definition for singly-linked list.
+ */

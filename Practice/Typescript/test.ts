@@ -1772,3 +1772,43 @@ function compareVersion(version1: string, version2: string): number {
     return 0
 };
 
+class ListNode {
+    val: number
+    next: ListNode | null
+    constructor(val?: number, next?: ListNode | null) {
+        this.val = (val===undefined ? 0 : val)
+        this.next = (next===undefined ? null : next)
+    }
+}
+function removeNodes(head: ListNode | null): ListNode | null {
+    if (head === null) return head;
+    let stack: ListNode[] = [];
+    let curr: ListNode = head;
+    while (curr) {
+        while (stack.length && stack[stack.length - 1].val < curr.val) stack.pop();
+        if (stack.length) stack[stack.length - 1].next = curr;
+        stack.push(curr);
+        curr = curr.next!;
+    }
+    return stack[0];
+};
+
+function findRelativeRanks(score: Array<number | string>): string[] {
+    const sorted: Array<[number, number]> = [...score].map((e, index) => [Number(e), index]);
+    sorted.sort((a, b) => b[0] - a[0]);
+    for (let pos = 0; pos < sorted.length; pos++)
+        score[sorted[pos][1]] = 
+            pos === 0 ? "Gold Medal" : 
+            pos === 1 ? "Silver Medal" : 
+            pos === 2 ? "Bronze Medal" : 
+            (pos + 1).toString();
+    return score as string[];
+};
+
+function enumerate<T>(arr: T[]): Array<[number, T]> {
+    return arr.map((val, index) => [index, val]);
+}
+
+function zip<T, U>(arr1: T[], arr2: U[]): Array<[T, U]> {
+    return arr1.map((val, index) => [val, arr2[index]]);
+}

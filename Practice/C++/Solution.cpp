@@ -489,3 +489,52 @@ public:
         return count - 1;
     }
 };
+
+class Solution
+{
+public:
+    ListNode *doubleIt(ListNode *head)
+    {
+        if (head->val > 4)
+        {
+            head = new ListNode(0, head);
+        };
+        ListNode* node = head; 
+        while (head)
+        {
+            node->val = (node->val * 2) % 10;
+            if (node->next && node->next->val > 4)
+            {
+                node->val++;
+            }
+            node = node->next;
+        }
+        return head;
+    }
+};
+
+class Solution
+{
+public:
+    vector<string> findRelativeRanks(vector<int> &score)
+    {
+        vector<int> ordered(score);
+        sort(ordered.rbegin(), ordered.rend());
+        unordered_map<int, string> ranks;
+        for (int i = 0; i < ordered.size(); i++)
+        {
+            if (i == 0)
+                ranks[ordered[i]] = "Gold Medal";
+            else if (i == 1)
+                ranks[ordered[i]] = "Silver Medal";
+            else if (i == 2)
+                ranks[ordered[i]] = "Bronze Medal";
+            else
+                ranks[ordered[i]] = to_string(i + 1);
+        }
+        vector<string> result;
+        for (int s : score)
+            result.push_back(ranks[s]);
+        return result;
+    }
+};

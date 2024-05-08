@@ -2692,20 +2692,20 @@
 # print(Solution.sumNumbers(root))
 
 
-import random
+# import random
 
 
-class Solution:
-    @staticmethod
-    def numberOfSpecialChars(word: str) -> int:
-        book = set()
-        print(book)
-        print(sorted(word.split(" ")))
-        return 0
-
-
-print(Solution.numberOfSpecialChars("aaAbBcC"))
 # class Solution:
+#     @staticmethod
+#     def numberOfSpecialChars(word: str) -> int:
+#         book = set()
+#         print(book)
+#         print(sorted(word.split(" ")))
+#         return 0
+
+
+# print(Solution.numberOfSpecialChars("aaAbBcC"))
+# # class Solution:
 #     @staticmethod
 #     def sumNumbers(root: Optional[TreeNode]) -> int:
 #         def dfs(node, stack) -> int:
@@ -3226,333 +3226,423 @@ print(Solution.numberOfSpecialChars("aaAbBcC"))
 #     def findRotateSteps(self, ring: str, key: str) -> int:
 #         return (dp := cache(lambda i, j: 0 if i == len(key) else min(min(abs(j - k), len(ring) - abs(j - k)) + dp(i + 1, k) + 1 for k in range(len(ring)) if ring[k] == key[i])))(0, 0)
 
-from typing import List
-
-
-class Solution:
-    def canMakeSquare(self, grid: List[List[str]]) -> bool:
-        R = len(grid)
-        C = len(grid[0])
-
-        for r in range(R):
-            for c in range(C):
-                if self.check_2_by_2(grid, r, c, "B"):
-                    return
-                if self.check_2_by_2(grid, r, c, "W"):
-                    return
-        return True
-
-    def check_2_by_2(self, grid: List[List[str]], r: int, c: int, color: str) -> bool:
-        return (
-            grid[r][c] == color
-            and grid[r + 1][c] == color
-            and grid[r][c + 1] == color
-            and grid[r + 1][c + 1] == color
-        )
-
-
-def canMakeSquare(grid):
-    for i in range(len(grid) - 1):
-        for j in range(len(grid[0]) - 1):
-            square = [grid[i][j], grid[i][j + 1], grid[i + 1][j], grid[i + 1][j + 1]]
-            if max(square.count("B"), square.count("W")) >= 3:
-                return True
-    return False
-
-
-class Solution:
-    def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
-        res: int = 0
-        for i in range(len(grid) - 1):
-            for j in range(len(grid[0]) - 1):
-                square = [
-                    grid[i][j],
-                    grid[i][j + 1],
-                    grid[i + 1][j],
-                    grid[i + 1][j + 1],
-                ]
-                if square.count(1) == 3:
-                    res += 1
-        return res
-
-
-class Solution:
-    def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
-        R, C = len(grid), len(grid[0])
-        rc = [0] * R
-        cc = [0] * C
-        for r in range(R):
-            for c in range(C):
-                if grid[r][c] == 1:
-                    rc[r] += 1
-                    cc[c] += 1
-        res: int = 0
-        for r in range(R):
-            for c in range(C):
-                if grid[r][c] == 1:
-                    res += (rc[r] - 1) * (cc[c] - 1)
-        return res
-
-
-class Solution:
-    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
-        MOD = int(1e9 + 7)
-        dp = [[0] * (one + 1) for _ in range(zero + one + 1)]
-        dp[0][0] = 1
-        for i in range(1, zero + one + 1):
-            dp[i][0] = dp[i - 1][0]
-            if i <= zero:
-                dp[i][0] = (dp[i][0] + dp[i - 1][0]) % MOD
-            for j in range(1, min(i, one) + 1):
-                dp[i][j] = dp[i - 1][j]
-                if i <= zero + j:
-                    dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD
-                if j > limit:
-                    dp[i][j] = (dp[i][j] - dp[i - limit - 1][j - 1]) % MOD
-        return (
-            sum(dp[i][j] for i in range(zero + one + 1) for j in range(1, one + 1))
-            % MOD
-        )
-
-
-from functools import cache
-
-
-class Solution:
-    def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
-        MOD = 10**9 + 7
-        N = zero + one
-
-        @cache
-        def go(zero, one, last):
-            if zero == 0 and one == 0:
-                return 1
-
-            total = 0
-            if last != 0:
-                for i in range(1, min(limit + 1, one + 1)):
-                    total += go(zero, one - i, 1)
-                    total %= MOD
-            return total % MOD
-
-        return go(zero, one, -1)
-
-
-from collections import defaultdict
-
-
-class Solution:
-    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
-        graph: dict[int, set[int]] = defaultdict(set)
-        for u, v in edges:
-            graph[u].add((v))
-            graph[v].add((u))
-        count: list[int] = [1] * n
-        ans: list[int] = [0] * n
-
-        @cache
-        def dfs(node: int = 0, parent=None) -> None:
-            for child in graph[node]:
-                if child != parent:
-                    dfs(child, node)
-                    count[node] += count[child]
-                    ans[node] += ans[child] + count[child]
-
-        @cache
-        def dfs2(node: int = 0, parent=None) -> None:
-            for child in graph[node]:
-                if child != parent:
-                    ans[child] = ans[node] - count[child] + n - count[child]
-                    dfs2(child, node)
-
-        dfs()
-        dfs2()
-        dfs.cache_clear()
-        dfs2.cache_clear()
-        return ans
-
-
-class Solution:
-    def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
-        # Base case
-        if nums1 == nums2:
-            return 0
-        nums1.sort()
-        nums2.sort()
-        # Find the difference between the first elements of both arrays
-        res = nums2[0] - nums1[0]
-        for i in range(1, len(nums1)):
-            # If the difference between the elements of both arrays is not the same
-            if nums2[i] - nums1[i] != res:
-                return 0
-        return res
-
-
-from math import inf
-
-
-class Solution:
-    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
-        nums1.sort()
-        nums2.sort()
-        n = len(nums1)
-        ans = inf
-        for i in range(n):
-            # Remove the ith element from both arrays
-            for j in range(i + 1, n):
-                # Remove the jth element from both arrays
-                lst = nums1[:]
-                lst.pop(j)
-                lst.pop(i)
-                # Calculate the difference between the elements of both arrays
-                cur = [-lst[i] + nums2[i] for i in range(n - 2)]
-                # If the difference between the elements of both arrays is the same
-                if len(set(cur)) == 1 and cur[0] < ans:
-                    # Update the answer
-                    ans = cur[0]
-        return ans
-
-
-from collections import deque
-
-
-class Solution:
-    def minEnd(self, n: int, x: int) -> int:
-        # Convert the integer to a binary string
-        bit = list(int(a) for a in "{:060b}".format(x))
-        zeros = deque()
-        # Find the positions of the zeros in the binary string
-        # We're doing it in reverse, and the starting position is 59
-        # because the binary string has a length of 60
-        for i in range(59, -1, -1):
-            # If the bit is 0, add the position to the zeros list
-            if bit[i] == 0:
-                zeros.append(59 - i)
-        n -= 1
-        ans = x
-        # While there are zeros in the zeros list
-        while n and zeros:
-            # Get the position of the rightmost zero
-            r = n % 2
-            # If the rightmost zero is at the rightmost position
-            add = zeros.popleft()
-            if r:
-                # Add 2^add to the answer
-                # << is the left shift operator
-                # which shifts the bits of the number to the left
-                ans += 1 << add
-            n = n // 2
-        return ans
-
-
-class Solution:
-    def medianOfUniquenessArray(self, nums: List[int]) -> int:
-        n = len(nums)
-
-        def count(var):
-            right = 0
-            seen = {}  # book keeping
-
-            answer = 0
-            for left in range(n):
-                if left > 0:
-                    # remove the left element from the book keeping
-                    x = nums[left - 1]
-                    # decrement the count of the element
-                    seen[x] -= 1
-                    # if the count is 0, remove the element from the book keeping
-                    if seen[x] == 0:
-                        del seen[x]
-                # add elements to the book keeping
-                while right < n and len(seen) < var:
-                    x = nums[right]
-                    # increment the count of the element
-                    seen[x] = seen.get(x, 0) + 1
-                    right += 1
-
-                if len(seen) == var:
-                    # if the count of the elements is equal to var
-                    answer += n - right + 1
-
-            return answer
-
-        ptr_left, ptr_right = 1, n  # two pointer
-        # target value
-        target = (n**2 + n) // 4
-
-        # binary search
-        while ptr_left != ptr_right:
-            ptr = (ptr_left + ptr_right + 1) // 2
-
-            if count(ptr) > target:
-                ptr_left = ptr
-            else:
-                ptr_right = ptr - 1
-
-        return ptr_left
+# from typing import List
 
 
 # class Solution:
-from operator import xor
-from functools import reduce
+#     def canMakeSquare(self, grid: List[List[str]]) -> bool:
+#         R = len(grid)
+#         C = len(grid[0])
+
+#         for r in range(R):
+#             for c in range(C):
+#                 if self.check_2_by_2(grid, r, c, "B"):
+#                     return
+#                 if self.check_2_by_2(grid, r, c, "W"):
+#                     return
+#         return True
+
+#     def check_2_by_2(self, grid: List[List[str]], r: int, c: int, color: str) -> bool:
+#         return (
+#             grid[r][c] == color
+#             and grid[r + 1][c] == color
+#             and grid[r][c + 1] == color
+#             and grid[r + 1][c + 1] == color
+#         )
 
 
-def minOperations(nums: List[int], k: int) -> int:
-    return (reduce(xor, nums) ^ k).bit_count()
+# def canMakeSquare(grid):
+#     for i in range(len(grid) - 1):
+#         for j in range(len(grid[0]) - 1):
+#             square = [grid[i][j], grid[i][j + 1], grid[i + 1][j], grid[i + 1][j + 1]]
+#             if max(square.count("B"), square.count("W")) >= 3:
+#                 return True
+#     return False
 
 
-# def bit_count(self):
-#    return bin(self).count("1")
+# class Solution:
+#     def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
+#         res: int = 0
+#         for i in range(len(grid) - 1):
+#             for j in range(len(grid[0]) - 1):
+#                 square = [
+#                     grid[i][j],
+#                     grid[i][j + 1],
+#                     grid[i + 1][j],
+#                     grid[i + 1][j + 1],
+#                 ]
+#                 if square.count(1) == 3:
+#                     res += 1
+#         return res
 
 
+# class Solution:
+#     def numberOfRightTriangles2(self, grid: List[List[int]]) -> int:
+#         R, C = len(grid), len(grid[0])
+#         rc = [0] * R
+#         cc = [0] * C
+#         for r in range(R):
+#             for c in range(C):
+#                 if grid[r][c] == 1:
+#                     rc[r] += 1
+#                     cc[c] += 1
+#         res: int = 0
+#         for r in range(R):
+#             for c in range(C):
+#                 if grid[r][c] == 1:
+#                     res += (rc[r] - 1) * (cc[c] - 1)
+#         return res
+
+
+# class Solution:
+#     def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
+#         MOD = int(1e9 + 7)
+#         dp = [[0] * (one + 1) for _ in range(zero + one + 1)]
+#         dp[0][0] = 1
+#         for i in range(1, zero + one + 1):
+#             dp[i][0] = dp[i - 1][0]
+#             if i <= zero:
+#                 dp[i][0] = (dp[i][0] + dp[i - 1][0]) % MOD
+#             for j in range(1, min(i, one) + 1):
+#                 dp[i][j] = dp[i - 1][j]
+#                 if i <= zero + j:
+#                     dp[i][j] = (dp[i][j] + dp[i - 1][j - 1]) % MOD
+#                 if j > limit:
+#                     dp[i][j] = (dp[i][j] - dp[i - limit - 1][j - 1]) % MOD
+#         return (
+#             sum(dp[i][j] for i in range(zero + one + 1) for j in range(1, one + 1))
+#             % MOD
+#         )
+
+
+# from functools import cache
+
+
+# class Solution:
+#     def numberOfStableArrays(self, zero: int, one: int, limit: int) -> int:
+#         MOD = 10**9 + 7
+#         N = zero + one
+
+#         @cache
+#         def go(zero, one, last):
+#             if zero == 0 and one == 0:
+#                 return 1
+
+#             total = 0
+#             if last != 0:
+#                 for i in range(1, min(limit + 1, one + 1)):
+#                     total += go(zero, one - i, 1)
+#                     total %= MOD
+#             return total % MOD
+
+#         return go(zero, one, -1)
+
+
+# from collections import defaultdict
+
+
+# class Solution:
+#     def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+#         graph: dict[int, set[int]] = defaultdict(set)
+#         for u, v in edges:
+#             graph[u].add((v))
+#             graph[v].add((u))
+#         count: list[int] = [1] * n
+#         ans: list[int] = [0] * n
+
+#         @cache
+#         def dfs(node: int = 0, parent=None) -> None:
+#             for child in graph[node]:
+#                 if child != parent:
+#                     dfs(child, node)
+#                     count[node] += count[child]
+#                     ans[node] += ans[child] + count[child]
+
+#         @cache
+#         def dfs2(node: int = 0, parent=None) -> None:
+#             for child in graph[node]:
+#                 if child != parent:
+#                     ans[child] = ans[node] - count[child] + n - count[child]
+#                     dfs2(child, node)
+
+#         dfs()
+#         dfs2()
+#         dfs.cache_clear()
+#         dfs2.cache_clear()
+#         return ans
+
+
+# class Solution:
+#     def addedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+#         # Base case
+#         if nums1 == nums2:
+#             return 0
+#         nums1.sort()
+#         nums2.sort()
+#         # Find the difference between the first elements of both arrays
+#         res = nums2[0] - nums1[0]
+#         for i in range(1, len(nums1)):
+#             # If the difference between the elements of both arrays is not the same
+#             if nums2[i] - nums1[i] != res:
+#                 return 0
+#         return res
+
+
+# from math import inf
+
+
+# class Solution:
+#     def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+#         nums1.sort()
+#         nums2.sort()
+#         n = len(nums1)
+#         ans = inf
+#         for i in range(n):
+#             # Remove the ith element from both arrays
+#             for j in range(i + 1, n):
+#                 # Remove the jth element from both arrays
+#                 lst = nums1[:]
+#                 lst.pop(j)
+#                 lst.pop(i)
+#                 # Calculate the difference between the elements of both arrays
+#                 cur = [-lst[i] + nums2[i] for i in range(n - 2)]
+#                 # If the difference between the elements of both arrays is the same
+#                 if len(set(cur)) == 1 and cur[0] < ans:
+#                     # Update the answer
+#                     ans = cur[0]
+#         return ans
+
+
+# from collections import deque
+
+
+# class Solution:
+#     def minEnd(self, n: int, x: int) -> int:
+#         # Convert the integer to a binary string
+#         bit = list(int(a) for a in "{:060b}".format(x))
+#         zeros = deque()
+#         # Find the positions of the zeros in the binary string
+#         # We're doing it in reverse, and the starting position is 59
+#         # because the binary string has a length of 60
+#         for i in range(59, -1, -1):
+#             # If the bit is 0, add the position to the zeros list
+#             if bit[i] == 0:
+#                 zeros.append(59 - i)
+#         n -= 1
+#         ans = x
+#         # While there are zeros in the zeros list
+#         while n and zeros:
+#             # Get the position of the rightmost zero
+#             r = n % 2
+#             # If the rightmost zero is at the rightmost position
+#             add = zeros.popleft()
+#             if r:
+#                 # Add 2^add to the answer
+#                 # << is the left shift operator
+#                 # which shifts the bits of the number to the left
+#                 ans += 1 << add
+#             n = n // 2
+#         return ans
+
+
+# class Solution:
+#     def medianOfUniquenessArray(self, nums: List[int]) -> int:
+#         n = len(nums)
+
+#         def count(var):
+#             right = 0
+#             seen = {}  # book keeping
+
+#             answer = 0
+#             for left in range(n):
+#                 if left > 0:
+#                     # remove the left element from the book keeping
+#                     x = nums[left - 1]
+#                     # decrement the count of the element
+#                     seen[x] -= 1
+#                     # if the count is 0, remove the element from the book keeping
+#                     if seen[x] == 0:
+#                         del seen[x]
+#                 # add elements to the book keeping
+#                 while right < n and len(seen) < var:
+#                     x = nums[right]
+#                     # increment the count of the element
+#                     seen[x] = seen.get(x, 0) + 1
+#                     right += 1
+
+#                 if len(seen) == var:
+#                     # if the count of the elements is equal to var
+#                     answer += n - right + 1
+
+#             return answer
+
+#         ptr_left, ptr_right = 1, n  # two pointer
+#         # target value
+#         target = (n**2 + n) // 4
+
+#         # binary search
+#         while ptr_left != ptr_right:
+#             ptr = (ptr_left + ptr_right + 1) // 2
+
+#             if count(ptr) > target:
+#                 ptr_left = ptr
+#             else:
+#                 ptr_right = ptr - 1
+
+#         return ptr_left
+
+
+# # class Solution:
+# from operator import xor
+# from functools import reduce
+
+
+# def minOperations(nums: List[int], k: int) -> int:
+#     return (reduce(xor, nums) ^ k).bit_count()
+
+
+# # def bit_count(self):
+# #    return bin(self).count("1")
+
+
+# class Solution:
+#     def wonderfulSubstrings(self, word: str) -> int:
+#         wonderful = 0
+#         seen = defaultdict(int, {0: 1})
+#         mask = 0
+
+#         for index, char in enumerate(word):
+#             mask ^= 1 << (ord(char) - ord("a"))
+#             wonderful += seen[mask]
+#             for c in range(10):
+#                 wonderful += seen[mask ^ (1 << c)]
+#             seen[mask] += 1
+#         return wonderful
+
+
+# class Solution:
+#     def compareVersion(self, version1: str, version2: str) -> int:
+#         s1: list[str] = version1.split(".")
+#         s2: list[str] = version2.split(".")
+
+#         smol = min(len(s1), len(s2))
+
+#         for i in range(smol):
+#             if int(s1[i]) > int(s2[i]):
+#                 return 1
+#             elif int(s2[i]) > int(s1[i]):
+#                 return -1
+
+#         if len(s1) < len(s2):
+#             for i in range(len(s1), len(s2)):
+#                 if int(s2[i]) != 0:
+#                     return -1
+
+#         elif len(s1) > len(s2):
+#             for i in range(len(s2), len(s1)):
+#                 if int(s1[i]) != 0:
+#                     return 1
+#         return 0
+
+
+# class Solution:
+#     def numRescueBoats(self, people: List[int], limit: int) -> int:
+#         people.sort()
+#         ans = 0
+#         i, j = 0, len(people) - 1
+#         while i <= j:
+#             if people[i] + people[j] <= limit:
+#                 i += 1
+#             j -= 1
+#             ans += 1
+#         return ans
+
+# # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# from typing import Optional
+# class Solution:
+#     def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#             if not head: return head
+#             stack = []
+#             curr = head
+#             while curr:
+#                 while stack and stack[-1].val < curr.val:
+#                     stack.pop()
+#                 if stack:
+#                     stack[-1].next = curr
+#                 stack.append(curr)
+#                 curr = curr.next
+
+#             return stack[0]
+
+# from collections import Counter
+# def is_substring(string: str) -> int:
+#     char_index = Counter()
+#     longest_length = start = 0
+#     for i, char in enumerate(string):
+#         if char in char_index and start <= char_index[char]:
+#             start = char_index[char] + 1
+#         else:
+#             longest_length = max(longest_length, i - start + 1)
+
+#         char_index[char] = i
+#     return longest_length
+
+# def roman_nums(r: str) -> int:
+#     roman: dict = {
+
+#     }
+#     total: int = 0
+#     for i in range(len(r)):
+#         value: int = roman[r[i]]
+#         if (i + 1 < len(r) and roman[r[i + 1]] > value):
+#             total -= value
+#         else:
+#             total += value
+#     return total
+
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# from typing import Optional
+# class Solution:
+#     def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         if head.val > 4:
+#             head = ListNode(0, head)
+#         node = head
+#         while node:
+#             node.val = (node.val * 2) % 10
+#             if node.next and node.next.val > 4:
+#                 node.val += 1
+#             node = node.next
+#         return head
+# class Dummy:
+#     def appendNode(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+#         if not head: return head
+#         curr = head
+#         while curr.next:
+#             curr = curr.next
+
+#         curr.next = ListNode(n)
+#         return head
+
+from collections import defaultdict
+from typing import List
 class Solution:
-    def wonderfulSubstrings(self, word: str) -> int:
-        wonderful = 0
-        seen = defaultdict(int, {0: 1})
-        mask = 0
+    @staticmethod
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        sorted_scores = sorted([(s, i) for i, s in enumerate(score)], reverse=True)
+        ranks = ["Gold Medal", "Silver Medal", "Bronze Medal"] + list(
+            map(str, range(4, len(score) + 1))
+        )
 
-        for index, char in enumerate(word):
-            mask ^= 1 << (ord(char) - ord("a"))
-            wonderful += seen[mask]
-            for c in range(10):
-                wonderful += seen[mask ^ (1 << c)]
-            seen[mask] += 1
-        return wonderful
+        res: list[int] = [0] * len(score)
+        for rank, (_, idx) in zip(ranks, sorted_scores):
+            res[idx] = rank
 
+        return res
 
-class Solution:
-    def compareVersion(self, version1: str, version2: str) -> int:
-        s1: list[str] = version1.split(".")
-        s2: list[str] = version2.split(".")
-
-        smol = min(len(s1), len(s2))
-
-        for i in range(smol):
-            if int(s1[i]) > int(s2[i]):
-                return 1
-            elif int(s2[i]) > int(s1[i]):
-                return -1
-
-        if len(s1) < len(s2):
-            for i in range(len(s1), len(s2)):
-                if int(s2[i]) != 0:
-                    return -1
-
-        elif len(s1) > len(s2):
-            for i in range(len(s2), len(s1)):
-                if int(s1[i]) != 0:
-                    return 1
-        return 0
-
-
-class Solution:
-    def numRescueBoats(self, people: List[int], limit: int) -> int:
-        people.sort()
-        ans = 0
-        i, j = 0, len(people) - 1
-        while i <= j:
-            if people[i] + people[j] <= limit:
-                i += 1
-            j -= 1
-            ans += 1
-        return ans

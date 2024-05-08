@@ -238,3 +238,56 @@ func numRescueBoats(people []int, limit int) int {
 	}
 	return res
 }
+func removeNodes(head *ListNode) *ListNode {
+	if (head == nil) return head;
+	stack := []*ListNode{};
+	curr := head;
+	for curr != nil {
+		for len(stack) > 0 && stack[len(stack)-1].Val < curr.Val {
+			stack = stack[:len(stack)-1];
+		}
+		if (len(stack) > 0) {
+			stack[len(stack)-1].Next = curr;
+		}
+		stack = append(stack, curr);
+		curr = curr.Next;
+	}
+	return stack[0];
+}
+
+func doubleIt(head *ListNode) *ListNode {
+    if (head.Val > 4) { head = &ListNode{0, head}; }
+		node := head;
+		for node != nil {
+			node.Val = (node.Val * 2) % 10;
+			if (node.Next != nil && node.Next.Val > 4) {
+				node.Val++;
+			}
+			node = node.Next;
+		}
+		return head;
+}
+
+func findRelativeRanks(score []int) []string {
+		n := len(score)
+		res := make([]string, n)
+		rank := make([]int, n)
+		for i := range rank {
+				rank[i] = i
+		}
+		sort.Slice(rank, func(i, j int) bool {
+				return score[rank[i]] > score[rank[j]]
+		})
+		for i := 0; i < n; i++ {
+				if i == 0 {
+						res[rank[i]] = "Gold Medal"
+				} else if i == 1 {
+						res[rank[i]] = "Silver Medal"
+				} else if i == 2 {
+						res[rank[i]] = "Bronze Medal"
+				} else {
+						res[rank[i]] = strconv.Itoa(i + 1)
+				}
+		}
+		return res
+}

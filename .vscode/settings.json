@@ -61,7 +61,5 @@
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "circleci.persistedProjectSelection": [
-    "gh/WomB0ComB0/TestingThingsOut"
-  ]
+  "circleci.persistedProjectSelection": []
 }

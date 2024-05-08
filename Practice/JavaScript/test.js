@@ -444,3 +444,17 @@ var wonderfulSubstrings = function (word) {
   return wonderful;
 };
 
+
+
+var removeNodes = function (head) {
+  if (head === null) return head;
+  let stack = [];
+  let current = head;
+  while (current) {
+    while (stack.length && stack[stack.length - 1].val < current.val) stack.pop();
+    if (stack.length) stack[stack.length - 1].next = current;
+    stack.push(current);
+    current = current.next;
+  }
+  return stack[0];
+};
