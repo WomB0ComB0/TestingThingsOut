@@ -291,3 +291,31 @@ func findRelativeRanks(score []int) []string {
 		}
 		return res
 }
+
+
+func maximumHappinessSum(happiness []int, k int) int64 {
+  sort.Slice(happiness, func(i, j int) bool {
+			return happiness[i] > happiness[j]
+	})
+	var sum int64
+	for i := 0; i < len(happiness); i++ {
+			if i < k {
+					sum += int64(max(0, happiness[i]-i))
+			} else {
+					break
+			}
+	}
+	return sum
+}
+
+
+/**
+function maximumHappinessSum(happiness: number[], k: number): number {
+    happiness.sort((a, b) => b - a);
+    let sum: number = 0;
+    for (let i = 0; i < happiness.length; i++)
+        if (i < k) sum += Math.max(0, happiness[i] - i);
+        else break;
+    return sum;
+}
+*/

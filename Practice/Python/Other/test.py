@@ -3630,19 +3630,37 @@
 #         curr.next = ListNode(n)
 #         return head
 
-from collections import defaultdict
-from typing import List
-class Solution:
-    @staticmethod
-    def findRelativeRanks(self, score: List[int]) -> List[str]:
-        sorted_scores = sorted([(s, i) for i, s in enumerate(score)], reverse=True)
-        ranks = ["Gold Medal", "Silver Medal", "Bronze Medal"] + list(
-            map(str, range(4, len(score) + 1))
-        )
+# from collections import defaultdict
+# from typing import List
+# class Solution:
+#     @staticmethod
+#     def findRelativeRanks(self, score: List[int]) -> List[str]:
+#         sorted_scores = sorted([(s, i) for i, s in enumerate(score)], reverse=True)
+#         ranks = ["Gold Medal", "Silver Medal", "Bronze Medal"] + list(
+#             map(str, range(4, len(score) + 1))
+#         )
 
-        res: list[int] = [0] * len(score)
-        for rank, (_, idx) in zip(ranks, sorted_scores):
-            res[idx] = rank
+#         res: list[int] = [0] * len(score)
+#         for rank, (_, idx) in zip(ranks, sorted_scores):
+#             res[idx] = rank
 
-        return res
 
+#         return res
+def display_in_reverse_order(*args: str) -> str:
+    res = []
+    for arg in args:
+        res.append(arg[::-1])
+    return "".join(reversed(res))
+
+def display_in_reverse_order(*arguments: str) -> str:
+    new_word = ""
+    for word in arguments:
+        new_word += word
+    return "".join(reversed(new_word))
+
+
+def display_in_reverse_order(*input: tuple[str]) -> str:
+    return reversed("".join(map(lambda x: x, input)))
+
+
+print(display_in_reverse_order("Hello", "Welcome", "to", "TechWise"))
